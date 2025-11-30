@@ -108,6 +108,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({ questions, session
             type={currentQuestion.mediaType}
             prompt={feedbackState === 'correct' ? `${currentQuestion.mediaPrompt} - Correct Action` : currentQuestion.mediaPrompt}
             isCorrectAction={feedbackState === 'correct'}
+            localVideoFilename={`s${sessionId}_q${currentIndex + 1}_scn.mp4`}
           />
 
           {/* Feedback Modal Overlay */}

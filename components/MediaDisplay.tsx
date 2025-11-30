@@ -8,22 +8,55 @@ interface MediaDisplayProps {
   type: 'video' | 'image';
   prompt: string;
   isCorrectAction?: boolean;
+  localVideoFilename?: string;
   cacheKey?: string; // Unique key for storage (e.g., "s1_q1_scn")
 }
 
-export const MediaDisplay: React.FC<MediaDisplayProps> = ({ type, prompt, isCorrectAction, cacheKey }) => {
+export const MediaDisplay: React.FC<MediaDisplayProps> = ({ type, prompt, isCorrectAction, cacheKey, localVideoFilename }) => {
   const [generatedVideoUrl, setGeneratedVideoUrl] = useState<string | null>(null);
   const [videoBlob, setVideoBlob] = useState<Blob | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationProgress, setGenerationProgress] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isCheckingDB, setIsCheckingDB] = useState(true);
+  const [localVideoUrl, setLocalVideoUrl] = useState<string | null>(null);
+
+  // Check for local video file
+  useEffect(() => {
+    const checkLocalVideo = async () => {
+      if (!localVideoFilename) {
+        setLocalVideoUrl(null);
+        return;
+      }
+
+      try {
+        const videoPath = `/videos/${localVideoFilename}`;
+        const response = await fetch(videoPath, { method: 'HEAD' });
+        if (response.ok) {
+          setLocalVideoUrl(videoPath);
+        } else {
+          setLocalVideoUrl(null);
+        }
+      } catch (err) {
+        console.error("Error checking local video:", err);
+        setLocalVideoUrl(null);
+      }
+    };
+
+    checkLocalVideo();
+  }, [localVideoFilename]);
 
   // Use cacheKey if provided, otherwise fallback to prompt
   const storageKey = cacheKey || prompt;
 
   // Restore video from DB on prompt/key change
   useEffect(() => {
+    // If we have a local video, we don't need to check DB
+    if (localVideoUrl) {
+      setIsCheckingDB(false);
+      return;
+    }
+
     let isActive = true;
     let objectUrl: string | null = null;
 
@@ -55,7 +88,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({ type, prompt, isCorr
         URL.revokeObjectURL(objectUrl);
       }
     };
-  }, [storageKey]);
+  }, [storageKey, localVideoUrl]);
 
   const handleGenerateVideo = async () => {
     setError(null);
@@ -175,7 +208,16 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({ type, prompt, isCorr
   return (
     <div className="w-full h-full bg-black relative overflow-hidden group">
 
-      {generatedVideoUrl ? (
+      {localVideoUrl ? (
+        <video
+          src={localVideoUrl}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        />
+      ) : generatedVideoUrl ? (
         <video
           src={generatedVideoUrl}
           autoPlay
@@ -193,7 +235,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({ type, prompt, isCorr
       )}
 
       {/* Overlay UI */}
-      {!generatedVideoUrl && !isGenerating && !error && !isCheckingDB && (
+      {!generatedVideoUrl && !isGenerating && !error && !isCheckingDB && !localVideoUrl && (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
           <div className="mb-6 flex gap-4">
              <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/30">
