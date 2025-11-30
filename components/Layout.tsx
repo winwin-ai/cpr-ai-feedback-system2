@@ -17,8 +17,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, viewState }) => {
               <Activity className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-slate-900 tracking-tight">CPR Training AI</h1>
-              <p className="text-xs text-slate-500 font-medium">Interactive Simulation Platform</p>
+              <h1 className="text-xl font-bold text-slate-900 tracking-tight">전남대 CPR 교육</h1>
+              <p className="text-xs text-slate-500 font-medium">심폐소생술 교육 플랫폼</p>
             </div>
           </div>
 
