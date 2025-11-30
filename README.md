@@ -1,84 +1,92 @@
-# AI CPR Training Platform (AI 기반 심폐소생술 교육 플랫폼)
+# CPR 교육 플랫폼 (전남대학교 간호대학)
 
-AI 기술을 활용하여 실제 응급 상황 시나리오를 제공하고, 학습자의 판단에 대해 실시간 피드백을 제공하는 인터랙티브 CPR 교육 플랫폼입니다.
+## 프로젝트 소개
+
+전남대학교 간호대학 조인영 교수님이 주도하는 연구 프로젝트로, 실제 응급 상황 시나리오를 제공하고 학습자의 판단에 대해 실시간 피드백을 제공하는 인터랙티브 CPR 교육 플랫폼입니다.
+
+### 개발 정보
+
+- **개발 기관**: 전남대학교 간호대학
+- **연구 책임자**: 조인영 교수
+- **저작권**: © 2025 전남대학교 간호대학. All rights reserved.
 
 ## 주요 기능
 
-- **실감나는 AI 시나리오**: Google Gemini Video Generation 모델을 프롬프팅하여 생성된 고화질 시나리오 영상을 통해 몰입감 있는 학습 환경을 제공합니다.
+- **실감나는 시나리오**: 고화질 시나리오 영상을 통해 몰입감 있는 학습 환경을 제공합니다.
 - **단계별 학습 (Session)**:
   - **Session 1**: 심정지 인지 및 초기 대응 (현장 안전, 의식 확인, 신고)
   - **Session 2**: 고품질 심폐소생술(CPR) 및 자동심장충격기(AED) 사용법
 - **실시간 피드백**: 학습자의 선택에 따라 즉각적인 정답/오답 피드백과 상세한 해설을 제공합니다.
-- **영상 보관함 (Video Library)**: AI로 생성된 시나리오 영상을 저장하고 다시 볼 수 있는 보관함 기능을 제공합니다.
+- **영상 보관함 (Video Library)**: 시나리오 영상을 저장하고 다시 볼 수 있는 보관함 기능을 제공합니다.
 - **성과 분석**: 세션 종료 후 점수와 합격 여부를 판정하고, 부족한 부분을 재학습하도록 유도합니다.
 
 ---
 
 ## 교육 커리큘럼 및 시나리오 상세
 
-이 플랫폼에 탑재된 모든 교육 콘텐츠와 AI 영상 생성 프롬프트는 다음과 같습니다.
+이 플랫폼에 탑재된 모든 교육 콘텐츠는 다음과 같습니다.
 
 ### Session 1: 심정지 인지 및 초기 대응 (Cardiac Arrest Recognition & Initial Response)
 
 #### Q1. 현장 안전 확인 (Safety)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a university hospital ward bathroom. Cold fluorescent lighting creates a tense atmosphere. A 50-year-old Korean male patient in a hospital gown is lying supine on the floor. A late 20s Korean female nurse in a clean blue scrub uniform, looking professional and focused. quickly scans the surroundings (floor, ceiling) for 0.5 seconds to ensure safety, then kneels beside the patient.`
+- **시나리오**: 대학병원 병실 화장실에서 50대 남성 환자가 병원복을 입고 바닥에 누워있음. 20대 후반 간호사가 냉광 조명 아래 현장을 확인.
 - **질문**: 환자를 발견했습니다. 가장 먼저 해야 할 행동은 무엇입니까?
 - **정답**: **b) 주변 현장의 안전을 확인한다.**
 - **해설**: 환자에게 접근하기 전, 현장이 안전한지(감전, 가스 누출 등) 확인하는 것이 최우선 순위입니다.
 
 #### Q2. 환자 접근 (Approach)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a university hospital ward bathroom. Cold fluorescent lighting creates a tense atmosphere. A 50-year-old Korean male patient in a hospital gown is lying supine on the floor. A late 20s Korean female nurse in a clean blue scrub uniform, looking professional and focused. approaches the patient safely and prepares to check responsiveness. Close up on the nurse's calm but urgent face.`
+- **시나리오**: 현장 안전 확인 후 간호사가 환자에게 안전하게 접근하여 반응 확인 준비.
 - **질문**: 현장이 안전합니다. 환자에게 어떻게 접근해야 합니까?
 - **정답**: **c) 환자의 어깨 옆에 무릎을 꿇고 앉는다.**
 - **해설**: 환자의 어깨 옆에 위치하는 것이 의식 확인 및 가슴 압박을 수행하기에 가장 효율적인 위치입니다.
 
 #### Q3. 반응 확인 (Check Response)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a university hospital ward bathroom. Cold fluorescent lighting creates a tense atmosphere. A 50-year-old Korean male patient in a hospital gown is lying supine on the floor. Close up shot. A late 20s Korean female nurse in a clean blue scrub uniform, looking professional and focused. taps the patient's both shoulders firmly and shouts 'Are you okay?' loudly near the patient's ear.`
+- **시나리오**: 간호사가 환자의 양쪽 어깨를 두드리며 큰 소리로 "괜찮으세요?" 외침.
 - **질문**: 환자의 반응을 확인하는 올바른 방법은?
 - **정답**: **c) 어깨를 가볍게 두드리며 큰 소리로 '괜찮으세요?'라고 물어본다.**
 - **해설**: 양쪽 어깨를 가볍게 두드리며 큰 소리로 의식을 확인해야 합니다.
 
 #### Q4. 반응 없음 판단 (Unresponsive)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a university hospital ward bathroom. Cold fluorescent lighting creates a tense atmosphere. A 50-year-old Korean male patient in a hospital gown is lying supine on the floor. The patient shows absolutely no movement or sound. The nurse observes the face closely. Silence and stillness emphasized.`
+- **시나리오**: 환자가 전혀 움직임이나 소리 없음. 간호사가 얼굴을 주의 깊게 관찰.
 - **질문**: 환자가 아무런 반응이 없습니다. 이를 무엇이라 판단합니까?
 - **정답**: **b) 의식 없음 (Unresponsive)**
 - **해설**: 언어적, 신체적 자극에 반응이 없다면 의식이 없는 위급 상황으로 판단합니다.
 
 #### Q5. 도움 요청 (Call for Help)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a university hospital ward bathroom. Cold fluorescent lighting creates a tense atmosphere. A 50-year-old Korean male patient in a hospital gown is lying supine on the floor. Dynamic shot. A late 20s Korean female nurse in a clean blue scrub uniform, looking professional and focused. points a finger authoritatively towards the camera (or bystander) and shouts for help, then presses the emergency code blue button on the wall.`
+- **시나리오**: 간호사가 손가락으로 주변을 가리키며 도움을 요청하고 벽의 응급 코드 블루 버튼을 누름.
 - **질문**: 환자가 반응이 없습니다. 다음 행동으로 적절한 것은?
 - **정답**: **b) 주변에 도움을 요청하고 119 신고 및 AED를 요청한다.**
 - **해설**: 특정인을 지목하여 119 신고와 자동심장충격기(AED)를 가져오도록 명확히 지시해야 합니다. 병원 내라면 코드 블루/호출벨을 사용합니다.
 
 #### Q6. 호흡 확인 준비 (Check Breathing Prep)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a university hospital ward bathroom. Cold fluorescent lighting creates a tense atmosphere. A 50-year-old Korean male patient in a hospital gown is lying supine on the floor. A late 20s Korean female nurse in a clean blue scrub uniform, looking professional and focused. leans over the patient's face, looking at the chest, placing an ear near the mouth. Ready to check breathing and pulse simultaneously.`
+- **시나리오**: 간호사가 환자의 얼굴 위로 몸을 숙이고 가슴을 보며 입 근처에 귀를 가까이 댐.
 - **질문**: 도움 요청 후, 환자의 상태를 파악하기 위해 무엇을 해야 합니까?
 - **정답**: **c) 호흡과 맥박을 동시에 확인한다.**
 - **해설**: 의료 종사자는 호흡과 맥박 확인을 동시에 시행하여 시간을 단축해야 합니다.
 
 #### Q7. 맥박 및 호흡 확인 (Check Pulse)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a university hospital ward bathroom. Cold fluorescent lighting creates a tense atmosphere. A 50-year-old Korean male patient in a hospital gown is lying supine on the floor. Close up on A late 20s Korean female nurse in a clean blue scrub uniform, looking professional and focused.'s hand. Two fingers placed on the patient's carotid artery. The nurse's eyes are watching the patient's chest for movement. A timer graphic counts down from 10 to 0.`
+- **시나리오**: 간호사의 손 클로즈업. 두 손가락을 환자의 경동맥에 위치. 눈은 환자의 가슴 움직임을 관찰. 타이머가 10초에서 0으로 카운트다운.
 - **질문**: 맥박과 호흡을 확인하려 합니다. 올바른 방법과 시간은?
 - **정답**: **b) 경동맥을 10초 이내로 확인하며 동시에 호흡 유무를 관찰한다.**
 - **해설**: 일반인은 맥박 확인이 어려울 수 있으나, 의료인은 10초 이내에 경동맥 맥박과 호흡을 동시에 확인해야 합니다.
 
 #### Q8. 비정상 호흡 판단 (Agonal Breathing)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a university hospital ward bathroom. Cold fluorescent lighting creates a tense atmosphere. A 50-year-old Korean male patient in a hospital gown is lying supine on the floor. Extreme close up on patient's face. Lips are slightly blue. The patient gasps irregularly (Agonal Breathing). The chest does not rise normally.`
+- **시나리오**: 환자 얼굴 극도 클로즈업. 입술이 약간 파랗고 환자가 불규칙하게 헐떡임. 가슴이 정상적으로 올라가지 않음.
 - **질문**: 환자가 간헐적으로 헐떡이는 호흡(Agonal breathing)을 보입니다. 이것은 무엇을 의미합니까?
 - **정답**: **b) 심정지 초기 징후이며, 즉각적인 심폐소생술이 필요하다.**
 - **해설**: 임종 호흡(Agonal breathing)은 심정지 직후 뇌에 남은 산소로 인해 발생하는 반사적 행동으로, 즉시 가슴압박을 시작해야 합니다.
 
 #### Q9. 가슴압박 준비 (Prep Compression)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a university hospital ward bathroom. Cold fluorescent lighting creates a tense atmosphere. A 50-year-old Korean male patient in a hospital gown is lying supine on the floor. A late 20s Korean female nurse in a clean blue scrub uniform, looking professional and focused. swiftly moves hands to the center of the chest, interlocking fingers, and straightening elbows. Ready to compress.`
+- **시나리오**: 간호사가 신속하게 손을 가슴 중앙으로 이동, 손을 깍지 끼고 팔꿈치를 펴서 압박 준비.
 - **질문**: 심정지로 판단했습니다. 가슴 압박을 시작하기 직전, 가장 먼저 취해야 할 자세는?
 - **정답**: **b) 가슴 중앙에 손꿈치를 대고 깍지를 낀다.**
 - **해설**: 심정지 인지 즉시 가슴 압박을 시작할 수 있도록 정확한 위치(흉골 하부 1/2)를 잡습니다.
@@ -89,89 +97,96 @@ AI 기술을 활용하여 실제 응급 상황 시나리오를 제공하고, 학
 
 #### Q10. 가슴 압박 위치 (Hand Position)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. Close up on the chest. The nurse places the heel of one hand on the center of the patient's chest (lower half of sternum) and the other hand on top. Fingers are interlaced and lifted off the ribs.`
+- **시나리오**: 밝은 병원 치료실. 응급 장비와 AED가 보임. 가슴 클로즈업. 간호사가 한 손의 손꿈치를 환자 가슴 중앙(흉골 아래쪽 절반)에 대고 다른 손을 위에 올림. 손가락은 깍지 끼고 갈비뼈에서 들어 올림.
 - **질문**: 가슴 압박을 시작합니다. 정확한 압박 위치는 어디입니까?
 - **정답**: **c) 흉골(가슴뼈)의 아래쪽 절반(중앙)**
 - **해설**: 양쪽 젖꼭지를 이은 선의 중앙(흉골 하부)에 손꿈치를 대고 압박해야 합니다.
 
 #### Q11. 압박 자세 (Posture)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. Side view. The nurse kneels beside the patient. Arms are perfectly straight vertically. Shoulders are directly over the hands. Using body weight to compress.`
+- **시나리오**: 측면 뷰. 간호사가 환자 옆에 무릎을 꿇음. 팔이 완벽하게 수직으로 곧음. 어깨가 손 바로 위에 있음. 체중을 이용해 압박.
 - **질문**: 효율적인 압박을 위한 구조자의 자세로 올바른 것은?
 - **정답**: **b) 팔을 수직으로 곧게 펴고 체중을 싣는다.**
 - **해설**: 구조자의 어깨, 팔꿈치, 손목이 일직선이 되도록 하여 체중을 실어 압박해야 합니다.
 
 #### Q12. 압박 속도 (Rate)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. The nurse is performing CPR. A metronome visual effect beats at 110 bpm. The compression rhythm matches the beat perfectly. Fast and strong.`
+- **시나리오**: 간호사가 CPR 수행 중. 메트로놈 시각 효과가 110 bpm으로 박동. 압박 리듬이 박동과 완벽하게 일치. 빠르고 강함.
 - **질문**: 가슴 압박의 적절한 속도는?
 - **정답**: **b) 분당 100~120회**
 - **해설**: 분당 100~120회의 빠르고 강한 압박이 필요합니다.
 
 #### Q13. 압박 깊이 및 이완 (Depth & Recoil)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. Close up side view of the chest. The chest is compressed deep (5cm) and then returns fully to normal position (full recoil) before the next push. Rhythmic and mechanical precision.`
+- **시나리오**: 가슴 측면 클로즈업 뷰. 가슴이 깊게 (5cm) 압박되고 다음 압박 전에 정상 위치로 완전히 돌아옴(완전 이완). 리드미컬하고 기계적인 정밀함.
 - **질문**: 가슴 압박 깊이와 이완에 대한 설명으로 옳은 것은?
 - **정답**: **b) 최소 5cm 깊이로 압박하고, 압박 후 가슴이 완전히 펴지도록(이완) 한다.**
 - **해설**: 성인 기준 최소 5cm 깊이로 압박하며, 다음 압박 전 심장에 혈액이 차도록 완전한 이완(Recoil)이 필수적입니다.
 
 #### Q14. 제세동기 전원 (AED Power)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. Montage sequence. 1. Hand pressing 'Power' button on AED. 2. Removing pads from package. 3. AED screen lighting up.`
+- **시나리오**: 몽타주 시퀀스. 1. AED의 '전원' 버튼을 누르는 손. 2. 패키지에서 패드를 꺼냄. 3. AED 화면이 켜짐.
 - **질문**: 자동심장충격기(AED)가 도착했습니다. 가장 먼저 해야 할 일은?
 - **정답**: **c) 전원을 켠다.**
 - **해설**: AED 사용의 첫 단계는 전원 켜기입니다. 이후 음성 지시에 따라 패드를 부착하고 리듬을 분석합니다.
 
 #### Q15. 패드 부착 위치 (Pad Placement)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. Top down view. Pads are applied to the patient's bare chest. One pad on the right upper chest (below clavicle), the other on the left lower ribs (mid-axillary line).`
+- **시나리오**: 탑 다운 뷰. 패드가 환자의 맨 가슴에 부착됨. 하나의 패드는 오른쪽 윗가슴(쇄골 아래), 다른 하나는 왼쪽 아래 갈비뼈(중겨드랑이선)에.
 - **질문**: 패드를 부착할 정확한 위치는 어디입니까?
 - **정답**: **a) 오른쪽 가슴 위, 왼쪽 가슴 아래**
 - **해설**: 전류가 심장을 대각선으로 통과하도록 우측 쇄골 아래와 좌측 옆구리에 부착합니다.
 
 #### Q16. 심장 리듬 분석 (VF Rhythm)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. Close up on AED screen. It shows a chaotic, rapid, irregular waveform (Ventricular Fibrillation). Text on screen: 'ANALYZING RHYTHM'.`
+- **시나리오**: AED 화면 클로즈업. 혼란스럽고 빠르고 불규칙한 파형(심실세동)이 표시됨. 화면 텍스트: '리듬 분석 중'.
 - **질문**: AED가 '심장 리듬을 분석 중입니다'라고 합니다. 이때 주의할 점은?
 - **정답**: **b) 환자에게서 손을 떼고 접촉하지 않는다.**
 - **해설**: 리듬 분석 중에는 환자의 몸이 흔들리면 안 되므로, 가슴 압박을 중단하고 모두 물러나야 합니다.
 
 #### Q17. 제세동 필요 안내 (Shock Advised)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. AED device close up. The button flashes orange/red. Audio visual indicator shows 'SHOCK ADVISED'.`
+- **시나리오**: AED 장치 클로즈업. 버튼이 주황색/빨간색으로 깜박임. 오디오 비주얼 표시기에 '제세동 필요'가 표시됨.
 - **질문**: AED가 '제세동이 필요합니다'라고 안내합니다. 다음 단계는?
 - **정답**: **b) 충전되는 동안 잠시 가슴 압박을 하고, 충전 완료 시 버튼을 누를 준비를 한다.**
 - **해설**: 충전에는 수 초가 소요되므로, 그동안 가슴 압박을 하다가 충전 완료 신호가 오면 물러나서 쇼크를 줍니다.
 
 #### Q18. 충격 준비 (Prep Shock)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. The nurse puts hands near the shock button but does not press yet. Looking around to ensure clearance.`
+- **시나리오**: 간호사가 쇼크 버튼 근처에 손을 두지만 아직 누르지 않음. 주변을 둘러보며 안전 확인.
 - **질문**: 충전이 완료되었습니다. 버튼을 누르기 전 필수 행동은?
 - **정답**: **b) 주변 안전 확인**
 - **해설**: 감전 사고를 막기 위해 마지막으로 환자와 접촉한 사람이 없는지 확인해야 합니다.
 
 #### Q19. 충격 전달 (Clear for Shock)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. Dynamic shot. A late 20s Korean female nurse in a clean blue scrub uniform, looking professional and focused. shouts 'Stand Clear!' with hands up in the air, looking around, then decisively presses the shock button. Patient body jerks slightly.`
+- **시나리오**: 다이내믹 샷. 간호사가 손을 공중으로 들어올리며 '비켜주세요!' 외치고 주변을 둘러본 후 쇼크 버튼을 단호하게 누름. 환자 몸이 약간 경련.
 - **질문**: 제세동 버튼(Shock)을 누르기 전에 반드시 확인해야 할 것은?
 - **정답**: **b) 아무도 환자와 접촉하지 않았는지 눈으로 확인하고 '비켜주세요' 외친다.**
 - **해설**: 쇼크 전달 시 환자와 접촉해 있으면 감전 위험이 있고, 에너지가 분산되어 제세동 효과가 떨어질 수 있습니다.
 
 #### Q20. 압박 재개 (Resume CPR)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. Immediately after the shock, the nurse instantly places hands back on the chest and resumes compressions without hesitation.`
+- **시나리오**: 쇼크 직후, 간호사가 즉시 가슴에 손을 다시 올리고 망설임 없이 압박 재개.
 - **질문**: 제세동(쇼크)을 실시한 직후 해야 할 행동은?
 - **정답**: **b) 즉시 가슴 압박을 다시 시작한다.**
 - **해설**: 쇼크 직후에는 심장이 바로 정상 박동을 찾지 못할 수 있으므로, 즉시 흉부 압박을 재개하여 혈류를 공급해야 합니다.
 
 #### Q21. ROSC 확인 (Return of Spontaneous Circulation)
 
-- **AI Video Prompt**: `Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment. Monitor screen shows a normal sinus rhythm with blood pressure reading 120/80. The nurse checks the carotid pulse and nods, signaling recovery. Patient coughs or moves.`
+- **시나리오**: 모니터 화면에 정상 동율동과 혈압 수치 120/80이 표시됨. 간호사가 경동맥 맥박을 확인하고 고개를 끄덕이며 회복 신호를 보냄. 환자가 기침하거나 움직임.
 - **질문**: 제세동 후 가슴 압박을 지속하던 중 환자가 움직이고 모니터에 정상 리듬이 보입니다. 조치는?
 - **정답**: **b) 맥박과 호흡을 확인하고, 회복되었다면 회복 자세를 취하거나 전문 소생술 팀을 기다린다.**
 - **해설**: 환자가 의식/호흡/맥박이 돌아왔다면(ROSC), 기도를 유지하고 활력 징후를 모니터링하며 전문 의료진에게 인계합니다.
 
 ---
+
+## 기술 스택
+
+- **Frontend**: Next.js 15, React, TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Video**: Local video files 및 동적 생성 지원
 
 ## 실행 방법 (Getting Started)
 
@@ -188,3 +203,34 @@ bun dev
 ```
 
 브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
+
+## 프로젝트 구조
+
+```
+cpr-ai-feedback-system2/
+├── app/                    # Next.js 앱 디렉토리
+│   ├── page.tsx           # 메인 페이지
+│   ├── layout.tsx         # 루트 레이아웃
+│   ├── data.ts            # 질문 데이터
+│   └── types.ts           # 타입 정의
+├── components/            # React 컴포넌트
+│   ├── Dashboard.tsx      # 메인 대시보드
+│   ├── SessionPlayer.tsx  # 세션 플레이어
+│   ├── MediaDisplay.tsx   # 비디오 디스플레이
+│   ├── FeedbackModal.tsx  # 피드백 모달
+│   ├── ResultScreen.tsx   # 결과 화면
+│   ├── VideoLibrary.tsx   # 영상 보관함
+│   └── Layout.tsx         # 공통 레이아웃
+├── public/
+│   └── videos/           # 로컬 비디오 파일
+└── README.md
+```
+
+## 라이선스 및 연락처
+
+**저작권**: © 2025 전남대학교 간호대학. All rights reserved.
+
+**연구 책임자**: 조인영 교수
+**소속**: 전남대학교 간호대학
+
+이 프로젝트는 교육 및 연구 목적으로 개발되었으며, 무단 복제 및 배포를 금합니다.

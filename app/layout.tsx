@@ -9,8 +9,8 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "AI CPR Training Platform",
-  description: "Interactive Simulation Platform",
+  title: "CPR 교육 플랫폼 - 전남대학교 간호대학",
+  description: "전남대학교 간호대학 조인영 교수 연구 프로젝트 - 실시간 피드백 시스템을 활용한 심폐소생술 교육 플랫폼",
 };
 
 export default function RootLayout({

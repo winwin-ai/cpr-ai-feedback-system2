@@ -13,16 +13,16 @@ export const Dashboard: React.FC<DashboardProps> = ({ onStart, onOpenLibrary }) 
       {/* Hero Section */}
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
-          AI 기반 CPR 교육 플랫폼:<br />
+          전남대학교 간호대학 CPR 교육 플랫폼:<br />
           <span className="text-blue-600">The Digital Blueprint</span>
         </h2>
         <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-          실제 응급 상황 시나리오를 통해 심정지 인지부터 고품질 심폐소생술까지.<br/>
-          AI가 생성한 미디어와 함께 실전처럼 학습하세요.
+          전남대학교 간호대학이 개발한 교육 플랫폼으로,<br/>
+          실제 응급 상황 시나리오를 통해 심정지 인지부터 고품질 심폐소생술까지 실전처럼 학습하세요.
         </p>
-        
+
         <div className="flex justify-center gap-4">
-          <button 
+          <button
             onClick={onStart}
             className="group relative inline-flex items-center gap-3 px-8 py-4 bg-blue-600 text-white text-lg font-bold rounded-xl shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all hover:-translate-y-1 overflow-hidden"
           >
@@ -31,7 +31,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onStart, onOpenLibrary }) 
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </button>
 
-          <button 
+          <button
             onClick={onOpenLibrary}
             className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-700 border border-slate-200 text-lg font-bold rounded-xl shadow-sm hover:bg-slate-50 hover:shadow-md transition-all hover:-translate-y-1"
           >
@@ -101,7 +101,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onStart, onOpenLibrary }) 
               <h3 className="text-2xl font-bold mb-2">준비되셨나요?</h3>
               <p className="text-slate-300">지금 바로 가상 시나리오에 접속하여 생명을 살리는 기술을 배우세요.</p>
             </div>
-            <button 
+            <button
               onClick={onStart}
               className="flex items-center gap-2 px-6 py-3 bg-white text-slate-900 rounded-lg font-bold hover:bg-slate-100 transition-colors"
             >

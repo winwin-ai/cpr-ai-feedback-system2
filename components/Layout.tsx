@@ -21,7 +21,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, viewState }) => {
               <p className="text-xs text-slate-500 font-medium">Interactive Simulation Platform</p>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <div className={`px-3 py-1 rounded-full text-xs font-semibold ${viewState.includes('SESSION') ? 'bg-green-100 text-green-700 animate-pulse' : 'bg-slate-100 text-slate-500'}`}>
               {viewState === 'DASHBOARD' ? '대기 중' : '시뮬레이션 진행 중'}
@@ -38,9 +38,10 @@ export const Layout: React.FC<LayoutProps> = ({ children, viewState }) => {
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-6 mt-auto">
         <div className="max-w-7xl mx-auto px-4 text-center text-sm">
-          <p>© 2025 AI Based CPR Education Platform. All rights reserved.</p>
+          <p className="text-slate-300 font-medium mb-1">전남대학교 간호대학 조인영 교수 연구 프로젝트</p>
+          <p>© 2025 전남대학교 간호대학 CPR 교육 플랫폼. All rights reserved.</p>
           <div className="flex justify-center gap-4 mt-2">
-             <span className="flex items-center gap-1"><HeartPulse size={14}/> Life Saving Tech</span>
+             <span className="flex items-center gap-1"><HeartPulse size={14}/> 생명을 살리는 기술</span>
           </div>
         </div>
       </footer>
