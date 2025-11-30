@@ -1,11 +1,13 @@
+
 import React from 'react';
-import { PlayCircle, ShieldAlert, Heart, BarChart3, ChevronRight } from 'lucide-react';
+import { PlayCircle, ShieldAlert, Heart, BarChart3, ChevronRight, Film } from 'lucide-react';
 
 interface DashboardProps {
   onStart: () => void;
+  onOpenLibrary: () => void;
 }
 
-export const Dashboard: React.FC<DashboardProps> = ({ onStart }) => {
+export const Dashboard: React.FC<DashboardProps> = ({ onStart, onOpenLibrary }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
       {/* Hero Section */}
@@ -18,14 +20,25 @@ export const Dashboard: React.FC<DashboardProps> = ({ onStart }) => {
           실제 응급 상황 시나리오를 통해 심정지 인지부터 고품질 심폐소생술까지.<br/>
           AI가 생성한 미디어와 함께 실전처럼 학습하세요.
         </p>
-        <button 
-          onClick={onStart}
-          className="group relative inline-flex items-center gap-3 px-8 py-4 bg-blue-600 text-white text-lg font-bold rounded-xl shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all hover:-translate-y-1 overflow-hidden"
-        >
-          <span className="relative z-10">교육 시작하기</span>
-          <PlayCircle className="w-6 h-6 relative z-10 group-hover:scale-110 transition-transform" />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-        </button>
+        
+        <div className="flex justify-center gap-4">
+          <button 
+            onClick={onStart}
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-blue-600 text-white text-lg font-bold rounded-xl shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all hover:-translate-y-1 overflow-hidden"
+          >
+            <span className="relative z-10">교육 시작하기</span>
+            <PlayCircle className="w-6 h-6 relative z-10 group-hover:scale-110 transition-transform" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </button>
+
+          <button 
+            onClick={onOpenLibrary}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-700 border border-slate-200 text-lg font-bold rounded-xl shadow-sm hover:bg-slate-50 hover:shadow-md transition-all hover:-translate-y-1"
+          >
+            <Film className="w-6 h-6" />
+            <span>영상 보관함</span>
+          </button>
+        </div>
       </div>
 
       {/* Curriculum Grid */}

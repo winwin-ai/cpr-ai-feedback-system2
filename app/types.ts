@@ -4,7 +4,8 @@ export enum ViewState {
   SESSION_2 = 'SESSION_2',
   RESULT_PASS = 'RESULT_PASS',
   RESULT_FAIL = 'RESULT_FAIL',
-  COMPLETION = 'COMPLETION'
+  COMPLETION = 'COMPLETION',
+  LIBRARY = 'LIBRARY'
 }
 
 export interface Option {

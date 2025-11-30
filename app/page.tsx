@@ -5,6 +5,7 @@ import { Layout } from '../components/Layout';
 import { Dashboard } from '../components/Dashboard';
 import { SessionPlayer } from '../components/SessionPlayer';
 import { ResultScreen } from '../components/ResultScreen';
+import { VideoLibrary } from '../components/VideoLibrary';
 import { ViewState } from './types';
 import { session1Questions, session2Questions } from './data';
 
@@ -16,6 +17,14 @@ export default function Home() {
 
   const handleStart = () => {
     setViewState(ViewState.SESSION_1);
+  };
+
+  const handleOpenLibrary = () => {
+    setViewState(ViewState.LIBRARY);
+  };
+
+  const handleBackToDashboard = () => {
+    setViewState(ViewState.DASHBOARD);
   };
 
   const handleSession1Complete = (correctCount: number) => {
@@ -62,7 +71,14 @@ export default function Home() {
   return (
     <Layout viewState={viewState}>
       {viewState === ViewState.DASHBOARD && (
-        <Dashboard onStart={() => { setActiveSessionId(1); handleStart(); }} />
+        <Dashboard
+          onStart={() => { setActiveSessionId(1); handleStart(); }}
+          onOpenLibrary={handleOpenLibrary}
+        />
+      )}
+
+      {viewState === ViewState.LIBRARY && (
+        <VideoLibrary onBack={handleBackToDashboard} />
       )}
 
       {viewState === ViewState.SESSION_1 && (
