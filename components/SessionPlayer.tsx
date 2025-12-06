@@ -177,12 +177,15 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
         {playbackState === "waiting" && (
           <>
             {/* Top: Title */}
+            {/* Top: Title */}
             <div
-              className={`absolute top-0 left-0 right-0 p-8 z-10 duration-500 text-center ${
-                feedbackState !== "idle" ? "opacity-50 blur-sm" : "opacity-100"
+              className={`absolute top-0 left-0 right-0 p-8 z-10 text-center animate-in fade-in slide-in-from-top-6 duration-700 ease-out ${
+                feedbackState !== "idle"
+                  ? "opacity-50 blur-sm transition-all duration-500"
+                  : "opacity-100"
               }`}
             >
-              <div className="bg-black/60 backdrop-blur-md inline-block px-8 py-4 rounded-2xl shadow-lg">
+              <div className="bg-black/60 backdrop-blur-md inline-block px-8 py-4 rounded-2xl shadow-lg border border-white/10">
                 <h2 className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-2">
                   Question {currentIndex + 1}
                 </h2>
@@ -194,95 +197,100 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
             {/* Bottom: Options Horizontal List */}
             <div
-              className={`absolute bottom-0 left-0 right-0 p-6 z-10 duration-500 ${
+              className={`absolute bottom-0 left-0 right-0 p-4 md:p-8 z-10 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-150 ease-out ${
                 feedbackState !== "idle"
-                  ? "opacity-50 blur-sm pointer-events-none"
+                  ? "opacity-50 blur-sm pointer-events-none transition-all duration-500"
                   : "opacity-100"
               }`}
             >
-              <div className="max-w-7xl mx-auto">
-                <div className="flex gap-4 overflow-x-auto pb-4 snap-x justify-center">
-                  {currentQuestion.options.map((option) => {
-                    const isDisabled = disabledOptionIds.has(option.id);
-                    return (
-                      <button
-                        key={option.id}
-                        onClick={() => handleOptionSelect(option.id)}
-                        disabled={isDisabled || feedbackState !== "idle"}
-                        className={`
-                            flex-shrink-0 w-64 md:w-72 rounded-xl overflow-hidden shadow-xl
-                            transform transition-all duration-300
-                            ${
-                              isDisabled
-                                ? "bg-slate-300 opacity-50 cursor-not-allowed grayscale"
-                                : "bg-white/90 backdrop-blur-sm hover:scale-105 hover:bg-white cursor-pointer"
-                            }
-                            ${
-                              selectedOptionId === option.id
-                                ? "ring-4 ring-blue-500 scale-105"
-                                : "border border-white/20"
-                            }
-                          `}
-                      >
-                        {/* Image Area */}
-                        <div className="h-40 bg-slate-200 relative">
-                          {option.imageUrl ? (
-                            <img
-                              src={option.imageUrl}
-                              alt={option.text}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center text-slate-400">
-                              No Image
-                            </div>
-                          )}
-                          <div className="absolute top-2 left-2 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold shadow-md">
-                            {option.id.toUpperCase()}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-7xl mx-auto">
+                {currentQuestion.options.map((option) => {
+                  const isDisabled = disabledOptionIds.has(option.id);
+                  return (
+                    <button
+                      key={option.id}
+                      onClick={() => handleOptionSelect(option.id)}
+                      disabled={isDisabled || feedbackState !== "idle"}
+                      className={`
+                          w-full rounded-2xl overflow-hidden shadow-2xl
+                          transform transition-all duration-300
+                          ${
+                            isDisabled
+                              ? "bg-slate-300 opacity-50 cursor-not-allowed grayscale"
+                              : "bg-white/90 backdrop-blur-sm hover:scale-105 hover:-translate-y-2 hover:bg-white cursor-pointer hover:shadow-blue-500/30"
+                          }
+                          ${
+                            selectedOptionId === option.id
+                              ? "ring-4 ring-blue-500 scale-105"
+                              : "border border-white/20"
+                          }
+                        `}
+                    >
+                      {/* Image Area */}
+                      <div className="h-32 md:h-48 bg-slate-200 relative">
+                        {option.imageUrl ? (
+                          <img
+                            src={option.imageUrl}
+                            alt={option.text}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-slate-400">
+                            No Image
                           </div>
+                        )}
+                        <div className="absolute top-3 left-3 w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm md:text-lg font-bold shadow-md ring-2 ring-white/50">
+                          {option.id.toUpperCase()}
+                        </div>
 
-                          {/* Disabled Overlay */}
-                          {isDisabled && (
-                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                              <XCircle className="text-white w-12 h-12 opacity-80" />
-                            </div>
-                          )}
-                        </div>
-                        {/* Text Area */}
-                        <div className="p-4 h-24 flex items-center text-left">
-                          <span
-                            className={`text-sm font-semibold line-clamp-3 ${
-                              isDisabled ? "text-slate-500" : "text-slate-900"
-                            }`}
-                          >
-                            {option.text}
-                          </span>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+                        {/* Disabled Overlay */}
+                        {isDisabled && (
+                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                            <XCircle className="text-white w-12 h-12 opacity-80" />
+                          </div>
+                        )}
+                      </div>
+                      {/* Text Area */}
+                      <div className="p-3 md:p-5 h-20 md:h-28 flex items-center text-left">
+                        <span
+                          className={`text-sm md:text-lg font-semibold line-clamp-3 leading-snug ${
+                            isDisabled ? "text-slate-500" : "text-slate-900"
+                          }`}
+                        >
+                          {option.text}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </>
         )}
 
         {/* Feedback Overlays (O/X) */}
+        {/* Feedback Overlays (O/X) */}
         {feedbackState === "correct" && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-transparent animate-in fade-in zoom-in duration-300">
+          <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-transparent animate-in fade-in zoom-in duration-300">
             <CheckCircle2
-              className="w-48 h-48 text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.8)]"
+              className="w-48 h-48 text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.8)] mb-6"
               strokeWidth={3}
             />
+            <span className="text-4xl md:text-5xl font-bold text-white drop-shadow-md">
+              정답입니다.
+            </span>
           </div>
         )}
 
         {feedbackState === "incorrect" && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-transparent animate-in fade-in zoom-in duration-300">
+          <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-transparent animate-in fade-in zoom-in duration-300">
             <XCircle
-              className="w-48 h-48 text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.8)]"
+              className="w-48 h-48 text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.8)] mb-6"
               strokeWidth={3}
             />
+            <span className="text-4xl md:text-5xl font-bold text-white drop-shadow-md">
+              오답입니다.
+            </span>
           </div>
         )}
       </div>

@@ -1,391 +1,692 @@
 import { Question } from "./types";
 
-const COMMON_BG_WARD =
-  "Cinematic 8K video, photorealistic. Inside a university hospital ward bathroom. Cold fluorescent lighting creates a tense atmosphere. A 50-year-old Korean male patient in a hospital gown is lying supine on the floor.";
-const COMMON_BG_ER =
-  "Cinematic 8K video, photorealistic. Inside a well-lit hospital treatment room. Emergency equipment and AED are visible. A professional medical environment.";
-const ACTOR_NURSE =
-  "A late 20s Korean female nurse in a clean blue scrub uniform, looking professional and focused.";
-const ACTOR_PATIENT =
-  "A 50-year-old Korean male patient, unconscious, pale face.";
+// Common media prompts (kept for reference, using placeholders for now)
+const COMMON_BG_WARD = "Cinematic 8K video...";
+const COMMON_BG_ER = "Cinematic 8K video...";
 
-// Session 1: Cardiac Arrest Recognition & Initial Response (Q1-Q3 Demo)
 export const session1Questions: Question[] = [
   {
     id: 1,
     sessionId: 1,
-    title: "현장 안전 확인 (Safety)",
+    title: "초기 대응 확인",
     mediaType: "video",
-    mediaPrompt: "Q01 Placeholder",
-    questionText:
-      '보호자가 "환자가 쓰러졌어요"라고 외쳤습니다. 어떻게 하시겠습니까?',
-    options: [
-      {
-        id: "a",
-        text: "즉시 주변 안전을 확인하고 환자에게 접근한다.",
-        imageUrl: "/videos/Q01-A.jpg",
-      },
-      {
-        id: "b",
-        text: '보호자에게 "괜찮아질 거예요"라고 안심시키며 지켜본다.',
-        imageUrl: "/videos/Q01-B.jpg",
-      },
-      {
-        id: "c",
-        text: "간질 환자라 하니 발작이 멈출 때까지 기다린다.",
-        imageUrl: "/videos/Q01-C.png",
-      },
-      {
-        id: "d",
-        text: "바로 환자의 팔다리를 붙잡아 경련을 막는다.",
-        imageUrl: "/videos/Q01-D.png",
-      },
-    ],
-    correctOptionId: "a",
-    feedbackCorrect:
-      "정답입니다! 구조자의 안전이 확보되지 않으면 구조를 시작할 수 없습니다.",
-    feedbackIncorrect: "안전 확인이 우선입니다.",
-    explanation:
-      "환자에게 접근하기 전, 현장이 안전한지(감전, 가스 누출 등) 확인하는 것이 최우선 순위입니다.",
-    videoPaths: {
-      question: "/videos/Q01.mp4",
-      answer: "/videos/Q01-A.mp4",
-    },
-  },
-  {
-    id: 2,
-    sessionId: 1,
-    title: "환자 접근 (Approach)",
-    mediaType: "video",
-    mediaPrompt: "Q02 Placeholder",
+    mediaPrompt: "Q01",
     questionText: "쓰러진 환자를 발견한 당신이 가장 먼저 해야 할 행동은?",
     options: [
       {
         id: "a",
         text: "환자의 반응을 확인한다.",
-        imageUrl: "/videos/Q02-A.jpg",
+        imageUrl: "/videos/Q01-A.jpg",
       },
       {
         id: "b",
         text: "선임간호사에게 알려서 도움을 요청한다.",
-        imageUrl: "/videos/Q02-B.jpg",
+        imageUrl: "/videos/Q01-B.jpg",
       },
       {
         id: "c",
         text: "쓰러진 환자를 바로 눕혀 기도 확보를 먼저 시도한다.",
-        imageUrl: "/videos/Q02-C.png",
+        imageUrl: "/videos/Q01-C.png",
       },
       {
         id: "d",
-        text: "경련을 하니까 PRN 진정제가 있는지 확인한다.",
-        imageUrl: "/videos/Q02-D.png",
+        text: "경련을 하므로 PRN 진정제가 있는지 확인한다.",
+        imageUrl: "/videos/Q01-D.png",
       },
     ],
     correctOptionId: "a",
-    feedbackCorrect:
-      "정답입니다! 어깨 옆에 위치해야 얼굴을 확인하고 압박을 시행하기 좋습니다.",
-    feedbackIncorrect: "상체 처치를 위해 어깨 옆이 가장 적절합니다.",
+    feedbackCorrect: "정답입니다. 먼저 환자의 반응을 확인해야 합니다.",
+    feedbackIncorrect: "가장 먼저 환자의 의식/반응을 확인해야 합니다.",
     explanation:
-      "환자의 어깨 옆에 위치하는 것이 의식 확인 및 가슴 압박을 수행하기에 가장 효율적인 위치입니다.",
-    videoPaths: {
-      question: "/videos/Q02.mp4",
-      answer: "/videos/Q02-A.mp4",
-    },
+      "쓰러진 환자 발견 시 가장 먼저 수행해야 할 단계는 의식 확인입니다.",
+    videoPaths: { question: "/videos/Q01.mp4", answer: "/videos/Q01-A.mp4" },
   },
   {
-    id: 3,
+    id: 2,
     sessionId: 1,
-    title: "반응 확인 (Check Response)",
+    title: "반응 확인 방법",
     mediaType: "video",
-    mediaPrompt: "Q03 Placeholder",
+    mediaPrompt: "Q02",
     questionText: "환자의 반응을 확인하는 방법은 무엇인가요?",
     options: [
       {
         id: "a",
         text: "환자에게 큰소리로 말을 걸어본다.",
-        imageUrl: "/videos/Q03-A.jpg",
+        imageUrl: "/videos/Q02-A.jpg",
       },
       {
         id: "b",
         text: "환자의 얼굴을 가까이 들여다보며 호흡 소리를 듣는다.",
-        imageUrl: "/videos/Q03-B.jpg",
+        imageUrl: "/videos/Q02-B.jpg",
       },
       {
         id: "c",
         text: '환자의 어깨를 두드리며 큰소리로 "괜찮으세요"라고 묻는다.',
-        imageUrl: "/videos/Q03-C.png",
-      }, // Q03-C.mp4 exists, so C is likely intended or at least the video exists
+        imageUrl: "/videos/Q02-C.png",
+      },
       {
         id: "d",
         text: "어깨를 세게 흔들며 이름을 부른다.",
-        imageUrl: "/videos/Q03-D.png",
+        imageUrl: "/videos/Q02-D.png",
       },
     ],
     correctOptionId: "c",
-    feedbackCorrect:
-      "정답입니다! 어깨를 두드리며 큰 소리로 반응을 확인하는 것이 표준 절차입니다.",
-    feedbackIncorrect:
-      "과도한 자극이나 흔들기는 경추 손상을 악화시킬 수 있습니다.",
+    feedbackCorrect: "정답입니다. 어깨를 가볍게 두드리며 큰 소리로 확인합니다.",
+    feedbackIncorrect: "어깨를 두드리며 큰 소리로 질문해야 합니다.",
     explanation:
-      "양쪽 어깨를 가볍게 두드리며 큰 소리로 의식을 확인해야 합니다.",
-    videoPaths: {
-      question: "/videos/Q03.mp4",
-      answer: "/videos/Q03-C.mp4",
-    },
-  },
-];
-
-// Session 2: High Quality CPR & Defibrillation (Q10-Q21)
-export const session2Questions: Question[] = [
-  {
-    id: 10,
-    sessionId: 2,
-    title: "가슴 압박 위치 (Hand Position)",
-    mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} Close up on the chest. The nurse places the heel of one hand on the center of the patient's chest (lower half of sternum) and the other hand on top. Fingers are interlaced and lifted off the ribs.`,
-    questionText: "가슴압박 시 올바른 손 위치는 어디인가요?",
-    options: [
-      { id: "a", text: "흉골 중앙에 손바닥을 올린다." },
-      { id: "b", text: "왼쪽 가슴 위를 손끝으로 빠르게 누른다." },
-      { id: "c", text: "환자의 배 위(명치 부분)를 눌러준다." },
-      { id: "d", text: "흉골을 세게 3~4회만 눌러 반응을 본다." },
-    ],
-    correctOptionId: "a",
-    feedbackCorrect: "정답입니다! 흉골 하부 1/2 지점이 올바른 위치입니다.",
-    feedbackIncorrect:
-      "위치가 잘못되면 갈비뼈 골절이나 장기 손상을 유발할 수 있습니다.",
-    explanation:
-      "양쪽 젖꼭지를 이은 선의 중앙(흉골 하부)에 손꿈치를 대고 압박해야 합니다.",
+      "반응 확인은 양쪽 어깨를 가볍게 두드리며 큰 목소리로 물어보는 것이 표준 절차입니다.",
+    videoPaths: { question: "/videos/Q02.mp4", answer: "/videos/Q02-C.mp4" },
   },
   {
-    id: 11,
-    sessionId: 2,
-    title: "압박 자세 (Posture)",
+    id: 3,
+    sessionId: 1,
+    title: "무반응 시 대처",
     mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} Side view. The nurse kneels beside the patient. Arms are perfectly straight vertically. Shoulders are directly over the hands. Using body weight to compress.`,
-    questionText: "가슴압박의 올바른 깊이는 얼마인가요?",
+    mediaPrompt: "Q03",
+    questionText: "환자의 반응이 없습니다. 어떻게 해야 하나요?",
     options: [
-      { id: "a", text: "5cm 깊이로 압박한다." },
-      { id: "b", text: "1cm 깊이로 압박한다." },
-      { id: "c", text: "10cm 이상 깊이로 압박한다." },
-      { id: "d", text: "깊이와 상관없이 빠르게만 누른다." },
-    ],
-    correctOptionId: "a",
-    feedbackCorrect:
-      "정답입니다. 팔을 펴야 체중을 이용해 강한 압박이 가능합니다.",
-    feedbackIncorrect:
-      "팔을 굽히면 근육의 힘만 쓰게 되어 지치기 쉽고 깊이가 얕아집니다.",
-    explanation:
-      "구조자의 어깨, 팔꿈치, 손목이 일직선이 되도록 하여 체중을 실어 압박해야 합니다.",
-  },
-  {
-    id: 12,
-    sessionId: 2,
-    title: "압박 속도 (Rate)",
-    mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} The nurse is performing CPR. A metronome visual effect beats at 110 bpm. The compression rhythm matches the beat perfectly. Fast and strong.`,
-    questionText: "가슴압박의 올바른 속도는 얼마인가요?",
-    options: [
-      { id: "a", text: "100~120회/분으로 압박한다." },
-      { id: "b", text: "50회/분으로 압박한다." },
-      { id: "c", text: "150회/분으로 압박한다." },
-      { id: "d", text: "가능한 빠르게 누른다." },
-    ],
-    correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 분당 100~120회가 최적의 혈류를 생성합니다.",
-    feedbackIncorrect: "너무 느리거나 빠르면 심박출량이 감소합니다.",
-    explanation: "분당 100~120회의 빠르고 강한 압박이 필요합니다.",
-  },
-  {
-    id: 13,
-    sessionId: 2,
-    title: "압박 깊이 및 이완 (Depth & Recoil)",
-    mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} Close up side view of the chest. The chest is compressed deep (5cm) and then returns fully to normal position (full recoil) before the next push. Rhythmic and mechanical precision.`,
-    questionText: "가슴압박 시 신체 자세로 옳은 것은? (올바른 자세)",
-    options: [
-      { id: "a", text: "팔꿈치를 굽히고 손목의 힘을 이용한다." },
-      { id: "b", text: "손가락 끝으로 흉부를 누른다." },
+      { id: "a", text: "도움을 요청한다.", imageUrl: "/videos/Q03-A.jpg" },
+      { id: "b", text: "혈당을 측정한다.", imageUrl: "/videos/Q03-B.jpg" },
       {
         id: "c",
-        text: "팔을 곧게 펴고 어깨가 환자 흉부 위에 수직이 되도록 한다.",
+        text: "우선 환자를 침대로 옮긴다.",
+        imageUrl: "/videos/Q03-C.png",
       },
-      { id: "d", text: "허리를 굽혀 상체만으로 압박한다." },
-    ],
-    correctOptionId: "c",
-    feedbackCorrect: "정답입니다! 고품질 CPR의 핵심 요소입니다.",
-    feedbackIncorrect:
-      "압박이 너무 얕거나 이완이 안 되면 혈류가 채워지지 않습니다.",
-    explanation:
-      "성인 기준 최소 5cm 깊이로 압박하며, 다음 압박 전 심장에 혈액이 차도록 완전한 이완(Recoil)이 필수적입니다.",
-  },
-  {
-    id: 14,
-    sessionId: 2,
-    title: "제세동기 전원 (AED Power)",
-    mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} Montage sequence. 1. Hand pressing 'Power' button on AED. 2. Removing pads from package. 3. AED screen lighting up.`,
-    questionText:
-      "어떤 순서로 제세동기를 준비하고 사용해야 할까요? (순서 배열)",
-    options: [
-      { id: "a", text: "A(전원)-C(패드)-B(리듬확인)" },
-      { id: "b", text: "A(전원)-C(패드)-B(리듬확인)-D(충전)" },
-      { id: "c", text: "A(전원)-D(충전)" },
-      { id: "d", text: "A(전원)-E(처방대기)" },
+      { id: "d", text: "가슴압박을 시작한다.", imageUrl: "/videos/Q03-D.png" },
     ],
     correctOptionId: "a",
-    feedbackCorrect:
-      "정답입니다! 전원을 켜야 음성 안내에 따라 절차를 진행할 수 있습니다.",
-    feedbackIncorrect: "전원을 켜는 것이 항상 첫 번째 단계입니다.",
+    feedbackCorrect: "정답입니다. 즉시 도움을 요청해야 합니다.",
+    feedbackIncorrect: "혼자 해결하려 하지 말고 도움을 요청해야 합니다.",
     explanation:
-      "AED 사용의 첫 단계는 전원 켜기입니다. 이후 음성 지시에 따라 패드를 부착하고 리듬을 분석합니다.",
+      "환자가 반응이 없다면 즉시 주변에 도움을 요청하여 의료 응급팀(Code Blue 등)을 활성화해야 합니다.",
+    videoPaths: { question: "/videos/Q03.mp4", answer: "/videos/Q03-A.mp4" },
   },
   {
-    id: 15,
-    sessionId: 2,
-    title: "패드 부착 위치 (Pad Placement)",
+    id: 4,
+    sessionId: 1,
+    title: "도움 요청",
     mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} Top down view. Pads are applied to the patient's bare chest. One pad on the right upper chest (below clavicle), the other on the left lower ribs (mid-axillary line).`,
-    questionText: "패드를 성인 환자에게 부착할 때 올바른 위치는?",
-    options: [
-      { id: "a", text: "오른쪽 어깨와 왼쪽 어깨" },
-      { id: "b", text: "오른쪽 갈비뼈 아래와 왼쪽 갈비뼈 아래" },
-      { id: "c", text: "오른쪽 쇄골 아래와 왼쪽 유두 외측(겨드랑이) 아래쪽" },
-      { id: "d", text: "목 부위와 배꼽 부위" },
-    ],
-    correctOptionId: "c",
-    feedbackCorrect:
-      "정답입니다. 우측 쇄골 하부와 좌측 유두 바깥쪽 겨드랑이 선입니다.",
-    feedbackIncorrect: "심장을 관통하는 전류 흐름을 만들기 위한 위치입니다.",
-    explanation:
-      "전류가 심장을 대각선으로 통과하도록 우측 쇄골 아래와 좌측 옆구리에 부착합니다.",
-  },
-  {
-    id: 16,
-    sessionId: 2,
-    title: "심장 리듬 분석 (VF Rhythm)",
-    mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} Close up on AED screen. It shows a chaotic, rapid, irregular waveform (Ventricular Fibrillation). Text on screen: 'ANALYZING RHYTHM'.`,
-    questionText: "다음 심전도는 무슨 리듬인가요? (VF 파형 영상 제시)",
-    options: [
-      { id: "a", text: "VF (심실세동)" },
-      { id: "b", text: "Pulseless VT (무맥성 심실빈맥)" },
-      { id: "c", text: "A-systole (무수축)" },
-      { id: "d", text: "PEA (무맥성 전기활동)" },
-    ],
-    correctOptionId: "a",
-    feedbackCorrect:
-      "정답입니다. 정확한 분석을 위해 움직임이나 접촉이 없어야 합니다.",
-    feedbackIncorrect: "접촉 시 오작동하거나 분석 오류가 발생할 수 있습니다.",
-    explanation:
-      "리듬 분석 중에는 환자의 몸이 흔들리면 안 되므로, 가슴 압박을 중단하고 모두 물러나야 합니다.",
-  },
-  {
-    id: 17,
-    sessionId: 2,
-    title: "제세동 필요 안내 (Shock Advised)",
-    mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} AED device close up. The button flashes orange/red. Audio visual indicator shows 'SHOCK ADVISED'.`,
-    questionText: "V-fib을 확인한 당신은 어떻게 해야 하나요?",
-    options: [
-      { id: "a", text: "제세동을 준비한다." },
-      { id: "b", text: "가슴압박을 지속한다." },
-      { id: "c", text: "응급약물을 준비한다." },
-      { id: "d", text: "혈압을 측정한다." },
-    ],
-    correctOptionId: "a",
-    feedbackCorrect:
-      "정답입니다. 충전 시간 동안에도 가슴 압박을 하여 중단 시간을 최소화합니다.",
-    feedbackIncorrect:
-      "충전 시간을 그냥 기다리는 것보다 압박을 하는 것이 좋습니다.",
-    explanation:
-      "충전에는 수 초가 소요되므로, 그동안 가슴 압박을 하다가 충전 완료 신호가 오면 물러나서 쇼크를 줍니다.",
-  },
-  {
-    id: 18,
-    sessionId: 2,
-    title: "충격 준비 (Prep Shock)",
-    mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} The nurse puts hands near the shock button but does not press yet. Looking around to ensure clearance.`,
-    questionText:
-      "의사가 제세동을 지시했습니다. 간호사가 가장 먼저 해야 할 행동은?",
-    options: [
-      { id: "a", text: "패들에 젤을 바르고 제세동기 충전을 한다." },
-      { id: "b", text: '"물러나세요"라고 외치며 주변을 확인한다.' },
-      { id: "c", text: "Shock 버튼을 바로 누른다." },
-      { id: "d", text: "보호자에게 상황을 설명한다." },
-    ],
-    correctOptionId: "a",
-    feedbackCorrect:
-      "정답입니다. 버튼 누르기 직전 다시 한번 안전을 확인해야 합니다.",
-    feedbackIncorrect: "쇼크 버튼을 누르기 전 최종 확인이 필요합니다.",
-    explanation:
-      "감전 사고를 막기 위해 마지막으로 환자와 접촉한 사람이 없는지 확인해야 합니다.",
-  },
-  {
-    id: 19,
-    sessionId: 2,
-    title: "충격 전달 (Clear for Shock)",
-    mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} Dynamic shot. ${ACTOR_NURSE} shouts 'Stand Clear!' with hands up in the air, looking around, then decisively presses the shock button. Patient body jerks slightly.`,
-    questionText:
-      "제세동기를 충전한 후 간호사가 가장 먼저 해야 할 올바른 행동은?",
+    mediaPrompt: "Q04",
+    questionText: "도움요청을 어떻게 해야 할까요?",
     options: [
       {
         id: "a",
-        text: '의사가 충격 버튼을 누르기 전 "물러나세요"를 외치며 주변의 접촉을 확인한다.',
+        text: "간호사실에 가서 상황을 보고한다.",
+        imageUrl: "/videos/Q04-A.jpg",
       },
-      { id: "b", text: "가슴압박을 멈추지 않고 계속 진행한다." },
-      { id: "c", text: "패들에 젤을 다시 바른다." },
-      { id: "d", text: "보호자에게 상태를 설명한다." },
+      {
+        id: "b",
+        text: "내 핸드폰으로 선임간호사에게 전화한다.",
+        imageUrl: "/videos/Q04-B.jpg",
+      },
+      {
+        id: "c",
+        text: "보호자에게 간호사를 불러오라고 한다.",
+        imageUrl: "/videos/Q04-C.png",
+      },
+      {
+        id: "d",
+        text: "호출벨을 눌러 주변에 알린다.",
+        imageUrl: "/videos/Q04-D.png",
+      },
+    ],
+    correctOptionId: "d",
+    feedbackCorrect: "정답입니다. 호출벨을 이용하여 신속하게 알립니다.",
+    feedbackIncorrect: "가장 빠르고 효율적인 수단인 호출벨을 사용해야 합니다.",
+    explanation:
+      "병실 내 호출벨을 사용하여 즉시 동료 의료진에게 상황을 전파해야 합니다.",
+    videoPaths: { question: "/videos/Q04.mp4", answer: "/videos/Q04-D.mp4" },
+  },
+  {
+    id: 5,
+    sessionId: 1,
+    title: "도움 요청 후 조치",
+    mediaType: "video",
+    mediaPrompt: "Q05",
+    questionText: "도움요청 후 무엇을 해야 하나요?",
+    options: [
+      {
+        id: "a",
+        text: "환자의 맥박과 호흡을 10초 이내로 확인한다.",
+        imageUrl: "/videos/Q05-A.jpg",
+      },
+      {
+        id: "b",
+        text: "모니터를 가지고 와서 환자에게 부착한다.",
+        imageUrl: "/videos/Q05-B.jpg",
+      },
+      {
+        id: "c",
+        text: "정맥 주사라인을 확보한다.",
+        imageUrl: "/videos/Q05-C.png",
+      },
+      {
+        id: "d",
+        text: "환자에게 산소를 적용한다.",
+        imageUrl: "/videos/Q05-D.png",
+      },
+    ],
+    correctOptionId: "a",
+    feedbackCorrect: "정답입니다. 맥박과 호흡을 10초 이내에 확인합니다.",
+    feedbackIncorrect:
+      "전문 소생술 전, 환자 상태(맥박/호흡) 확인이 우선입니다.",
+    explanation:
+      "심정지 여부를 판단하기 위해 10초 이내에 맥박과 호흡 유무를 동시에 확인해야 합니다.",
+    videoPaths: { question: "/videos/Q05.mp4", answer: "/videos/Q05-A.mp4" },
+  },
+  {
+    id: 6,
+    sessionId: 1,
+    title: "맥박과 호흡 확인",
+    mediaType: "video",
+    mediaPrompt: "Q06",
+    questionText: "맥박과 호흡은 어떻게 확인하나요?",
+    options: [
+      {
+        id: "a",
+        text: "경동맥에 두 손가락을 대어 맥박을 느끼며 동시에 가슴의 움직임과 호흡음을 관찰한다.",
+        imageUrl: "/videos/Q06-A.jpg",
+      },
+      {
+        id: "b",
+        text: "손목의 요골맥을 짚고 호흡은 환자의 코에 손을 대서 확인한다.",
+        imageUrl: "/videos/Q06-B.jpg",
+      },
+      {
+        id: "c",
+        text: "복부에 귀를 대어 배 움직임으로 호흡을 확인한다.",
+        imageUrl: "/videos/Q06-C.png",
+      },
+      {
+        id: "d",
+        text: "심전도 모니터를 붙여 맥박과 호흡을 동시에 확인한다.",
+        imageUrl: "/videos/Q06-D.png",
+      },
+    ],
+    correctOptionId: "a",
+    feedbackCorrect: "정답입니다. 경동맥과 흉부 움직임을 동시에 확인합니다.",
+    feedbackIncorrect:
+      "성인은 경동맥 확인이 원칙이며, 시각/청각/촉각을 이용해 호흡을 확인합니다.",
+    explanation:
+      "경동맥 촉지와 흉부 상승 관찰을 동시에 수행하여 5~10초 이내에 완료해야 합니다.",
+    videoPaths: { question: "/videos/Q06.mp4", answer: "/videos/Q06-A.mp4" },
+  },
+  {
+    id: 7,
+    sessionId: 1,
+    title: "호흡 양상 판단",
+    mediaType: "video",
+    mediaPrompt: "Q07",
+    questionText: "이 환자의 호흡 상태는 어떤 양상을 보이나요?",
+    options: [
+      {
+        id: "a",
+        text: "규칙적이고 깊은 정상 호흡을 보임",
+        imageUrl: "/videos/Q07-A.jpg",
+      },
+      {
+        id: "b",
+        text: "심정지호흡을 보임 / 또는 간헐적 헐떡임(agonal breathing) 양상을 보임",
+        imageUrl: "/videos/Q07-B.jpg",
+      },
+      {
+        id: "c",
+        text: "코골이 소리가 나는 수면성 호흡을 보임",
+        imageUrl: "/videos/Q07-C.png",
+      },
+      {
+        id: "d",
+        text: "빠르고 얕은 과호흡을 보임",
+        imageUrl: "/videos/Q07-D.png",
+      },
+    ],
+    correctOptionId: "b",
+    feedbackCorrect: "정답입니다. 심정지 호흡(Agonal breathing)입니다.",
+    feedbackIncorrect:
+      "이는 심정지 초기에 나타나는 비정상적인 호흡 패턴입니다.",
+    explanation:
+      "심정지 직후 나타나는 헐떡임(Agonal breathing)은 정상 호흡이 아니며, 즉시 심정지로 간주해야 합니다.",
+    videoPaths: { question: "/videos/Q07.mp4", answer: "/videos/Q07-B.mp4" },
+  },
+  {
+    id: 8,
+    sessionId: 1,
+    title: "호흡 고려 조치",
+    mediaType: "video",
+    mediaPrompt: "Q08",
+    questionText:
+      "환자의 호흡을 고려했을 때, 당신은 어떤 조치를 취해야 할까요?",
+    options: [
+      { id: "a", text: "E-cart를 가져온다.", imageUrl: "/videos/Q08-A.jpg" },
+      {
+        id: "b",
+        text: "주치의에게 연락한 후 처방을 기다린다.",
+        imageUrl: "/videos/Q08-B.jpg",
+      },
+      {
+        id: "c",
+        text: "모니터를 가지고 와서 환자에게 부착한다.",
+        imageUrl: "/videos/Q08-C.png",
+      },
+      { id: "d", text: "가슴압박을 시작한다.", imageUrl: "/videos/Q08-D.png" },
+    ],
+    correctOptionId: "d",
+    feedbackCorrect: "정답입니다. 즉시 가슴압박을 시작해야 합니다.",
+    feedbackIncorrect: "심정지 상황이므로 즉시 CPR을 시작해야 합니다.",
+    explanation:
+      "비정상 호흡(심정지 호흡)과 맥박 부재 시 즉시 흉부 압박을 시작하는 것이 생존율을 높입니다.",
+    videoPaths: { question: "/videos/Q08.mp4", answer: "/videos/Q08-D.mp4" },
+  },
+  {
+    id: 9,
+    sessionId: 1,
+    title: "가슴 압박 위치",
+    mediaType: "video",
+    mediaPrompt: "Q09",
+    questionText: "가슴압박 시 올바른 압박 위치는 어디인가요?",
+    options: [
+      {
+        id: "a",
+        text: "흉골 중앙의 하단부(양쪽 nipple 사이)에 손바닥을 올리고 압박한다.",
+        imageUrl: "/videos/Q09-A.jpg",
+      },
+      {
+        id: "b",
+        text: "왼쪽 가슴 위를 손끝으로 빠르게 압박한다.",
+        imageUrl: "/videos/Q09-B.jpg",
+      },
+      {
+        id: "c",
+        text: "환자의 배 위(명치 부분)를 눌러준다.",
+        imageUrl: "/videos/Q09-C.png",
+      },
+      {
+        id: "d",
+        text: "흉골을 세게 3~4회만 눌러 반응을 본다.",
+        imageUrl: "/videos/Q09-D.png",
+      },
+    ],
+    correctOptionId: "a",
+    feedbackCorrect: "정답입니다. 흉골 하부 절반 위치입니다.",
+    feedbackIncorrect: "흉골 하부 중앙을 압박해야 효과적입니다.",
+    explanation:
+      "흉골의 하부 1/2 지점(양쪽 젖꼭지 연결선의 중앙)이 정확한 압박 위치입니다.",
+    videoPaths: { question: "/videos/Q09.mp4", answer: "/videos/Q09-A.mp4" },
+  },
+  {
+    id: 10,
+    sessionId: 1,
+    title: "가슴 압박 방법",
+    mediaType: "video",
+    mediaPrompt: "Q10",
+    questionText: "가슴압박의 올바른 방법은 무엇인가요?",
+    options: [
+      {
+        id: "a",
+        text: "5cm 깊이로 압박하고 압박 후에는 흉곽이 완전히 이완되도록 한다.",
+        imageUrl: "/videos/Q10-A.jpg",
+      },
+      {
+        id: "b",
+        text: "5cm 깊이로 압박하고 이완되지 않게 빠르게 압박을 지속한다.",
+        imageUrl: "/videos/Q10-B.jpg",
+      },
+      {
+        id: "c",
+        text: "10cm 이상 깊이로 압박한다.",
+        imageUrl: "/videos/Q10-C.png",
+      },
+      {
+        id: "d",
+        text: "깊이와 상관없이 빠르게만 누른다.",
+        imageUrl: "/videos/Q10-D.png",
+      },
+    ],
+    correctOptionId: "a",
+    feedbackCorrect: "정답입니다. 충분한 깊이와 완전한 이완이 중요합니다.",
+    feedbackIncorrect: "깊이뿐만 아니라 완전한 이완(recoil)도 중요합니다.",
+    explanation:
+      "성인 기준 약 5cm 깊이로 강하게 압박하고, 각 압박 후 가슴이 완전히 올라오도록 이완해야 합니다.",
+    videoPaths: { question: "/videos/Q10.mp4", answer: "/videos/Q10-A.mp4" },
+  },
+  {
+    id: 11,
+    sessionId: 1,
+    title: "가슴 압박 속도",
+    mediaType: "video",
+    mediaPrompt: "Q11",
+    questionText: "가슴압박의 올바른 속도는 얼마인가요?",
+    options: [
+      {
+        id: "a",
+        text: "100~120회/분으로 압박한다.",
+        imageUrl: "/videos/Q11-A.jpg",
+      },
+      { id: "b", text: "50회/분으로 압박한다.", imageUrl: "/videos/Q11-B.jpg" },
+      {
+        id: "c",
+        text: "150회/분으로 압박한다.",
+        imageUrl: "/videos/Q11-C.png",
+      },
+      { id: "d", text: "가능한 빠르게 누른다.", imageUrl: "/videos/Q11-D.png" },
+    ],
+    correctOptionId: "a",
+    feedbackCorrect: "정답입니다. 분당 100~120회를 유지해야 합니다.",
+    feedbackIncorrect: "너무 느리거나 빠르지 않게, 100~120회를 유지하세요.",
+    explanation: "가슴압박 속도는 분당 100~120회가 권장됩니다.",
+    videoPaths: { question: "/videos/Q11.mp4", answer: "/videos/Q11-A.mp4" },
+  },
+  {
+    id: 12,
+    sessionId: 1,
+    title: "가슴 압박 자세",
+    mediaType: "video",
+    mediaPrompt: "Q12",
+    questionText: "가슴압박 시 신체 자세로 옳은 것은? (올바른 자세)",
+    options: [
+      {
+        id: "a",
+        text: "팔꿈치를 굽히고 손목의 힘을 이용한다.",
+        imageUrl: "/videos/Q12-A.jpg",
+      },
+      {
+        id: "b",
+        text: "손가락 끝으로 흉부를 누른다.",
+        imageUrl: "/videos/Q12-B.jpg",
+      },
+      {
+        id: "c",
+        text: "팔을 곧게 펴고 어깨가 환자 흉부 위에 수직이 되도록 한다.",
+        imageUrl: "/videos/Q12-C.png",
+      },
+      {
+        id: "d",
+        text: "허리를 굽혀 상체만으로 압박한다.",
+        imageUrl: "/videos/Q12-D.png",
+      },
+    ],
+    correctOptionId: "c",
+    feedbackCorrect: "정답입니다. 팔을 펴고 수직으로 체중을 실어야 합니다.",
+    feedbackIncorrect:
+      "효율적인 압박을 위해 팔꿈치를 펴고 수직 자세를 유지해야 합니다.",
+    explanation:
+      "구조자의 어깨가 환자 가슴 바로 위에 오도록 하고, 팔꿈치를 곧게 펴 체중을 실어 압박합니다.",
+    videoPaths: { question: "/videos/Q12.mp4", answer: "/videos/Q12-C.mp4" },
+  },
+  {
+    id: 13,
+    sessionId: 1,
+    title: "제세동기 준비 순서",
+    mediaType: "video",
+    mediaPrompt: "Q13",
+    questionText:
+      "가슴압박을 교대한 후... 어떤 순서로 제세동기를 준비하고 사용해야 할까요?",
+    options: [
+      {
+        id: "a",
+        text: "A(전원)-C(전극부착)-B(리듬확인)",
+        imageUrl: "/videos/Q13-A.jpg",
+      },
+      { id: "b", text: "A-C-B-D", imageUrl: "/videos/Q13-B.jpg" },
+      { id: "c", text: "A-D", imageUrl: "/videos/Q13-C.png" },
+      { id: "d", text: "A-E", imageUrl: "/videos/Q13-D.png" },
     ],
     correctOptionId: "a",
     feedbackCorrect:
-      "정답입니다! 감전 사고 예방과 정확한 에너지 전달을 위해 필수적입니다.",
-    feedbackIncorrect: "접촉된 사람이 있으면 감전될 위험이 있습니다.",
+      "정답입니다. 전원 켜기 -> 패드 부착 -> 리듬 분석 순입니다.",
+    feedbackIncorrect: "AED 사용의 기본 순서는 전원, 패드, 분석입니다.",
     explanation:
-      "쇼크 전달 시 환자와 접촉해 있으면 감전 위험이 있고, 에너지가 분산되어 제세동 효과가 떨어질 수 있습니다.",
+      "제세동기 사용은 전원을 켜고, 패드를 부착한 뒤, 심전도 리듬을 분석하는 순서로 진행됩니다.",
+    videoPaths: { question: "/videos/Q13.mp4", answer: "/videos/Q13-A.mp4" },
   },
   {
-    id: 20,
-    sessionId: 2,
-    title: "압박 재개 (Resume CPR)",
+    id: 14,
+    sessionId: 1,
+    title: "전극 부착 위치",
     mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} Immediately after the shock, the nurse instantly places hands back on the chest and resumes compressions without hesitation.`,
-    questionText:
-      "의사의 제세동 지시가 있을 때 간호사가 수행해야 할 올바른 순서는?",
+    mediaPrompt: "Q14",
+    questionText: "전극(electrode)를 성인 환자에게 부착할 때 올바른 위치는?",
     options: [
-      { id: "a", text: "A-B-C-D" },
-      { id: "b", text: "B-A-C-D" },
-      { id: "c", text: "A-C-B-D" },
-      { id: "d", text: "C-A-B-D" },
+      {
+        id: "a",
+        text: "오른쪽 어깨와 왼쪽 어깨",
+        imageUrl: "/videos/Q14-A.jpg",
+      },
+      {
+        id: "b",
+        text: "오른쪽 쇄골 아래, 오른쪽 갈비뼈 아래와 왼쪽 갈비뼈 아래",
+        imageUrl: "/videos/Q14-B.jpg",
+      },
+      {
+        id: "c",
+        text: "오른쪽 쇄골 아래, 왼쪽 쇄골 아래와 왼쪽 갈비뼈 아래",
+        imageUrl: "/videos/Q14-C.png",
+      },
+      { id: "d", text: "목 부위와 배꼽 부위", imageUrl: "/videos/Q14-D.png" },
     ],
-    correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 쇼크 후 즉시 압박을 재개해야 합니다.",
-    feedbackIncorrect:
-      "맥박 확인이나 리듬 분석은 2분 후 시행합니다. 지금은 즉시 압박해야 합니다.",
+    correctOptionId: "c",
+    feedbackCorrect: "정답입니다. 3 lead 모니터링 시 권장되는 위치입니다.",
+    feedbackIncorrect: "올바른 심전도 모니터링을 위한 위치를 선정해야 합니다.",
     explanation:
-      "쇼크 직후에는 심장이 바로 정상 박동을 찾지 못할 수 있으므로, 즉시 흉부 압박을 재개하여 혈류를 공급해야 합니다.",
+      "일반적인 3-lead 모니터링 부착 위치는 우측 쇄골 아래(RA), 좌측 쇄골 아래(LA), 좌측 갈비뼈 아래(LL) 입니다.",
+    videoPaths: { question: "/videos/Q14.mp4", answer: "/videos/Q14-C.mp4" },
   },
   {
-    id: 21,
-    sessionId: 2,
-    title: "ROSC 확인 (Return of Spontaneous Circulation)",
+    id: 15,
+    sessionId: 1,
+    title: "심전도 리듬 확인 (Asystole)",
     mediaType: "video",
-    mediaPrompt: `${COMMON_BG_ER} Monitor screen shows a normal sinus rhythm with blood pressure reading 120/80. The nurse checks the carotid pulse and nods, signaling recovery. Patient coughs or moves.`,
-    questionText: "다음 중 자발순환 회복(ROSC)의 징후로 가장 올바른 것은?",
+    mediaPrompt: "Q15",
+    questionText:
+      "제세동기 전극 부착 후... 다음 심전도는 무슨 리듬인가요? (Asystole 영상)",
     options: [
-      { id: "a", text: "Shock 직후 심전도 파형의 일시적 변화" },
-      { id: "b", text: "자발 맥박이 돌아오고 혈압이 측정되는 것" },
-      { id: "c", text: "가슴압박 시 피부색이 잠시 좋아지는 것" },
-      { id: "d", text: "환자의 동공이 확장된 상태로 유지되는 것" },
+      { id: "a", text: "VF", imageUrl: "/videos/Q15-A.jpg" },
+      { id: "b", text: "Pulseless VT", imageUrl: "/videos/Q15-B.jpg" },
+      { id: "c", text: "A-systole", imageUrl: "/videos/Q15-C.png" },
+      { id: "d", text: "PEA", imageUrl: "/videos/Q15-D.png" },
+    ],
+    correctOptionId: "c",
+    feedbackCorrect: "정답입니다. 무수축(Asystole) 리듬입니다.",
+    feedbackIncorrect: "평탄한 선으로 나타나는 무수축 리듬입니다.",
+    explanation: "전기적 활동이 없는 상태인 무수축(Asystole) 입니다.",
+    videoPaths: { question: "/videos/Q15.mp4", answer: "/videos/Q15-C.mp4" },
+  },
+  {
+    id: 16,
+    sessionId: 1,
+    title: "Asystole 대처",
+    mediaType: "video",
+    mediaPrompt: "Q16",
+    questionText: "Asystole을 확인한 경우에 어떻게 해야 하나요?",
+    options: [
+      { id: "a", text: "제세동을 준비한다.", imageUrl: "/videos/Q16-A.jpg" },
+      { id: "b", text: "가슴압박을 지속한다.", imageUrl: "/videos/Q16-B.jpg" },
+      { id: "c", text: "응급약물을 준비한다.", imageUrl: "/videos/Q16-C.png" },
+      { id: "d", text: "혈압을 측정한다.", imageUrl: "/videos/Q16-D.png" },
     ],
     correctOptionId: "b",
     feedbackCorrect:
-      "정답입니다! ROSC(자발순환회복)가 확인되면 환자를 안정시키고 관찰해야 합니다.",
-    feedbackIncorrect:
-      "회복된 환자에게 가슴 압박이나 제세동을 하면 위험합니다.",
+      "정답입니다. 제세동 불가 리듬이므로 즉시 가슴압박을 지속합니다.",
+    feedbackIncorrect: "Asystole은 제세동 적응증이 아닙니다.",
     explanation:
-      "환자가 의식/호흡/맥박이 돌아왔다면(ROSC), 기도를 유지하고 활력 징후를 모니터링하며 전문 의료진에게 인계합니다.",
+      "무수축(Asystole)은 충격 필요 리듬이 아니므로, 즉시 고품질 CPR(가슴압박)을 이어서 수행해야 합니다.",
+    videoPaths: { question: "/videos/Q16.mp4", answer: "/videos/Q16-B.mp4" },
+  },
+  {
+    id: 17,
+    sessionId: 1,
+    title: "Asystole 약물 투여",
+    mediaType: "video",
+    mediaPrompt: "Q17",
+    questionText:
+      "심정지 환자(Asystole)에서... 에피네프린은 어떻게 투여해야 할까요?",
+    options: [
+      {
+        id: "a",
+        text: "제세동 후 투여하며 3~5분 간격으로 반복 주사한다.",
+        imageUrl: "/videos/Q17-A.jpg",
+      },
+      {
+        id: "b",
+        text: "가능한 한 빨리 투여하며 3~5분 간격으로 반복 주사한다.",
+        imageUrl: "/videos/Q17-B.jpg",
+      },
+      {
+        id: "c",
+        text: "자발순환 회복 후 투여한다.",
+        imageUrl: "/videos/Q17-C.png",
+      },
+      {
+        id: "d",
+        text: "Shockable 리듬에서만 투여한다.",
+        imageUrl: "/videos/Q17-D.png",
+      },
+    ],
+    correctOptionId: "b",
+    feedbackCorrect:
+      "정답입니다. 제세동 불가 리듬에서는 가능한 빨리 투여합니다.",
+    feedbackIncorrect:
+      "Asystole의 경우 지체 없이 에피네프린을 투여해야 합니다.",
+    explanation:
+      "제세동 불가 리듬(Asystole, PEA)에서는 에피네프린을 가능한 한 빨리 투여하고, 3~5분마다 반복합니다.",
+    videoPaths: { question: "/videos/Q17.mp4", answer: "/videos/Q17-B.mp4" },
+  },
+  {
+    id: 18,
+    sessionId: 1,
+    title: "심전도 리듬 확인 (VF)",
+    mediaType: "video",
+    mediaPrompt: "Q18",
+    questionText: "가슴압박 중... 다음 심전도는 무슨 리듬인가요? (VF 영상)",
+    options: [
+      { id: "a", text: "VF (심실세동)", imageUrl: "/videos/Q18-A.jpg" },
+      { id: "b", text: "Pulseless VT", imageUrl: "/videos/Q18-B.jpg" },
+      { id: "c", text: "A-systole", imageUrl: "/videos/Q18-C.png" },
+      { id: "d", text: "PEA", imageUrl: "/videos/Q18-D.png" },
+    ],
+    correctOptionId: "a",
+    feedbackCorrect: "정답입니다. 불규칙한 파형의 심실세동(VF)입니다.",
+    feedbackIncorrect: "불규칙하고 무질서한 파형은 심실세동의 특징입니다.",
+    explanation:
+      "심실세동(Ventricular Fibrillation)은 심장이 무질서하게 떨리는 상태로, 즉각적인 제세동이 필요합니다.",
+    videoPaths: { question: "/videos/Q18.mp4", answer: "/videos/Q18-A.mp4" },
+  },
+  {
+    id: 19,
+    sessionId: 1,
+    title: "VF 대처",
+    mediaType: "video",
+    mediaPrompt: "Q19",
+    questionText: "V-fib을 확인한 당신은 어떻게 해야 하나요?",
+    options: [
+      { id: "a", text: "제세동을 준비한다.", imageUrl: "/videos/Q19-A.jpg" },
+      { id: "b", text: "가슴압박을 지속한다.", imageUrl: "/videos/Q19-B.jpg" },
+      { id: "c", text: "응급약물을 준비한다.", imageUrl: "/videos/Q19-C.png" },
+      { id: "d", text: "혈압을 측정한다.", imageUrl: "/videos/Q19-D.png" },
+    ],
+    correctOptionId: "a",
+    feedbackCorrect: "정답입니다. VF는 제세동이 필요한 리듬입니다.",
+    feedbackIncorrect: "심실세동은 제세동(Shock)이 가장 중요한 치료입니다.",
+    explanation:
+      "심실세동(VF)은 Shockable rhythm이므로 즉시 제세동(Defibrillation)을 준비하고 시행해야 합니다.",
+    videoPaths: { question: "/videos/Q19.mp4", answer: "/videos/Q19-A.mp4" },
+  },
+  {
+    id: 20,
+    sessionId: 1,
+    title: "제세동 순서",
+    mediaType: "video",
+    mediaPrompt: "Q20",
+    questionText: "제세동이 필요할 때 올바른 순서로 묶인 것은?",
+    options: [
+      { id: "a", text: "A-B-C-D", imageUrl: "/videos/Q20-A.jpg" },
+      { id: "b", text: "B-A-C-D", imageUrl: "/videos/Q20-B.jpg" },
+      { id: "c", text: "A-C-B-D", imageUrl: "/videos/Q20-C.png" },
+      { id: "d", text: "C-A-B-D", imageUrl: "/videos/Q20-D.png" },
+    ],
+    correctOptionId: "a",
+    feedbackCorrect: "정답입니다. 젤-충전-비켜-쇼크 순서입니다.",
+    feedbackIncorrect: "준비(젤)-충전-안전확인-쇼크 순서를 지켜야 합니다.",
+    explanation:
+      "패들 준비(젤) -> 충전 -> 안전 확인(물러나세요) -> 쇼크 실행 및 즉시 가슴압박 재개 순서입니다.",
+    videoPaths: { question: "/videos/Q20.mp4", answer: "/videos/Q20-A.mp4" },
+  },
+  {
+    id: 21,
+    sessionId: 1,
+    title: "VF 에피네프린 투여 시점",
+    mediaType: "video",
+    mediaPrompt: "Q21",
+    questionText:
+      "심정지 환자에서 심실세동(VF)이 확인되었습니다. 이때 에피네프린 투여 시점은?",
+    options: [
+      {
+        id: "a",
+        text: "심정지가 확인되면 즉시 투여한다.",
+        imageUrl: "/videos/Q21-A.jpg",
+      },
+      {
+        id: "b",
+        text: "제세동하기 전에 먼저 투여한다.",
+        imageUrl: "/videos/Q21-B.jpg",
+      },
+      {
+        id: "c",
+        text: "제세동을 한 뒤 이어지는 가슴압박 시간에 투여하며 3~5분 간격으로 반복 주사한다.",
+        imageUrl: "/videos/Q21-C.png",
+      },
+      {
+        id: "d",
+        text: "Shockable 리듬에서는 투여하지 않는다.",
+        imageUrl: "/videos/Q21-D.png",
+      },
+    ],
+    correctOptionId: "c",
+    feedbackCorrect: "정답입니다. 2차 제세동 후 투여가 원칙입니다.",
+    feedbackIncorrect:
+      "Shockable 리듬에서는 제세동이 우선이며, 약물은 그 후 고려됩니다.",
+    explanation:
+      "VF/pVT의 경우 제세동과 CPR이 우선이며, 에피네프린은 2번째 제세동 후에도 순환이 돌아오지 않을 때 투여합니다.",
+    videoPaths: { question: "/videos/Q21.mp4", answer: "/videos/Q21-C.mp4" },
+  },
+  {
+    id: 22,
+    sessionId: 1,
+    title: "ROSC 징후 확인",
+    mediaType: "video",
+    mediaPrompt: "Q22",
+    questionText:
+      "환자의 ROSC를 확인해야 합니다. 다음 중 자발순환 회복(ROSC)의 징후로 가장 올바른 것은?",
+    options: [
+      {
+        id: "a",
+        text: "Shock 직후 심전도 파형의 일시적 변화",
+        imageUrl: "/videos/Q22-A.jpg",
+      },
+      {
+        id: "b",
+        text: "자발 맥박이 돌아오고 혈압이 측정되는 것",
+        imageUrl: "/videos/Q22-B.jpg",
+      },
+      {
+        id: "c",
+        text: "가슴압박 시 피부색이 잠시 좋아지는 것",
+        imageUrl: "/videos/Q22-C.png",
+      },
+      {
+        id: "d",
+        text: "환자의 동공이 확장된 상태로 유지되는 것",
+        imageUrl: "/videos/Q22-D.png",
+      },
+    ],
+    correctOptionId: "b",
+    feedbackCorrect: "정답입니다! 자발 맥박과 혈압이 측정되어야 ROSC입니다.",
+    feedbackIncorrect: "맥박 촉지와 혈압 측정이 가장 확실한 징후입니다.",
+    explanation:
+      "자발순환 회복(ROSC)은 경동맥 등에서 자발적인 맥박이 촉지되고 혈압이 측정되는 상태를 의미합니다.",
+    videoPaths: { question: "/videos/Q22.mp4", answer: "/videos/Q22-B.mp4" },
   },
 ];
+
+// Removed separate session2Questions as Q1-Q22 are now consolidated.
+export const session2Questions: Question[] = [];
