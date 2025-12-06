@@ -1,57 +1,25 @@
-import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-import { writeFile } from 'fs/promises';
-
-const UPLOAD_DIR = path.join(process.cwd(), 'public/videos');
-
-// Ensure directory exists
-if (!fs.existsSync(UPLOAD_DIR)) {
-  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
-}
+import { NextResponse } from 'next/server';
+import cloudinary from '@/lib/cloudinary';
 
 export async function GET() {
   try {
-    const files = fs.readdirSync(UPLOAD_DIR);
-    // Filter only video files if needed, or just return all
-    const videoFiles = files.filter(file =>
-      file.endsWith('.mp4') || file.endsWith('.webm') || file.endsWith('.ogg')
-    );
+    // Cloudinary에서 비디오 목록 조회
+    const result = await cloudinary.api.resources({
+      type: 'upload',
+      prefix: 'cpr-videos/',
+      resource_type: 'video',
+      max_results: 100,
+    });
 
-    return NextResponse.json({ files: videoFiles });
+    const files = result.resources.map((r: { public_id: string; secure_url: string; format: string }) => ({
+      publicId: r.public_id,
+      url: r.secure_url,
+      filename: r.public_id.replace('cpr-videos/', '') + '.' + r.format,
+    }));
+
+    return NextResponse.json({ files });
   } catch (error) {
+    console.error('Cloudinary error:', error);
     return NextResponse.json({ error: 'Failed to list videos' }, { status: 500 });
-  }
-}
-
-export async function POST(request: NextRequest) {
-  try {
-    const formData = await request.formData();
-    const file = formData.get('file') as File;
-    const key = formData.get('key') as string;
-
-    if (!file) {
-      return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
-    }
-
-    const buffer = Buffer.from(await file.arrayBuffer());
-    // Sanitize filename: use key if provided, else original name.
-    // Ensure extension matches or append .mp4 if missing/unknown
-    let filename = key || file.name;
-    if (!filename.includes('.')) {
-        filename += '.mp4';
-    }
-
-    // Prevent directory traversal
-    filename = path.basename(filename);
-
-    const filepath = path.join(UPLOAD_DIR, filename);
-
-    await writeFile(filepath, buffer);
-
-    return NextResponse.json({ success: true, filename });
-  } catch (error) {
-    console.error('Upload error:', error);
-    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
   }
 }

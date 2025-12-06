@@ -1,9 +1,5 @@
 import { Question } from "./types";
 
-// Common media prompts (kept for reference, using placeholders for now)
-const COMMON_BG_WARD = "Cinematic 8K video...";
-const COMMON_BG_ER = "Cinematic 8K video...";
-
 export const session1Questions: Question[] = [
   {
     id: 1,
@@ -519,7 +515,7 @@ export const session1Questions: Question[] = [
     mediaType: "video",
     mediaPrompt: "Q17",
     questionText:
-      "심정지 환자에서 Asystole 리듬이 확인되었습니다. 정맥로가 확보된 경우, 에피네프린은 어떻게 투여해야 할 까요? (Asystole, Non-shockable Rhythm 상황)",
+      "심정지 환자에서 Asystole 리듬이 확인되었습니다. 정맥로가 확보된 경우, 에피네프린은 어떻게 투여해야 할 까요?\n(Asystole, Non-shockable Rhythm 상황)",
     options: [
       {
         id: "a",
@@ -618,7 +614,7 @@ export const session1Questions: Question[] = [
     mediaType: "video",
     mediaPrompt: "Q21",
     questionText:
-      "심정지 환자에서 심실세동(VF)이 확인되었습니다. 이때 에피네프린 투여 시점은 언제가 적절한가요? (VF, Shockable Rhythm 상황)",
+      "심정지 환자에서 심실세동(VF)이 확인되었습니다. 이때 에피네프린 투여 시점은 언제가 적절한가요?\n(VF, Shockable Rhythm 상황)",
     options: [
       {
         id: "a",

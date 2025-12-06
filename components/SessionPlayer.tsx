@@ -3,6 +3,7 @@ import { Question } from "@/app/types";
 import { MediaDisplay } from "./MediaDisplay";
 import { Timer, AlertCircle, CheckCircle2, XCircle } from "lucide-react";
 import Image from "next/image";
+import { getCloudinaryUrl } from "@/utils/cloudinaryUrl";
 
 interface SessionPlayerProps {
   questions: Question[];
@@ -118,11 +119,11 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
     }
   };
 
-  // Determine Video Source
+  // Determine Video Source (Cloudinary)
   const videoSrc =
     playbackState === "answer"
-      ? currentQuestion.videoPaths?.answer
-      : currentQuestion.videoPaths?.question;
+      ? getCloudinaryUrl(currentQuestion.videoPaths?.answer)
+      : getCloudinaryUrl(currentQuestion.videoPaths?.question);
 
   // Progress
   const progress = (currentIndex / questions.length) * 100;
@@ -232,7 +233,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                       <div className="h-20 md:h-32 bg-slate-200 relative">
                         {option.imageUrl ? (
                           <img
-                            src={option.imageUrl}
+                            src={getCloudinaryUrl(option.imageUrl)}
                             alt={option.text}
                             className="w-full h-full object-cover"
                           />
