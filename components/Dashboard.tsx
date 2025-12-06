@@ -9,9 +9,13 @@ import {
 
 interface DashboardProps {
   onStart: () => void;
+  onJumpToQuestion: (index: number) => void;
 }
 
-export const Dashboard: React.FC<DashboardProps> = ({ onStart }) => {
+export const Dashboard: React.FC<DashboardProps> = ({
+  onStart,
+  onJumpToQuestion,
+}) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
       {/* Hero Section */}
@@ -125,7 +129,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onStart }) => {
         </div>
       </div>
 
-      <div className="bg-slate-900 rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
+      <div className="bg-slate-900 rounded-2xl p-8 md:p-12 text-white relative overflow-hidden mb-16">
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h3 className="text-2xl font-bold mb-2">준비되셨나요?</h3>
@@ -149,6 +153,24 @@ export const Dashboard: React.FC<DashboardProps> = ({ onStart }) => {
             backgroundSize: "40px 40px",
           }}
         ></div>
+      </div>
+
+      {/* Dev Shortcuts */}
+      <div className="border border-slate-200 rounded-xl p-6 bg-slate-50">
+        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">
+          Development Shortcuts
+        </h3>
+        <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-2">
+          {Array.from({ length: 22 }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => onJumpToQuestion(i)}
+              className="px-2 py-2 bg-white border border-slate-300 rounded text-sm font-medium hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 transition-colors"
+            >
+              Q{i + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

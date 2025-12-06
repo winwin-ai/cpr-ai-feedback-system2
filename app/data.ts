@@ -420,11 +420,11 @@ export const session1Questions: Question[] = [
     mediaType: "video",
     mediaPrompt: "Q13",
     questionText:
-      "가슴압박을 교대한 후... 어떤 순서로 제세동기를 준비하고 사용해야 할까요?",
+      "가슴압박을 교대한 후, 당신은 제세동기를 준비해야 합니다. 어떤 순서로 제세동기를 준비하고 사용해야 할 까요?\n\nA. 전원을 켠다.\nB. 리듬을 확인한다.\nC. 전극(magnerode)을 부착한다.\nD. 200J 충전을 한다.\nE. 처방이 있을 때까지 기다린다.",
     options: [
       {
         id: "a",
-        text: "A(전원)-C(전극부착)-B(리듬확인)",
+        text: "A-C-B",
         imageUrl: "/videos/Q13-A.jpg",
       },
       { id: "b", text: "A-C-B-D", imageUrl: "/videos/Q13-B.jpg" },
@@ -519,26 +519,26 @@ export const session1Questions: Question[] = [
     mediaType: "video",
     mediaPrompt: "Q17",
     questionText:
-      "심정지 환자(Asystole)에서... 에피네프린은 어떻게 투여해야 할까요?",
+      "심정지 환자에서 Asystole 리듬이 확인되었습니다. 정맥로가 확보된 경우, 에피네프린은 어떻게 투여해야 할 까요? (Asystole, Non-shockable Rhythm 상황)",
     options: [
       {
         id: "a",
-        text: "제세동 후 투여하며 3~5분 간격으로 반복 주사한다.",
+        text: "제세동 후 투여하며, 3~5분 간격으로 반복 주사한다.",
         imageUrl: "/videos/Q17-A.jpg",
       },
       {
         id: "b",
-        text: "가능한 한 빨리 투여하며 3~5분 간격으로 반복 주사한다.",
+        text: "가능한 한 빨리 투여하며, 3~5분 간격으로 반복 주사한다.",
         imageUrl: "/videos/Q17-B.jpg",
       },
       {
         id: "c",
-        text: "자발순환 회복 후 투여한다.",
+        text: "자발순환 회복 후 투여한다",
         imageUrl: "/videos/Q17-C.png",
       },
       {
         id: "d",
-        text: "Shockable 리듬에서만 투여한다.",
+        text: "Shockable 리듬에서만 투여한다",
         imageUrl: "/videos/Q17-D.png",
       },
     ],
@@ -618,26 +618,26 @@ export const session1Questions: Question[] = [
     mediaType: "video",
     mediaPrompt: "Q21",
     questionText:
-      "심정지 환자에서 심실세동(VF)이 확인되었습니다. 이때 에피네프린 투여 시점은?",
+      "심정지 환자에서 심실세동(VF)이 확인되었습니다. 이때 에피네프린 투여 시점은 언제가 적절한가요? (VF, Shockable Rhythm 상황)",
     options: [
       {
         id: "a",
-        text: "심정지가 확인되면 즉시 투여한다.",
+        text: "심정지가 확인되면 즉시 투여한다",
         imageUrl: "/videos/Q21-A.jpg",
       },
       {
         id: "b",
-        text: "제세동하기 전에 먼저 투여한다.",
+        text: "제세동하기 전에 먼저 투여한다",
         imageUrl: "/videos/Q21-B.jpg",
       },
       {
         id: "c",
-        text: "제세동을 한 뒤 이어지는 가슴압박 시간에 투여하며 3~5분 간격으로 반복 주사한다.",
+        text: "제세동을 한 뒤, 이어지는 가슴압박 시간에 투여하며, 3~5분 간격으로 반복 주사한다.",
         imageUrl: "/videos/Q21-C.png",
       },
       {
         id: "d",
-        text: "Shockable 리듬에서는 투여하지 않는다.",
+        text: "Shockable 리듬에서는 투여하지 않는다",
         imageUrl: "/videos/Q21-D.png",
       },
     ],

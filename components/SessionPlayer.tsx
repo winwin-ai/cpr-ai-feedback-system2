@@ -7,6 +7,7 @@ import Image from "next/image";
 interface SessionPlayerProps {
   questions: Question[];
   sessionId: number;
+  initialQuestionIndex?: number;
   onComplete: (correctCount: number) => void;
 }
 
@@ -15,9 +16,10 @@ type PlaybackState = "intro" | "question" | "waiting" | "answer";
 export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   questions,
   sessionId,
+  initialQuestionIndex = 0,
   onComplete,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(initialQuestionIndex);
   const [playbackState, setPlaybackState] = useState<PlaybackState>("intro");
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [feedbackState, setFeedbackState] = useState<

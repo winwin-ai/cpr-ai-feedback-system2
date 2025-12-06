@@ -13,8 +13,16 @@ export default function Home() {
   const [sessionScore, setSessionScore] = useState(0);
   // Track which session is currently active or just finished
   const [activeSessionId, setActiveSessionId] = useState(1);
+  const [startQuestionIndex, setStartQuestionIndex] = useState(0);
 
   const handleStart = () => {
+    setStartQuestionIndex(0);
+    setViewState(ViewState.SESSION_1);
+  };
+
+  const handleJumpToQuestion = (index: number) => {
+    setStartQuestionIndex(index);
+    setActiveSessionId(1);
     setViewState(ViewState.SESSION_1);
   };
 
@@ -71,6 +79,7 @@ export default function Home() {
             setActiveSessionId(1);
             handleStart();
           }}
+          onJumpToQuestion={handleJumpToQuestion}
         />
       )}
 
@@ -78,6 +87,7 @@ export default function Home() {
         <SessionPlayer
           sessionId={1}
           questions={session1Questions}
+          initialQuestionIndex={startQuestionIndex}
           onComplete={handleSession1Complete}
         />
       )}
