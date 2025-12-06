@@ -22,12 +22,12 @@ export const session1Questions: Question[] = [
       {
         id: "c",
         text: "쓰러진 환자를 바로 눕혀 기도 확보를 먼저 시도한다.",
-        imageUrl: "/videos/Q01-C.png",
+        imageUrl: "/videos/Q01-C.jpg",
       },
       {
         id: "d",
         text: "경련을 하므로 PRN 진정제가 있는지 확인한다.",
-        imageUrl: "/videos/Q01-D.png",
+        imageUrl: "/videos/Q01-D.jpg",
       },
     ],
     correctOptionId: "a",
@@ -58,12 +58,12 @@ export const session1Questions: Question[] = [
       {
         id: "c",
         text: '환자의 어깨를 두드리며 큰소리로 "괜찮으세요"라고 묻는다.',
-        imageUrl: "/videos/Q02-C.png",
+        imageUrl: "/videos/Q02-C.jpg",
       },
       {
         id: "d",
         text: "어깨를 세게 흔들며 이름을 부른다.",
-        imageUrl: "/videos/Q02-D.png",
+        imageUrl: "/videos/Q02-D.jpg",
       },
     ],
     correctOptionId: "c",
@@ -86,9 +86,9 @@ export const session1Questions: Question[] = [
       {
         id: "c",
         text: "우선 환자를 침대로 옮긴다.",
-        imageUrl: "/videos/Q03-C.png",
+        imageUrl: "/videos/Q03-C.jpg",
       },
-      { id: "d", text: "가슴압박을 시작한다.", imageUrl: "/videos/Q03-D.png" },
+      { id: "d", text: "가슴압박을 시작한다.", imageUrl: "/videos/Q03-D.jpg" },
     ],
     correctOptionId: "a",
     feedbackCorrect: "정답입니다. 즉시 도움을 요청해야 합니다.",
