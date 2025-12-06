@@ -197,13 +197,13 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
             {/* Bottom: Options Horizontal List */}
             <div
-              className={`absolute bottom-0 left-0 right-0 p-4 md:p-8 z-10 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-150 ease-out ${
+              className={`absolute bottom-8 left-0 right-0 p-2 md:p-4 z-10 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-150 ease-out ${
                 feedbackState !== "idle"
                   ? "opacity-50 blur-sm pointer-events-none transition-all duration-500"
                   : "opacity-100"
               }`}
             >
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-7xl mx-auto">
+              <div className="grid grid-cols-4 gap-3 md:gap-6 w-full max-w-7xl mx-auto">
                 {currentQuestion.options.map((option) => {
                   const isDisabled = disabledOptionIds.has(option.id);
                   return (
@@ -212,12 +212,12 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                       onClick={() => handleOptionSelect(option.id)}
                       disabled={isDisabled || feedbackState !== "idle"}
                       className={`
-                          w-full rounded-2xl overflow-hidden shadow-2xl
+                          w-full rounded-xl overflow-hidden shadow-2xl
                           transform transition-all duration-300
                           ${
                             isDisabled
                               ? "bg-slate-300 opacity-50 cursor-not-allowed grayscale"
-                              : "bg-white/90 backdrop-blur-sm hover:scale-105 hover:-translate-y-2 hover:bg-white cursor-pointer hover:shadow-blue-500/30"
+                              : "bg-white/90 backdrop-blur-sm hover:scale-105 hover:bg-white cursor-pointer hover:shadow-blue-500/30"
                           }
                           ${
                             selectedOptionId === option.id
@@ -227,7 +227,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                         `}
                     >
                       {/* Image Area */}
-                      <div className="h-32 md:h-48 bg-slate-200 relative">
+                      <div className="h-20 md:h-32 bg-slate-200 relative">
                         {option.imageUrl ? (
                           <img
                             src={option.imageUrl}
@@ -239,21 +239,21 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                             No Image
                           </div>
                         )}
-                        <div className="absolute top-3 left-3 w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm md:text-lg font-bold shadow-md ring-2 ring-white/50">
+                        <div className="absolute top-2 left-2 w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs md:text-base font-bold shadow-md ring-1 ring-white/50">
                           {option.id.toUpperCase()}
                         </div>
 
                         {/* Disabled Overlay */}
                         {isDisabled && (
                           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                            <XCircle className="text-white w-12 h-12 opacity-80" />
+                            <XCircle className="text-white w-8 h-8 md:w-12 md:h-12 opacity-80" />
                           </div>
                         )}
                       </div>
                       {/* Text Area */}
-                      <div className="p-3 md:p-5 h-20 md:h-28 flex items-center text-left">
+                      <div className="p-2 md:p-4 h-16 md:h-24 flex items-center text-left bg-white">
                         <span
-                          className={`text-sm md:text-lg font-semibold line-clamp-3 leading-snug ${
+                          className={`text-xs md:text-sm font-semibold line-clamp-3 leading-tight ${
                             isDisabled ? "text-slate-500" : "text-slate-900"
                           }`}
                         >
@@ -270,27 +270,35 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
         {/* Feedback Overlays (O/X) */}
         {/* Feedback Overlays (O/X) */}
-        {feedbackState === "correct" && (
-          <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-transparent animate-in fade-in zoom-in duration-300">
-            <CheckCircle2
-              className="w-48 h-48 text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.8)] mb-6"
-              strokeWidth={3}
-            />
-            <span className="text-4xl md:text-5xl font-bold text-white drop-shadow-md">
-              정답입니다.
-            </span>
-          </div>
-        )}
-
-        {feedbackState === "incorrect" && (
-          <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-transparent animate-in fade-in zoom-in duration-300">
-            <XCircle
-              className="w-48 h-48 text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.8)] mb-6"
-              strokeWidth={3}
-            />
-            <span className="text-4xl md:text-5xl font-bold text-white drop-shadow-md">
-              오답입니다.
-            </span>
+        {feedbackState !== "idle" && (
+          <div className="absolute inset-0 z-50 flex flex-col items-center justify-center pointer-events-none bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+            {feedbackState === "correct" ? (
+              <>
+                <div className="w-48 h-48 md:w-64 md:h-64 rounded-full border-[12px] border-green-500 flex items-center justify-center shadow-[0_0_50px_rgba(34,197,94,0.6)] bg-green-500/10 animate-in zoom-in-50 duration-300">
+                  <span className="text-[120px] md:text-[160px] font-black text-green-500 leading-none pb-4 select-none">
+                    O
+                  </span>
+                </div>
+                <p className="mt-8 text-4xl md:text-6xl font-black text-green-500 tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] animate-in slide-in-from-bottom-5 duration-500">
+                  정답입니다!
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="relative w-48 h-48 md:w-64 md:h-64 animate-in zoom-in-50 duration-300">
+                  {/* X Shape */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <XCircle
+                      className="w-full h-full text-red-500 drop-shadow-[0_0_30px_rgba(239,68,68,0.6)]"
+                      strokeWidth={1.5}
+                    />
+                  </div>
+                </div>
+                <p className="mt-8 text-4xl md:text-6xl font-black text-red-500 tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] animate-in slide-in-from-bottom-5 duration-500">
+                  오답입니다...
+                </p>
+              </>
+            )}
           </div>
         )}
       </div>
