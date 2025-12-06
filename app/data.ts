@@ -35,7 +35,12 @@ export const session1Questions: Question[] = [
     feedbackIncorrect: "가장 먼저 환자의 의식/반응을 확인해야 합니다.",
     explanation:
       "쓰러진 환자 발견 시 가장 먼저 수행해야 할 단계는 의식 확인입니다.",
-    videoPaths: { question: "/videos/Q01.mp4", answer: "/videos/Q01-A.mp4" },
+    videoPaths: {
+      question:
+        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032264/Q01.mp4",
+      answer:
+        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032263/Q01-A.mp4",
+    },
   },
   {
     id: 2,
@@ -71,7 +76,12 @@ export const session1Questions: Question[] = [
     feedbackIncorrect: "어깨를 두드리며 큰 소리로 질문해야 합니다.",
     explanation:
       "반응 확인은 양쪽 어깨를 가볍게 두드리며 큰 목소리로 물어보는 것이 표준 절차입니다.",
-    videoPaths: { question: "/videos/Q02.mp4", answer: "/videos/Q02-C.mp4" },
+    videoPaths: {
+      question:
+        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032277/Q02.mp4",
+      answer:
+        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032272/Q02-C.mp4",
+    },
   },
   {
     id: 3,
@@ -95,7 +105,12 @@ export const session1Questions: Question[] = [
     feedbackIncorrect: "혼자 해결하려 하지 말고 도움을 요청해야 합니다.",
     explanation:
       "환자가 반응이 없다면 즉시 주변에 도움을 요청하여 의료 응급팀(Code Blue 등)을 활성화해야 합니다.",
-    videoPaths: { question: "/videos/Q03.mp4", answer: "/videos/Q03-A.mp4" },
+    videoPaths: {
+      question:
+        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032270/Q03.mp4",
+      answer:
+        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032264/Q03-A.mp4",
+    },
   },
   {
     id: 4,
