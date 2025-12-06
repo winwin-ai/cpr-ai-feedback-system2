@@ -1,13 +1,12 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Layout } from '../components/Layout';
-import { Dashboard } from '../components/Dashboard';
-import { SessionPlayer } from '../components/SessionPlayer';
-import { ResultScreen } from '../components/ResultScreen';
-import { VideoLibrary } from '../components/VideoLibrary';
-import { ViewState } from './types';
-import { session1Questions, session2Questions } from './data';
+import React, { useState } from "react";
+import { Layout } from "../components/Layout";
+import { Dashboard } from "../components/Dashboard";
+import { SessionPlayer } from "../components/SessionPlayer";
+import { ResultScreen } from "../components/ResultScreen";
+import { ViewState } from "./types";
+import { session1Questions, session2Questions } from "./data";
 
 export default function Home() {
   const [viewState, setViewState] = useState<ViewState>(ViewState.DASHBOARD);
@@ -17,10 +16,6 @@ export default function Home() {
 
   const handleStart = () => {
     setViewState(ViewState.SESSION_1);
-  };
-
-  const handleOpenLibrary = () => {
-    setViewState(ViewState.LIBRARY);
   };
 
   const handleBackToDashboard = () => {
@@ -72,13 +67,11 @@ export default function Home() {
     <Layout viewState={viewState}>
       {viewState === ViewState.DASHBOARD && (
         <Dashboard
-          onStart={() => { setActiveSessionId(1); handleStart(); }}
-          onOpenLibrary={handleOpenLibrary}
+          onStart={() => {
+            setActiveSessionId(1);
+            handleStart();
+          }}
         />
-      )}
-
-      {viewState === ViewState.LIBRARY && (
-        <VideoLibrary onBack={handleBackToDashboard} />
       )}
 
       {viewState === ViewState.SESSION_1 && (
@@ -97,10 +90,15 @@ export default function Home() {
         />
       )}
 
-      {(viewState === ViewState.RESULT_PASS || viewState === ViewState.RESULT_FAIL) && (
+      {(viewState === ViewState.RESULT_PASS ||
+        viewState === ViewState.RESULT_FAIL) && (
         <ResultScreen
           score={sessionScore}
-          total={activeSessionId === 1 ? session1Questions.length : session2Questions.length}
+          total={
+            activeSessionId === 1
+              ? session1Questions.length
+              : session2Questions.length
+          }
           passed={viewState === ViewState.RESULT_PASS}
           sessionId={activeSessionId}
           onRetry={handleRetry}
