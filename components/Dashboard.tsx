@@ -21,9 +21,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
       {/* Hero Section */}
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
-          전남대학교 간호대학 CPR 교육 플랫폼:
-          <br />
-          <span className="text-blue-600">The Digital Blueprint</span>
+          전남대학교 간호대학 CPR 교육 플랫폼
         </h2>
         <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
           전남대학교 간호대학이 개발한 교육 플랫폼으로,
