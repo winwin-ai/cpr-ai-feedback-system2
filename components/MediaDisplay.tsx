@@ -269,7 +269,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           muted={false}
           onEnded={onVideoEnded}
           playsInline
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
       ) : localVideoUrl ? (
         <video
@@ -280,7 +280,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           muted={false}
           onEnded={onVideoEnded}
           playsInline
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
       ) : generatedVideoUrl ? (
         <video
@@ -291,7 +291,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           muted={false}
           onEnded={onVideoEnded}
           playsInline
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
       ) : (
         <img

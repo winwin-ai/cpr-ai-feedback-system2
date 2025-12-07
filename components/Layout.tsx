@@ -43,8 +43,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, viewState }) => {
       {/* Main Content */}
       <main className="flex-grow flex flex-col">{children}</main>
 
-      {/* Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 z-[60] bg-slate-900 text-slate-400 py-2 border-t border-slate-800">
+      {/* Footer - 휴대폰 가로모드에서 숨김 */}
+      <footer className="mobile-landscape-hidden fixed bottom-0 left-0 right-0 z-[60] bg-slate-900 text-slate-400 py-2 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 text-center text-xs flex flex-wrap justify-center items-center gap-2 md:gap-4">
           <span className="text-slate-300 font-medium">
             전남대학교 간호대학 조인영 교수 연구 프로젝트

@@ -124,24 +124,145 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   return (
     <div className="flex flex-col h-[calc(100vh-64px)] overflow-hidden bg-black font-sans">
       {/* Top Bar */}
-      <div className="bg-slate-900 text-white px-6 py-3 flex items-center justify-between border-b border-slate-700 z-20">
-        <div className="flex items-center gap-4 w-1/2">
-          <span className="text-sm font-bold text-slate-400">
+      <div className="bg-slate-900 text-white px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-between border-b border-slate-700 z-20">
+        <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-1/2">
+          <span className="text-xs sm:text-sm font-bold text-slate-400 whitespace-nowrap">
             SESSION {sessionId}
           </span>
-          <div className="flex-grow h-2 bg-slate-700 rounded-full overflow-hidden">
+          <div className="flex-grow h-1.5 sm:h-2 bg-slate-700 rounded-full overflow-hidden">
             <div
               className="h-full bg-blue-500 transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
-          <span className="text-sm font-mono">
+          <span className="text-xs sm:text-sm font-mono whitespace-nowrap">
             {currentIndex + 1} / {questions.length}
           </span>
         </div>
       </div>
 
-      <div className="flex-grow relative w-full h-full flex flex-col">
+      {/* 모바일 세로모드 레이아웃 (sm 이하) */}
+      <div className="flex-grow flex flex-col sm:hidden overflow-hidden">
+        {/* 영상 영역 - 상단 40% */}
+        <div className="relative h-[35%] w-full bg-black">
+          <MediaDisplay
+            type={currentQuestion.mediaType}
+            prompt={currentQuestion.mediaPrompt}
+            videoSrc={videoSrc}
+            onVideoEnded={handleVideoEnded}
+            autoLoop={false}
+            autoPlay={playbackState !== "intro"}
+          />
+          {/* Intro Overlay (모바일) */}
+          {playbackState === "intro" && (
+            <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black animate-in fade-in duration-300">
+              <div className="text-center space-y-2">
+                <h2 className="text-lg text-slate-400 font-bold uppercase tracking-widest">
+                  Session {sessionId}
+                </h2>
+                <h1 className="text-3xl text-white font-extrabold">
+                  Question {currentIndex + 1}
+                </h1>
+                <div className="w-12 h-1 bg-blue-500 mx-auto mt-2 rounded-full"></div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* 질문 및 선택지 영역 - 하단 60% */}
+        {playbackState === "waiting" && (
+          <div
+            className={`flex-grow flex flex-col p-3 overflow-auto ${
+              feedbackState !== "idle"
+                ? "opacity-30 blur-sm pointer-events-none"
+                : ""
+            }`}
+          >
+            {/* 질문 텍스트 */}
+            <div className="bg-slate-800/80 backdrop-blur-sm px-4 py-3 rounded-xl mb-3 border border-slate-700">
+              <h2 className="text-blue-400 font-bold text-xs uppercase tracking-widest mb-1">
+                Question {currentIndex + 1}
+              </h2>
+              <h3 className="text-white text-base font-bold leading-snug">
+                {currentQuestion.questionText}
+              </h3>
+            </div>
+
+            {/* 선택지 2x2 그리드 */}
+            <div className="grid grid-cols-2 gap-2 flex-grow">
+              {currentQuestion.options.map((option) => {
+                const isDisabled = disabledOptionIds.has(option.id);
+                return (
+                  <button
+                    key={option.id}
+                    onClick={() => handleOptionSelect(option.id)}
+                    disabled={isDisabled || feedbackState !== "idle"}
+                    className={`
+                      w-full rounded-lg overflow-hidden shadow-lg flex flex-col
+                      transform transition-all duration-200
+                      ${
+                        isDisabled
+                          ? "bg-slate-300 opacity-50 cursor-not-allowed grayscale"
+                          : "bg-white/95 active:scale-95 cursor-pointer"
+                      }
+                      ${
+                        selectedOptionId === option.id
+                          ? "ring-3 ring-blue-500"
+                          : "border border-slate-200"
+                      }
+                    `}
+                  >
+                    {/* Image Area */}
+                    <div className="h-20 bg-slate-200 relative flex-shrink-0">
+                      {option.imageUrl ? (
+                        <img
+                          src={getCloudinaryUrl(option.imageUrl)}
+                          alt={option.text}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">
+                          No Image
+                        </div>
+                      )}
+                      <div className="absolute top-1.5 left-1.5 w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-md">
+                        {option.id.toUpperCase()}
+                      </div>
+
+                      {/* Disabled Overlay */}
+                      {isDisabled && (
+                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                          <XCircle className="text-white w-6 h-6 opacity-80" />
+                        </div>
+                      )}
+                    </div>
+                    {/* Text Area */}
+                    <div className="p-2 flex-grow flex items-center text-left bg-white min-h-[48px]">
+                      <span
+                        className={`text-xs font-semibold line-clamp-2 leading-tight ${
+                          isDisabled ? "text-slate-500" : "text-slate-900"
+                        }`}
+                      >
+                        {option.text}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* 인트로/영상 재생 중일 때 하단 빈 공간 */}
+        {playbackState !== "waiting" && playbackState !== "intro" && (
+          <div className="flex-grow flex items-center justify-center">
+            <p className="text-slate-500 text-sm">영상을 시청해주세요...</p>
+          </div>
+        )}
+      </div>
+
+      {/* PC/태블릿 레이아웃 (sm 이상) - 기존 레이아웃 유지 */}
+      <div className="hidden sm:flex flex-grow relative w-full h-full flex-col">
         {/* Full Screen Media */}
         <div className="absolute inset-0 z-0">
           <MediaDisplay
@@ -173,7 +294,6 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
         {playbackState === "waiting" && (
           <>
             {/* Top: Title */}
-            {/* Top: Title */}
             <div
               className={`absolute top-0 left-0 right-0 p-8 z-10 text-center animate-in fade-in slide-in-from-top-6 duration-700 ease-out ${
                 feedbackState !== "idle"
@@ -193,13 +313,13 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
             {/* Bottom: Options Horizontal List */}
             <div
-              className={`absolute bottom-8 left-0 right-0 p-2 md:p-4 z-10 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-150 ease-out ${
+              className={`absolute bottom-8 left-0 right-0 p-4 z-10 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-150 ease-out ${
                 feedbackState !== "idle"
                   ? "opacity-50 blur-sm pointer-events-none transition-all duration-500"
                   : "opacity-100"
               }`}
             >
-              <div className="grid grid-cols-4 gap-3 md:gap-6 w-full max-w-7xl mx-auto">
+              <div className="grid grid-cols-4 gap-6 w-full max-w-7xl mx-auto">
                 {currentQuestion.options.map((option) => {
                   const isDisabled = disabledOptionIds.has(option.id);
                   return (
@@ -223,7 +343,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                         `}
                     >
                       {/* Image Area */}
-                      <div className="h-28 md:h-44 bg-slate-200 relative">
+                      <div className="h-44 bg-slate-200 relative">
                         {option.imageUrl ? (
                           <img
                             src={getCloudinaryUrl(option.imageUrl)}
@@ -235,21 +355,21 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                             No Image
                           </div>
                         )}
-                        <div className="absolute top-2 left-2 w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs md:text-base font-bold shadow-md ring-1 ring-white/50">
+                        <div className="absolute top-2 left-2 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-base font-bold shadow-md ring-1 ring-white/50">
                           {option.id.toUpperCase()}
                         </div>
 
                         {/* Disabled Overlay */}
                         {isDisabled && (
                           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                            <XCircle className="text-white w-8 h-8 md:w-12 md:h-12 opacity-80" />
+                            <XCircle className="text-white w-12 h-12 opacity-80" />
                           </div>
                         )}
                       </div>
                       {/* Text Area */}
-                      <div className="p-2 md:p-4 h-16 md:h-24 flex items-center text-left bg-white">
+                      <div className="p-4 h-24 flex items-center text-left bg-white">
                         <span
-                          className={`text-xs md:text-sm font-semibold line-clamp-3 leading-tight ${
+                          className={`text-sm font-semibold line-clamp-3 leading-tight ${
                             isDisabled ? "text-slate-500" : "text-slate-900"
                           }`}
                         >
@@ -263,58 +383,57 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
             </div>
           </>
         )}
-
-        {/* Feedback Overlays (O/X) */}
-        {/* Feedback Overlays (O/X) */}
-        {feedbackState !== "idle" && (
-          <div className="absolute inset-0 z-50 flex flex-col items-center justify-center pointer-events-none bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-            {feedbackState === "correct" ? (
-              <>
-                <div className="w-48 h-48 md:w-64 md:h-64 rounded-full border-[12px] border-green-500 flex items-center justify-center shadow-[0_0_50px_rgba(34,197,94,0.6)] bg-green-500/10 animate-in zoom-in-50 duration-300">
-                  <span className="text-[120px] md:text-[160px] font-black text-green-500 leading-none pb-4 select-none">
-                    O
-                  </span>
-                </div>
-                <p className="mt-8 text-4xl md:text-6xl font-black text-green-500 tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] animate-in slide-in-from-bottom-5 duration-500">
-                  정답입니다!
-                </p>
-                <div className="mt-6 max-w-2xl px-6">
-                  <p className="text-xl md:text-2xl text-white text-center font-medium leading-relaxed drop-shadow-md animate-in slide-in-from-bottom-6 duration-500 delay-100">
-                    {currentQuestion.feedbackCorrect}
-                  </p>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="relative w-48 h-48 md:w-64 md:h-64 animate-in zoom-in-50 duration-300">
-                  {/* X Shape */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <XCircle
-                      className="w-full h-full text-red-500 drop-shadow-[0_0_30px_rgba(239,68,68,0.6)]"
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                </div>
-                <p className="mt-8 text-4xl md:text-6xl font-black text-red-500 tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] animate-in slide-in-from-bottom-5 duration-500">
-                  오답입니다...
-                </p>
-                <div className="mt-6 max-w-2xl px-6">
-                  <p className="text-xl md:text-2xl text-white text-center font-medium leading-relaxed drop-shadow-md animate-in slide-in-from-bottom-6 duration-500 delay-100">
-                    {currentQuestion.feedbackIncorrect}
-                  </p>
-                </div>
-              </>
-            )}
-
-            <button
-              onClick={handleFeedbackConfirm}
-              className="mt-10 px-10 py-4 bg-white text-black text-xl md:text-2xl font-bold rounded-full hover:scale-105 hover:bg-slate-200 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)] animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200 pointer-events-auto"
-            >
-              확인
-            </button>
-          </div>
-        )}
       </div>
+
+      {/* Feedback Overlays (O/X) - 모바일/PC 공통 */}
+      {feedbackState !== "idle" && (
+        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center pointer-events-none bg-black/70 backdrop-blur-sm animate-in fade-in duration-300">
+          {feedbackState === "correct" ? (
+            <>
+              <div className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full border-[8px] sm:border-[12px] border-green-500 flex items-center justify-center shadow-[0_0_50px_rgba(34,197,94,0.6)] bg-green-500/10 animate-in zoom-in-50 duration-300">
+                <span className="text-[80px] sm:text-[120px] md:text-[160px] font-black text-green-500 leading-none pb-2 sm:pb-4 select-none">
+                  O
+                </span>
+              </div>
+              <p className="mt-4 sm:mt-8 text-2xl sm:text-4xl md:text-6xl font-black text-green-500 tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] animate-in slide-in-from-bottom-5 duration-500">
+                정답입니다!
+              </p>
+              <div className="mt-3 sm:mt-6 max-w-md sm:max-w-2xl px-4 sm:px-6">
+                <p className="text-sm sm:text-xl md:text-2xl text-white text-center font-medium leading-relaxed drop-shadow-md animate-in slide-in-from-bottom-6 duration-500 delay-100">
+                  {currentQuestion.feedbackCorrect}
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="relative w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 animate-in zoom-in-50 duration-300">
+                {/* X Shape */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <XCircle
+                    className="w-full h-full text-red-500 drop-shadow-[0_0_30px_rgba(239,68,68,0.6)]"
+                    strokeWidth={1.5}
+                  />
+                </div>
+              </div>
+              <p className="mt-4 sm:mt-8 text-2xl sm:text-4xl md:text-6xl font-black text-red-500 tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] animate-in slide-in-from-bottom-5 duration-500">
+                오답입니다...
+              </p>
+              <div className="mt-3 sm:mt-6 max-w-md sm:max-w-2xl px-4 sm:px-6">
+                <p className="text-sm sm:text-xl md:text-2xl text-white text-center font-medium leading-relaxed drop-shadow-md animate-in slide-in-from-bottom-6 duration-500 delay-100">
+                  {currentQuestion.feedbackIncorrect}
+                </p>
+              </div>
+            </>
+          )}
+
+          <button
+            onClick={handleFeedbackConfirm}
+            className="mt-6 sm:mt-10 px-6 sm:px-10 py-3 sm:py-4 bg-white text-black text-lg sm:text-xl md:text-2xl font-bold rounded-full hover:scale-105 active:scale-95 hover:bg-slate-200 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)] animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200 pointer-events-auto"
+          >
+            확인
+          </button>
+        </div>
+      )}
     </div>
   );
 };

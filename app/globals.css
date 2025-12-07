@@ -39,3 +39,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 휴대폰 가로 모드에서 footer 숨김 */
+@media (orientation: landscape) and (max-height: 500px) {
+  .mobile-landscape-hidden {
+    display: none !important;
+  }
+}
+
+/* 모바일 환경에서 footer 숨김 (640px 미만) */
+@media (max-width: 639px) {
+  .mobile-landscape-hidden {
+    display: none !important;
+  }
+}
