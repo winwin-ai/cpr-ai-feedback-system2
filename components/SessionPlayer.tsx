@@ -63,12 +63,8 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
     if (playbackState === "question") {
       setPlaybackState("waiting");
     } else if (playbackState === "answer") {
-      // Video ended, now show the "O" feedback
-      setFeedbackState("correct");
-      // Wait 2 seconds before moving to the next question
-      setTimeout(() => {
-        proceedToNextQuestion();
-      }, 2000);
+      // Answer video ended, move to next question
+      proceedToNextQuestion();
     }
   };
 
@@ -87,35 +83,32 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       if (retryCount === 0) {
         setScore((prev) => prev + 1);
       }
-
-      // Check if there is an answer video
-      if (currentQuestion.videoPaths?.answer) {
-        setPlaybackState("answer");
-        setFeedbackState("idle"); // Ensure feedback is hidden while video plays
-      } else {
-        // If no video, show correct feedback immediately
-        setFeedbackState("correct");
-        setTimeout(() => {
-          proceedToNextQuestion();
-        }, 2000);
-      }
+      // Show correct feedback immediately
+      setFeedbackState("correct");
     } else {
       setFeedbackState("incorrect");
       setDisabledOptionIds((prev) => new Set(prev).add(optionId));
       const newRetryCount = retryCount + 1;
       setRetryCount(newRetryCount);
+    }
+  };
 
-      // Show X for 2 seconds
-      setTimeout(() => {
-        if (newRetryCount >= 2) {
-          // If 2nd mistake, move to next
-          proceedToNextQuestion();
-        } else {
-          // Allow retry
-          setFeedbackState("idle");
-          setSelectedOptionId(null);
-        }
-      }, 2000);
+  const handleFeedbackConfirm = () => {
+    if (feedbackState === "correct") {
+      // If there is an answer video, play it now
+      if (currentQuestion.videoPaths?.answer) {
+        setPlaybackState("answer");
+        setFeedbackState("idle");
+      } else {
+        proceedToNextQuestion();
+      }
+    } else if (feedbackState === "incorrect") {
+      if (retryCount >= 2) {
+        proceedToNextQuestion();
+      } else {
+        setFeedbackState("idle");
+        setSelectedOptionId(null);
+      }
     }
   };
 
@@ -230,7 +223,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                         `}
                     >
                       {/* Image Area */}
-                      <div className="h-20 md:h-32 bg-slate-200 relative">
+                      <div className="h-28 md:h-44 bg-slate-200 relative">
                         {option.imageUrl ? (
                           <img
                             src={getCloudinaryUrl(option.imageUrl)}
@@ -285,6 +278,11 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                 <p className="mt-8 text-4xl md:text-6xl font-black text-green-500 tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] animate-in slide-in-from-bottom-5 duration-500">
                   정답입니다!
                 </p>
+                <div className="mt-6 max-w-2xl px-6">
+                  <p className="text-xl md:text-2xl text-white text-center font-medium leading-relaxed drop-shadow-md animate-in slide-in-from-bottom-6 duration-500 delay-100">
+                    {currentQuestion.feedbackCorrect}
+                  </p>
+                </div>
               </>
             ) : (
               <>
@@ -300,8 +298,20 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                 <p className="mt-8 text-4xl md:text-6xl font-black text-red-500 tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] animate-in slide-in-from-bottom-5 duration-500">
                   오답입니다...
                 </p>
+                <div className="mt-6 max-w-2xl px-6">
+                  <p className="text-xl md:text-2xl text-white text-center font-medium leading-relaxed drop-shadow-md animate-in slide-in-from-bottom-6 duration-500 delay-100">
+                    {currentQuestion.feedbackIncorrect}
+                  </p>
+                </div>
               </>
             )}
+
+            <button
+              onClick={handleFeedbackConfirm}
+              className="mt-10 px-10 py-4 bg-white text-black text-xl md:text-2xl font-bold rounded-full hover:scale-105 hover:bg-slate-200 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)] animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200 pointer-events-auto"
+            >
+              확인
+            </button>
           </div>
         )}
       </div>

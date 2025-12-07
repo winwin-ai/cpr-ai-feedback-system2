@@ -86,8 +86,8 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
 
   // Restore video from DB on prompt/key change
   useEffect(() => {
-    // If we have a local video, we don't need to check DB
-    if (localVideoUrl) {
+    // If we have a direct video source or local video file, we don't need to check DB
+    if (videoSrc || localVideoUrl) {
       setIsCheckingDB(false);
       return;
     }
@@ -123,7 +123,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
         URL.revokeObjectURL(objectUrl);
       }
     };
-  }, [storageKey, localVideoUrl]);
+  }, [storageKey, localVideoUrl, videoSrc]);
 
   const handleGenerateVideo = async () => {
     setError(null);
