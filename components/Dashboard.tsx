@@ -127,32 +127,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
-      <div className="bg-slate-900 rounded-2xl p-8 md:p-12 text-white relative overflow-hidden mb-16">
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <h3 className="text-2xl font-bold mb-2">준비되셨나요?</h3>
-            <p className="text-slate-300">
-              지금 바로 가상 시나리오에 접속하여 생명을 살리는 기술을 배우세요.
-            </p>
-          </div>
-          <button
-            onClick={onStart}
-            className="flex items-center gap-2 px-6 py-3 bg-white text-slate-900 rounded-lg font-bold hover:bg-slate-100 transition-colors"
-          >
-            시작하기 <ChevronRight size={18} />
-          </button>
-        </div>
-        {/* Abstract grid background */}
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        ></div>
-      </div>
-
       {/* Dev Shortcuts */}
       <div className="border border-slate-200 rounded-xl p-6 bg-slate-50">
         <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">

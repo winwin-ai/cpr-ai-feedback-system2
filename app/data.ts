@@ -31,8 +31,10 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 먼저 환자의 반응을 확인해야 합니다.",
-    feedbackIncorrect: "가장 먼저 환자의 의식/반응을 확인해야 합니다.",
+    feedbackCorrect:
+      "정확합니다! 환자의 반응을 확인하는 것이 초기 대응의 첫 단계입니다.",
+    feedbackIncorrect:
+      "잘못된 선택입니다. 환자를 옮기거나 약을 찾기보다 먼저 환자가 반응하는지 확인해야 합니다.",
     explanation:
       "쓰러진 환자 발견 시 가장 먼저 수행해야 할 단계는 의식 확인입니다.",
     videoPaths: {
@@ -72,8 +74,10 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "c",
-    feedbackCorrect: "정답입니다. 어깨를 가볍게 두드리며 큰 소리로 확인합니다.",
-    feedbackIncorrect: "어깨를 두드리며 큰 소리로 질문해야 합니다.",
+    feedbackCorrect:
+      "정답입니다. 어깨를 두드리며 큰소리로 묻는 것이 표준화된 반응 확인 방법입니다.",
+    feedbackIncorrect:
+      "잘못된 방법입니다. 얼굴을 가까이 들여다보거나 세게 흔드는 것은 잘못된 방법입니다. 어깨를 가볍게 두드리며 큰소리로 물어야 합니다.",
     explanation:
       "반응 확인은 양쪽 어깨를 가볍게 두드리며 큰 목소리로 물어보는 것이 표준 절차입니다.",
     videoPaths: {
@@ -101,8 +105,10 @@ export const session1Questions: Question[] = [
       { id: "d", text: "가슴압박을 시작한다.", imageUrl: "/videos/Q03-D.jpg" },
     ],
     correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 즉시 도움을 요청해야 합니다.",
-    feedbackIncorrect: "혼자 해결하려 하지 말고 도움을 요청해야 합니다.",
+    feedbackCorrect:
+      "정확합니다! 환자의 반응이 없으면 즉시 주변에 도움을 요청해야 합니다.",
+    feedbackIncorrect:
+      "잘못된 선택입니다. 혈당 측정이나 환자를 옮기는 행동보다 먼저 도움을 요청해야 합니다.",
     explanation:
       "환자가 반응이 없다면 즉시 주변에 도움을 요청하여 의료 응급팀(Code Blue 등)을 활성화해야 합니다.",
     videoPaths: {
@@ -142,8 +148,10 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "d",
-    feedbackCorrect: "정답입니다. 호출벨을 이용하여 신속하게 알립니다.",
-    feedbackIncorrect: "가장 빠르고 효율적인 수단인 호출벨을 사용해야 합니다.",
+    feedbackCorrect:
+      "정답입니다. 도움요청을 위해 호출벨을 누르는 것이 가장 빠른 방법입니다.",
+    feedbackIncorrect:
+      "오답입니다. 전화나 간접적인 요청보다 즉각적으로 도움요청을 위해 호출벨을 눌러야 신속 대응이 가능합니다.",
     explanation:
       "병실 내 호출벨을 사용하여 즉시 동료 의료진에게 상황을 전파해야 합니다.",
     videoPaths: { question: "/videos/Q04.mp4", answer: "/videos/Q04-D.mp4" },
@@ -178,9 +186,10 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 맥박과 호흡을 10초 이내에 확인합니다.",
+    feedbackCorrect:
+      "정확합니다! 도움 요청 후에는 환자의 맥박과 호흡을 10초 이내로 확인해야 합니다.",
     feedbackIncorrect:
-      "전문 소생술 전, 환자 상태(맥박/호흡) 확인이 우선입니다.",
+      "잘못된 선택입니다. 모니터 부착이나 IV 확보보다 먼저 심정지 여부를 확인해야 합니다.",
     explanation:
       "심정지 여부를 판단하기 위해 10초 이내에 맥박과 호흡 유무를 동시에 확인해야 합니다.",
     videoPaths: { question: "/videos/Q05.mp4", answer: "/videos/Q05-A.mp4" },
@@ -215,9 +224,10 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 경동맥과 흉부 움직임을 동시에 확인합니다.",
+    feedbackCorrect:
+      "정답입니다! 경동맥 촉지와 흉곽 움직임, 호흡음 확인이 표준 절차입니다.",
     feedbackIncorrect:
-      "성인은 경동맥 확인이 원칙이며, 시각/청각/촉각을 이용해 호흡을 확인합니다.",
+      "정확하지 않습니다. 손목 맥박은 신뢰도가 낮으며, 복부나 코에 손을 대는 방법은 표준이 아닙니다.",
     explanation:
       "경동맥 촉지와 흉부 상승 관찰을 동시에 수행하여 5~10초 이내에 완료해야 합니다.",
     videoPaths: { question: "/videos/Q06.mp4", answer: "/videos/Q06-A.mp4" },
@@ -252,9 +262,10 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "b",
-    feedbackCorrect: "정답입니다. 심정지 호흡(Agonal breathing)입니다.",
+    feedbackCorrect:
+      "정확합니다! 영상에서 보이는 간헐적 헐떡임은 정상 호흡이 아닌 심정지 호흡(agonal breathing)입니다.",
     feedbackIncorrect:
-      "이는 심정지 초기에 나타나는 비정상적인 호흡 패턴입니다.",
+      "잘못된 선택입니다. 간헐적 헐떡임은 정상 호흡이 아니며 심정지 상태의 특징입니다.",
     explanation:
       "심정지 직후 나타나는 헐떡임(Agonal breathing)은 정상 호흡이 아니며, 즉시 심정지로 간주해야 합니다.",
     videoPaths: { question: "/videos/Q07.mp4", answer: "/videos/Q07-B.mp4" },
@@ -282,15 +293,20 @@ export const session1Questions: Question[] = [
       { id: "d", text: "가슴압박을 시작한다.", imageUrl: "/videos/Q08-D.png" },
     ],
     correctOptionId: "d",
-    feedbackCorrect: "정답입니다. 즉시 가슴압박을 시작해야 합니다.",
-    feedbackIncorrect: "심정지 상황이므로 즉시 CPR을 시작해야 합니다.",
+    feedbackCorrect:
+      "정답입니다! 심정지 호흡이 관찰되면 즉시 가슴압박을 시작해야 합니다.",
+    feedbackIncorrect:
+      "잘못된 선택입니다. 주치의 지시를 기다리거나 모니터 부착보다 가슴압박을 바로 시작해야 합니다.",
     explanation:
       "비정상 호흡(심정지 호흡)과 맥박 부재 시 즉시 흉부 압박을 시작하는 것이 생존율을 높입니다.",
     videoPaths: { question: "/videos/Q08.mp4", answer: "/videos/Q08-D.mp4" },
   },
+];
+
+export const session2Questions: Question[] = [
   {
     id: 9,
-    sessionId: 1,
+    sessionId: 2,
     title: "가슴 압박 위치",
     mediaType: "video",
     mediaPrompt: "Q09",
@@ -318,15 +334,17 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 흉골 하부 절반 위치입니다.",
-    feedbackIncorrect: "흉골 하부 중앙을 압박해야 효과적입니다.",
+    feedbackCorrect:
+      "올바릅니다! 흉골 중앙의 하단부, 즉 양쪽 nipple 사이를 압박해야 합니다.",
+    feedbackIncorrect:
+      "오답입니다. 가슴압박은 반드시 흉골 중앙의 하단부에 손바닥을 올려 심장에 효과적으로 압력을 전달해야 합니다.",
     explanation:
       "흉골의 하부 1/2 지점(양쪽 젖꼭지 연결선의 중앙)이 정확한 압박 위치입니다.",
     videoPaths: { question: "/videos/Q09.mp4", answer: "/videos/Q09-A.mp4" },
   },
   {
     id: 10,
-    sessionId: 1,
+    sessionId: 2,
     title: "가슴 압박 방법",
     mediaType: "video",
     mediaPrompt: "Q10",
@@ -354,15 +372,17 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 충분한 깊이와 완전한 이완이 중요합니다.",
-    feedbackIncorrect: "깊이뿐만 아니라 완전한 이완(recoil)도 중요합니다.",
+    feedbackCorrect:
+      "정답입니다! 5cm 깊이는 성인에게 적절한 심장 압박 깊이입니다. 그리고 압박 후에는 효과적인 순환을 위해 흉곽을 완전히 이완시키는 것(recoil)이 중요합니다.",
+    feedbackIncorrect:
+      "오답입니다. 5cm보다 얕거나 깊으면 효과적인 순환이 이루어지지 않거나 손상 위험이 있으며, 완전 이완(recoil) 없이 압박만 지속하면 효과적인 순환이 어렵습니다.",
     explanation:
       "성인 기준 약 5cm 깊이로 강하게 압박하고, 각 압박 후 가슴이 완전히 올라오도록 이완해야 합니다.",
     videoPaths: { question: "/videos/Q10.mp4", answer: "/videos/Q10-A.mp4" },
   },
   {
     id: 11,
-    sessionId: 1,
+    sessionId: 2,
     title: "가슴 압박 속도",
     mediaType: "video",
     mediaPrompt: "Q11",
@@ -382,14 +402,16 @@ export const session1Questions: Question[] = [
       { id: "d", text: "가능한 빠르게 누른다.", imageUrl: "/videos/Q11-D.png" },
     ],
     correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 분당 100~120회를 유지해야 합니다.",
-    feedbackIncorrect: "너무 느리거나 빠르지 않게, 100~120회를 유지하세요.",
+    feedbackCorrect:
+      "잘했습니다! 100~120회/분은 뇌와 심장에 혈류를 공급할 수 있는 최적 속도입니다.",
+    feedbackIncorrect:
+      "오답입니다. 너무 빠르거나 느린 속도는 효과적인 순환을 방해합니다. 100~120회/분을 유지하세요.",
     explanation: "가슴압박 속도는 분당 100~120회가 권장됩니다.",
     videoPaths: { question: "/videos/Q11.mp4", answer: "/videos/Q11-A.mp4" },
   },
   {
     id: 12,
-    sessionId: 1,
+    sessionId: 2,
     title: "가슴 압박 자세",
     mediaType: "video",
     mediaPrompt: "Q12",
@@ -417,16 +439,17 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "c",
-    feedbackCorrect: "정답입니다. 팔을 펴고 수직으로 체중을 실어야 합니다.",
+    feedbackCorrect:
+      "정답입니다! 팔을 곧게 펴고 어깨를 환자 흉부 위에 수직으로 위치시키면 효율적으로 압박할 수 있습니다.",
     feedbackIncorrect:
-      "효율적인 압박을 위해 팔꿈치를 펴고 수직 자세를 유지해야 합니다.",
+      "오답입니다. 팔꿈치를 굽히거나 손가락만으로 누르는 방식은 힘이 분산되어 압박 효과가 떨어집니다.",
     explanation:
       "구조자의 어깨가 환자 가슴 바로 위에 오도록 하고, 팔꿈치를 곧게 펴 체중을 실어 압박합니다.",
     videoPaths: { question: "/videos/Q12.mp4", answer: "/videos/Q12-C.mp4" },
   },
   {
     id: 13,
-    sessionId: 1,
+    sessionId: 2,
     title: "제세동기 준비 순서",
     mediaType: "video",
     mediaPrompt: "Q13",
@@ -444,15 +467,16 @@ export const session1Questions: Question[] = [
     ],
     correctOptionId: "a",
     feedbackCorrect:
-      "정답입니다. 전원 켜기 -> 패드 부착 -> 리듬 분석 순입니다.",
-    feedbackIncorrect: "AED 사용의 기본 순서는 전원, 패드, 분석입니다.",
+      "정확합니다! 제세동기는 전원을 켜고 전극을 부착한 후 리듬을 확인해야 합니다.",
+    feedbackIncorrect:
+      "잘못된 순서입니다. 전원을 먼저 켜고 전극 부착 후 리듬 확인, 처방이 있을시에 충전해야 합니다.",
     explanation:
       "제세동기 사용은 전원을 켜고, 패드를 부착한 뒤, 심전도 리듬을 분석하는 순서로 진행됩니다.",
     videoPaths: { question: "/videos/Q13.mp4", answer: "/videos/Q13-A.mp4" },
   },
   {
     id: 14,
-    sessionId: 1,
+    sessionId: 2,
     title: "전극 부착 위치",
     mediaType: "video",
     mediaPrompt: "Q14",
@@ -476,15 +500,17 @@ export const session1Questions: Question[] = [
       { id: "d", text: "목 부위와 배꼽 부위", imageUrl: "/videos/Q14-D.png" },
     ],
     correctOptionId: "c",
-    feedbackCorrect: "정답입니다. 3 lead 모니터링 시 권장되는 위치입니다.",
-    feedbackIncorrect: "올바른 심전도 모니터링을 위한 위치를 선정해야 합니다.",
+    feedbackCorrect:
+      "정답입니다! 전극은 양쪽 쇄골 아래와 왼쪽 갈비뼈 아래에 부착해야 합니다.",
+    feedbackIncorrect:
+      "잘못된 위치입니다. 양 어깨나 목 부위, 갈비뼈 아래는 부착 위치가 아닙니다. 표준 위치를 기억하세요.",
     explanation:
       "일반적인 3-lead 모니터링 부착 위치는 우측 쇄골 아래(RA), 좌측 쇄골 아래(LA), 좌측 갈비뼈 아래(LL) 입니다.",
     videoPaths: { question: "/videos/Q14.mp4", answer: "/videos/Q14-C.mp4" },
   },
   {
     id: 15,
-    sessionId: 1,
+    sessionId: 2,
     title: "심전도 리듬 확인 (Asystole)",
     mediaType: "video",
     mediaPrompt: "Q15",
@@ -497,14 +523,16 @@ export const session1Questions: Question[] = [
       { id: "d", text: "PEA", imageUrl: "/videos/Q15-D.png" },
     ],
     correctOptionId: "c",
-    feedbackCorrect: "정답입니다. 무수축(Asystole) 리듬입니다.",
-    feedbackIncorrect: "평탄한 선으로 나타나는 무수축 리듬입니다.",
+    feedbackCorrect:
+      "정확합니다! 제시된 파형은 Asystole으로 Non-shockable 리듬입니다.",
+    feedbackIncorrect:
+      "잘못된 판별입니다. 이 파형은 Asystole으로 Non-shockable 리듬입니다.",
     explanation: "전기적 활동이 없는 상태인 무수축(Asystole) 입니다.",
     videoPaths: { question: "/videos/Q15.mp4", answer: "/videos/Q15-C.mp4" },
   },
   {
     id: 16,
-    sessionId: 1,
+    sessionId: 2,
     title: "Asystole 대처",
     mediaType: "video",
     mediaPrompt: "Q16",
@@ -517,15 +545,16 @@ export const session1Questions: Question[] = [
     ],
     correctOptionId: "b",
     feedbackCorrect:
-      "정답입니다. 제세동 불가 리듬이므로 즉시 가슴압박을 지속합니다.",
-    feedbackIncorrect: "Asystole은 제세동 적응증이 아닙니다.",
+      "정답입니다! Asystole 리듬은 제세동 대상이 아니므로 가슴압박을 지속해야 합니다.",
+    feedbackIncorrect:
+      "잘못된 선택입니다. Asystole은 Non-shockable 리듬으로 제세동 대상이 아닙니다.",
     explanation:
       "무수축(Asystole)은 충격 필요 리듬이 아니므로, 즉시 고품질 CPR(가슴압박)을 이어서 수행해야 합니다.",
     videoPaths: { question: "/videos/Q16.mp4", answer: "/videos/Q16-B.mp4" },
   },
   {
     id: 17,
-    sessionId: 1,
+    sessionId: 2,
     title: "Asystole 약물 투여",
     mediaType: "video",
     mediaPrompt: "Q17",
@@ -555,16 +584,16 @@ export const session1Questions: Question[] = [
     ],
     correctOptionId: "b",
     feedbackCorrect:
-      "정답입니다. 제세동 불가 리듬에서는 가능한 빨리 투여합니다.",
+      "정답입니다! 비충격 리듬은 제세동이 필요 없으므로 CPR 시작 후 정맥로가 확보되면 즉시 에피네프린 투여해야하며, 자발순환이 회복되거나 전문소생술이 끝날 때까지 3~5분 간격으로 반복 투여해야 합니다.",
     feedbackIncorrect:
-      "Asystole의 경우 지체 없이 에피네프린을 투여해야 합니다.",
+      "잘못된 선택입니다. Asystole은 Non-shockable 리듬으로 제세동이 필요없고 에피네프린은 가능한 한 빨리 투여해야 합니다.",
     explanation:
       "제세동 불가 리듬(Asystole, PEA)에서는 에피네프린을 가능한 한 빨리 투여하고, 3~5분마다 반복합니다.",
     videoPaths: { question: "/videos/Q17.mp4", answer: "/videos/Q17-B.mp4" },
   },
   {
     id: 18,
-    sessionId: 1,
+    sessionId: 2,
     title: "심전도 리듬 확인 (VF)",
     mediaType: "video",
     mediaPrompt: "Q18",
@@ -576,15 +605,17 @@ export const session1Questions: Question[] = [
       { id: "d", text: "PEA", imageUrl: "/videos/Q18-D.png" },
     ],
     correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 불규칙한 파형의 심실세동(VF)입니다.",
-    feedbackIncorrect: "불규칙하고 무질서한 파형은 심실세동의 특징입니다.",
+    feedbackCorrect:
+      "정확합니다! 제시된 파형은 무맥성 심실세동(VF)으로 Shockable 리듬입니다.",
+    feedbackIncorrect:
+      "잘못된 판별입니다. 이 파형은 무맥성 심실세동(VF)이며 즉시 제세동 대상입니다.",
     explanation:
       "심실세동(Ventricular Fibrillation)은 심장이 무질서하게 떨리는 상태로, 즉각적인 제세동이 필요합니다.",
     videoPaths: { question: "/videos/Q18.mp4", answer: "/videos/Q18-A.mp4" },
   },
   {
     id: 19,
-    sessionId: 1,
+    sessionId: 2,
     title: "VF 대처",
     mediaType: "video",
     mediaPrompt: "Q19",
@@ -596,15 +627,17 @@ export const session1Questions: Question[] = [
       { id: "d", text: "혈압을 측정한다.", imageUrl: "/videos/Q19-D.png" },
     ],
     correctOptionId: "a",
-    feedbackCorrect: "정답입니다. VF는 제세동이 필요한 리듬입니다.",
-    feedbackIncorrect: "심실세동은 제세동(Shock)이 가장 중요한 치료입니다.",
+    feedbackCorrect:
+      "정답입니다! VF 확인 후 가장 먼저 제세동을 준비해야 합니다.",
+    feedbackIncorrect:
+      "잘못된 선택입니다. 가슴압박과 응급약물도 중요하지만 VF는 제세동이 최우선입니다.",
     explanation:
       "심실세동(VF)은 Shockable rhythm이므로 즉시 제세동(Defibrillation)을 준비하고 시행해야 합니다.",
     videoPaths: { question: "/videos/Q19.mp4", answer: "/videos/Q19-A.mp4" },
   },
   {
     id: 20,
-    sessionId: 1,
+    sessionId: 2,
     title: "제세동 순서",
     mediaType: "video",
     mediaPrompt: "Q20",
@@ -616,15 +649,17 @@ export const session1Questions: Question[] = [
       { id: "d", text: "C-A-B-D", imageUrl: "/videos/Q20-D.png" },
     ],
     correctOptionId: "a",
-    feedbackCorrect: "정답입니다. 젤-충전-비켜-쇼크 순서입니다.",
-    feedbackIncorrect: "준비(젤)-충전-안전확인-쇼크 순서를 지켜야 합니다.",
+    feedbackCorrect:
+      "정확합니다! 올바른 순서는 A-B-C-D(패들 젤→충전→안전확인→가슴압박재개)입니다.",
+    feedbackIncorrect:
+      "잘못된 순서입니다. 항상 패들 젤 바르기 → 충전 → 주변 안전 확인 → 충격 후 가슴압박 재개 순으로 진행해야 합니다.",
     explanation:
       "패들 준비(젤) -> 충전 -> 안전 확인(물러나세요) -> 쇼크 실행 및 즉시 가슴압박 재개 순서입니다.",
     videoPaths: { question: "/videos/Q20.mp4", answer: "/videos/Q20-A.mp4" },
   },
   {
     id: 21,
-    sessionId: 1,
+    sessionId: 2,
     title: "VF 에피네프린 투여 시점",
     mediaType: "video",
     mediaPrompt: "Q21",
@@ -653,16 +688,17 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "c",
-    feedbackCorrect: "정답입니다. 2차 제세동 후 투여가 원칙입니다.",
+    feedbackCorrect:
+      "정확합니다! Shockable 리듬은 제세동이 최우선입니다. 따라서 에피네프린은 첫 제세동 직후 다시 시작하는 2분 가슴압박 시간에 투여해야 하며, 3~5분 간격으로 반복 투여해야 합니다.",
     feedbackIncorrect:
-      "Shockable 리듬에서는 제세동이 우선이며, 약물은 그 후 고려됩니다.",
+      "잘못된 선택입니다. VF는 Shockable Rhythm이므로 제세동이 최우선입니다. 제세동을 한 뒤에 에피네프린을 투여해야 합니다.",
     explanation:
       "VF/pVT의 경우 제세동과 CPR이 우선이며, 에피네프린은 2번째 제세동 후에도 순환이 돌아오지 않을 때 투여합니다.",
     videoPaths: { question: "/videos/Q21.mp4", answer: "/videos/Q21-C.mp4" },
   },
   {
     id: 22,
-    sessionId: 1,
+    sessionId: 2,
     title: "ROSC 징후 확인",
     mediaType: "video",
     mediaPrompt: "Q22",
@@ -691,13 +727,12 @@ export const session1Questions: Question[] = [
       },
     ],
     correctOptionId: "b",
-    feedbackCorrect: "정답입니다! 자발 맥박과 혈압이 측정되어야 ROSC입니다.",
-    feedbackIncorrect: "맥박 촉지와 혈압 측정이 가장 확실한 징후입니다.",
+    feedbackCorrect:
+      "정답입니다! 자발 맥박이 돌아오고 혈압 측정 가능은 ROSC의 대표적인 징후입니다.",
+    feedbackIncorrect:
+      "잘못된 선택입니다. 일시적인 심전도 변화나 피부색 변화는 ROSC를 의미하지 않으며, 동공 확장은 회복 징후가 아닙니다.",
     explanation:
       "자발순환 회복(ROSC)은 경동맥 등에서 자발적인 맥박이 촉지되고 혈압이 측정되는 상태를 의미합니다.",
     videoPaths: { question: "/videos/Q22.mp4", answer: "/videos/Q22-B.mp4" },
   },
 ];
-
-// Removed separate session2Questions as Q1-Q22 are now consolidated.
-export const session2Questions: Question[] = [];

@@ -5,6 +5,7 @@ import { Layout } from "../components/Layout";
 import { Dashboard } from "../components/Dashboard";
 import { SessionPlayer } from "../components/SessionPlayer";
 import { ResultScreen } from "../components/ResultScreen";
+import { Scenario } from "../components/Scenario";
 import { ViewState } from "./types";
 import { session1Questions, session2Questions } from "./data";
 
@@ -17,6 +18,10 @@ export default function Home() {
 
   const handleStart = () => {
     setStartQuestionIndex(0);
+    setViewState(ViewState.SCENARIO);
+  };
+
+  const handleScenarioComplete = () => {
     setViewState(ViewState.SESSION_1);
   };
 
@@ -81,6 +86,10 @@ export default function Home() {
           }}
           onJumpToQuestion={handleJumpToQuestion}
         />
+      )}
+
+      {viewState === ViewState.SCENARIO && (
+        <Scenario onNext={handleScenarioComplete} />
       )}
 
       {viewState === ViewState.SESSION_1 && (

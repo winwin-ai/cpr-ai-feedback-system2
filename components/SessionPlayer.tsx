@@ -21,7 +21,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   onComplete,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(initialQuestionIndex);
-  const [playbackState, setPlaybackState] = useState<PlaybackState>("intro");
+  const [playbackState, setPlaybackState] = useState<PlaybackState>("question");
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [feedbackState, setFeedbackState] = useState<
     "idle" | "correct" | "incorrect"
@@ -32,23 +32,27 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   const [score, setScore] = useState(0);
   const [retryCount, setRetryCount] = useState(0);
   const [timer, setTimer] = useState<number | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true); // Default to true or check on mount
 
   const currentQuestion = questions[currentIndex];
 
-  // Reset when question changes and show Intro
   useEffect(() => {
-    setPlaybackState("intro");
+    setIsMounted(true);
+    const checkIsDesktop = () => setIsDesktop(window.innerWidth >= 640);
+    checkIsDesktop();
+    window.addEventListener("resize", checkIsDesktop);
+    return () => window.removeEventListener("resize", checkIsDesktop);
+  }, []);
+
+  // Reset when question changes
+  useEffect(() => {
+    setPlaybackState("question");
     setFeedbackState("idle");
     setSelectedOptionId(null);
     setDisabledOptionIds(new Set());
     setRetryCount(0);
     setTimer(null);
-
-    const introTimer = setTimeout(() => {
-      setPlaybackState("question");
-    }, 2000);
-
-    return () => clearTimeout(introTimer);
   }, [currentIndex]);
 
   const proceedToNextQuestion = () => {
@@ -145,28 +149,25 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       <div className="flex-grow flex flex-col sm:hidden overflow-hidden">
         {/* 영상 영역 - 상단 40% */}
         <div className="relative h-[35%] w-full bg-black">
-          <MediaDisplay
-            type={currentQuestion.mediaType}
-            prompt={currentQuestion.mediaPrompt}
-            videoSrc={videoSrc}
-            onVideoEnded={handleVideoEnded}
-            autoLoop={false}
-            autoPlay={playbackState !== "intro"}
-          />
-          {/* Intro Overlay (모바일) */}
-          {playbackState === "intro" && (
-            <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black animate-in fade-in duration-300">
-              <div className="text-center space-y-2">
-                <h2 className="text-lg text-slate-400 font-bold uppercase tracking-widest">
-                  Session {sessionId}
-                </h2>
-                <h1 className="text-3xl text-white font-extrabold">
-                  Question {currentIndex + 1}
-                </h1>
-                <div className="w-12 h-1 bg-blue-500 mx-auto mt-2 rounded-full"></div>
-              </div>
-            </div>
+          {isMounted && !isDesktop && (
+            <MediaDisplay
+              type={currentQuestion.mediaType}
+              prompt={currentQuestion.mediaPrompt}
+              videoSrc={videoSrc}
+              onVideoEnded={handleVideoEnded}
+              autoLoop={false}
+              autoPlay={playbackState !== "intro"}
+            />
           )}
+
+          {/* Question Overlay (Small) - Mobile */}
+          <div className="absolute top-4 left-4 z-10">
+            <div className="bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10">
+              <span className="text-white font-bold text-sm tracking-wider">
+                Q{currentIndex + 1}
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* 질문 및 선택지 영역 - 하단 60% */}
@@ -265,30 +266,26 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       <div className="hidden sm:flex flex-grow relative w-full h-full flex-col">
         {/* Full Screen Media */}
         <div className="absolute inset-0 z-0">
-          <MediaDisplay
-            type={currentQuestion.mediaType}
-            prompt={currentQuestion.mediaPrompt}
-            videoSrc={videoSrc}
-            onVideoEnded={handleVideoEnded}
-            autoLoop={false}
-            autoPlay={playbackState !== "intro"}
-          />
+          {isMounted && isDesktop && (
+            <MediaDisplay
+              type={currentQuestion.mediaType}
+              prompt={currentQuestion.mediaPrompt}
+              videoSrc={videoSrc}
+              onVideoEnded={handleVideoEnded}
+              autoLoop={false}
+              autoPlay={playbackState !== "intro"}
+            />
+          )}
         </div>
 
-        {/* Intro Overlay */}
-        {playbackState === "intro" && (
-          <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black animate-in fade-in duration-300">
-            <div className="text-center space-y-4">
-              <h2 className="text-2xl text-slate-400 font-bold uppercase tracking-widest">
-                Session {sessionId}
-              </h2>
-              <h1 className="text-6xl text-white font-extrabold">
-                Question {currentIndex + 1}
-              </h1>
-              <div className="w-16 h-1 bg-blue-500 mx-auto mt-4 rounded-full"></div>
-            </div>
+        {/* Question Overlay (Small) - Desktop */}
+        <div className="absolute top-6 left-6 z-10">
+          <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 shadow-lg">
+            <span className="text-white font-bold text-xl tracking-wider">
+              Question {currentIndex + 1}
+            </span>
           </div>
-        )}
+        </div>
 
         {/* Overlays - Only in Waiting State */}
         {playbackState === "waiting" && (
@@ -420,7 +417,9 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
               </p>
               <div className="mt-3 sm:mt-6 max-w-md sm:max-w-2xl px-4 sm:px-6">
                 <p className="text-sm sm:text-xl md:text-2xl text-white text-center font-medium leading-relaxed drop-shadow-md animate-in slide-in-from-bottom-6 duration-500 delay-100">
-                  {currentQuestion.feedbackIncorrect}
+                  {retryCount === 1
+                    ? "다시 선택해 보세요."
+                    : currentQuestion.feedbackIncorrect}
                 </p>
               </div>
             </>
