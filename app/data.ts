@@ -12,27 +12,27 @@ export const session1Questions: Question[] = [
     questionText: "쓰러진 환자를 발견한 당신이 가장 먼저 해야 할 행동은?",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "환자의 반응을 확인한다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q01-A.jpg`,
       },
       {
-        id: "b",
+        id: "2",
         text: "선임간호사에게 알려서 도움을 요청한다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q01-B.png`,
       },
       {
-        id: "c",
+        id: "3",
         text: "쓰러진 환자를 바로 눕혀 기도 확보를 먼저 시도한다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q01-C.png`,
       },
       {
-        id: "d",
+        id: "4",
         text: "경련을 하므로 PRN 진정제가 있는지 확인한다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q01-D.png`,
       },
     ],
-    correctOptionId: "a",
+    correctOptionId: "1",
     feedbackCorrect:
       "정확합니다! 환자의 반응을 확인하는 것이 초기 대응의 첫 단계입니다.",
     feedbackIncorrect:
@@ -53,27 +53,27 @@ export const session1Questions: Question[] = [
     questionText: "환자의 반응을 확인하는 방법은 무엇인가요?",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "환자에게 큰소리로 말을 걸어본다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q02-A.png`,
       },
       {
-        id: "b",
+        id: "2",
         text: "환자의 얼굴을 가까이 들여다보며 호흡 소리를 듣는다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q02-B.png`,
       },
       {
-        id: "c",
+        id: "3",
         text: '환자의 어깨를 두드리며 큰소리로 "괜찮으세요"라고 묻는다.',
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q02-C.jpg`,
       },
       {
-        id: "d",
+        id: "4",
         text: "어깨를 세게 흔들며 이름을 부른다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q02-D.png`,
       },
     ],
-    correctOptionId: "c",
+    correctOptionId: "3",
     feedbackCorrect:
       "정답입니다. 어깨를 두드리며 큰소리로 묻는 것이 표준화된 반응 확인 방법입니다.",
     feedbackIncorrect:
@@ -94,27 +94,27 @@ export const session1Questions: Question[] = [
     questionText: "환자의 반응이 없습니다. 어떻게 해야 하나요?",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "도움을 요청한다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q03-A.jpg`,
       },
       {
-        id: "b",
+        id: "2",
         text: "혈당을 측정한다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q03-B.png`,
       },
       {
-        id: "c",
+        id: "3",
         text: "우선 환자를 침대로 옮긴다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q03-C.png`,
       },
       {
-        id: "d",
+        id: "4",
         text: "가슴압박을 시작한다.",
         imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q03-D.jpg`,
       },
     ],
-    correctOptionId: "a",
+    correctOptionId: "1",
     feedbackCorrect:
       "정확합니다! 환자의 반응이 없으면 즉시 주변에 도움을 요청해야 합니다.",
     feedbackIncorrect:
@@ -249,12 +249,6 @@ export const session1Questions: Question[] = [
       answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q06-1.mp4`,
     },
   },
-];
-
-// ========================================
-// 임시 저장: Q07 ~ Q22 (영상 추가 후 활성화)
-// ========================================
-export const pendingSession1Questions: Question[] = [
   {
     id: 7,
     sessionId: 1,
@@ -264,34 +258,37 @@ export const pendingSession1Questions: Question[] = [
     questionText: "이 환자의 호흡 상태는 어떤 양상을 보이나요?",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "규칙적이고 깊은 정상 호흡을 보임",
-        imageUrl: "/videos/Q07-A.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q07-1.jpg`,
       },
       {
-        id: "b",
+        id: "2",
         text: "심정지호흡을 보임 / 또는 간헐적 헐떡임(agonal breathing) 양상을 보임",
-        imageUrl: "/videos/Q07-B.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q07-2.jpg`,
       },
       {
-        id: "c",
+        id: "3",
         text: "코골이 소리가 나는 수면성 호흡을 보임",
-        imageUrl: "/videos/Q07-C.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q07-3.jpg`,
       },
       {
-        id: "d",
+        id: "4",
         text: "빠르고 얕은 과호흡을 보임",
-        imageUrl: "/videos/Q07-D.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q07-4.jpg`,
       },
     ],
-    correctOptionId: "b",
+    correctOptionId: "2",
     feedbackCorrect:
       "정확합니다! 영상에서 보이는 간헐적 헐떡임은 정상 호흡이 아닌 심정지 호흡(agonal breathing)입니다.",
     feedbackIncorrect:
       "잘못된 선택입니다. 간헐적 헐떡임은 정상 호흡이 아니며 심정지 상태의 특징입니다.",
     explanation:
       "심정지 직후 나타나는 헐떡임(Agonal breathing)은 정상 호흡이 아니며, 즉시 심정지로 간주해야 합니다.",
-    videoPaths: { question: "/videos/Q07.mp4", answer: "/videos/Q07-B.mp4" },
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q07.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q07-2.mp4`,
+    },
   },
   {
     id: 8,
@@ -302,31 +299,43 @@ export const pendingSession1Questions: Question[] = [
     questionText:
       "환자의 호흡을 고려했을 때, 당신은 어떤 조치를 취해야 할까요?",
     options: [
-      { id: "a", text: "E-cart를 가져온다.", imageUrl: "/videos/Q08-A.jpg" },
       {
-        id: "b",
+        id: "1",
+        text: "E-cart를 가져온다.",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q08-1.jpg`,
+      },
+      {
+        id: "2",
         text: "주치의에게 연락한 후 처방을 기다린다.",
-        imageUrl: "/videos/Q08-B.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q08-2.jpg`,
       },
       {
-        id: "c",
+        id: "3",
         text: "모니터를 가지고 와서 환자에게 부착한다.",
-        imageUrl: "/videos/Q08-C.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q08-3.jpg`,
       },
-      { id: "d", text: "가슴압박을 시작한다.", imageUrl: "/videos/Q08-D.png" },
+      {
+        id: "4",
+        text: "가슴압박을 시작한다.",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q08-4.jpg`,
+      },
     ],
-    correctOptionId: "d",
+    correctOptionId: "4",
     feedbackCorrect:
       "정답입니다! 심정지 호흡이 관찰되면 즉시 가슴압박을 시작해야 합니다.",
     feedbackIncorrect:
       "잘못된 선택입니다. 주치의 지시를 기다리거나 모니터 부착보다 가슴압박을 바로 시작해야 합니다.",
     explanation:
       "비정상 호흡(심정지 호흡)과 맥박 부재 시 즉시 흉부 압박을 시작하는 것이 생존율을 높입니다.",
-    videoPaths: { question: "/videos/Q08.mp4", answer: "/videos/Q08-D.mp4" },
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q08.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q08-4.mp4`,
+    },
   },
 ];
 
-export const pendingSession2Questions: Question[] = [
+// Session 2 질문 (Q09 ~ Q12)
+export const session2Questions: Question[] = [
   {
     id: 9,
     sessionId: 2,
@@ -336,34 +345,37 @@ export const pendingSession2Questions: Question[] = [
     questionText: "가슴압박 시 올바른 압박 위치는 어디인가요?",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "흉골 중앙의 하단부(양쪽 nipple 사이)에 손바닥을 올리고 압박한다.",
-        imageUrl: "/videos/Q09-A.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q09-1.jpg`,
       },
       {
-        id: "b",
+        id: "2",
         text: "왼쪽 가슴 위를 손끝으로 빠르게 압박한다.",
-        imageUrl: "/videos/Q09-B.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q09-2.png`,
       },
       {
-        id: "c",
+        id: "3",
         text: "환자의 배 위(명치 부분)를 눌러준다.",
-        imageUrl: "/videos/Q09-C.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q09-3.jpg`,
       },
       {
-        id: "d",
+        id: "4",
         text: "흉골을 세게 3~4회만 눌러 반응을 본다.",
-        imageUrl: "/videos/Q09-D.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q09-4.png`,
       },
     ],
-    correctOptionId: "a",
+    correctOptionId: "1",
     feedbackCorrect:
       "올바릅니다! 흉골 중앙의 하단부, 즉 양쪽 nipple 사이를 압박해야 합니다.",
     feedbackIncorrect:
       "오답입니다. 가슴압박은 반드시 흉골 중앙의 하단부에 손바닥을 올려 심장에 효과적으로 압력을 전달해야 합니다.",
     explanation:
       "흉골의 하부 1/2 지점(양쪽 젖꼭지 연결선의 중앙)이 정확한 압박 위치입니다.",
-    videoPaths: { question: "/videos/Q09.mp4", answer: "/videos/Q09-A.mp4" },
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q09.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q09-1.mp4`,
+    },
   },
   {
     id: 10,
@@ -374,34 +386,37 @@ export const pendingSession2Questions: Question[] = [
     questionText: "가슴압박의 올바른 방법은 무엇인가요?",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "5cm 깊이로 압박하고 압박 후에는 흉곽이 완전히 이완되도록 한다.",
-        imageUrl: "/videos/Q10-A.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q10-1.jpg`,
       },
       {
-        id: "b",
+        id: "2",
         text: "5cm 깊이로 압박하고 이완되지 않게 빠르게 압박을 지속한다.",
-        imageUrl: "/videos/Q10-B.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q10-2.jpg`,
       },
       {
-        id: "c",
+        id: "3",
         text: "10cm 이상 깊이로 압박한다.",
-        imageUrl: "/videos/Q10-C.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q10-3.jpg`,
       },
       {
-        id: "d",
+        id: "4",
         text: "깊이와 상관없이 빠르게만 누른다.",
-        imageUrl: "/videos/Q10-D.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q10-4.jpg`,
       },
     ],
-    correctOptionId: "a",
+    correctOptionId: "1",
     feedbackCorrect:
       "정답입니다! 5cm 깊이는 성인에게 적절한 심장 압박 깊이입니다. 그리고 압박 후에는 효과적인 순환을 위해 흉곽을 완전히 이완시키는 것(recoil)이 중요합니다.",
     feedbackIncorrect:
       "오답입니다. 5cm보다 얕거나 깊으면 효과적인 순환이 이루어지지 않거나 손상 위험이 있으며, 완전 이완(recoil) 없이 압박만 지속하면 효과적인 순환이 어렵습니다.",
     explanation:
       "성인 기준 약 5cm 깊이로 강하게 압박하고, 각 압박 후 가슴이 완전히 올라오도록 이완해야 합니다.",
-    videoPaths: { question: "/videos/Q10.mp4", answer: "/videos/Q10-A.mp4" },
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q10.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q10-1.mp4`,
+    },
   },
   {
     id: 11,
@@ -412,25 +427,36 @@ export const pendingSession2Questions: Question[] = [
     questionText: "가슴압박의 올바른 속도는 얼마인가요?",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "100~120회/분으로 압박한다.",
-        imageUrl: "/videos/Q11-A.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q11-1.mp4`,
       },
-      { id: "b", text: "50회/분으로 압박한다.", imageUrl: "/videos/Q11-B.jpg" },
       {
-        id: "c",
-        text: "150회/분으로 압박한다.",
-        imageUrl: "/videos/Q11-C.png",
+        id: "2",
+        text: "50회/분으로 압박한다.",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q11-2.jpg`,
       },
-      { id: "d", text: "가능한 빠르게 누른다.", imageUrl: "/videos/Q11-D.png" },
+      {
+        id: "3",
+        text: "150회/분으로 압박한다.",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q11-3.jpg`,
+      },
+      {
+        id: "4",
+        text: "가능한 빠르게 누른다.",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q11-4.jpg`,
+      },
     ],
-    correctOptionId: "a",
+    correctOptionId: "1",
     feedbackCorrect:
       "잘했습니다! 100~120회/분은 뇌와 심장에 혈류를 공급할 수 있는 최적 속도입니다.",
     feedbackIncorrect:
       "오답입니다. 너무 빠르거나 느린 속도는 효과적인 순환을 방해합니다. 100~120회/분을 유지하세요.",
     explanation: "가슴압박 속도는 분당 100~120회가 권장됩니다.",
-    videoPaths: { question: "/videos/Q11.mp4", answer: "/videos/Q11-A.mp4" },
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q11.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q11-1.mp4`,
+    },
   },
   {
     id: 12,
@@ -441,35 +467,46 @@ export const pendingSession2Questions: Question[] = [
     questionText: "가슴압박 시 신체 자세로 옳은 것은? (올바른 자세)",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "팔꿈치를 굽히고 손목의 힘을 이용한다.",
-        imageUrl: "/videos/Q12-A.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q12-1.png`,
       },
       {
-        id: "b",
+        id: "2",
         text: "손가락 끝으로 흉부를 누른다.",
-        imageUrl: "/videos/Q12-B.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q12-2.png`,
       },
       {
-        id: "c",
+        id: "3",
         text: "팔을 곧게 펴고 어깨가 환자 흉부 위에 수직이 되도록 한다.",
-        imageUrl: "/videos/Q12-C.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q12-3.jpg`,
       },
       {
-        id: "d",
+        id: "4",
         text: "허리를 굽혀 상체만으로 압박한다.",
-        imageUrl: "/videos/Q12-D.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q12-4.jpg`,
       },
     ],
-    correctOptionId: "c",
+    correctOptionId: "3",
     feedbackCorrect:
       "정답입니다! 팔을 곧게 펴고 어깨를 환자 흉부 위에 수직으로 위치시키면 효율적으로 압박할 수 있습니다.",
     feedbackIncorrect:
       "오답입니다. 팔꿈치를 굽히거나 손가락만으로 누르는 방식은 힘이 분산되어 압박 효과가 떨어집니다.",
     explanation:
       "구조자의 어깨가 환자 가슴 바로 위에 오도록 하고, 팔꿈치를 곧게 펴 체중을 실어 압박합니다.",
-    videoPaths: { question: "/videos/Q12.mp4", answer: "/videos/Q12-C.mp4" },
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q12.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q12-3.mp4`,
+    },
   },
+];
+
+// ========================================
+// 임시 저장: Q13 ~ Q22 (영상 추가 후 활성화)
+// ========================================
+export const pendingSession1Questions: Question[] = [];
+
+export const pendingSession2Questions: Question[] = [
   {
     id: 13,
     sessionId: 2,
@@ -759,6 +796,3 @@ export const pendingSession2Questions: Question[] = [
     videoPaths: { question: "/videos/Q22.mp4", answer: "/videos/Q22-B.mp4" },
   },
 ];
-
-// 현재 활성화된 Session 2 질문 (비어있음 - 영상 추가 후 pendingSession2Questions에서 이동)
-export const session2Questions: Question[] = [];
