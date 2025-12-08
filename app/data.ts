@@ -1,5 +1,7 @@
 import { Question } from "./types";
 
+const CLOUDINARY_BASE = "https://res.cloudinary.com/dn3cicucf";
+
 export const session1Questions: Question[] = [
   {
     id: 1,
@@ -12,22 +14,22 @@ export const session1Questions: Question[] = [
       {
         id: "a",
         text: "환자의 반응을 확인한다.",
-        imageUrl: "/videos/Q01-A.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q01-A.jpg`,
       },
       {
         id: "b",
         text: "선임간호사에게 알려서 도움을 요청한다.",
-        imageUrl: "/videos/Q01-B.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q01-B.png`,
       },
       {
         id: "c",
         text: "쓰러진 환자를 바로 눕혀 기도 확보를 먼저 시도한다.",
-        imageUrl: "/videos/Q01-C.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q01-C.png`,
       },
       {
         id: "d",
         text: "경련을 하므로 PRN 진정제가 있는지 확인한다.",
-        imageUrl: "/videos/Q01-D.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q01-D.png`,
       },
     ],
     correctOptionId: "a",
@@ -38,10 +40,8 @@ export const session1Questions: Question[] = [
     explanation:
       "쓰러진 환자 발견 시 가장 먼저 수행해야 할 단계는 의식 확인입니다.",
     videoPaths: {
-      question:
-        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032264/Q01.mp4",
-      answer:
-        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032263/Q01-A.mp4",
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q01.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q01-A.mp4`,
     },
   },
   {
@@ -55,22 +55,22 @@ export const session1Questions: Question[] = [
       {
         id: "a",
         text: "환자에게 큰소리로 말을 걸어본다.",
-        imageUrl: "/videos/Q02-A.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q02-A.png`,
       },
       {
         id: "b",
         text: "환자의 얼굴을 가까이 들여다보며 호흡 소리를 듣는다.",
-        imageUrl: "/videos/Q02-B.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q02-B.png`,
       },
       {
         id: "c",
         text: '환자의 어깨를 두드리며 큰소리로 "괜찮으세요"라고 묻는다.',
-        imageUrl: "/videos/Q02-C.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q02-C.jpg`,
       },
       {
         id: "d",
         text: "어깨를 세게 흔들며 이름을 부른다.",
-        imageUrl: "/videos/Q02-D.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q02-D.png`,
       },
     ],
     correctOptionId: "c",
@@ -81,10 +81,8 @@ export const session1Questions: Question[] = [
     explanation:
       "반응 확인은 양쪽 어깨를 가볍게 두드리며 큰 목소리로 물어보는 것이 표준 절차입니다.",
     videoPaths: {
-      question:
-        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032277/Q02.mp4",
-      answer:
-        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032272/Q02-C.mp4",
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q02.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q02-C.mp4`,
     },
   },
   {
@@ -95,14 +93,26 @@ export const session1Questions: Question[] = [
     mediaPrompt: "Q03",
     questionText: "환자의 반응이 없습니다. 어떻게 해야 하나요?",
     options: [
-      { id: "a", text: "도움을 요청한다.", imageUrl: "/videos/Q03-A.jpg" },
-      { id: "b", text: "혈당을 측정한다.", imageUrl: "/videos/Q03-B.jpg" },
+      {
+        id: "a",
+        text: "도움을 요청한다.",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q03-A.jpg`,
+      },
+      {
+        id: "b",
+        text: "혈당을 측정한다.",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q03-B.png`,
+      },
       {
         id: "c",
         text: "우선 환자를 침대로 옮긴다.",
-        imageUrl: "/videos/Q03-C.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q03-C.png`,
       },
-      { id: "d", text: "가슴압박을 시작한다.", imageUrl: "/videos/Q03-D.jpg" },
+      {
+        id: "d",
+        text: "가슴압박을 시작한다.",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q03-D.jpg`,
+      },
     ],
     correctOptionId: "a",
     feedbackCorrect:
@@ -112,10 +122,8 @@ export const session1Questions: Question[] = [
     explanation:
       "환자가 반응이 없다면 즉시 주변에 도움을 요청하여 의료 응급팀(Code Blue 등)을 활성화해야 합니다.",
     videoPaths: {
-      question:
-        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032270/Q03.mp4",
-      answer:
-        "https://res.cloudinary.com/dn3cicucf/video/upload/v1765032264/Q03-A.mp4",
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q03.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q03-A.mp4`,
     },
   },
   {
@@ -127,34 +135,37 @@ export const session1Questions: Question[] = [
     questionText: "도움요청을 어떻게 해야 할까요?",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "간호사실에 가서 상황을 보고한다.",
-        imageUrl: "/videos/Q04-A.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q04-1.png`,
       },
       {
-        id: "b",
+        id: "2",
         text: "내 핸드폰으로 선임간호사에게 전화한다.",
-        imageUrl: "/videos/Q04-B.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q04-2.png`,
       },
       {
-        id: "c",
+        id: "3",
         text: "보호자에게 간호사를 불러오라고 한다.",
-        imageUrl: "/videos/Q04-C.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q04-3.png`,
       },
       {
-        id: "d",
+        id: "4",
         text: "호출벨을 눌러 주변에 알린다.",
-        imageUrl: "/videos/Q04-D.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q04-4.jpg`,
       },
     ],
-    correctOptionId: "d",
+    correctOptionId: "4",
     feedbackCorrect:
       "정답입니다. 도움요청을 위해 호출벨을 누르는 것이 가장 빠른 방법입니다.",
     feedbackIncorrect:
       "오답입니다. 전화나 간접적인 요청보다 즉각적으로 도움요청을 위해 호출벨을 눌러야 신속 대응이 가능합니다.",
     explanation:
       "병실 내 호출벨을 사용하여 즉시 동료 의료진에게 상황을 전파해야 합니다.",
-    videoPaths: { question: "/videos/Q04.mp4", answer: "/videos/Q04-D.mp4" },
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q04.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q04-4.mp4`,
+    },
   },
   {
     id: 5,
@@ -165,34 +176,37 @@ export const session1Questions: Question[] = [
     questionText: "도움요청 후 무엇을 해야 하나요?",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "환자의 맥박과 호흡을 10초 이내로 확인한다.",
-        imageUrl: "/videos/Q05-A.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q05-1.jpg`,
       },
       {
-        id: "b",
+        id: "2",
         text: "모니터를 가지고 와서 환자에게 부착한다.",
-        imageUrl: "/videos/Q05-B.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q05-2.png`,
       },
       {
-        id: "c",
+        id: "3",
         text: "정맥 주사라인을 확보한다.",
-        imageUrl: "/videos/Q05-C.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q05-3.jpg`,
       },
       {
-        id: "d",
+        id: "4",
         text: "환자에게 산소를 적용한다.",
-        imageUrl: "/videos/Q05-D.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q05-4.jpg`,
       },
     ],
-    correctOptionId: "a",
+    correctOptionId: "1",
     feedbackCorrect:
       "정확합니다! 도움 요청 후에는 환자의 맥박과 호흡을 10초 이내로 확인해야 합니다.",
     feedbackIncorrect:
       "잘못된 선택입니다. 모니터 부착이나 IV 확보보다 먼저 심정지 여부를 확인해야 합니다.",
     explanation:
       "심정지 여부를 판단하기 위해 10초 이내에 맥박과 호흡 유무를 동시에 확인해야 합니다.",
-    videoPaths: { question: "/videos/Q05.mp4", answer: "/videos/Q05-A.mp4" },
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q05.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q05-1.mp4`,
+    },
   },
   {
     id: 6,
@@ -203,35 +217,44 @@ export const session1Questions: Question[] = [
     questionText: "맥박과 호흡은 어떻게 확인하나요?",
     options: [
       {
-        id: "a",
+        id: "1",
         text: "경동맥에 두 손가락을 대어 맥박을 느끼며 동시에 가슴의 움직임과 호흡음을 관찰한다.",
-        imageUrl: "/videos/Q06-A.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q06-1.jpg`,
       },
       {
-        id: "b",
+        id: "2",
         text: "손목의 요골맥을 짚고 호흡은 환자의 코에 손을 대서 확인한다.",
-        imageUrl: "/videos/Q06-B.jpg",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q06-2.jpg`,
       },
       {
-        id: "c",
+        id: "3",
         text: "복부에 귀를 대어 배 움직임으로 호흡을 확인한다.",
-        imageUrl: "/videos/Q06-C.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q06-3.png`,
       },
       {
-        id: "d",
+        id: "4",
         text: "심전도 모니터를 붙여 맥박과 호흡을 동시에 확인한다.",
-        imageUrl: "/videos/Q06-D.png",
+        imageUrl: `${CLOUDINARY_BASE}/image/upload/cpr-videos/Q06-4.jpg`,
       },
     ],
-    correctOptionId: "a",
+    correctOptionId: "1",
     feedbackCorrect:
       "정답입니다! 경동맥 촉지와 흉곽 움직임, 호흡음 확인이 표준 절차입니다.",
     feedbackIncorrect:
       "정확하지 않습니다. 손목 맥박은 신뢰도가 낮으며, 복부나 코에 손을 대는 방법은 표준이 아닙니다.",
     explanation:
       "경동맥 촉지와 흉부 상승 관찰을 동시에 수행하여 5~10초 이내에 완료해야 합니다.",
-    videoPaths: { question: "/videos/Q06.mp4", answer: "/videos/Q06-A.mp4" },
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q06.mp4`,
+      answer: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q06-1.mp4`,
+    },
   },
+];
+
+// ========================================
+// 임시 저장: Q07 ~ Q22 (영상 추가 후 활성화)
+// ========================================
+export const pendingSession1Questions: Question[] = [
   {
     id: 7,
     sessionId: 1,
@@ -303,7 +326,7 @@ export const session1Questions: Question[] = [
   },
 ];
 
-export const session2Questions: Question[] = [
+export const pendingSession2Questions: Question[] = [
   {
     id: 9,
     sessionId: 2,
@@ -736,3 +759,6 @@ export const session2Questions: Question[] = [
     videoPaths: { question: "/videos/Q22.mp4", answer: "/videos/Q22-B.mp4" },
   },
 ];
+
+// 현재 활성화된 Session 2 질문 (비어있음 - 영상 추가 후 pendingSession2Questions에서 이동)
+export const session2Questions: Question[] = [];
