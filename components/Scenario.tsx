@@ -3,7 +3,7 @@ import { ArrowRight, FileText, Activity, AlertTriangle } from "lucide-react";
 
 interface ScenarioProps {
   title: string;
-  description: string;
+  description: React.ReactNode;
   patientInfo: {
     status: string;
     history: string;
@@ -38,7 +38,9 @@ export const Scenario: React.FC<ScenarioProps> = ({
         {/* Content */}
         <div className="p-8 md:p-12 space-y-8">
           {description && (
-            <p className="text-slate-600 text-lg">{description}</p>
+            <div className="text-slate-600 text-lg leading-relaxed">
+              {description}
+            </div>
           )}
 
           {/* Patient Profile */}
