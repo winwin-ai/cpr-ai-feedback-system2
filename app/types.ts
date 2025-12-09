@@ -34,6 +34,7 @@ export interface Question {
     question: string;
     answer?: string; // Video to play upon correct answer
   };
+  isTransition?: boolean; // If true, displayed as a session transition screen
 }
 
 export interface SessionResult {

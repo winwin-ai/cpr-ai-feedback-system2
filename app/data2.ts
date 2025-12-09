@@ -4,6 +4,7 @@ const CLOUDINARY_BASE = "https://res.cloudinary.com/dn3cicucf";
 
 // 시나리오 1: 심소생 (심정지 환자) - 세션 1 & 2
 export const scenario1Questions: Question[] = [
+  // --- Session 1 ---
   {
     id: 101,
     scenarioId: 1,
@@ -34,7 +35,7 @@ export const scenario1Questions: Question[] = [
     sessionId: 1,
     title: "반응 확인 방법",
     mediaType: "video",
-    mediaPrompt: "1_1_FollowUp",
+    mediaPrompt: "1_1_FollowUp", // No video
     questionText: "환자의 반응을 확인하는 방법은 무엇인가요?",
     options: [
       { id: "1", text: "환자에게 큰소리로 말을 걸어본다." },
@@ -51,9 +52,6 @@ export const scenario1Questions: Question[] = [
     feedbackIncorrect:
       "얼굴을 가까이 들여다보거나 세게 흔드는 것은 잘못된 방법입니다. 어깨를 가볍게 두드리며 큰소리로 물어야 합니다.",
     explanation: "추가 설명이 없습니다.",
-    videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288685/S1_1_ltbciy.mp4`,
-    },
   },
   {
     id: 103,
@@ -99,9 +97,6 @@ export const scenario1Questions: Question[] = [
     feedbackIncorrect:
       "전화나 간접적인 요청보다 즉각적으로 도움요청을 위해 호출벨을 눌러야 신속 대응이 가능합니다.",
     explanation: "추가 설명이 없습니다.",
-    videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288679/S1_2_rkfidu.mp4`,
-    },
   },
   {
     id: 105,
@@ -153,9 +148,6 @@ export const scenario1Questions: Question[] = [
     feedbackIncorrect:
       "정확하지 않습니다. 손목 맥박은 신뢰도가 낮으며, 복부나 코에 손을 대는 방법은 표준이 아닙니다.",
     explanation: "추가 설명이 없습니다.",
-    videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288684/S1_3_dvpmqa.mp4`,
-    },
   },
   {
     id: 107,
@@ -205,10 +197,30 @@ export const scenario1Questions: Question[] = [
     feedbackIncorrect:
       "잘못된 선택입니다. 주치의 지시를 기다리거나 모니터 부착보다 가슴압박을 바로 시작해야 합니다.",
     explanation: "추가 설명이 없습니다.",
-    videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288697/S1_4_woqoql.mp4`,
-    },
   },
+
+  // --- Transition to Session 2 ---
+  {
+    id: 1085,
+    scenarioId: 1,
+    sessionId: 2, // Start showing Session 2
+    title: "세션 2 시작",
+    mediaType: "video",
+    mediaPrompt: "Scenario1_Video_1_5",
+    questionText: "초기 대응이 끝났습니다. 전문 소생술(세션 2)을 시작합니다.",
+    options: [{ id: "1", text: "세션 2 시작하기" }],
+    correctOptionId: "1",
+    feedbackCorrect:
+      "세션 2로 진입합니다. 가슴압박 및 제세동 소생술을 수행합니다.",
+    feedbackIncorrect: "",
+    explanation: "세션 1 종료 및 세션 2 연결 영상입니다.",
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/v1765314530/S1_5_drwwcm.mp4`,
+    },
+    isTransition: true,
+  },
+
+  // --- Session 2 ---
   {
     id: 109,
     scenarioId: 1,
@@ -233,7 +245,7 @@ export const scenario1Questions: Question[] = [
       "오답입니다. 가슴압박은 반드시 흉골 중앙의 하단부에 손바닥을 올려 심장에 효과적으로 압력을 전달해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q09.mp4`, // No explicit mapping, using old Q09 logic if available or placeholder
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315067/S1_2_1_eheqyh.mp4`,
     },
   },
   {
@@ -263,7 +275,7 @@ export const scenario1Questions: Question[] = [
       "오답입니다. 5cm보다 얕거나 깊으면 효과적인 순환이 이루어지지 않거나 손상 위험이 있으며, 완전 이완(recoil) 없이 압박만 지속하면 효과적인 순환이 어렵습니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q10.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315022/S1_2_2_qtbre1.mp4`,
     },
   },
   {
@@ -287,7 +299,34 @@ export const scenario1Questions: Question[] = [
       "오답입니다. 너무 빠르거나 느린 속도는 효과적인 순환을 방해합니다. 100~120회/분을 유지하세요.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q11.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315418/S1_2_3_hkmklv.mp4`,
+    },
+  },
+  {
+    id: 112,
+    scenarioId: 1,
+    sessionId: 2,
+    title: "가슴압박 자세",
+    mediaType: "video",
+    mediaPrompt: "Scenario1_Video_2_4",
+    questionText: "가슴압박 시 신체 자세로 옳은 것은?",
+    options: [
+      { id: "1", text: "팔꿈치를 굽히고 손목의 힘을 이용한다." },
+      { id: "2", text: "손가락 끝으로 흉부를 누른다." },
+      {
+        id: "3",
+        text: "팔을 곧게 펴고 어깨가 환자 흉부 위에 수직이 되도록 한다.",
+      },
+      { id: "4", text: "허리를 굽혀 상체만으로 압박한다." },
+    ],
+    correctOptionId: "3",
+    feedbackCorrect:
+      "정답입니다! 팔을 곧게 펴고 어깨를 환자 흉부 위에 수직으로 위치시키면 효율적으로 압박할 수 있습니다.",
+    feedbackIncorrect:
+      "오답입니다. 팔꿈치를 굽히거나 손가락만으로 누르는 방식은 힘이 분산되어 압박 효과가 떨어집니다.",
+    explanation: "구조자의 어깨가 환자 가슴 바로 위에 오도록 합니다.",
+    videoPaths: {
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314973/S1_2_4_h4y1jm.mp4`,
     },
   },
   {
@@ -296,32 +335,55 @@ export const scenario1Questions: Question[] = [
     sessionId: 2,
     title: "제세동기 준비 순서",
     mediaType: "video",
-    mediaPrompt: "Scenario1_Video_2_4",
-    questionText: "가슴압박 교대 후 제세동기를 준비합니다. 올바른 순서는?",
+    mediaPrompt: "Scenario1_Video_2_5",
+    questionText: "제세동기를 준비합니다. 올바른 순서는?",
     options: [
-      { id: "1", text: "전원 켜기 -> 전극 부착 -> 리듬 확인" },
-      { id: "2", text: "전원 켜기 -> 전극 부착 -> 리듬 확인 -> 200J 충전" },
-      { id: "3", text: "전원 켜기 -> 200J 충전" },
+      { id: "1", text: "전원 켜기 -> 전극 부착 -> 리듬 확인 -> 충전" },
+      { id: "2", text: "전극 부착 -> 전원 켜기 -> 충전 -> 리듬 확인" },
+      { id: "3", text: "충전 -> 전원 켜기 -> 전극 부착" },
       { id: "4", text: "전원 켜기 -> 처방 대기" },
     ],
     correctOptionId: "1",
     feedbackCorrect:
       "정확합니다! 제세동기는 전원을 켜고, 전극을 부착한 후 리듬을 확인해야 합니다.",
     feedbackIncorrect:
-      "잘못된 순서입니다. 전원을 먼저 켜고 전극 부착 후 리듬 확인, 처방이 있을시에 충전해야 합니다.",
-    explanation: "추가 설명이 없습니다.",
+      "잘못된 순서입니다. 전원 켜기 -> 패드 부착 -> 리듬 확인 순서가 표준입니다.",
+    explanation: "전원 → 패드 → 리듬 → 충전 순서입니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q13.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314878/S1_2_5_dmebob.mp4`,
+    },
+  },
+  {
+    id: 114,
+    scenarioId: 1,
+    sessionId: 2,
+    title: "패드 부착 위치",
+    mediaType: "video",
+    mediaPrompt: "Scenario1_Video_2_6",
+    questionText: "제세동 패드의 올바른 부착 위치는?",
+    options: [
+      { id: "1", text: "오른쪽 쇄골 아래와 왼쪽 유두 아래 겨드랑이 선" },
+      { id: "2", text: "왼쪽 쇄골 아래와 오른쪽 유두 아래" },
+      { id: "3", text: "양쪽 가슴 중앙" },
+      { id: "4", text: "복부와 등" },
+    ],
+    correctOptionId: "1",
+    feedbackCorrect:
+      "정확합니다! 우측 쇄골 하부와 좌측 유두 옆 겨드랑이 선에 부착합니다.",
+    feedbackIncorrect: "위치가 잘못되었습니다. 표준 부착 위치를 확인하세요.",
+    explanation: "Anterior-Lateral 위치에 부착합니다.",
+    videoPaths: {
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314811/S1_2_6_ep5fxi.mp4`,
     },
   },
   {
     id: 115,
     scenarioId: 1,
     sessionId: 2,
-    title: "리듬 확인 (Asystole)",
+    title: "심장 리듬 확인 (Asystole)",
     mediaType: "video",
-    mediaPrompt: "Scenario1_Video_2_5",
-    questionText: "제세동기 부착 후 확인된 심전도 리듬은 무엇인가요?",
+    mediaPrompt: "Scenario1_Video_2_7",
+    questionText: "화면에 보이는 심전도 리듬은 무엇인가요?",
     options: [
       { id: "1", text: "VF (심실세동)" },
       { id: "2", text: "Pulseless VT (무맥성 심실빈맥)" },
@@ -330,36 +392,59 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "3",
     feedbackCorrect:
-      "정확합니다! 제시된 파형은 Asystole으로 Non-shockable 리듬입니다.",
-    feedbackIncorrect:
-      "잘못된 판별입니다. 이 파형은 Asystole으로 Non-shockable 리듬입니다.",
-    explanation: "추가 설명이 없습니다.",
+      "정확합니다! 무수축(Asystole)이며 Non-shockable 리듬입니다.",
+    feedbackIncorrect: "틀렸습니다. 이 파형은 무수축(Asystole)입니다.",
+    explanation: "전기적 활동이 없는 상태입니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q15.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314753/S1_2_7_wb6ydm.mp4`,
     },
   },
   {
     id: 116,
     scenarioId: 1,
     sessionId: 2,
-    title: "Asystole 대응",
+    title: "Asystole 시 행동",
     mediaType: "video",
-    mediaPrompt: "Scenario1_Video_2_6",
-    questionText: "Asystole을 확인한 경우 어떻게 해야 하나요?",
+    mediaPrompt: "Scenario1_Video_2_8",
+    questionText: "Asystole이 확인되었습니다. 가장 먼저 해야 할 행동은?",
     options: [
-      { id: "1", text: "제세동을 준비한다." },
-      { id: "2", text: "가슴압박을 지속한다." },
-      { id: "3", text: "응급약물을 준비한다." },
-      { id: "4", text: "혈압을 측정한다." },
+      { id: "1", text: "제세동을 실시한다." },
+      { id: "2", text: "가슴압박을 즉시 재개한다." },
+      { id: "3", text: "맥박을 1분간 확인한다." },
+      { id: "4", text: "기도 삽관을 시도한다." },
     ],
     correctOptionId: "2",
     feedbackCorrect:
-      "정답입니다! Asystole리듬은 제세동 대상이 아니므로 가슴압박을 지속해야 합니다.",
+      "정답입니다! Non-shockable 리듬이므로 즉시 가슴압박을 지속해야 합니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. Asystole은 Non-shockable 리듬으로 제세동 대상이 아닙니다.",
-    explanation: "추가 설명이 없습니다.",
+      "제세동 대상이 아닙니다. 가슴압박을 우선 지속해야 합니다.",
+    explanation: "CPR을 2분간 지속합니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q16.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316513/S1_2_8_jwrlmd.mp4`,
+    },
+  },
+  {
+    id: 117,
+    scenarioId: 1,
+    sessionId: 2,
+    title: "Asystole 약물 투여",
+    mediaType: "video",
+    mediaPrompt: "Scenario1_Video_2_9",
+    questionText: "Asystole 상황에서 에피네프린 투여 방법은?",
+    options: [
+      { id: "1", text: "가능한 빨리 1mg 투여 후 3~5분마다 반복" },
+      { id: "2", text: "제세동 후 투여" },
+      { id: "3", text: "3mg을 한번에 투여" },
+      { id: "4", text: "투여하지 않는다" },
+    ],
+    correctOptionId: "1",
+    feedbackCorrect:
+      "정확합니다. Non-shockable 리듬에서는 IV/IO 확보 즉시 에피네프린을 투여합니다.",
+    feedbackIncorrect:
+      "틀렸습니다. 가능한 빨리 투여하고 3~5분 간격으로 반복합니다.",
+    explanation: "가급적 빠른 투여가 권장됩니다.",
+    videoPaths: {
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314710/S1_2_9_iso4al.mp4`,
     },
   },
   {
@@ -368,49 +453,117 @@ export const scenario1Questions: Question[] = [
     sessionId: 2,
     title: "리듬 확인 (VF)",
     mediaType: "video",
-    mediaPrompt: "Scenario1_Video_2_7",
-    questionText: "가슴압박 중 재확인한 심전도 리듬은 무엇인가요?",
+    mediaPrompt: "Scenario1_Video_2_10",
+    questionText: "2분 후 리듬 재확인 중입니다. 이 리듬은 무엇인가요?",
     options: [
       { id: "1", text: "VF (심실세동)" },
-      { id: "2", text: "Pulseless VT" },
+      { id: "2", text: "Normal Sinus Rhythm" },
       { id: "3", text: "Asystole" },
       { id: "4", text: "PEA" },
     ],
     correctOptionId: "1",
-    feedbackCorrect:
-      "정확합니다! 제시된 파형은 무맥성 심실세동(VF)으로 Shockable 리듬입니다.",
-    feedbackIncorrect:
-      "잘못된 판별입니다. 이 파형은 무맥성 심실세동(VF)이며, 즉시 제세동 대상입니다.",
-    explanation: "추가 설명이 없습니다.",
+    feedbackCorrect: "정답입니다! 심실세동(VF)으로 Shockable 리듬입니다.",
+    feedbackIncorrect: "틀렸습니다. 불규칙한 파형의 심실세동입니다.",
+    explanation: "즉각적인 제세동이 필요합니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q18.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288661/VF_r1yv9r.mp4`,
+    },
+  },
+  {
+    id: 119,
+    scenarioId: 1,
+    sessionId: 2,
+    title: "VF 확인 시 행동",
+    mediaType: "video",
+    mediaPrompt: "Scenario1_Video_2_11",
+    questionText: "VF가 확인되었습니다. 우선적인 행동은?",
+    options: [
+      { id: "1", text: "즉시 제세동(Shock)을 준비/시행한다." },
+      { id: "2", text: "가슴압박만 계속한다." },
+      { id: "3", text: "에피네프린을 먼저 투여한다." },
+      { id: "4", text: "기도 삽관을 한다." },
+    ],
+    correctOptionId: "1",
+    feedbackCorrect: "정확합니다! Shockable 리듬이므로 제세동이 우선입니다.",
+    feedbackIncorrect: "제세동이 가장 시급한 처치입니다.",
+    explanation: "심실세동은 제세동이 유일한 교정 방법입니다.",
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/v1765315500/S1_2_11_placeholder.mp4`,
     },
   },
   {
     id: 120,
     scenarioId: 1,
     sessionId: 2,
-    title: "제세동 시행",
+    title: "제세동 시행 순서",
     mediaType: "video",
-    mediaPrompt: "Scenario1_Video_2_8",
+    mediaPrompt: "Scenario1_Video_2_12",
     questionText: "제세동 시행 시 올바른 순서는?",
     options: [
       {
         id: "1",
-        text: "패들 젤 도포 -> 충전 -> '물러나세요' 외침 -> Shock -> 가슴압박 재개",
+        text: "패드 젤/부착 -> 충전 -> '물러나세요' 확인 -> Shock -> 가슴압박 재개",
       },
-      { id: "2", text: "충전 -> 젤 도포 -> '물러나세요' 외침 -> Shock" },
-      { id: "3", text: "젤 도포 -> '물러나세요' 외침 -> 충전 -> Shock" },
-      { id: "4", text: "'물러나세요' 외침 -> 젤 도포 -> 충전 -> Shock" },
+      { id: "2", text: "충전 -> 부착 -> Shock -> 확인" },
+      { id: "3", text: "Shock -> 충전 -> 부착" },
+      { id: "4", text: "확인 없이 즉시 Shock" },
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다! 올바른 순서는 A-B-C-D(패들 젤-충전-물러나세요-Shock)입니다.",
-    feedbackIncorrect:
-      "잘못된 순서입니다. 항상 패들 젤 바르기 → 충전 → 주변 안전 확인 → 충격 후 가슴압박 재개 순으로 진행해야 합니다.",
-    explanation: "추가 설명이 없습니다.",
+      "정확합니다! 안전 확인 후 Shock, 즉시 가슴압박 재개입니다.",
+    feedbackIncorrect: "순서와 안전 확인이 중요합니다.",
+    explanation: "주변인의 안전을 확보하는 것이 중요합니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q20.mp4`,
+      question: `${CLOUDINARY_BASE}/video/upload/v1765315500/S1_2_12_placeholder.mp4`,
+    },
+  },
+  {
+    id: 121,
+    scenarioId: 1,
+    sessionId: 2,
+    title: "VF 약물 투여 시점",
+    mediaType: "video",
+    mediaPrompt: "Scenario1_Video_2_13",
+    questionText: "Shockable 리듬(VF/VT)에서 에피네프린 투여 시점은?",
+    options: [
+      { id: "1", text: "첫 번째 제세동 후" },
+      {
+        id: "2",
+        text: "두 번째 제세동 후, 지속되는 가슴압박 기간 중",
+      },
+      { id: "3", text: "즉시 투여" },
+      { id: "4", text: "세 번째 제세동 후" },
+    ],
+    correctOptionId: "2",
+    feedbackCorrect:
+      "정답입니다. Shockable 리듬에서는 2차 제세동 실패 후 투여를 고려합니다.",
+    feedbackIncorrect: "타이밍이 맞지 않습니다.",
+    explanation: "가이드라인에 따라 투여 시점을 잡습니다.",
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/v1765315500/S1_2_13_placeholder.mp4`,
+    },
+  },
+  {
+    id: 122,
+    scenarioId: 1,
+    sessionId: 2,
+    title: "ROSC 확인",
+    mediaType: "video",
+    mediaPrompt: "Scenario1_Video_2_14",
+    questionText: "자발순환회복(ROSC)의 징후로 옳은 것은?",
+    options: [
+      { id: "1", text: "자발 맥박 촉지 및 혈압 상승" },
+      { id: "2", text: "가슴압박 중단 시 심전도 변화" },
+      { id: "3", text: "동공반사 소실" },
+      { id: "4", text: "피부색 변화" },
+    ],
+    correctOptionId: "1",
+    feedbackCorrect:
+      "정확합니다! 맥박이 만져지고 혈압이 측정되면 ROSC 상태입니다.",
+    feedbackIncorrect: "다른 징후들은 확실한 ROSC 증거가 아닙니다.",
+    explanation: "교육이 종료됩니다. 수고하셨습니다.",
+    videoPaths: {
+      question: `${CLOUDINARY_BASE}/video/upload/v1765315500/S1_2_14_placeholder.mp4`,
     },
   },
 ];

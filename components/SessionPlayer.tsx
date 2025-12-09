@@ -35,6 +35,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   const [isMounted, setIsMounted] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true); // Default to true or check on mount
   const [videoError, setVideoError] = useState(false);
+  const [activeVideoSrc, setActiveVideoSrc] = useState<string | null>(null);
 
   const currentQuestion = questions[currentIndex];
 
@@ -48,14 +49,17 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
   // Reset when question changes
   useEffect(() => {
-    setPlaybackState("question");
+    // If no video, skip straight to waiting (question)
+    const hasQuestionVideo = !!questions[currentIndex].videoPaths?.question;
+    setPlaybackState(hasQuestionVideo ? "question" : "waiting");
+
     setFeedbackState("idle");
     setSelectedOptionId(null);
     setDisabledOptionIds(new Set());
     setRetryCount(0);
     setTimer(null);
     setVideoError(false);
-  }, [currentIndex]);
+  }, [currentIndex, questions]);
 
   const proceedToNextQuestion = () => {
     if (currentIndex < questions.length - 1) {
@@ -129,10 +133,16 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   };
 
   // Determine Video Source (Cloudinary)
-  const videoSrc =
+  const currentIntendedSrc =
     playbackState === "answer"
       ? getCloudinaryUrl(currentQuestion.videoPaths?.answer)
       : getCloudinaryUrl(currentQuestion.videoPaths?.question);
+
+  useEffect(() => {
+    if (currentIntendedSrc) {
+      setActiveVideoSrc(currentIntendedSrc);
+    }
+  }, [currentIntendedSrc]);
 
   // Progress
   const progress = (currentIndex / questions.length) * 100;
@@ -143,7 +153,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       <div className="bg-slate-900 text-white px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-between border-b border-slate-700 z-20">
         <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-1/2">
           <span className="text-xs sm:text-sm font-bold text-slate-400 whitespace-nowrap">
-            SESSION {sessionId}
+            SESSION {currentQuestion.sessionId || sessionId}
           </span>
           <div className="flex-grow h-1.5 sm:h-2 bg-slate-700 rounded-full overflow-hidden">
             <div
@@ -165,14 +175,14 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
             <>
               {!videoError ? (
                 <MediaDisplay
-                  key={`${currentQuestion.id}-${playbackState}`}
+                  key={activeVideoSrc || "empty"}
                   type={currentQuestion.mediaType}
                   prompt={currentQuestion.mediaPrompt}
-                  videoSrc={videoSrc}
+                  videoSrc={activeVideoSrc || undefined}
                   onVideoEnded={handleVideoEnded}
                   onError={handleVideoError}
                   autoLoop={false}
-                  autoPlay={playbackState !== "intro"}
+                  autoPlay={playbackState !== "intro" && !!currentIntendedSrc}
                 />
               ) : (
                 <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center p-6 text-center">
@@ -213,66 +223,91 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                 : ""
             }`}
           >
-            {/* 질문 텍스트 */}
-            <div className="bg-slate-800/80 backdrop-blur-sm px-4 py-3 rounded-xl mb-3 border border-slate-700">
-              <h2 className="text-blue-400 font-bold text-xs uppercase tracking-widest mb-1">
-                Question {currentIndex + 1}
-              </h2>
-              <h3 className="text-white text-base font-bold leading-snug">
-                {currentQuestion.questionText}
-              </h3>
-            </div>
+            {/* Transition UI Check */}
+            {currentQuestion.isTransition ? (
+              <div className="flex-grow flex flex-col items-center justify-center text-center space-y-6 animate-in fade-in zoom-in duration-500">
+                <div className="bg-blue-600/20 p-6 rounded-full">
+                  <CheckCircle2 className="w-16 h-16 text-blue-500" />
+                </div>
+                <div>
+                  <h2 className="text-blue-400 font-bold text-sm mb-2 uppercase tracking-widest">
+                    SESSION COMPLETE
+                  </h2>
+                  <h3 className="text-2xl font-bold text-white mb-4">
+                    {currentQuestion.title}
+                  </h3>
+                  <p className="text-slate-300 text-base leading-relaxed max-w-xs mx-auto">
+                    {currentQuestion.questionText}
+                  </p>
+                </div>
+                <button
+                  onClick={() =>
+                    handleOptionSelect(currentQuestion.options[0].id)
+                  }
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-blue-500/20 transition-all flex items-center justify-center gap-2"
+                >
+                  {currentQuestion.options[0].text}
+                  <CheckCircle2 className="w-5 h-5" />
+                </button>
+              </div>
+            ) : (
+              // Standard Question UI
+              <>
+                <div className="bg-slate-800/80 backdrop-blur-sm px-4 py-3 rounded-xl mb-3 border border-slate-700">
+                  <h2 className="text-blue-400 font-bold text-xs uppercase tracking-widest mb-1">
+                    Question {currentIndex + 1}
+                  </h2>
+                  <h3 className="text-white text-base font-bold leading-snug">
+                    {currentQuestion.questionText}
+                  </h3>
+                </div>
 
-            {/* 선택지 2x2 그리드 */}
-            <div className="grid grid-cols-2 gap-2 flex-grow">
-              {currentQuestion.options.map((option) => {
-                const isDisabled = disabledOptionIds.has(option.id);
-                return (
-                  <button
-                    key={option.id}
-                    onClick={() => handleOptionSelect(option.id)}
-                    disabled={isDisabled || feedbackState !== "idle"}
-                    className={`
-                      w-full rounded-lg overflow-hidden shadow-lg flex flex-col
-                      transform transition-all duration-200
-                      ${
-                        isDisabled
-                          ? "bg-slate-300 opacity-50 cursor-not-allowed grayscale"
-                          : "bg-white/95 active:scale-95 cursor-pointer"
-                      }
-                      ${
-                        selectedOptionId === option.id
-                          ? "ring-3 ring-blue-500"
-                          : "border border-slate-200"
-                      }
-                    `}
-                  >
-                    {/* Option ID Badge */}
-                    <div className="absolute top-2 left-2 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-md z-10">
-                      {option.id.toUpperCase()}
-                    </div>
-
-                    {/* Text Area */}
-                    <div className="p-4 flex-grow flex items-center justify-center text-center bg-white min-h-[80px]">
-                      <span
-                        className={`text-sm font-semibold line-clamp-3 leading-tight ${
-                          isDisabled ? "text-slate-500" : "text-slate-900"
-                        }`}
+                <div className="grid grid-cols-2 gap-2 flex-grow">
+                  {currentQuestion.options.map((option) => {
+                    const isDisabled = disabledOptionIds.has(option.id);
+                    return (
+                      <button
+                        key={option.id}
+                        onClick={() => handleOptionSelect(option.id)}
+                        disabled={isDisabled || feedbackState !== "idle"}
+                        className={`
+                        w-full rounded-lg overflow-hidden shadow-lg flex flex-col
+                        transform transition-all duration-200
+                        ${
+                          isDisabled
+                            ? "bg-slate-300 opacity-50 cursor-not-allowed grayscale"
+                            : "bg-white/95 active:scale-95 cursor-pointer"
+                        }
+                        ${
+                          selectedOptionId === option.id
+                            ? "ring-3 ring-blue-500"
+                            : "border border-slate-200"
+                        }
+                      `}
                       >
-                        {option.text}
-                      </span>
-                    </div>
-
-                    {/* Disabled Overlay */}
-                    {isDisabled && (
-                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
-                        <XCircle className="text-white w-8 h-8 opacity-80" />
-                      </div>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+                        <div className="absolute top-2 left-2 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-md z-10">
+                          {option.id.toUpperCase()}
+                        </div>
+                        <div className="p-4 flex-grow flex items-center justify-center text-center bg-white min-h-[80px]">
+                          <span
+                            className={`text-sm font-semibold line-clamp-3 leading-tight ${
+                              isDisabled ? "text-slate-500" : "text-slate-900"
+                            }`}
+                          >
+                            {option.text}
+                          </span>
+                        </div>
+                        {isDisabled && (
+                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
+                            <XCircle className="text-white w-8 h-8 opacity-80" />
+                          </div>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         )}
 
@@ -292,13 +327,14 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
             <>
               {!videoError ? (
                 <MediaDisplay
+                  key={activeVideoSrc || "empty"}
                   type={currentQuestion.mediaType}
                   prompt={currentQuestion.mediaPrompt}
-                  videoSrc={videoSrc}
+                  videoSrc={activeVideoSrc || undefined}
                   onVideoEnded={handleVideoEnded}
                   onError={handleVideoError}
                   autoLoop={false}
-                  autoPlay={playbackState !== "intro"}
+                  autoPlay={playbackState !== "intro" && !!currentIntendedSrc}
                 />
               ) : (
                 <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center p-12 text-center z-50 relative">
@@ -337,92 +373,118 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
         {/* Overlays - Only in Waiting State */}
         {playbackState === "waiting" && (
           <>
-            {/* Top: Title */}
-            <div
-              className={`absolute top-0 left-0 right-0 p-8 z-10 text-center animate-in fade-in slide-in-from-top-6 duration-700 ease-out ${
-                feedbackState !== "idle"
-                  ? "opacity-50 blur-sm transition-all duration-500"
-                  : "opacity-100"
-              }`}
-            >
-              <div className="bg-black/60 backdrop-blur-md inline-block px-8 py-4 rounded-2xl shadow-lg border border-white/10">
-                <h2 className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-2">
-                  Question {currentIndex + 1}
-                </h2>
-                <h3 className="text-white text-2xl md:text-3xl font-bold leading-relaxed">
-                  {currentQuestion.questionText}
-                </h3>
+            {currentQuestion.isTransition ? (
+              // Desktop Transition UI
+              <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-md animate-in fade-in duration-700">
+                <div className="bg-slate-900/90 p-12 rounded-3xl border border-slate-700 shadow-2xl max-w-3xl w-full text-center">
+                  <div className="inline-block p-4 mb-6 rounded-full bg-blue-500/20">
+                    <CheckCircle2 className="w-20 h-20 text-blue-500" />
+                  </div>
+                  <h2 className="text-blue-400 font-bold text-xl uppercase tracking-widest mb-4">
+                    SESSION COMPLETE
+                  </h2>
+                  <h1 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+                    {currentQuestion.title}
+                  </h1>
+                  <p className="text-slate-300 text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+                    {currentQuestion.questionText}
+                  </p>
+                  <button
+                    onClick={() =>
+                      handleOptionSelect(currentQuestion.options[0].id)
+                    }
+                    className="bg-blue-600 hover:bg-blue-500 text-white text-2xl font-bold px-12 py-6 rounded-2xl shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:shadow-[0_0_50px_rgba(37,99,235,0.5)] transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 mx-auto"
+                  >
+                    {currentQuestion.options[0].text}
+                    <CheckCircle2 className="w-8 h-8" />
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : (
+              // Standard Desktop UI
+              <>
+                {/* Top: Title */}
+                <div
+                  className={`absolute top-0 left-0 right-0 p-8 z-10 text-center animate-in fade-in slide-in-from-top-6 duration-700 ease-out ${
+                    feedbackState !== "idle"
+                      ? "opacity-50 blur-sm transition-all duration-500"
+                      : "opacity-100"
+                  }`}
+                >
+                  <div className="bg-black/60 backdrop-blur-md inline-block px-8 py-4 rounded-2xl shadow-lg border border-white/10">
+                    <h2 className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-2">
+                      Question {currentIndex + 1}
+                    </h2>
+                    <h3 className="text-white text-2xl md:text-3xl font-bold leading-relaxed">
+                      {currentQuestion.questionText}
+                    </h3>
+                  </div>
+                </div>
 
-            {/* Bottom: Options Horizontal List */}
-            <div
-              className={`absolute bottom-8 left-0 right-0 p-4 z-10 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-150 ease-out ${
-                feedbackState !== "idle"
-                  ? "opacity-50 blur-sm pointer-events-none transition-all duration-500"
-                  : "opacity-100"
-              }`}
-            >
-              <div className="grid grid-cols-4 gap-6 w-full max-w-7xl mx-auto">
-                {currentQuestion.options.map((option) => {
-                  const isDisabled = disabledOptionIds.has(option.id);
-                  return (
-                    <button
-                      key={option.id}
-                      onClick={() => handleOptionSelect(option.id)}
-                      disabled={isDisabled || feedbackState !== "idle"}
-                      className={`
-                          w-full rounded-xl overflow-hidden shadow-2xl
-                          transform transition-all duration-300
-                          ${
-                            isDisabled
-                              ? "bg-slate-300 opacity-50 cursor-not-allowed grayscale"
-                              : "bg-white/90 backdrop-blur-sm hover:scale-105 hover:bg-white cursor-pointer hover:shadow-blue-500/30"
-                          }
-                          ${
-                            selectedOptionId === option.id
-                              ? "ring-4 ring-blue-500 scale-105"
-                              : "border border-white/20"
-                          }
-                        `}
-                    >
-                      {/* Option ID Badge */}
-                      <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-base font-bold shadow-md z-10 ring-1 ring-white/50">
-                        {option.id.toUpperCase()}
-                      </div>
-
-                      {/* Text Area */}
-                      <div className="p-6 h-full min-h-[120px] flex items-center justify-center text-center bg-white relative">
-                        <span
-                          className={`text-lg font-semibold leading-snug ${
-                            isDisabled ? "text-slate-500" : "text-slate-900"
-                          }`}
+                {/* Bottom: Options Horizontal List */}
+                <div
+                  className={`absolute bottom-8 left-0 right-0 p-4 z-10 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-150 ease-out ${
+                    feedbackState !== "idle"
+                      ? "opacity-50 blur-sm pointer-events-none transition-all duration-500"
+                      : "opacity-100"
+                  }`}
+                >
+                  <div className="grid grid-cols-4 gap-6 w-full max-w-7xl mx-auto">
+                    {currentQuestion.options.map((option) => {
+                      const isDisabled = disabledOptionIds.has(option.id);
+                      return (
+                        <button
+                          key={option.id}
+                          onClick={() => handleOptionSelect(option.id)}
+                          disabled={isDisabled || feedbackState !== "idle"}
+                          className={`
+                            w-full rounded-xl overflow-hidden shadow-2xl
+                            transform transition-all duration-300
+                            ${
+                              isDisabled
+                                ? "bg-slate-300 opacity-50 cursor-not-allowed grayscale"
+                                : "bg-white/90 backdrop-blur-sm hover:scale-105 hover:bg-white cursor-pointer hover:shadow-blue-500/30"
+                            }
+                            ${
+                              selectedOptionId === option.id
+                                ? "ring-4 ring-blue-500 scale-105"
+                                : "border border-white/20"
+                            }
+                          `}
                         >
-                          {option.text}
-                        </span>
-
-                        {/* Disabled Overlay */}
-                        {isDisabled && (
-                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
-                            <XCircle className="text-white w-12 h-12 opacity-80" />
+                          <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-base font-bold shadow-md z-10 ring-1 ring-white/50">
+                            {option.id.toUpperCase()}
                           </div>
-                        )}
-                      </div>
-                      {/* Text Area */}
-                      <div className="p-4 h-24 flex items-center text-left bg-white">
-                        <span
-                          className={`text-sm font-semibold line-clamp-3 leading-tight ${
-                            isDisabled ? "text-slate-500" : "text-slate-900"
-                          }`}
-                        >
-                          {option.text}
-                        </span>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+                          <div className="p-6 h-full min-h-[120px] flex items-center justify-center text-center bg-white relative">
+                            <span
+                              className={`text-lg font-semibold leading-snug ${
+                                isDisabled ? "text-slate-500" : "text-slate-900"
+                              }`}
+                            >
+                              {option.text}
+                            </span>
+                            {isDisabled && (
+                              <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
+                                <XCircle className="text-white w-12 h-12 opacity-80" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-4 h-24 flex items-center text-left bg-white">
+                            <span
+                              className={`text-sm font-semibold line-clamp-3 leading-tight ${
+                                isDisabled ? "text-slate-500" : "text-slate-900"
+                              }`}
+                            >
+                              {option.text}
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
