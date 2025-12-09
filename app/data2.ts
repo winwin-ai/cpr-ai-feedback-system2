@@ -47,9 +47,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "3",
     feedbackCorrect:
-      "정확합니다! 어깨를 두드리며 큰소리로 묻는 것이 표준화된 반응 확인 방법입니다.",
+      "어깨를 두드리며 큰소리로 묻는 것이 표준화된 반응 확인 방법입니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 얼굴을 가까이 대거나 세게 흔드는 것은 잘못된 방법입니다.",
+      "얼굴을 가까이 들여다보거나 세게 흔드는 것은 잘못된 방법입니다. 어깨를 가볍게 두드리며 큰소리로 물어야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288685/S1_1_ltbciy.mp4`,
@@ -73,7 +73,7 @@ export const scenario1Questions: Question[] = [
     feedbackCorrect:
       "정확합니다! 환자의 반응이 없으면 즉시 주변에 도움을 요청해야 합니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 혈당 측정이나 환자 이송보다 도움 요청이 우선입니다.",
+      "잘못된 선택입니다. 혈당 측정이나 환자를 옮기는 행동보다 먼저 도움을 요청해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288679/S1_2_rkfidu.mp4`,
@@ -95,9 +95,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "4",
     feedbackCorrect:
-      "정확합니다! 호출벨을 누르는 것이 가장 빠르고 효과적인 도움 요청 방법입니다.",
+      "도움요청을 위해 호출벨을 누르는 것이 가장 빠른 방법입니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 전화를 걸거나 이동하는 것보다 호출벨이 신속합니다.",
+      "전화나 간접적인 요청보다 즉각적으로 도움요청을 위해 호출벨을 눌러야 신속 대응이 가능합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288679/S1_2_rkfidu.mp4`,
@@ -119,9 +119,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다! 도움 요청 후에는 10초 이내에 맥박과 호흡을 확인해야 합니다.",
+      "정확합니다! 도움 요청 후에는 환자의 맥박과 호흡을 10초 이내로 확인해야 합니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 모니터나 IV보다 심정지 여부 확인이 우선입니다.",
+      "잘못된 선택입니다. 모니터 부착이나 IV 확보보다 먼저 심정지 여부를 확인해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288684/S1_3_dvpmqa.mp4`,
@@ -149,9 +149,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정답입니다! 경동맥 촉지와 흉곽 움직임, 호흡음 동시 확인이 표준 절차입니다.",
+      "정답입니다! 경동맥 촉지와 흉곽 움직임, 호흡음 확인이 표준 절차입니다.",
     feedbackIncorrect:
-      "정확하지 않습니다. 요골맥이나 복부 확인은 부정확할 수 있습니다.",
+      "정확하지 않습니다. 손목 맥박은 신뢰도가 낮으며, 복부나 코에 손을 대는 방법은 표준이 아닙니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288684/S1_3_dvpmqa.mp4`,
@@ -176,9 +176,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "2",
     feedbackCorrect:
-      "정확합니다! 영상 속 호흡은 심정지 호흡(agonal breathing)입니다.",
+      "정확합니다! 영상에서 보이는 간헐적 헐떡임은 정상 호흡이 아닌 심정지 호흡(agonal breathing)입니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 이는 정상 호흡이 아니며 심정지 징후입니다.",
+      "잘못된 선택입니다. 간헐적 헐떡임은 정상 호흡이 아니며 심정지 상태의 특징입니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288697/S1_4_woqoql.mp4`,
@@ -201,9 +201,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "4",
     feedbackCorrect:
-      "정답입니다! 심정지 호흡이 확인되면 즉시 가슴압박을 시작해야 합니다.",
+      "정답입니다! 심정지 호흡이 관찰되면 즉시 가슴압박을 시작해야 합니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 다른 준비보다 가슴압박이 최우선입니다.",
+      "잘못된 선택입니다. 주치의 지시를 기다리거나 모니터 부착보다 가슴압박을 바로 시작해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288697/S1_4_woqoql.mp4`,
@@ -228,8 +228,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "올바릅니다! 흉골 중앙 하단부(양쪽 젖꼭지 사이)가 정확한 위치입니다.",
-    feedbackIncorrect: "오답입니다. 정확한 위치는 흉골 중앙 하단부입니다.",
+      "올바릅니다! 흉골 중앙의 하단부, 즉 양쪽 nipple 사이를 압박해야 합니다.",
+    feedbackIncorrect:
+      "오답입니다. 가슴압박은 반드시 흉골 중앙의 하단부에 손바닥을 올려 심장에 효과적으로 압력을 전달해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q09.mp4`, // No explicit mapping, using old Q09 logic if available or placeholder
@@ -257,9 +258,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정답입니다! 5cm 깊이 압박과 완전한 이완(recoil)이 중요합니다.",
+      "정답입니다! 5cm 깊이는 성인에게 적절한 심장 압박 깊이입니다. 그리고 압박 후에는 효과적인 순환을 위해 흉곽을 완전히 이완시키는 것(recoil)이 중요합니다.",
     feedbackIncorrect:
-      "오답입니다. 충분한 이완 없이는 혈류 순환이 되지 않습니다.",
+      "오답입니다. 5cm보다 얕거나 깊으면 효과적인 순환이 이루어지지 않거나 손상 위험이 있으며, 완전 이완(recoil) 없이 압박만 지속하면 효과적인 순환이 어렵습니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q10.mp4`,
@@ -280,8 +281,10 @@ export const scenario1Questions: Question[] = [
       { id: "4", text: "가능한 빠르게 누른다." },
     ],
     correctOptionId: "1",
-    feedbackCorrect: "잘했습니다! 분당 100~120회가 최적의 압박 속도입니다.",
-    feedbackIncorrect: "오답입니다. 너무 빠르거나 느리면 효과가 떨어집니다.",
+    feedbackCorrect:
+      "잘했습니다! 100~120회/분은 뇌와 심장에 혈류를 공급할 수 있는 최적 속도입니다.",
+    feedbackIncorrect:
+      "오답입니다. 너무 빠르거나 느린 속도는 효과적인 순환을 방해합니다. 100~120회/분을 유지하세요.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q11.mp4`,
@@ -303,9 +306,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다! 전원을 켜고 전극을 부착한 뒤 리듬을 확인해야 합니다.",
+      "정확합니다! 제세동기는 전원을 켜고, 전극을 부착한 후 리듬을 확인해야 합니다.",
     feedbackIncorrect:
-      "잘못된 순서입니다. 충전은 리듬 확인 및 처방 후에 수행합니다.",
+      "잘못된 순서입니다. 전원을 먼저 켜고 전극 부착 후 리듬 확인, 처방이 있을시에 충전해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q13.mp4`,
@@ -326,8 +329,10 @@ export const scenario1Questions: Question[] = [
       { id: "4", text: "PEA (무맥성 전기활동)" },
     ],
     correctOptionId: "3",
-    feedbackCorrect: "정확합니다! 제시된 파형은 Asystole(무수축)입니다.",
-    feedbackIncorrect: "잘못된 판별입니다. 평탄한 파형은 Asystole입니다.",
+    feedbackCorrect:
+      "정확합니다! 제시된 파형은 Asystole으로 Non-shockable 리듬입니다.",
+    feedbackIncorrect:
+      "잘못된 판별입니다. 이 파형은 Asystole으로 Non-shockable 리듬입니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q15.mp4`,
@@ -349,9 +354,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "2",
     feedbackCorrect:
-      "정답입니다! Asystole은 제세동 대상이 아니므로 가슴압박을 지속해야 합니다.",
+      "정답입니다! Asystole리듬은 제세동 대상이 아니므로 가슴압박을 지속해야 합니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. Asystole은 Non-shockable 리듬입니다.",
+      "잘못된 선택입니다. Asystole은 Non-shockable 리듬으로 제세동 대상이 아닙니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q16.mp4`,
@@ -372,8 +377,10 @@ export const scenario1Questions: Question[] = [
       { id: "4", text: "PEA" },
     ],
     correctOptionId: "1",
-    feedbackCorrect: "정확합니다! 불규칙한 파형은 심실세동(VF)입니다.",
-    feedbackIncorrect: "오답입니다. VF 파형입니다.",
+    feedbackCorrect:
+      "정확합니다! 제시된 파형은 무맥성 심실세동(VF)으로 Shockable 리듬입니다.",
+    feedbackIncorrect:
+      "잘못된 판별입니다. 이 파형은 무맥성 심실세동(VF)이며, 즉시 제세동 대상입니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q18.mp4`,
@@ -398,9 +405,9 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다! 안전 확보(물러나세요)와 충격 후 즉각적인 압박 재개가 중요합니다.",
+      "정확합니다! 올바른 순서는 A-B-C-D(패들 젤-충전-물러나세요-Shock)입니다.",
     feedbackIncorrect:
-      "잘못된 순서입니다. 안전 확보와 압박 재개 순서를 기억하세요.",
+      "잘못된 순서입니다. 항상 패들 젤 바르기 → 충전 → 주변 안전 확인 → 충격 후 가슴압박 재개 순으로 진행해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/cpr-videos/Q20.mp4`,
@@ -429,9 +436,9 @@ export const scenario2Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다! 반응 확인은 어깨를 가볍게 두드리고 큰소리로 말을 거는 것이 우선입니다.",
+      "정확합니다! 반응 확인은 어깨를 가볍게 두드리고 큰소리로 말을 거는 것이 표준 절차입니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 산소나 이송보다 반응 확인이 먼저입니다.",
+      "잘못된 선택입니다. 산소 적용이나 맥박 확인보다 먼저 환자의 반응부터 확인해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288671/S2_1_djheyy.mp4`,
@@ -452,9 +459,10 @@ export const scenario2Questions: Question[] = [
       { id: "4", text: "혈당을 측정한다." },
     ],
     correctOptionId: "1",
-    feedbackCorrect: "정확합니다! 반응이 없으면 즉시 도움을 요청해야 합니다.",
+    feedbackCorrect:
+      "정확합니다! 반응없는 환자를 발견한 경우 즉시 주변에 도움을 요청하는 것이 첫 번째 대응입니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 이송이나 측정보다 도움 요청이 우선입니다.",
+      "잘못된 선택입니다. 환자를 옮기거나 모니터를 부착하는 것보다, 먼저 도움을 요청해 응급 대응 체계를 가동하는 것이 우선입니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288668/S2_2_yjxhvv.mp4`,
@@ -476,8 +484,9 @@ export const scenario2Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다! 도움 요청 후에는 즉시 심정지 여부를 판단해야 합니다.",
-    feedbackIncorrect: "잘못된 선택입니다. 맥박과 호흡 확인이 우선입니다.",
+      "정확합니다! 심정지 여부를 판단하기 위해 도움 요청 후에는 반드시 10초 이내에 맥박과 호흡을 동시에 확인해야 합니다.",
+    feedbackIncorrect:
+      "잘못된 선택입니다. 모니터 부착이나 IV 확보보다 먼저 환자가 심정지 상태인지 확인하는 것이 중요합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288664/S2_3_dvrtt1.mp4`,
@@ -499,8 +508,9 @@ export const scenario2Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다! 이 환자는 규칙적이고 깊은 정상 호흡을 하고 있습니다.",
-    feedbackIncorrect: "잘못된 판단입니다. 영상은 정상 호흡을 보여줍니다.",
+      "정확합니다! 이 환자는 규칙적이고 깊은 정상 호흡을 보이고 있어 심정지 상황은 아닙니다..",
+    feedbackIncorrect:
+      "잘못된 판단입니다. 간헐적이거나 비정상적인 호흡과 달리, 이 영상은 규칙적이고 깊은 정상 호흡을 나타냅니다. 심정지가 아님을 인지해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288675/S2_4_ikoiia.mp4`,
@@ -522,9 +532,9 @@ export const scenario2Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다! 심정지가 아니므로 기도를 유지하고 보고하는 것이 적절합니다.",
+      "정확합니다! 환자는 심정지가 아니지만 의식이 없으므로, 기도를 유지하고 활력징후를 측정하며 즉시 의료진에게 보고하는 것이 적절한 조치입니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 정상 호흡 환자에게 CPR은 불필요합니다.",
+      "잘못된 선택입니다. 정상 호흡이 있어 CPR은 필요하지 않으며, 단순히 지켜보거나 보호자에게 병력을 묻는 것은 시급성을 간과한 대응입니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288676/S2_5_allcbm.mp4`,
@@ -552,8 +562,9 @@ export const scenario3Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다! 어깨를 두드리며 반응을 확인하는 것이 첫 단계입니다.",
-    feedbackIncorrect: "잘못된 선택입니다. 반응 확인이 가장 먼저입니다.",
+      "정확합니다! 환자의 반응을 확인하는 것이 초기 대응의 첫 단계입니다. 여기서 올바른 반응 확인 방법은 어깨를 두드리며 큰소리로 묻는 것입니다.",
+    feedbackIncorrect:
+      "잘못된 선택입니다. 환자를 옮기거나 라인을 확보하기보다 먼저 환자가 반응하는지 확인해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288685/S3_1_zn1hxj.mp4`,
@@ -575,9 +586,10 @@ export const scenario3Questions: Question[] = [
       { id: "4", text: "가슴압박을 시작한다." },
     ],
     correctOptionId: "1",
-    feedbackCorrect: "정확합니다! 즉시 주변에 도움을 요청해야 합니다.",
+    feedbackCorrect:
+      "정확합니다! 환자의 반응이 없으면 즉시 주변에 도움을 요청해야 합니다. 여기서 올바른 도움요청 방법은 큰소리로 도움을 외치거나 호출벨을 누르는 것이 가장 빠른 방법입니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 다른 처치보다 도움 요청이 우선입니다.",
+      "잘못된 선택입니다. 다른 처치보다 먼저 도움을 요청해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288690/S3_2_ugitot.mp4`,
@@ -600,8 +612,9 @@ export const scenario3Questions: Question[] = [
     ],
     correctOptionId: "4",
     feedbackCorrect:
-      "정확합니다! 심정지 인지 후 즉시 가슴압박을 시작해야 합니다.",
-    feedbackIncorrect: "잘못된 선택입니다. 즉각적인 압박이 필요합니다.",
+      "정확합니다! 심정지 인지 후에는 즉시 가슴 압박을 시작해야 합니다.",
+    feedbackIncorrect:
+      "잘못된 선택입니다. 주치의 처방을 기다리거나 모니터 부착보다 바로 가슴 압박을 시작하는 것이 중요합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765289085/S3_5_sezwy8.mp4`,
@@ -626,9 +639,9 @@ export const scenario3Questions: Question[] = [
     ],
     correctOptionId: "3",
     feedbackCorrect:
-      "정확합니다! CPR팀 호출과 제세동기 확보가 최우선 역할입니다.",
+      "정확합니다! CPR상황이므로 도움 요청을 받았으면 즉시 CPR팀과 주치의를 호출하고 제세동을 위해 제세동기 보유부서에 제세동기를 요청해야 합니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 팀 호출과 장비 확보를 먼저 해야 합니다.",
+      "잘못된 선택입니다. CPR상황에서 도움 요청을 받은 간호사는 CPR팀과 주치의를 호출하는 것이 먼저입니다. 또 먼저 제세동기가 준비될 수 있게 조치를 한 후에 가슴 압박을 돕거나 정맥을 확보하는 등의 대응을 해야합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288677/S4_1_z43cvx.mp4`,
@@ -651,9 +664,9 @@ export const scenario3Questions: Question[] = [
     ],
     correctOptionId: "2",
     feedbackCorrect:
-      "정확합니다! 기도 확보 후 앰부백으로 최대 산소를 공급해야 합니다.",
+      "정확합니다! head tilt-chin lift 자세는 기도가 직선으로 확보되어 산소 공급을 최적화됩니다. 심정지 상황에서는 sniffing자세를 취한 후 ambubagging을 통해 O2를 full로 공급하여 최대한의 산소를 공급해야 합니다.",
     feedbackIncorrect:
-      "잘못된 선택입니다. 심정지 시 앰부백을 통한 고농도 산소 공급이 필수입니다.",
+      "잘못된 선택입니다. Head up이나 베개를 적용할 시에 기도를 부분적으로 막아 산소 공급이 원활하지 않을 수 있습니다. 또한 cannula나 mask를 통한 산소 공급은 자발호흡이 없는 심정지 환자에게는 적합하지 않으며 ambubagging을 통한 최대한의 산소를 공급해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288674/S4_3_w1wq5g.mp4`,
@@ -678,8 +691,9 @@ export const scenario3Questions: Question[] = [
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다! CPR 진행을 위해 E-cart를 신속히 준비해야 합니다.",
-    feedbackIncorrect: "잘못된 선택입니다. 장비와 약물 준비가 우선입니다.",
+      "정확합니다! 가슴압박이 시작되었다면 당신은 CPR다음 단계를 위한 준비를 위해 E-cart를 가지고 와야 합니다.",
+    feedbackIncorrect:
+      "잘못된 선택입니다. 가슴압박 중에 혈압 측정은 불필요하며 CPR시 제세동기는 요청받은 보유부서에서 가지고 옵니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765289075/S5_1_jc9v9i.mp4`,
@@ -702,9 +716,9 @@ export const scenario3Questions: Question[] = [
     ],
     correctOptionId: "2",
     feedbackCorrect:
-      "정답입니다! 에피네프린은 3-5분 간격 Bolus 투여 후 Flush가 원칙입니다.",
+      "에피네프린은 1mg IV를 3~5분 간격으로 반복 투여하며, Shockable 리듬은 제세동 후, Non-shockable 리듬은 즉시 투여합니다",
     feedbackIncorrect:
-      "잘못된 선택입니다. Bolus 투여와 리듬에 따른 투여 시점을 기억하세요.",
+      "잘못된 선택입니다. 심정지 상황에서 에피네프린은 1mg을 정맥주사 bolus로 3~5분 간격으로 반복 투여해야하며, 투여 후 생리식염수로 flush 해야합니다. Shockable과 Non-shockable 리듬에 따라 투여 시점이 다릅니다. Shockable 리듬은 제세동 후 이어지는 가슴압박 시간에, Non-shockable 리듬은 가능한 한 빨리 투여합니다. 또한 의사 처방에 따라 투여해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
       question: `${CLOUDINARY_BASE}/video/upload/v1765288674/S5_10_qr5wzd.mp4`,
