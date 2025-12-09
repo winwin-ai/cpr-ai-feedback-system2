@@ -20,6 +20,7 @@ interface MediaDisplayProps {
   videoSrc?: string; // Direct URL/Path
   cacheKey?: string; // Unique key for storage (e.g., "s1_q1_scn")
   onVideoEnded?: () => void;
+  onError?: () => void;
   autoLoop?: boolean; // Controls looping
   autoPlay?: boolean; // Controls initial playback
 }
@@ -32,6 +33,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
   localVideoFilename,
   videoSrc,
   onVideoEnded,
+  onError,
   autoLoop = true,
   autoPlay = true,
 }) => {
@@ -54,7 +56,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
         .play()
         .catch((e) => console.log("Playback failed/prevented", e));
     }
-  }, [autoPlay, videoSrc, localVideoUrl, generatedVideoUrl]);
+  }, [autoPlay, videoSrc, localVideoUrl, generatedVideoUrl, prompt]);
 
   // Check for local video file
   useEffect(() => {
@@ -262,12 +264,13 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
       {videoSrc ? (
         <video
           ref={videoRef}
-          key={videoSrc} // Force re-render on change
+          key={`${videoSrc}-${prompt}`} // Force re-render on prompt change even if src is same
           src={videoSrc}
           autoPlay={autoPlay}
           loop={autoLoop}
           muted={false}
           onEnded={onVideoEnded}
+          onError={onError}
           playsInline
           className="w-full h-full object-contain"
         />
@@ -279,6 +282,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           loop={autoLoop}
           muted={false}
           onEnded={onVideoEnded}
+          onError={onError}
           playsInline
           className="w-full h-full object-contain"
         />
@@ -290,6 +294,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           loop={autoLoop}
           muted={false}
           onEnded={onVideoEnded}
+          onError={onError}
           playsInline
           className="w-full h-full object-contain"
         />

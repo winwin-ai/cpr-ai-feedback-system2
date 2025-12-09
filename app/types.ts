@@ -17,6 +17,8 @@ export interface Option {
 export interface Question {
   id: number;
   sessionId: number;
+  scenarioId?: number; // Optional scenario ID
+  role?: string; // Optional role for team CPR
   title: string;
   description?: string; // Additional context
   mediaType: "video" | "image";

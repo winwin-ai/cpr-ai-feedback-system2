@@ -34,6 +34,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   const [timer, setTimer] = useState<number | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true); // Default to true or check on mount
+  const [videoError, setVideoError] = useState(false);
 
   const currentQuestion = questions[currentIndex];
 
@@ -53,6 +54,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
     setDisabledOptionIds(new Set());
     setRetryCount(0);
     setTimer(null);
+    setVideoError(false);
   }, [currentIndex]);
 
   const proceedToNextQuestion = () => {
@@ -70,6 +72,16 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       // Answer video ended, move to next question
       proceedToNextQuestion();
     }
+  };
+
+  const handleVideoError = () => {
+    console.log("Video load error");
+    setVideoError(true);
+  };
+
+  const handleSkipVideo = () => {
+    setVideoError(false);
+    handleVideoEnded();
   };
 
   const handleOptionSelect = (optionId: string) => {
@@ -150,14 +162,36 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
         {/* 영상 영역 - 상단 40% */}
         <div className="relative h-[35%] w-full bg-black">
           {isMounted && !isDesktop && (
-            <MediaDisplay
-              type={currentQuestion.mediaType}
-              prompt={currentQuestion.mediaPrompt}
-              videoSrc={videoSrc}
-              onVideoEnded={handleVideoEnded}
-              autoLoop={false}
-              autoPlay={playbackState !== "intro"}
-            />
+            <>
+              {!videoError ? (
+                <MediaDisplay
+                  key={`${currentQuestion.id}-${playbackState}`}
+                  type={currentQuestion.mediaType}
+                  prompt={currentQuestion.mediaPrompt}
+                  videoSrc={videoSrc}
+                  onVideoEnded={handleVideoEnded}
+                  onError={handleVideoError}
+                  autoLoop={false}
+                  autoPlay={playbackState !== "intro"}
+                />
+              ) : (
+                <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center p-6 text-center">
+                  <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+                  <p className="text-white text-lg font-bold mb-2">
+                    영상을 재생할 수 없습니다
+                  </p>
+                  <p className="text-slate-400 text-sm mb-6">
+                    네트워크 상태를 확인하거나 다음으로 진행해주세요.
+                  </p>
+                  <button
+                    onClick={handleSkipVideo}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold transition-colors"
+                  >
+                    다음으로 진행
+                  </button>
+                </div>
+              )}
+            </>
           )}
 
           {/* Question Overlay (Small) - Mobile */}
@@ -213,40 +247,28 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                       }
                     `}
                   >
-                    {/* Image Area */}
-                    <div className="h-20 bg-slate-200 relative flex-shrink-0">
-                      {option.imageUrl ? (
-                        <img
-                          src={getCloudinaryUrl(option.imageUrl)}
-                          alt={option.text}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">
-                          No Image
-                        </div>
-                      )}
-                      <div className="absolute top-1.5 left-1.5 w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-md">
-                        {option.id.toUpperCase()}
-                      </div>
-
-                      {/* Disabled Overlay */}
-                      {isDisabled && (
-                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                          <XCircle className="text-white w-6 h-6 opacity-80" />
-                        </div>
-                      )}
+                    {/* Option ID Badge */}
+                    <div className="absolute top-2 left-2 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-md z-10">
+                      {option.id.toUpperCase()}
                     </div>
+
                     {/* Text Area */}
-                    <div className="p-2 flex-grow flex items-center text-left bg-white min-h-[48px]">
+                    <div className="p-4 flex-grow flex items-center justify-center text-center bg-white min-h-[80px]">
                       <span
-                        className={`text-xs font-semibold line-clamp-2 leading-tight ${
+                        className={`text-sm font-semibold line-clamp-3 leading-tight ${
                           isDisabled ? "text-slate-500" : "text-slate-900"
                         }`}
                       >
                         {option.text}
                       </span>
                     </div>
+
+                    {/* Disabled Overlay */}
+                    {isDisabled && (
+                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
+                        <XCircle className="text-white w-8 h-8 opacity-80" />
+                      </div>
+                    )}
                   </button>
                 );
               })}
@@ -267,14 +289,39 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
         {/* Full Screen Media */}
         <div className="absolute inset-0 z-0">
           {isMounted && isDesktop && (
-            <MediaDisplay
-              type={currentQuestion.mediaType}
-              prompt={currentQuestion.mediaPrompt}
-              videoSrc={videoSrc}
-              onVideoEnded={handleVideoEnded}
-              autoLoop={false}
-              autoPlay={playbackState !== "intro"}
-            />
+            <>
+              {!videoError ? (
+                <MediaDisplay
+                  type={currentQuestion.mediaType}
+                  prompt={currentQuestion.mediaPrompt}
+                  videoSrc={videoSrc}
+                  onVideoEnded={handleVideoEnded}
+                  onError={handleVideoError}
+                  autoLoop={false}
+                  autoPlay={playbackState !== "intro"}
+                />
+              ) : (
+                <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center p-12 text-center z-50 relative">
+                  <div className="bg-slate-800/80 p-12 rounded-3xl border border-slate-700 backdrop-blur-md shadow-2xl max-w-2xl">
+                    <AlertCircle className="w-24 h-24 text-red-500 mb-8 mx-auto" />
+                    <h2 className="text-white text-3xl font-bold mb-4">
+                      영상을 재생할 수 없습니다
+                    </h2>
+                    <p className="text-slate-400 text-xl mb-12 leading-relaxed">
+                      네트워크 상태를 확인하거나
+                      <br />
+                      일시적인 오류일 수 있습니다.
+                    </p>
+                    <button
+                      onClick={handleSkipVideo}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 rounded-2xl font-bold text-xl transition-all hover:scale-105 shadow-blue-500/20 shadow-lg"
+                    >
+                      다음 단계로 진행하기
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
 
@@ -339,26 +386,24 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                           }
                         `}
                     >
-                      {/* Image Area */}
-                      <div className="h-44 bg-slate-200 relative">
-                        {option.imageUrl ? (
-                          <img
-                            src={getCloudinaryUrl(option.imageUrl)}
-                            alt={option.text}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-slate-400">
-                            No Image
-                          </div>
-                        )}
-                        <div className="absolute top-2 left-2 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-base font-bold shadow-md ring-1 ring-white/50">
-                          {option.id.toUpperCase()}
-                        </div>
+                      {/* Option ID Badge */}
+                      <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-base font-bold shadow-md z-10 ring-1 ring-white/50">
+                        {option.id.toUpperCase()}
+                      </div>
+
+                      {/* Text Area */}
+                      <div className="p-6 h-full min-h-[120px] flex items-center justify-center text-center bg-white relative">
+                        <span
+                          className={`text-lg font-semibold leading-snug ${
+                            isDisabled ? "text-slate-500" : "text-slate-900"
+                          }`}
+                        >
+                          {option.text}
+                        </span>
 
                         {/* Disabled Overlay */}
                         {isDisabled && (
-                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
                             <XCircle className="text-white w-12 h-12 opacity-80" />
                           </div>
                         )}
