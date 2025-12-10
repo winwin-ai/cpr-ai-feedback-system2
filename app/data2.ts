@@ -26,7 +26,7 @@ export const scenario1Questions: Question[] = [
       "잘못된 선택입니다. 환자를 옮기거나 약을 찾기보다 먼저 환자가 반응하는지 확인해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288685/S1_1_ltbciy.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765292860/S1_1_ltbciy.mp4`,
     },
   },
   {
@@ -74,7 +74,7 @@ export const scenario1Questions: Question[] = [
       "잘못된 선택입니다. 혈당 측정이나 환자를 옮기는 행동보다 먼저 도움을 요청해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288679/S1_2_rkfidu.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314678/S1_2_rkfidu.mp4`,
     },
   },
   {
@@ -119,7 +119,7 @@ export const scenario1Questions: Question[] = [
       "잘못된 선택입니다. 모니터 부착이나 IV 확보보다 먼저 심정지 여부를 확인해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288684/S1_3_dvpmqa.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314644/S1_3_dvpmqa.mp4`,
     },
   },
   {
@@ -173,7 +173,7 @@ export const scenario1Questions: Question[] = [
       "잘못된 선택입니다. 간헐적 헐떡임은 정상 호흡이 아니며 심정지 상태의 특징입니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288697/S1_4_woqoql.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314580/S1_4_woqoql.mp4`,
     },
   },
   {
@@ -215,7 +215,7 @@ export const scenario1Questions: Question[] = [
     feedbackIncorrect: "",
     explanation: "세션 1 종료 및 세션 2 연결 영상입니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765314530/S1_5_drwwcm.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314530/S1_5_drwwcm.mp4`,
     },
     isTransition: true,
   },
@@ -487,9 +487,6 @@ export const scenario1Questions: Question[] = [
     feedbackCorrect: "정확합니다! Shockable 리듬이므로 제세동이 우선입니다.",
     feedbackIncorrect: "제세동이 가장 시급한 처치입니다.",
     explanation: "심실세동은 제세동이 유일한 교정 방법입니다.",
-    videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765315500/S1_2_11_placeholder.mp4`,
-    },
   },
   {
     id: 120,
@@ -513,9 +510,6 @@ export const scenario1Questions: Question[] = [
       "정확합니다! 안전 확인 후 Shock, 즉시 가슴압박 재개입니다.",
     feedbackIncorrect: "순서와 안전 확인이 중요합니다.",
     explanation: "주변인의 안전을 확보하는 것이 중요합니다.",
-    videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765315500/S1_2_12_placeholder.mp4`,
-    },
   },
   {
     id: 121,
@@ -539,9 +533,6 @@ export const scenario1Questions: Question[] = [
       "정답입니다. Shockable 리듬에서는 2차 제세동 실패 후 투여를 고려합니다.",
     feedbackIncorrect: "타이밍이 맞지 않습니다.",
     explanation: "가이드라인에 따라 투여 시점을 잡습니다.",
-    videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765315500/S1_2_13_placeholder.mp4`,
-    },
   },
   {
     id: 122,
@@ -562,9 +553,6 @@ export const scenario1Questions: Question[] = [
       "정확합니다! 맥박이 만져지고 혈압이 측정되면 ROSC 상태입니다.",
     feedbackIncorrect: "다른 징후들은 확실한 ROSC 증거가 아닙니다.",
     explanation: "교육이 종료됩니다. 수고하셨습니다.",
-    videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765315500/S1_2_14_placeholder.mp4`,
-    },
   },
 ];
 
@@ -594,7 +582,7 @@ export const scenario2Questions: Question[] = [
       "잘못된 선택입니다. 산소 적용이나 맥박 확인보다 먼저 환자의 반응부터 확인해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288671/S2_1_djheyy.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316267/S2_1_djheyy.mp4`,
     },
   },
   {
@@ -618,7 +606,7 @@ export const scenario2Questions: Question[] = [
       "잘못된 선택입니다. 환자를 옮기거나 모니터를 부착하는 것보다, 먼저 도움을 요청해 응급 대응 체계를 가동하는 것이 우선입니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288668/S2_2_yjxhvv.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316400/S2_2_yjxhvv.mp4`,
     },
   },
   {
@@ -642,7 +630,7 @@ export const scenario2Questions: Question[] = [
       "잘못된 선택입니다. 모니터 부착이나 IV 확보보다 먼저 환자가 심정지 상태인지 확인하는 것이 중요합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288664/S2_3_dvrtt1.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316458/S2_3_dvrtt1.mp4`,
     },
   },
   {
@@ -666,7 +654,7 @@ export const scenario2Questions: Question[] = [
       "잘못된 판단입니다. 간헐적이거나 비정상적인 호흡과 달리, 이 영상은 규칙적이고 깊은 정상 호흡을 나타냅니다. 심정지가 아님을 인지해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288675/S2_4_ikoiia.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316102/S2_4_ikoiia.mp4`,
     },
   },
   {
@@ -690,7 +678,7 @@ export const scenario2Questions: Question[] = [
       "잘못된 선택입니다. 정상 호흡이 있어 CPR은 필요하지 않으며, 단순히 지켜보거나 보호자에게 병력을 묻는 것은 시급성을 간과한 대응입니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288676/S2_5_allcbm.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316044/S2_5_allcbm.mp4`,
     },
   },
 ];
@@ -720,7 +708,7 @@ export const scenario3Questions: Question[] = [
       "잘못된 선택입니다. 환자를 옮기거나 라인을 확보하기보다 먼저 환자가 반응하는지 확인해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288685/S3_1_zn1hxj.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315689/S3_1_zn1hxj.mp4`,
     },
   },
   {
@@ -745,7 +733,7 @@ export const scenario3Questions: Question[] = [
       "잘못된 선택입니다. 다른 처치보다 먼저 도움을 요청해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288690/S3_2_ugitot.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315593/S3_2_ugitot.mp4`,
     },
   },
   {
@@ -770,7 +758,7 @@ export const scenario3Questions: Question[] = [
       "잘못된 선택입니다. 주치의 처방을 기다리거나 모니터 부착보다 바로 가슴 압박을 시작하는 것이 중요합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765289085/S3_5_sezwy8.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315150/S3_5_sezwy8.mp4`,
     },
   },
 
@@ -797,7 +785,7 @@ export const scenario3Questions: Question[] = [
       "잘못된 선택입니다. CPR상황에서 도움 요청을 받은 간호사는 CPR팀과 주치의를 호출하는 것이 먼저입니다. 또 먼저 제세동기가 준비될 수 있게 조치를 한 후에 가슴 압박을 돕거나 정맥을 확보하는 등의 대응을 해야합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288677/S4_1_z43cvx.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315915/S4_1_z43cvx.mp4`,
     },
   },
   {
@@ -822,7 +810,7 @@ export const scenario3Questions: Question[] = [
       "잘못된 선택입니다. Head up이나 베개를 적용할 시에 기도를 부분적으로 막아 산소 공급이 원활하지 않을 수 있습니다. 또한 cannula나 mask를 통한 산소 공급은 자발호흡이 없는 심정지 환자에게는 적합하지 않으며 ambubagging을 통한 최대한의 산소를 공급해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288674/S4_3_w1wq5g.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316225/S4_3_w1wq5g.mp4`,
     },
   },
 
@@ -849,7 +837,7 @@ export const scenario3Questions: Question[] = [
       "잘못된 선택입니다. 가슴압박 중에 혈압 측정은 불필요하며 CPR시 제세동기는 요청받은 보유부서에서 가지고 옵니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765289075/S5_1_jc9v9i.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315385/S5_1_jc9v9i.mp4`,
     },
   },
   {
@@ -874,7 +862,7 @@ export const scenario3Questions: Question[] = [
       "잘못된 선택입니다. 심정지 상황에서 에피네프린은 1mg을 정맥주사 bolus로 3~5분 간격으로 반복 투여해야하며, 투여 후 생리식염수로 flush 해야합니다. Shockable과 Non-shockable 리듬에 따라 투여 시점이 다릅니다. Shockable 리듬은 제세동 후 이어지는 가슴압박 시간에, Non-shockable 리듬은 가능한 한 빨리 투여합니다. 또한 의사 처방에 따라 투여해야 합니다.",
     explanation: "추가 설명이 없습니다.",
     videoPaths: {
-      question: `${CLOUDINARY_BASE}/video/upload/v1765288674/S5_10_qr5wzd.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316168/S5_10_qr5wzd.mp4`,
     },
   },
 ];
