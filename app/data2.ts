@@ -383,7 +383,8 @@ export const scenario1Questions: Question[] = [
     title: "심장 리듬 확인 (Asystole)",
     mediaType: "video",
     mediaPrompt: "Scenario1_Video_2_7",
-    questionText: "화면에 보이는 심전도 리듬은 무엇인가요?",
+    questionText:
+      "제세동기 전극 부착 후 환자의 심장 리듬을 확인했습니다. 다음 심전도는 무슨 리듬인가요?",
     options: [
       { id: "1", text: "VF (심실세동)" },
       { id: "2", text: "Pulseless VT (무맥성 심실빈맥)" },
@@ -392,11 +393,11 @@ export const scenario1Questions: Question[] = [
     ],
     correctOptionId: "3",
     feedbackCorrect:
-      "정확합니다! 무수축(Asystole)이며 Non-shockable 리듬입니다.",
+      "정확합니다! 제시된 파형은 Asystole으로 Non-shockable 리듬입니다.",
     feedbackIncorrect: "틀렸습니다. 이 파형은 무수축(Asystole)입니다.",
     explanation: "전기적 활동이 없는 상태입니다.",
     videoPaths: {
-      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314753/S1_2_7_wb6ydm.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288666/Asystole_gq88ky.mp4`,
     },
   },
   {
@@ -406,16 +407,16 @@ export const scenario1Questions: Question[] = [
     title: "Asystole 시 행동",
     mediaType: "video",
     mediaPrompt: "Scenario1_Video_2_8",
-    questionText: "Asystole이 확인되었습니다. 가장 먼저 해야 할 행동은?",
+    questionText: "Asystole을 확인한 경우에 어떻게 해야 하나요?",
     options: [
-      { id: "1", text: "제세동을 실시한다." },
-      { id: "2", text: "가슴압박을 즉시 재개한다." },
-      { id: "3", text: "맥박을 1분간 확인한다." },
-      { id: "4", text: "기도 삽관을 시도한다." },
+      { id: "1", text: "제세동을 준비한다." },
+      { id: "2", text: "가슴압박을 지속한다." },
+      { id: "3", text: "응급약물을 준비한다." },
+      { id: "4", text: "혈압을 측정한다." },
     ],
     correctOptionId: "2",
     feedbackCorrect:
-      "정답입니다! Non-shockable 리듬이므로 즉시 가슴압박을 지속해야 합니다.",
+      "정답입니다! Asystole 리듬은 제세동 대상이 아니므로 가슴압박을 지속해야 합니다.",
     feedbackIncorrect:
       "제세동 대상이 아닙니다. 가슴압박을 우선 지속해야 합니다.",
     explanation: "CPR을 2분간 지속합니다.",
@@ -430,16 +431,20 @@ export const scenario1Questions: Question[] = [
     title: "Asystole 약물 투여",
     mediaType: "video",
     mediaPrompt: "Scenario1_Video_2_9",
-    questionText: "Asystole 상황에서 에피네프린 투여 방법은?",
+    questionText:
+      "심정지 환자에서 Asystole 리듬이 확인되었습니다. 정맥로가 확보된 경우, 에피네프린은 어떻게 투여해야 할까요? (Asystole, Non-shockable Rhythm 상황)",
     options: [
-      { id: "1", text: "가능한 빨리 1mg 투여 후 3~5분마다 반복" },
-      { id: "2", text: "제세동 후 투여" },
-      { id: "3", text: "3mg을 한번에 투여" },
-      { id: "4", text: "투여하지 않는다" },
+      {
+        id: "1",
+        text: "가능한 한 빨리 투여하며, 3~5분 간격으로 반복 주사한다.",
+      },
+      { id: "2", text: "제세동 후 투여하며, 3~5분 간격으로 반복 주사한다." },
+      { id: "3", text: "자발순환 회복 후 투여한다." },
+      { id: "4", text: "Shockable 리듬에서만 투여한다." },
     ],
     correctOptionId: "1",
     feedbackCorrect:
-      "정확합니다. Non-shockable 리듬에서는 IV/IO 확보 즉시 에피네프린을 투여합니다.",
+      "정답입니다! 비충격 리듬은 제세동이 필요 없으므로, CPR 시작 후 정맥로가 확보되면 즉시 에피네프린 투여해야 하며, 자발순환이 회복되거나 전문소생술이 끝날 때까지 3~5분 간격으로 반복 투여해야 합니다.",
     feedbackIncorrect:
       "틀렸습니다. 가능한 빨리 투여하고 3~5분 간격으로 반복합니다.",
     explanation: "가급적 빠른 투여가 권장됩니다.",
