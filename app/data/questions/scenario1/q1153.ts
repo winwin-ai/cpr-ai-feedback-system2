@@ -4,7 +4,7 @@ export const q1153: Question = {
   id: 1153,
   displayId: "15-3",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "심장 리듬 확인 (PEA)",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_7_3",

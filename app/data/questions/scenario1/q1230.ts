@@ -4,7 +4,7 @@ export const q1230: Question = {
   id: 1230,
   displayId: "23",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "리듬 확인 (Pulseless VT)",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_15",

@@ -4,7 +4,7 @@ export const q1170: Question = {
   id: 1170,
   displayId: "17",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "Asystole 약물 투여",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_9",

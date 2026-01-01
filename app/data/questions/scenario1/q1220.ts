@@ -4,7 +4,7 @@ export const q1220: Question = {
   id: 1220,
   displayId: "22",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "ROSC 확인",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_14",

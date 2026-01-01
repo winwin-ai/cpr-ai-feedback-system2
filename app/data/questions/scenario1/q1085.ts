@@ -3,7 +3,7 @@ import { Question } from "../../../types";
 export const q1085: Question = {
   id: 1085,
   scenarioId: 1,
-  sessionId: 2, // Start showing Session 2
+  sessionId: 1,
   title: "세션 2 시작",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_1_5",

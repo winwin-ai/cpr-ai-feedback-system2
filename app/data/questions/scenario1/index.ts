@@ -10,7 +10,6 @@ import { q1071 } from "./q1071";
 import { q1072 } from "./q1072";
 import { q1073 } from "./q1073";
 import { q1080 } from "./q1080";
-import { q1085 } from "./q1085";
 import { q1090 } from "./q1090";
 import { q1100 } from "./q1100";
 import { q1110 } from "./q1110";
@@ -46,7 +45,6 @@ export const scenario1Questions: Question[] = [
   q1072,
   q1073,
   q1080,
-  q1085,
   q1090,
   q1100,
   q1110,

@@ -4,7 +4,7 @@ export const q1210: Question = {
   id: 1210,
   displayId: "21",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "VF 약물 투여 시점",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_13",

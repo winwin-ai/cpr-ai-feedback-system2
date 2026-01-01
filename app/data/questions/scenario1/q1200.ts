@@ -4,7 +4,7 @@ export const q1200: Question = {
   id: 1200,
   displayId: "20",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "제세동 시행 순서",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_12",

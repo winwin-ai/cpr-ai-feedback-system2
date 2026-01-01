@@ -4,7 +4,7 @@ export const q1120: Question = {
   id: 1120,
   displayId: "12",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "가슴압박 자세",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_4",

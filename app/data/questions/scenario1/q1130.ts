@@ -4,7 +4,7 @@ export const q1130: Question = {
   id: 1130,
   displayId: "13",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "제세동기 준비 순서",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_5",

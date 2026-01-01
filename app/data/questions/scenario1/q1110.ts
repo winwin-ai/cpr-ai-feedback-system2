@@ -4,7 +4,7 @@ export const q1110: Question = {
   id: 1110,
   displayId: "11",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "가슴압박 속도",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_3",

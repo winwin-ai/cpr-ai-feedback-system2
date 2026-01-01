@@ -4,7 +4,7 @@ export const q1190: Question = {
   id: 1190,
   displayId: "19",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "VF 확인 시 행동",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_11",

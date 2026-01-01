@@ -4,7 +4,7 @@ export const q1090: Question = {
   id: 1090,
   displayId: "9",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "가슴압박 위치",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_1",

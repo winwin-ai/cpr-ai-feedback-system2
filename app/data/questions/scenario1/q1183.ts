@@ -4,7 +4,7 @@ export const q1183: Question = {
   id: 1183,
   displayId: "18-3",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "리듬 확인 (VF)",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_10_3",

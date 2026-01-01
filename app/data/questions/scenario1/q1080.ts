@@ -37,5 +37,5 @@ export const q1080: Question = {
   feedbackIncorrect:
     "잘못된 선택입니다. 주치의 지시를 기다리거나 모니터 부착보다 가슴압박을 바로 시작해야 합니다.",
   explanation: "추가 설명이 없습니다.",
-  nextId: 1085,
+  nextId: 1090,
 };

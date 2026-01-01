@@ -4,7 +4,7 @@ export const q1100: Question = {
   id: 1100,
   displayId: "10",
   scenarioId: 1,
-  sessionId: 2,
+  sessionId: 1,
   title: "가슴압박 깊이",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_2",
