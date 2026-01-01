@@ -27,8 +27,5 @@ export const q1100: Question = {
   feedbackIncorrect:
     "오답입니다. 5cm보다 얕거나 깊으면 효과적인 순환이 이루어지지 않거나 손상 위험이 있으며, 완전 이완(recoil) 없이 압박만 지속하면 효과적인 순환이 어렵습니다.",
   explanation: "추가 설명이 없습니다.",
-  videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315022/S1_2_2_qtbre1.mp4`,
-  },
   nextId: 1110,
 };

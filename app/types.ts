@@ -15,6 +15,12 @@ export interface Option {
   nextId?: number | string; // Branching path based on choice
 }
 
+export interface DragItem {
+  id: string;
+  label: string;
+  imageUrl: string;
+}
+
 export interface Question {
   id: number | string;
   sessionId: number;
@@ -39,6 +45,10 @@ export interface Question {
   displayId?: string; // Custom question number for display (e.g., "7-1")
   nextId?: number | string; // Direct link to next question
   isTransition?: boolean; // If true, displayed as a session transition screen
+  // Drag-drop question support
+  questionType?: "default" | "dragdrop";
+  dragItems?: DragItem[];
+  correctOrder?: string[]; // Array of item ids in correct order
 }
 
 export interface Scenario {

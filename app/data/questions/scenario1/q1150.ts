@@ -11,22 +11,10 @@ export const q1150: Question = {
   questionText:
     "제세동기 전극 부착 후 환자의 심장 리듬을 확인했습니다. 다음 심전도는 무슨 리듬인가요?",
   options: [
-    { id: "1", text: "VF (심실세동)", imageUrl: "/images/questions/scenario1/Q15-A.jpg" },
-    {
-      id: "2",
-      text: "Pulseless VT (무맥성 심실빈맥)",
-      imageUrl: "/images/questions/scenario1/Q15-B.jpg",
-    },
-    {
-      id: "3",
-      text: "Asystole (무수축)",
-      imageUrl: "/images/questions/scenario1/Q15-C.jpg",
-    },
-    {
-      id: "4",
-      text: "PEA (무맥성 전기활동)",
-      imageUrl: "/images/questions/scenario1/Q15-D.jpg",
-    },
+    { id: "1", text: "VF (심실세동)" },
+    { id: "2", text: "Pulseless VT (무맥성 심실빈맥)" },
+    { id: "3", text: "Asystole (무수축)" },
+    { id: "4", text: "PEA (무맥성 전기활동)" },
   ],
   correctOptionId: "3",
   feedbackCorrect:
@@ -34,7 +22,7 @@ export const q1150: Question = {
   feedbackIncorrect: "틀렸습니다. 이 파형은 무수축(Asystole)입니다.",
   explanation: "전기적 활동이 없는 상태입니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288666/Asystole_gq88ky.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767270173/cpr-videos/Asystole.mp4`,
   },
-  nextId: 1160,
+  nextId: 1151,
 };

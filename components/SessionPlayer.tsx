@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MediaDisplay } from "./MediaDisplay";
+import { DragDropQuestion } from "./DragDropQuestion";
 import { AlertCircle, CheckCircle2, XCircle } from "lucide-react";
 import Image from "next/image";
 import { getCloudinaryUrl } from "@/utils/cloudinaryUrl";
@@ -10,6 +11,7 @@ interface SessionPlayerProps {
   initialQuestionId: string | number;
   sessionId: number;
   onComplete: (correctCount: number) => void;
+  onQuestionChange?: (questionId: string | number) => void;
 }
 
 type PlaybackState = "intro" | "question" | "waiting" | "answer";
@@ -20,6 +22,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   initialQuestionId,
   sessionId,
   onComplete,
+  onQuestionChange,
 }) => {
   const [currentQuestionId, setCurrentQuestionId] = useState(initialQuestionId);
   const [playbackState, setPlaybackState] = useState<PlaybackState>("question");
@@ -47,9 +50,20 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
     return () => window.removeEventListener("resize", checkIsDesktop);
   }, []);
 
+  // Sync with external initialQuestionId changes (e.g., from URL navigation)
+  useEffect(() => {
+    if (initialQuestionId && initialQuestionId !== currentQuestionId) {
+      queueMicrotask(() => setCurrentQuestionId(initialQuestionId));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialQuestionId]);
+
   // Reset when question changes
   useEffect(() => {
     if (!currentQuestion) return;
+
+    // Notify parent of question change
+    onQuestionChange?.(currentQuestionId);
 
     // If no video, skip straight to waiting (question)
     const hasQuestionVideo = !!currentQuestion.videoPaths?.question;
@@ -61,7 +75,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       setRetryCount(0);
       setVideoError(false);
     });
-  }, [currentQuestionId, currentQuestion]);
+  }, [currentQuestionId, currentQuestion, onQuestionChange]);
 
   const proceedToNextQuestion = () => {
     const selectedOption = currentQuestion.options.find(
@@ -163,7 +177,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   useEffect(() => {
     // Update activeVideoSrc when intended source changes
     if (currentIntendedSrc) {
-      setActiveVideoSrc(currentIntendedSrc);
+      queueMicrotask(() => setActiveVideoSrc(currentIntendedSrc));
     }
   }, [currentIntendedSrc]);
 
@@ -171,7 +185,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   useEffect(() => {
     if (playbackState === "answer" && currentQuestion.videoPaths?.answer) {
       const answerVideoUrl = getCloudinaryUrl(currentQuestion.videoPaths.answer);
-      setActiveVideoSrc(answerVideoUrl);
+      queueMicrotask(() => setActiveVideoSrc(answerVideoUrl));
     }
   }, [playbackState, currentQuestion.videoPaths?.answer]);
 
@@ -240,11 +254,14 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
           )}
 
           {/* Question Overlay (Small) - Mobile */}
-          <div className="absolute top-4 left-4 z-10">
-            <div className="bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10">
-              <span className="text-white font-bold text-sm tracking-wider">
+          <div className="absolute top-4 left-4 right-4 z-10">
+            <div className="bg-black/60 backdrop-blur-md px-3 py-2 rounded-lg border border-white/10">
+              <span className="text-blue-400 font-bold text-xs tracking-wider">
                 Q{currentQuestion.displayId || currentIndexInOrdered + 1}
               </span>
+              <p className="text-white font-bold text-sm mt-1 leading-snug">
+                {currentQuestion.questionText}
+              </p>
             </div>
           </div>
         </div>
@@ -284,6 +301,37 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                   {currentQuestion.options[0].text}
                   <CheckCircle2 className="w-5 h-5" />
                 </button>
+              </div>
+            ) : currentQuestion.questionType === "dragdrop" &&
+              currentQuestion.dragItems &&
+              currentQuestion.correctOrder ? (
+              // Drag-Drop Question UI - 제목만 팝업, 나머지는 전체 영역
+              <div className="flex flex-col h-full -mx-3 -mb-3">
+                <div className="px-3">
+                  <div className="bg-slate-800/80 backdrop-blur-sm px-4 py-2 rounded-xl mb-4 border border-slate-700">
+                    <h2 className="text-blue-400 font-bold text-xs uppercase tracking-widest mb-0.5">
+                      Question{" "}
+                      {currentQuestion.displayId || currentIndexInOrdered + 1}
+                    </h2>
+                    <h3 className="text-white text-sm font-bold leading-snug whitespace-pre-line">
+                      {currentQuestion.questionText}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="flex-grow overflow-auto px-2 pb-2">
+                  <DragDropQuestion
+                    items={currentQuestion.dragItems}
+                    correctOrder={currentQuestion.correctOrder}
+                    onCorrect={() => {
+                      setScore((prev) => prev + 1);
+                      setFeedbackState("correct");
+                    }}
+                    onIncorrect={() => {
+                      setRetryCount((prev) => prev + 1);
+                    }}
+                  />
+                </div>
               </div>
             ) : (
               // Standard Question UI
@@ -426,11 +474,14 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
         </div>
 
         {/* Question Overlay (Small) - Desktop */}
-        <div className="absolute top-6 left-6 z-10">
-          <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 shadow-lg">
-            <span className="text-white font-bold text-xl tracking-wider">
+        <div className="absolute top-6 left-6 right-6 z-10">
+          <div className="bg-black/60 backdrop-blur-md px-6 py-4 rounded-xl border border-white/10 shadow-lg inline-block max-w-3xl">
+            <span className="text-blue-400 font-bold text-sm uppercase tracking-wider">
               Question {currentQuestion.displayId || currentIndexInOrdered + 1}
             </span>
+            <p className="text-white font-bold text-xl mt-1 leading-snug">
+              {currentQuestion.questionText}
+            </p>
           </div>
         </div>
 
@@ -462,6 +513,41 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                     {currentQuestion.options[0].text}
                     <CheckCircle2 className="w-8 h-8" />
                   </button>
+                </div>
+              </div>
+            ) : currentQuestion.questionType === "dragdrop" &&
+              currentQuestion.dragItems &&
+              currentQuestion.correctOrder ? (
+              // Drag-Drop Desktop UI - 제목만 팝업, 나머지는 전체 영역
+              <div className="absolute inset-0 flex flex-col z-10 p-6">
+                {/* 상단: 제목만 팝업 스타일 */}
+                <div className="text-center mb-6">
+                  <div className="bg-black/70 backdrop-blur-md inline-block px-6 py-3 rounded-2xl border border-white/10">
+                    <h2 className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-1">
+                      Question{" "}
+                      {currentQuestion.displayId || currentIndexInOrdered + 1}
+                    </h2>
+                    <h3 className="text-white text-lg font-bold leading-relaxed whitespace-pre-line">
+                      {currentQuestion.questionText}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* 중단/하단: 드래그 드롭 영역 (팝업 밖, 전체 너비) */}
+                <div className="flex-grow flex items-start justify-center overflow-auto px-4">
+                  <div className="w-full max-w-6xl">
+                    <DragDropQuestion
+                      items={currentQuestion.dragItems}
+                      correctOrder={currentQuestion.correctOrder}
+                      onCorrect={() => {
+                        setScore((prev) => prev + 1);
+                        setFeedbackState("correct");
+                      }}
+                      onIncorrect={() => {
+                        setRetryCount((prev) => prev + 1);
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             ) : (

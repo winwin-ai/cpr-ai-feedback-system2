@@ -4,15 +4,28 @@ import { Activity, HeartPulse } from "lucide-react";
 interface LayoutProps {
   children: React.ReactNode;
   viewState: string;
+  onGoHome?: () => void;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, viewState }) => {
+export const Layout: React.FC<LayoutProps> = ({ children, viewState, onGoHome }) => {
+  const handleLogoClick = () => {
+    if (viewState === "DASHBOARD") {
+      return; // 이미 홈이면 아무것도 하지 않음
+    }
+    if (window.confirm("홈으로 이동하시겠습니까?\n진행 중인 내용은 저장되지 않습니다.")) {
+      onGoHome?.();
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div
+            className={`flex items-center gap-2 ${viewState !== "DASHBOARD" ? "cursor-pointer hover:opacity-80 transition-opacity" : ""}`}
+            onClick={handleLogoClick}
+          >
             <div className="bg-blue-600 p-2 rounded-lg">
               <Activity className="w-6 h-6 text-white" />
             </div>

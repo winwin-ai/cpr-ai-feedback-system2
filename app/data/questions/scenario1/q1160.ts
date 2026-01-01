@@ -33,11 +33,9 @@ export const q1160: Question = {
   ],
   correctOptionId: "2",
   feedbackCorrect:
-    "정답입니다! Asystole 리듬은 제세동 대상이 아니므로 가슴압박을 지속해야 합니다.",
-  feedbackIncorrect: "제세동 대상이 아닙니다. 가슴압박을 우선 지속해야 합니다.",
+    "정답입니다! Asystole리듬은 제세동 대상이 아니므로 가슴압박을 지속해야 합니다.",
+  feedbackIncorrect:
+    "잘못된 선택입니다. Asystole은 Non-shockable 리듬으로 제세동 대상이 아닙니다.",
   explanation: "CPR을 2분간 지속합니다.",
-  videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316513/S1_2_8_jwrlmd.mp4`,
-  },
   nextId: 1170,
 };

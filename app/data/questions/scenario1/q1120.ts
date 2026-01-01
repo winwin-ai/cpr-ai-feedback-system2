@@ -37,8 +37,8 @@ export const q1120: Question = {
   feedbackIncorrect:
     "오답입니다. 팔꿈치를 굽히거나 손가락만으로 누르는 방식은 힘이 분산되어 압박 효과가 떨어집니다.",
   explanation: "구조자의 어깨가 환자 가슴 바로 위에 오도록 합니다.",
-  videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314973/S1_2_4_h4y1jm.mp4`,
-  },
+    videoPaths: {
+        answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315022/S1_2_2_qtbre1.mp4`,
+    },
   nextId: 1130,
 };

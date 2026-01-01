@@ -6,9 +6,6 @@ import { q1040 } from "./q1040";
 import { q1050 } from "./q1050";
 import { q1060 } from "./q1060";
 import { q1070 } from "./q1070";
-import { q1071 } from "./q1071";
-import { q1072 } from "./q1072";
-import { q1073 } from "./q1073";
 import { q1080 } from "./q1080";
 import { q1090 } from "./q1090";
 import { q1100 } from "./q1100";
@@ -16,6 +13,7 @@ import { q1110 } from "./q1110";
 import { q1120 } from "./q1120";
 import { q1130 } from "./q1130";
 import { q1140 } from "./q1140";
+import { q1150 } from "./q1150";
 import { q1151 } from "./q1151";
 import { q1152 } from "./q1152";
 import { q1153 } from "./q1153";
@@ -41,9 +39,6 @@ export const scenario1Questions: Question[] = [
   q1050,
   q1060,
   q1070,
-  q1071,
-  q1072,
-  q1073,
   q1080,
   q1090,
   q1100,
@@ -51,6 +46,7 @@ export const scenario1Questions: Question[] = [
   q1120,
   q1130,
   q1140,
+  q1150,
   q1151,
   q1152,
   q1153,

@@ -8,32 +8,35 @@ export const q1140: Question = {
   title: "패드 부착 위치",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_6",
-  questionText: "제세동 패드의 올바른 부착 위치는?",
+  questionText:
+    "전극(electrode; magnerode)을 성인 환자에게 부착할 때 올바른 위치는?",
   options: [
     {
       id: "1",
-      text: "오른쪽 쇄골 아래와 왼쪽 유두 아래 겨드랑이 선",
+      text: "오른쪽 어깨와 왼쪽 어깨.",
       imageUrl: "/images/questions/scenario1/Q14-A.jpg",
     },
     {
       id: "2",
-      text: "왼쪽 쇄골 아래와 오른쪽 유두 아래",
+      text: "오른쪽 쇄골 아래, 오른쪽 갈비뼈 아래와 왼쪽 갈비뼈 아래.",
       imageUrl: "/images/questions/scenario1/Q14-B.jpg",
     },
     {
       id: "3",
-      text: "양쪽 가슴 중앙",
+      text: "오른쪽 쇄골 아래, 왼쪽 쇄골 아래와 왼쪽 갈비뼈 아래.",
       imageUrl: "/images/questions/scenario1/Q14-C.jpg",
     },
-    { id: "4", text: "복부와 등", imageUrl: "/images/questions/scenario1/Q14-D.jpg" },
+    {
+      id: "4",
+      text: "목 부위와 배꼽 부위.",
+      imageUrl: "/images/questions/scenario1/Q14-D.jpg",
+    },
   ],
-  correctOptionId: "1",
+  correctOptionId: "3",
   feedbackCorrect:
-    "정확합니다! 우측 쇄골 하부와 좌측 유두 옆 겨드랑이 선에 부착합니다.",
-  feedbackIncorrect: "위치가 잘못되었습니다. 표준 부착 위치를 확인하세요.",
+    "정답입니다! 전극은 양쪽 쇄골 아래와 왼쪽 갈비뼈 아래에 부착해야 합니다.",
+  feedbackIncorrect:
+    "잘못된 위치입니다. 양 어깨나 목 부위, 갈비뼈 아래는 부착 위치가 아닙니다. 표준 위치를 기억하세요.",
   explanation: "Anterior-Lateral 위치에 부착합니다.",
-  videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314811/S1_2_6_ep5fxi.mp4`,
-  },
-  nextId: 1151,
+  nextId: 1150,
 };

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Layout } from "../components/Layout";
 import { Dashboard } from "../components/Dashboard";
 import { SessionPlayer } from "../components/SessionPlayer";
@@ -790,11 +791,83 @@ const SCENARIO_DATA = {
   },
 };
 
-export default function Home() {
+function HomeContent() {
+  const searchParams = useSearchParams();
+
   const [viewState, setViewState] = useState<ViewState>(ViewState.DASHBOARD);
   const [sessionScore, setSessionScore] = useState(0);
   const [selectedScenarioId, setSelectedScenarioId] = useState<number>(1);
   const [initialQuestionIndex, setInitialQuestionIndex] = useState<number>(0);
+  const [currentQuestionId, setCurrentQuestionId] = useState<string | number | null>(null);
+
+  // Update URL when state changes
+  const updateUrl = useCallback((view: ViewState, scenarioId?: number, questionId?: string | number) => {
+    const params = new URLSearchParams();
+    params.set("view", view);
+    if (scenarioId) {
+      params.set("scenario", String(scenarioId));
+    }
+    if (questionId) {
+      params.set("q", String(questionId));
+    }
+    const newUrl = `?${params.toString()}`;
+    window.history.pushState({ view, scenarioId, questionId }, "", newUrl);
+  }, []);
+
+  // Parse URL and restore state on mount
+  useEffect(() => {
+    const view = searchParams.get("view");
+    const scenario = searchParams.get("scenario");
+    const questionId = searchParams.get("q");
+
+    queueMicrotask(() => {
+      if (view) {
+        const viewValue = view.toUpperCase() as ViewState;
+        if (Object.values(ViewState).includes(viewValue)) {
+          setViewState(viewValue);
+        }
+      }
+      if (scenario) {
+        const scenarioNum = parseInt(scenario, 10);
+        if ([1, 2, 3].includes(scenarioNum)) {
+          setSelectedScenarioId(scenarioNum);
+        }
+      }
+      if (questionId) {
+        setCurrentQuestionId(isNaN(Number(questionId)) ? questionId : Number(questionId));
+      }
+    });
+  }, [searchParams]);
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state) {
+        const { view, scenarioId, questionId } = event.state;
+        if (view && Object.values(ViewState).includes(view)) {
+          setViewState(view);
+        }
+        if (scenarioId) {
+          setSelectedScenarioId(scenarioId);
+        }
+        if (questionId) {
+          setCurrentQuestionId(questionId);
+        }
+      } else {
+        // No state - go back to dashboard
+        setViewState(ViewState.DASHBOARD);
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  // Handle question changes from SessionPlayer
+  const handleQuestionChange = useCallback((questionId: string | number) => {
+    setCurrentQuestionId(questionId);
+    updateUrl(ViewState.SESSION_1, selectedScenarioId, questionId);
+  }, [selectedScenarioId, updateUrl]);
 
   // Helper to get questions based on scenario
   const getQuestions = () => {
@@ -829,45 +902,63 @@ export default function Home() {
   const handleScenarioSelect = (scenarioId: number) => {
     setSelectedScenarioId(scenarioId);
     setInitialQuestionIndex(0);
+    setCurrentQuestionId(null);
     setViewState(ViewState.SCENARIO);
+    updateUrl(ViewState.SCENARIO, scenarioId);
   };
 
   const handleJumpToQuestion = (scenarioId: number, questionIndex: number) => {
     setSelectedScenarioId(scenarioId);
     setInitialQuestionIndex(questionIndex);
+    const questions = scenarioId === 1 ? scenario1Questions : scenarioId === 2 ? scenario2Questions : scenario3Questions;
+    const questionId = questions[questionIndex]?.id;
+    setCurrentQuestionId(questionId || null);
     setViewState(ViewState.SESSION_1);
+    updateUrl(ViewState.SESSION_1, scenarioId, questionId);
   };
 
   const handleScenarioComplete = () => {
     // Scenario 1 starts with Session 1 (which encompasses the whole flow in this simplified logic, or we can split it if needed)
     // For now, mapping all questions to "SESSION_1" view state which uses SessionPlayer
     setViewState(ViewState.SESSION_1);
+    const startQuestionId = currentScenario.startQuestionId;
+    setCurrentQuestionId(startQuestionId);
+    updateUrl(ViewState.SESSION_1, selectedScenarioId, startQuestionId);
   };
 
   const handleSessionComplete = (correctCount: number) => {
     setSessionScore(correctCount);
     const percentage = correctCount / currentQuestions.length;
-    if (percentage >= 0.8) {
-      setViewState(ViewState.RESULT_PASS); // Or COMPLETION, simplified for now
-    } else {
-      setViewState(ViewState.RESULT_FAIL);
-    }
+    const resultView = percentage >= 0.8 ? ViewState.RESULT_PASS : ViewState.RESULT_FAIL;
+    setViewState(resultView);
+    updateUrl(resultView, selectedScenarioId);
   };
 
   const handleRetry = () => {
+    const startQuestionId = currentScenario.startQuestionId;
+    setCurrentQuestionId(startQuestionId);
     setViewState(ViewState.SESSION_1);
+    updateUrl(ViewState.SESSION_1, selectedScenarioId, startQuestionId);
   };
 
   const handleContinue = () => {
     // Return to dashboard for now, or next session if applicable
     setViewState(ViewState.DASHBOARD);
+    updateUrl(ViewState.DASHBOARD);
+  };
+
+  const handleGoHome = () => {
+    setViewState(ViewState.DASHBOARD);
+    setCurrentQuestionId(null);
+    setInitialQuestionIndex(0);
+    updateUrl(ViewState.DASHBOARD);
   };
 
   const activeScenarioData =
     SCENARIO_DATA[selectedScenarioId as keyof typeof SCENARIO_DATA];
 
   return (
-    <Layout viewState={viewState}>
+    <Layout viewState={viewState} onGoHome={handleGoHome}>
       {viewState === ViewState.DASHBOARD && (
         <Dashboard
           onSelectScenario={handleScenarioSelect}
@@ -891,6 +982,7 @@ export default function Home() {
           questionsMap={currentScenario.questions}
           orderedQuestionIds={currentQuestions.map((q) => q.id)}
           initialQuestionId={
+            currentQuestionId ||
             currentQuestions[initialQuestionIndex]?.id ||
             currentScenario.startQuestionId
           }
@@ -898,6 +990,7 @@ export default function Home() {
             selectedScenarioId === 1 ? (initialQuestionIndex >= 8 ? 2 : 1) : 1
           }
           onComplete={handleSessionComplete}
+          onQuestionChange={handleQuestionChange}
         />
       )}
 
@@ -914,5 +1007,13 @@ export default function Home() {
         />
       )}
     </Layout>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

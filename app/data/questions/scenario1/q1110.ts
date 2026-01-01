@@ -21,8 +21,5 @@ export const q1110: Question = {
   feedbackIncorrect:
     "오답입니다. 너무 빠르거나 느린 속도는 효과적인 순환을 방해합니다. 100~120회/분을 유지하세요.",
   explanation: "추가 설명이 없습니다.",
-  videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315418/S1_2_3_hkmklv.mp4`,
-  },
   nextId: 1120,
 };

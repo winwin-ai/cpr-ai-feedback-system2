@@ -9,20 +9,25 @@ const BASE_URL = `https://res.cloudinary.com/${CLOUD_NAME}`;
  */
 export function getCloudinaryUrl(localPath: string | undefined): string {
   if (!localPath) return '';
-  
+
   // 이미 Cloudinary URL인 경우 그대로 반환
   if (localPath.startsWith('https://res.cloudinary.com')) {
     return localPath;
   }
-  
+
+  // 로컬 /videos/ 경로인 경우 그대로 반환 (public 폴더에서 서빙)
+  if (localPath.startsWith('/videos/')) {
+    return localPath;
+  }
+
   // /videos/Q01-A.jpg → cpr-videos/Q01-A
   const filename = localPath.replace('/videos/', '').replace(/\.[^.]+$/, '');
   const extension = localPath.split('.').pop()?.toLowerCase() || '';
-  
+
   // 리소스 타입 결정
   const isVideo = ['mp4', 'webm', 'ogg', 'mov'].includes(extension);
   const resourceType = isVideo ? 'video' : 'image';
-  
+
   return `${BASE_URL}/${resourceType}/upload/cpr-videos/${filename}`;
 }
 

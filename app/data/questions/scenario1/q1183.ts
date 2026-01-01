@@ -10,26 +10,10 @@ export const q1183: Question = {
   mediaPrompt: "Scenario1_Video_2_10_3",
   questionText: "다음 심전도는 무슨 리듬인가요?",
   options: [
-    {
-      id: "1",
-      text: "Asystole (무수축)",
-      imageUrl: "/images/questions/scenario1/Q18-C.jpg",
-    },
-    {
-      id: "2",
-      text: "PEA (무맥성 전기활동)",
-      imageUrl: "/images/questions/scenario1/Q18-D.jpg",
-    },
-    {
-      id: "3",
-      text: "VF (심실세동)",
-      imageUrl: "/images/questions/scenario1/Q18-A.jpg",
-    },
-    {
-      id: "4",
-      text: "Pulseless VT (무맥성 심실빈맥)",
-      imageUrl: "/images/questions/scenario1/Q18-B.jpg",
-    },
+    { id: "1", text: "Asystole (무수축)" },
+    { id: "2", text: "PEA (무맥성 전기활동)" },
+    { id: "3", text: "VF (심실세동)" },
+    { id: "4", text: "Pulseless VT (무맥성 심실빈맥)" },
   ],
   correctOptionId: "3",
   feedbackCorrect: "정답입니다! 심실세동(VF)으로 Shockable 리듬입니다.",

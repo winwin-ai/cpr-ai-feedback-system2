@@ -10,26 +10,10 @@ export const q1151: Question = {
   mediaPrompt: "Scenario1_Video_2_7_1",
   questionText: "다음 심전도는 무슨 리듬인가요?",
   options: [
-    {
-      id: "1",
-      text: "Asystole (무수축)",
-      imageUrl: "/images/questions/scenario1/Q15-C.jpg",
-    },
-    {
-      id: "2",
-      text: "PEA (무맥성 전기활동)",
-      imageUrl: "/images/questions/scenario1/Q15-D.jpg",
-    },
-    {
-      id: "3",
-      text: "VF (심실세동)",
-      imageUrl: "/images/questions/scenario1/Q15-A.jpg",
-    },
-    {
-      id: "4",
-      text: "Pulseless VT (무맥성 심실빈맥)",
-      imageUrl: "/images/questions/scenario1/Q15-B.jpg",
-    },
+    { id: "1", text: "Asystole (무수축)" },
+    { id: "2", text: "PEA (무맥성 전기활동)" },
+    { id: "3", text: "VF (심실세동)" },
+    { id: "4", text: "Pulseless VT (무맥성 심실빈맥)" },
   ],
   correctOptionId: "2",
   feedbackCorrect:
@@ -37,7 +21,7 @@ export const q1151: Question = {
   feedbackIncorrect: "틀렸습니다. 이 파형은 PEA(무맥성 전기활동)입니다.",
   explanation: "심전도상 전기적 활동은 보이나 맥박이 없는 상태입니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288667/PEA_placeholder.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767270178/cpr-videos/PEA-NSR.mp4`,
   },
   nextId: 1152,
 };

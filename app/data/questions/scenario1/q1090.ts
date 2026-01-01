@@ -12,7 +12,7 @@ export const q1090: Question = {
   options: [
     {
       id: "1",
-      text: "흉골 중앙의 하단부, 양쪽 nipple 사이에 손바닥을 올리고 압박한다.",
+      text: "흉골 중앙의 하단부, 양쪽 유두 사이에 손바닥을 올리고 압박한다.",
       imageUrl: "/images/questions/scenario1/Q09-A.jpg",
     },
     {
@@ -27,18 +27,19 @@ export const q1090: Question = {
     },
     {
       id: "4",
-      text: "흉골를 세게 3~4회만 눌러 반응을 본다.",
+      text: "흉골을 세게 3~4회만 눌러 반응을 본다.",
       imageUrl: "/images/questions/scenario1/Q09-D.jpg",
     },
   ],
   correctOptionId: "1",
   feedbackCorrect:
-    "올바릅니다! 흉골 중앙의 하단부, 즉 양쪽 nipple 사이를 압박해야 합니다.",
+    "올바릅니다! 흉골 중앙의 하단부, 양쪽 유두 사이를 압박해야 합니다.",
   feedbackIncorrect:
     "오답입니다. 가슴압박은 반드시 흉골 중앙의 하단부에 손바닥을 올려 심장에 효과적으로 압력을 전달해야 합니다.",
   explanation: "추가 설명이 없습니다.",
-  videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315067/S1_2_1_eheqyh.mp4`,
-  },
+    videoPaths: {
+        question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767256196/Q08_a9pza9.mp4`,
+    },
+
   nextId: 1100,
 };

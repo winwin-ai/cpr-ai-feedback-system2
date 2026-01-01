@@ -11,26 +11,10 @@ export const q1180: Question = {
   questionText:
     "가슴압박 중 환자의 심장 리듬을 재확인했습니다. 다음 심전도는 무슨 리듬인가요?",
   options: [
-    {
-      id: "1",
-      text: "VF (심실세동)",
-      imageUrl: "/images/questions/scenario1/Q18-A.jpg",
-    },
-    {
-      id: "2",
-      text: "Pulseless VT (무맥성 심실빈맥)",
-      imageUrl: "/images/questions/scenario1/Q18-B.jpg",
-    },
-    {
-      id: "3",
-      text: "Asystole (무수축)",
-      imageUrl: "/images/questions/scenario1/Q18-C.jpg",
-    },
-    {
-      id: "4",
-      text: "PEA (무맥성 전기활동)",
-      imageUrl: "/images/questions/scenario1/Q18-D.jpg",
-    },
+    { id: "1", text: "VF (심실세동)" },
+    { id: "2", text: "Pulseless VT (무맥성 심실빈맥)" },
+    { id: "3", text: "Asystole (무수축)" },
+    { id: "4", text: "PEA (무맥성 전기활동)" },
   ],
   correctOptionId: "1",
   feedbackCorrect: "정답입니다! 심실세동(VF)으로 Shockable 리듬입니다.",
