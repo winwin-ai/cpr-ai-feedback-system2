@@ -8,16 +8,29 @@ export const q1180: Question = {
   title: "리듬 확인 (VF)",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_10",
-  questionText: "2분 후 리듬 재확인 중입니다. 이 리듬은 무엇인가요?",
+  questionText:
+    "가슴압박 중 환자의 심장 리듬을 재확인했습니다. 다음 심전도는 무슨 리듬인가요?",
   options: [
-    { id: "1", text: "VF (심실세동)", imageUrl: "/images/questions/scenario1/Q18-A.jpg" },
+    {
+      id: "1",
+      text: "VF (심실세동)",
+      imageUrl: "/images/questions/scenario1/Q18-A.jpg",
+    },
     {
       id: "2",
-      text: "Normal Sinus Rhythm",
+      text: "Pulseless VT (무맥성 심실빈맥)",
       imageUrl: "/images/questions/scenario1/Q18-B.jpg",
     },
-    { id: "3", text: "Asystole", imageUrl: "/images/questions/scenario1/Q18-C.jpg" },
-    { id: "4", text: "PEA", imageUrl: "/images/questions/scenario1/Q18-D.jpg" },
+    {
+      id: "3",
+      text: "Asystole (무수축)",
+      imageUrl: "/images/questions/scenario1/Q18-C.jpg",
+    },
+    {
+      id: "4",
+      text: "PEA (무맥성 전기활동)",
+      imageUrl: "/images/questions/scenario1/Q18-D.jpg",
+    },
   ],
   correctOptionId: "1",
   feedbackCorrect: "정답입니다! 심실세동(VF)으로 Shockable 리듬입니다.",
@@ -26,5 +39,5 @@ export const q1180: Question = {
   videoPaths: {
     question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288661/VF_r1yv9r.mp4`,
   },
-  nextId: 1190,
+  nextId: 1181,
 };

@@ -17,10 +17,15 @@ import { q1110 } from "./q1110";
 import { q1120 } from "./q1120";
 import { q1130 } from "./q1130";
 import { q1140 } from "./q1140";
-import { q1150 } from "./q1150";
+import { q1151 } from "./q1151";
+import { q1152 } from "./q1152";
+import { q1153 } from "./q1153";
 import { q1160 } from "./q1160";
 import { q1170 } from "./q1170";
 import { q1180 } from "./q1180";
+import { q1181 } from "./q1181";
+import { q1182 } from "./q1182";
+import { q1183 } from "./q1183";
 import { q1190 } from "./q1190";
 import { q1200 } from "./q1200";
 import { q1210 } from "./q1210";
@@ -48,10 +53,15 @@ export const scenario1Questions: Question[] = [
   q1120,
   q1130,
   q1140,
-  q1150,
+  q1151,
+  q1152,
+  q1153,
   q1160,
   q1170,
   q1180,
+  q1181,
+  q1182,
+  q1183,
   q1190,
   q1200,
   q1210,
