@@ -518,22 +518,9 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
             ) : currentQuestion.questionType === "dragdrop" &&
               currentQuestion.dragItems &&
               currentQuestion.correctOrder ? (
-              // Drag-Drop Desktop UI - 제목만 팝업, 나머지는 전체 영역
-              <div className="absolute inset-0 flex flex-col z-10 p-6">
-                {/* 상단: 제목만 팝업 스타일 */}
-                <div className="text-center mb-6">
-                  <div className="bg-black/70 backdrop-blur-md inline-block px-6 py-3 rounded-2xl border border-white/10">
-                    <h2 className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-1">
-                      Question{" "}
-                      {currentQuestion.displayId || currentIndexInOrdered + 1}
-                    </h2>
-                    <h3 className="text-white text-lg font-bold leading-relaxed whitespace-pre-line">
-                      {currentQuestion.questionText}
-                    </h3>
-                  </div>
-                </div>
-
-                {/* 중단/하단: 드래그 드롭 영역 (팝업 밖, 전체 너비) */}
+              // Drag-Drop Desktop UI
+              <div className="absolute inset-0 flex flex-col z-10 p-6 pt-32">
+                {/* 드래그 드롭 영역 */}
                 <div className="flex-grow flex items-start justify-center overflow-auto px-4">
                   <div className="w-full max-w-6xl">
                     <DragDropQuestion
