@@ -521,7 +521,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
               // Drag-Drop Desktop UI
               <div className="absolute inset-0 flex flex-col z-10 p-6 pt-32">
                 {/* 드래그 드롭 영역 */}
-                <div className="flex-grow flex items-start justify-center overflow-auto px-4">
+                <div className="flex-grow flex items-end justify-center overflow-auto px-4">
                   <div className="w-full max-w-6xl">
                     <DragDropQuestion
                       items={currentQuestion.dragItems}
