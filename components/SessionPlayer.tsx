@@ -202,7 +202,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       <div className="bg-slate-900 text-white px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-between border-b border-slate-700 z-20">
         <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-1/2">
           <span className="text-xs sm:text-sm font-bold text-slate-400 whitespace-nowrap">
-            SESSION {currentQuestion.sessionId || sessionId}
+            Scenario {currentQuestion.scenarioId || 1}
           </span>
           <div className="flex-grow h-1.5 sm:h-2 bg-slate-700 rounded-full overflow-hidden">
             <div
@@ -473,13 +473,13 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
           )}
         </div>
 
-        {/* Question Overlay (Small) - Desktop */}
-        <div className="absolute top-6 left-6 right-6 z-10">
-          <div className="bg-black/60 backdrop-blur-md px-6 py-4 rounded-xl border border-white/10 shadow-lg inline-block max-w-3xl">
-            <span className="text-blue-400 font-bold text-sm uppercase tracking-wider">
+        {/* Question Title - Always Visible */}
+        <div className="absolute top-6 left-6 z-10">
+          <div className="bg-black/60 backdrop-blur-md px-8 py-5 rounded-xl border border-white/10 shadow-lg max-w-3xl">
+            <span className="text-blue-400 font-bold text-xl uppercase tracking-wider">
               Question {currentQuestion.displayId || currentIndexInOrdered + 1}
             </span>
-            <p className="text-white font-bold text-xl mt-1 leading-snug">
+            <p className="text-white font-bold text-2xl mt-2 leading-snug">
               {currentQuestion.questionText}
             </p>
           </div>
@@ -553,25 +553,6 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
             ) : (
               // Standard Desktop UI
               <>
-                {/* Top: Title */}
-                <div
-                  className={`absolute top-0 left-0 right-0 p-8 z-10 text-center animate-in fade-in slide-in-from-top-6 duration-700 ease-out ${
-                    feedbackState !== "idle"
-                      ? "opacity-50 blur-sm transition-all duration-500"
-                      : "opacity-100"
-                  }`}
-                >
-                  <div className="bg-black/60 backdrop-blur-md inline-block px-8 py-4 rounded-2xl shadow-lg border border-white/10">
-                    <h2 className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-2">
-                      Question{" "}
-                      {currentQuestion.displayId || currentIndexInOrdered + 1}
-                    </h2>
-                    <h3 className="text-white text-2xl md:text-3xl font-bold leading-relaxed">
-                      {currentQuestion.questionText}
-                    </h3>
-                  </div>
-                </div>
-
                 {/* Bottom: Options Horizontal List */}
                 <div
                   className={`absolute bottom-8 left-0 right-0 p-4 z-10 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-150 ease-out ${
