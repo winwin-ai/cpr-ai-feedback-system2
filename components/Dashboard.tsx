@@ -1,19 +1,11 @@
 import React from "react";
-import {
-  PlayCircle,
-  Activity,
-  User,
-  Users,
-  ChevronRight,
-  ShieldAlert,
-  Heart,
-  BarChart3,
-} from "lucide-react";
+import { Activity, User, Users, ChevronRight } from "lucide-react";
 import {
   scenario1Questions,
   scenario2Questions,
   scenario3Questions,
 } from "@/app/data";
+import { Question } from "@/app/types";
 
 interface DashboardProps {
   onSelectScenario: (scenarioId: number) => void;
@@ -26,7 +18,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 }) => {
   const renderShortcuts = (
     scenarioId: number,
-    questions: any[],
+    questions: Question[],
     colorClass: string
   ) => {
     return (

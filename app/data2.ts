@@ -1,7 +1,5 @@
 import { Question } from "./types";
 
-const CLOUDINARY_BASE = "https://res.cloudinary.com/dn3cicucf";
-
 // 시나리오 1: 심소생 (심정지 환자) - 세션 1 & 2
 export const scenario1Questions: Question[] = [
   // --- Session 1 ---

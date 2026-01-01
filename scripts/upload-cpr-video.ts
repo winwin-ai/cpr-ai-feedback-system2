@@ -37,8 +37,9 @@ async function upload() {
       });
       console.log('✅ ' + file + ' → ' + result.secure_url);
       success++;
-    } catch (error: any) {
-      console.error('❌ ' + file + ' 실패: ' + error.message);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error('❌ ' + file + ' 실패: ' + message);
       failed++;
     }
   }

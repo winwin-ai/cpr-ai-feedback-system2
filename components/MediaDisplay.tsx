@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  Image as ImageIcon,
-  Loader2,
-  Video,
-  Wand2,
-  AlertCircle,
-  RefreshCw,
-  Save,
-  Download,
-} from "lucide-react";
-import { GoogleGenAI } from "@google/genai";
-import { getVideoFromDB, saveVideoToDB } from "../utils/videoStorage";
+import Image from "next/image";
+import { getVideoFromDB } from "../utils/videoStorage";
 
 interface MediaDisplayProps {
   type: "video" | "image";
@@ -26,9 +16,7 @@ interface MediaDisplayProps {
 }
 
 export const MediaDisplay: React.FC<MediaDisplayProps> = ({
-  type,
   prompt,
-  isCorrectAction,
   cacheKey,
   localVideoFilename,
   videoSrc,
@@ -40,11 +28,6 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
   const [generatedVideoUrl, setGeneratedVideoUrl] = useState<string | null>(
     null
   );
-  const [videoBlob, setVideoBlob] = useState<Blob | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generationProgress, setGenerationProgress] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [isCheckingDB, setIsCheckingDB] = useState(true);
   const [localVideoUrl, setLocalVideoUrl] = useState<string | null>(null);
 
   const videoRef = React.useRef<HTMLVideoElement>(null);
@@ -90,7 +73,6 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
   useEffect(() => {
     // If we have a direct video source or local video file, we don't need to check DB
     if (videoSrc || localVideoUrl) {
-      setIsCheckingDB(false);
       return;
     }
 
@@ -98,22 +80,16 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
     let objectUrl: string | null = null;
 
     const loadFromCache = async () => {
-      setIsCheckingDB(true);
       setGeneratedVideoUrl(null);
-      setVideoBlob(null);
-      setError(null);
 
       try {
         const cachedBlob = await getVideoFromDB(storageKey);
         if (isActive && cachedBlob) {
           objectUrl = URL.createObjectURL(cachedBlob);
           setGeneratedVideoUrl(objectUrl);
-          setVideoBlob(cachedBlob);
         }
       } catch (err) {
         console.error("Cache restoration failed:", err);
-      } finally {
-        if (isActive) setIsCheckingDB(false);
       }
     };
 
@@ -126,134 +102,6 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
       }
     };
   }, [storageKey, localVideoUrl, videoSrc]);
-
-  const handleGenerateVideo = async () => {
-    setError(null);
-
-    try {
-      // Check for API Key in environment variables
-      const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-
-      if (!apiKey) {
-        // Fallback to window.aistudio if available (for backward compatibility or specific envs)
-        if (window.aistudio) {
-          const hasKey = await window.aistudio.hasSelectedApiKey();
-          if (!hasKey) {
-            await window.aistudio.openSelectKey();
-          }
-        } else {
-          throw new Error(
-            "API Key not found. Please set NEXT_PUBLIC_GEMINI_API_KEY in .env.local"
-          );
-        }
-      }
-
-      setIsGenerating(true);
-      setGenerationProgress("Initializing Veo model...");
-
-      // 2. Initialize Client
-      // Use the found apiKey or let the SDK handle it if it was set via other means (though SDK usually needs it passed)
-      // If we are here, we either have apiKey or window.aistudio handled it (but standard SDK needs key)
-
-      const effectiveKey = apiKey || process.env.API_KEY; // Fallback
-
-      if (!effectiveKey && !window.aistudio) {
-        throw new Error("No API Key available");
-      }
-
-      const ai = new GoogleGenAI({ apiKey: effectiveKey });
-
-      setGenerationProgress("Requesting video generation (Veo 3.1)...");
-
-      // 3. Call Generate Videos
-      let operation = await ai.models.generateVideos({
-        model: "veo-3.1-fast-generate-preview",
-        prompt: prompt + " The actors are Korean.",
-        config: {
-          numberOfVideos: 1,
-          resolution: "720p",
-          aspectRatio: "16:9",
-        },
-      });
-
-      // 4. Polling Loop
-      setGenerationProgress("Generating... (this may take a minute)");
-      while (!operation.done) {
-        await new Promise((resolve) => setTimeout(resolve, 5000));
-        operation = await ai.operations.getVideosOperation({
-          operation: operation,
-        });
-        setGenerationProgress("Rendering frames...");
-      }
-
-      if (operation.response?.generatedVideos?.[0]?.video?.uri) {
-        const downloadLink = operation.response.generatedVideos[0].video.uri;
-        setGenerationProgress("Downloading and saving...");
-
-        // 5. Fetch content
-        // Note: The download link might require the API key appended if it's not a public URL
-        const fetchUrl = effectiveKey
-          ? `${downloadLink}&key=${effectiveKey}`
-          : downloadLink;
-
-        const response = await fetch(fetchUrl);
-        if (!response.ok) {
-          throw new Error(`Download failed: ${response.statusText}`);
-        }
-
-        const blob = await response.blob();
-
-        // 6. Save to DB for persistence
-        await saveVideoToDB(storageKey, blob);
-
-        // 7. Display
-        const videoUrl = URL.createObjectURL(blob);
-        setGeneratedVideoUrl(videoUrl);
-        setVideoBlob(blob);
-      } else {
-        throw new Error("No video URI in response");
-      }
-    } catch (err: any) {
-      console.error("Video generation failed:", err);
-      let errorMessage = err.message || "Generation failed";
-
-      // Specific Error Handling
-      if (
-        errorMessage.includes("404") ||
-        errorMessage.includes("Requested entity was not found")
-      ) {
-        errorMessage = "API Key Error: Project not found or invalid key.";
-      } else if (
-        errorMessage.includes("429") ||
-        errorMessage.includes("quota") ||
-        errorMessage.includes("RESOURCE_EXHAUSTED")
-      ) {
-        errorMessage =
-          "Quota Exceeded: Veo generation limit reached. Please wait a moment or check your billing plan.";
-      }
-
-      setError(errorMessage);
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
-  const handleDownload = () => {
-    if (videoBlob) {
-      const url = URL.createObjectURL(videoBlob);
-      const a = document.createElement("a");
-      a.href = url;
-      // Use cacheKey as filename if available, otherwise default
-      const filename = cacheKey
-        ? `${cacheKey}.mp4`
-        : `generated_video_${Date.now()}.mp4`;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-  };
 
   const placeholderUrl = `https://picsum.photos/seed/${encodeURIComponent(
     prompt
@@ -299,14 +147,14 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           className="w-full h-full object-contain"
         />
       ) : (
-        <img
+        <Image
           src={placeholderUrl}
           alt={prompt}
-          className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-700"
+          fill
+          unoptimized
+          className="object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-700"
         />
       )}
-
-      {/* Overlay UI Removed as per user request */}
 
       {/* Grid Overlay for "Blueprint" feel */}
       <div

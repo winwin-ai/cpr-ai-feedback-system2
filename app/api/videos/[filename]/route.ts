@@ -21,7 +21,7 @@ export async function DELETE(
     } else {
       return NextResponse.json({ error: 'File not found' }, { status: 404 });
     }
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Delete failed' }, { status: 500 });
   }
 }

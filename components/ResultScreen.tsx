@@ -11,14 +11,13 @@ interface ResultScreenProps {
   isFinal?: boolean;
 }
 
-export const ResultScreen: React.FC<ResultScreenProps> = ({ 
-  score, 
-  total, 
-  passed, 
-  sessionId, 
-  onRetry, 
+export const ResultScreen: React.FC<ResultScreenProps> = ({
+  score,
+  total,
+  passed,
+  onRetry,
   onContinue,
-  isFinal = false 
+  isFinal = false
 }) => {
   const percentage = Math.round((score / total) * 100);
 

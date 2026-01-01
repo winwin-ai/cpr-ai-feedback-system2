@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Question } from "@/app/types";
 import { MediaDisplay } from "./MediaDisplay";
-import { Timer, AlertCircle, CheckCircle2, XCircle } from "lucide-react";
+import { AlertCircle, CheckCircle2, XCircle } from "lucide-react";
 import Image from "next/image";
 import { getCloudinaryUrl } from "@/utils/cloudinaryUrl";
 
@@ -33,7 +32,6 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   );
   const [score, setScore] = useState(0);
   const [retryCount, setRetryCount] = useState(0);
-  const [timer, setTimer] = useState<number | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true); // Default to true or check on mount
   const [videoError, setVideoError] = useState(false);
@@ -42,7 +40,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   const currentQuestion = questionsMap[currentQuestionId];
 
   useEffect(() => {
-    setIsMounted(true);
+    queueMicrotask(() => setIsMounted(true));
     const checkIsDesktop = () => setIsDesktop(window.innerWidth >= 640);
     checkIsDesktop();
     window.addEventListener("resize", checkIsDesktop);
@@ -55,15 +53,15 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
     // If no video, skip straight to waiting (question)
     const hasQuestionVideo = !!currentQuestion.videoPaths?.question;
-    setPlaybackState(hasQuestionVideo ? "question" : "waiting");
-
-    setFeedbackState("idle");
-    setSelectedOptionId(null);
-    setDisabledOptionIds(new Set());
-    setRetryCount(0);
-    setTimer(null);
-    setVideoError(false);
-  }, [currentQuestionId, questionsMap]);
+    queueMicrotask(() => {
+      setPlaybackState(hasQuestionVideo ? "question" : "waiting");
+      setFeedbackState("idle");
+      setSelectedOptionId(null);
+      setDisabledOptionIds(new Set());
+      setRetryCount(0);
+      setVideoError(false);
+    });
+  }, [currentQuestionId, currentQuestion]);
 
   const proceedToNextQuestion = () => {
     const selectedOption = currentQuestion.options.find(
@@ -164,7 +162,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
   useEffect(() => {
     if (currentIntendedSrc) {
-      setActiveVideoSrc(currentIntendedSrc);
+      queueMicrotask(() => setActiveVideoSrc(currentIntendedSrc));
     }
   }, [currentIntendedSrc]);
 

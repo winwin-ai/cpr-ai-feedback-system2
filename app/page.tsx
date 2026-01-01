@@ -6,7 +6,7 @@ import { Dashboard } from "../components/Dashboard";
 import { SessionPlayer } from "../components/SessionPlayer";
 import { ResultScreen } from "../components/ResultScreen";
 import { Scenario } from "../components/Scenario";
-import { ViewState, Question } from "./types";
+import { ViewState } from "./types";
 import {
   scenario1Questions,
   scenario1,
@@ -268,7 +268,7 @@ const SCENARIO_DATA = {
           일어서다 쓰러졌습니다.
           <br />
           <br />
-          보호자가 <span className="font-bold">"환자가 쓰러졌어요"</span>
+          보호자가 <span className="font-bold">&quot;환자가 쓰러졌어요&quot;</span>
           라고 해서 화장실에 갔을 때 환자는 바닥에 쓰러져 있었습니다. 눈을 감은
           채로 사지에{" "}
           <span className="font-bold decoration-red-300 underline underline-offset-4">
@@ -842,10 +842,6 @@ export default function Home() {
     // Scenario 1 starts with Session 1 (which encompasses the whole flow in this simplified logic, or we can split it if needed)
     // For now, mapping all questions to "SESSION_1" view state which uses SessionPlayer
     setViewState(ViewState.SESSION_1);
-  };
-
-  const handleBackToDashboard = () => {
-    setViewState(ViewState.DASHBOARD);
   };
 
   const handleSessionComplete = (correctCount: number) => {

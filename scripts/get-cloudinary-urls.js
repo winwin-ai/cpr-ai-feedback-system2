@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary").v2;
+import { v2 as cloudinary } from "cloudinary";
 
 // Config is loaded from .env.local via node --env-file=.env.local
 // or we can manually load if needed, but the command flag is easier.
