@@ -161,10 +161,19 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       : getCloudinaryUrl(currentQuestion.videoPaths?.question);
 
   useEffect(() => {
+    // Update activeVideoSrc when intended source changes
     if (currentIntendedSrc) {
-      queueMicrotask(() => setActiveVideoSrc(currentIntendedSrc));
+      setActiveVideoSrc(currentIntendedSrc);
     }
   }, [currentIntendedSrc]);
+
+  // Also update when playbackState changes to "answer"
+  useEffect(() => {
+    if (playbackState === "answer" && currentQuestion.videoPaths?.answer) {
+      const answerVideoUrl = getCloudinaryUrl(currentQuestion.videoPaths.answer);
+      setActiveVideoSrc(answerVideoUrl);
+    }
+  }, [playbackState, currentQuestion.videoPaths?.answer]);
 
   // Progress
   const currentIndexInOrdered = orderedQuestionIds.indexOf(currentQuestionId);

@@ -32,7 +32,7 @@ export interface Question {
   explanation: string; // Detailed medical explanation
   hasTimer?: boolean; // For the pulse check question
   videoPaths?: {
-    question: string;
+    question?: string;
     answer?: string; // Video to play upon correct answer
   };
   localVideoFilename?: string; // Local video file in /public/videos/
