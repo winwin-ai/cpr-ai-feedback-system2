@@ -9,9 +9,12 @@ import { Scenario } from "../components/Scenario";
 import { ViewState, Question } from "./types";
 import {
   scenario1Questions,
+  scenario1,
   scenario2Questions,
+  scenario2,
   scenario3Questions,
-} from "./data2";
+  scenario3,
+} from "@/app/data";
 
 // Scenario Intro Data
 const SCENARIO_DATA = {
@@ -791,6 +794,7 @@ export default function Home() {
   const [viewState, setViewState] = useState<ViewState>(ViewState.DASHBOARD);
   const [sessionScore, setSessionScore] = useState(0);
   const [selectedScenarioId, setSelectedScenarioId] = useState<number>(1);
+  const [initialQuestionIndex, setInitialQuestionIndex] = useState<number>(0);
 
   // Helper to get questions based on scenario
   const getQuestions = () => {
@@ -806,11 +810,32 @@ export default function Home() {
     }
   };
 
+  const getScenario = () => {
+    switch (selectedScenarioId) {
+      case 1:
+        return scenario1;
+      case 2:
+        return scenario2;
+      case 3:
+        return scenario3;
+      default:
+        return scenario1;
+    }
+  };
+
   const currentQuestions = getQuestions();
+  const currentScenario = getScenario();
 
   const handleScenarioSelect = (scenarioId: number) => {
     setSelectedScenarioId(scenarioId);
+    setInitialQuestionIndex(0);
     setViewState(ViewState.SCENARIO);
+  };
+
+  const handleJumpToQuestion = (scenarioId: number, questionIndex: number) => {
+    setSelectedScenarioId(scenarioId);
+    setInitialQuestionIndex(questionIndex);
+    setViewState(ViewState.SESSION_1);
   };
 
   const handleScenarioComplete = () => {
@@ -848,7 +873,10 @@ export default function Home() {
   return (
     <Layout viewState={viewState}>
       {viewState === ViewState.DASHBOARD && (
-        <Dashboard onSelectScenario={handleScenarioSelect} />
+        <Dashboard
+          onSelectScenario={handleScenarioSelect}
+          onJumpToQuestion={handleJumpToQuestion}
+        />
       )}
 
       {viewState === ViewState.SCENARIO && (
@@ -864,8 +892,15 @@ export default function Home() {
       {/* Reusing SESSION_1 state for the main player loop for any scenario */}
       {viewState === ViewState.SESSION_1 && (
         <SessionPlayer
-          sessionId={1} // Just a display number
-          questions={currentQuestions}
+          questionsMap={currentScenario.questions}
+          orderedQuestionIds={currentQuestions.map((q) => q.id)}
+          initialQuestionId={
+            currentQuestions[initialQuestionIndex]?.id ||
+            currentScenario.startQuestionId
+          }
+          sessionId={
+            selectedScenarioId === 1 ? (initialQuestionIndex >= 8 ? 2 : 1) : 1
+          }
           onComplete={handleSessionComplete}
         />
       )}

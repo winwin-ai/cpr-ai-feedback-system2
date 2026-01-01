@@ -12,10 +12,11 @@ export interface Option {
   id: string;
   text: string;
   imageUrl?: string;
+  nextId?: number | string; // Branching path based on choice
 }
 
 export interface Question {
-  id: number;
+  id: number | string;
   sessionId: number;
   scenarioId?: number; // Optional scenario ID
   role?: string; // Optional role for team CPR
@@ -34,7 +35,17 @@ export interface Question {
     question: string;
     answer?: string; // Video to play upon correct answer
   };
+  localVideoFilename?: string; // Local video file in /public/videos/
+  displayId?: string; // Custom question number for display (e.g., "7-1")
+  nextId?: number | string; // Direct link to next question
   isTransition?: boolean; // If true, displayed as a session transition screen
+}
+
+export interface Scenario {
+  id: number;
+  title: string;
+  questions: Record<string | number, Question>;
+  startQuestionId: string | number;
 }
 
 export interface SessionResult {

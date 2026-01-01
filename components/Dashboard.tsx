@@ -9,12 +9,52 @@ import {
   Heart,
   BarChart3,
 } from "lucide-react";
+import {
+  scenario1Questions,
+  scenario2Questions,
+  scenario3Questions,
+} from "@/app/data";
 
 interface DashboardProps {
   onSelectScenario: (scenarioId: number) => void;
+  onJumpToQuestion: (scenarioId: number, questionIndex: number) => void;
 }
 
-export const Dashboard: React.FC<DashboardProps> = ({ onSelectScenario }) => {
+export const Dashboard: React.FC<DashboardProps> = ({
+  onSelectScenario,
+  onJumpToQuestion,
+}) => {
+  const renderShortcuts = (
+    scenarioId: number,
+    questions: any[],
+    colorClass: string
+  ) => {
+    return (
+      <div className="mt-6 pt-6 border-t border-slate-100">
+        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
+          문항 바로가기
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {questions.map((q, i) => {
+            if (q.isTransition) return null;
+            return (
+              <button
+                key={i}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onJumpToQuestion(scenarioId, i);
+                }}
+                className={`w-auto min-w-[36px] px-2 h-9 rounded-lg flex items-center justify-center text-sm font-bold transition-all ${colorClass} hover:scale-110 active:scale-95`}
+              >
+                Q{q.displayId || i + 1}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
       {/* Hero Section */}
@@ -33,7 +73,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectScenario }) => {
         {/* Scenario 1 */}
         <div
           onClick={() => onSelectScenario(1)}
-          className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer relative overflow-hidden group"
+          className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer relative overflow-hidden group flex flex-col"
         >
           <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
             <Activity className="w-24 h-24 text-blue-600" />
@@ -45,19 +85,24 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectScenario }) => {
           <p className="text-lg font-bold text-blue-600 mb-4">
             심소생 (심정지 환자)
           </p>
-          <p className="text-slate-500 mb-6 text-sm">
+          <p className="text-slate-500 mb-6 text-sm flex-grow">
             병동에서 발생한 심정지 상황. 초기 대응부터 심폐소생술, 제세동까지의
             과정을 훈련합니다.
           </p>
-          <div className="flex items-center text-blue-600 font-bold group-hover:translate-x-2 transition-transform">
+          <div className="flex items-center text-blue-600 font-bold group-hover:translate-x-2 transition-transform mb-2">
             시작하기 <ChevronRight className="w-5 h-5 ml-1" />
           </div>
+          {renderShortcuts(
+            1,
+            scenario1Questions,
+            "bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white"
+          )}
         </div>
 
         {/* Scenario 2 */}
         <div
           onClick={() => onSelectScenario(2)}
-          className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer relative overflow-hidden group"
+          className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer relative overflow-hidden group flex flex-col"
         >
           <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
             <User className="w-24 h-24 text-teal-600" />
@@ -69,19 +114,24 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectScenario }) => {
           <p className="text-lg font-bold text-teal-600 mb-4">
             김여린 (실신/정상호흡)
           </p>
-          <p className="text-slate-500 mb-6 text-sm">
+          <p className="text-slate-500 mb-6 text-sm flex-grow">
             실신 환자 발생. 의식 확인 및 호흡 양상 판단을 통해 비심정지 상황을
             감별합니다.
           </p>
-          <div className="flex items-center text-teal-600 font-bold group-hover:translate-x-2 transition-transform">
+          <div className="flex items-center text-teal-600 font-bold group-hover:translate-x-2 transition-transform mb-2">
             시작하기 <ChevronRight className="w-5 h-5 ml-1" />
           </div>
+          {renderShortcuts(
+            2,
+            scenario2Questions,
+            "bg-teal-50 text-teal-600 hover:bg-teal-600 hover:text-white"
+          )}
         </div>
 
         {/* Scenario 3 */}
         <div
           onClick={() => onSelectScenario(3)}
-          className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer relative overflow-hidden group"
+          className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer relative overflow-hidden group flex flex-col"
         >
           <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
             <Users className="w-24 h-24 text-indigo-600" />
@@ -93,13 +143,18 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectScenario }) => {
           <p className="text-lg font-bold text-indigo-600 mb-4">
             장소중 (팀 기반 CPR)
           </p>
-          <p className="text-slate-500 mb-6 text-sm">
+          <p className="text-slate-500 mb-6 text-sm flex-grow">
             전문 심폐소생술 팀 활동. 간호사 1, 2, 3의 역할 분담과 협력을
             훈련합니다.
           </p>
-          <div className="flex items-center text-indigo-600 font-bold group-hover:translate-x-2 transition-transform">
+          <div className="flex items-center text-indigo-600 font-bold group-hover:translate-x-2 transition-transform mb-2">
             시작하기 <ChevronRight className="w-5 h-5 ml-1" />
           </div>
+          {renderShortcuts(
+            3,
+            scenario3Questions,
+            "bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white"
+          )}
         </div>
       </div>
     </div>

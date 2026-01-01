@@ -6,21 +6,23 @@ import Image from "next/image";
 import { getCloudinaryUrl } from "@/utils/cloudinaryUrl";
 
 interface SessionPlayerProps {
-  questions: Question[];
+  questionsMap: Record<string | number, import("@/app/types").Question>;
+  orderedQuestionIds: (string | number)[];
+  initialQuestionId: string | number;
   sessionId: number;
-  initialQuestionIndex?: number;
   onComplete: (correctCount: number) => void;
 }
 
 type PlaybackState = "intro" | "question" | "waiting" | "answer";
 
 export const SessionPlayer: React.FC<SessionPlayerProps> = ({
-  questions,
+  questionsMap,
+  orderedQuestionIds,
+  initialQuestionId,
   sessionId,
-  initialQuestionIndex = 0,
   onComplete,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(initialQuestionIndex);
+  const [currentQuestionId, setCurrentQuestionId] = useState(initialQuestionId);
   const [playbackState, setPlaybackState] = useState<PlaybackState>("question");
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [feedbackState, setFeedbackState] = useState<
@@ -37,7 +39,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   const [videoError, setVideoError] = useState(false);
   const [activeVideoSrc, setActiveVideoSrc] = useState<string | null>(null);
 
-  const currentQuestion = questions[currentIndex];
+  const currentQuestion = questionsMap[currentQuestionId];
 
   useEffect(() => {
     setIsMounted(true);
@@ -49,8 +51,10 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
   // Reset when question changes
   useEffect(() => {
+    if (!currentQuestion) return;
+
     // If no video, skip straight to waiting (question)
-    const hasQuestionVideo = !!questions[currentIndex].videoPaths?.question;
+    const hasQuestionVideo = !!currentQuestion.videoPaths?.question;
     setPlaybackState(hasQuestionVideo ? "question" : "waiting");
 
     setFeedbackState("idle");
@@ -59,14 +63,34 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
     setRetryCount(0);
     setTimer(null);
     setVideoError(false);
-  }, [currentIndex, questions]);
+  }, [currentQuestionId, questionsMap]);
 
   const proceedToNextQuestion = () => {
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else {
-      onComplete(score);
+    const selectedOption = currentQuestion.options.find(
+      (o) => o.id === selectedOptionId
+    );
+
+    // 1. Check if option has a specific nextId (branching)
+    if (selectedOption?.nextId && questionsMap[selectedOption.nextId]) {
+      setCurrentQuestionId(selectedOption.nextId);
+      return;
     }
+
+    // 2. Check if question has a direct nextId
+    if (currentQuestion.nextId && questionsMap[currentQuestion.nextId]) {
+      setCurrentQuestionId(currentQuestion.nextId);
+      return;
+    }
+
+    // 3. Fallback to ordered list if available
+    const currentIndex = orderedQuestionIds.indexOf(currentQuestionId);
+    if (currentIndex !== -1 && currentIndex < orderedQuestionIds.length - 1) {
+      setCurrentQuestionId(orderedQuestionIds[currentIndex + 1]);
+      return;
+    }
+
+    // 4. End of scenario
+    onComplete(score);
   };
 
   const handleVideoEnded = () => {
@@ -145,7 +169,11 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   }, [currentIntendedSrc]);
 
   // Progress
-  const progress = (currentIndex / questions.length) * 100;
+  const currentIndexInOrdered = orderedQuestionIds.indexOf(currentQuestionId);
+  const progress =
+    orderedQuestionIds.length > 0
+      ? (Math.max(0, currentIndexInOrdered) / orderedQuestionIds.length) * 100
+      : 0;
 
   return (
     <div className="flex flex-col h-[calc(100vh-64px)] overflow-hidden bg-black font-sans">
@@ -162,7 +190,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
             ></div>
           </div>
           <span className="text-xs sm:text-sm font-mono whitespace-nowrap">
-            {currentIndex + 1} / {questions.length}
+            {currentIndexInOrdered + 1} / {orderedQuestionIds.length}
           </span>
         </div>
       </div>
@@ -208,7 +236,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
           <div className="absolute top-4 left-4 z-10">
             <div className="bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10">
               <span className="text-white font-bold text-sm tracking-wider">
-                Q{currentIndex + 1}
+                Q{currentQuestion.displayId || currentIndexInOrdered + 1}
               </span>
             </div>
           </div>
@@ -255,7 +283,8 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
               <>
                 <div className="bg-slate-800/80 backdrop-blur-sm px-4 py-3 rounded-xl mb-3 border border-slate-700">
                   <h2 className="text-blue-400 font-bold text-xs uppercase tracking-widest mb-1">
-                    Question {currentIndex + 1}
+                    Question{" "}
+                    {currentQuestion.displayId || currentIndexInOrdered + 1}
                   </h2>
                   <h3 className="text-white text-base font-bold leading-snug">
                     {currentQuestion.questionText}
@@ -271,37 +300,65 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                         onClick={() => handleOptionSelect(option.id)}
                         disabled={isDisabled || feedbackState !== "idle"}
                         className={`
-                        w-full rounded-lg overflow-hidden shadow-lg flex flex-col
-                        transform transition-all duration-200
+                        group relative w-full rounded-xl overflow-hidden shadow-lg flex flex-col
+                        transform transition-all duration-200 border-2
+                        ${!option.imageUrl ? "aspect-square" : ""}
                         ${
                           isDisabled
-                            ? "bg-slate-300 opacity-50 cursor-not-allowed grayscale"
-                            : "bg-white/95 active:scale-95 cursor-pointer"
+                            ? "bg-slate-200 border-slate-300 opacity-50 cursor-not-allowed grayscale"
+                            : "bg-white border-transparent active:scale-95 cursor-pointer shadow-blue-500/10"
                         }
                         ${
                           selectedOptionId === option.id
-                            ? "ring-3 ring-blue-500"
-                            : "border border-slate-200"
+                            ? "border-blue-500 ring-2 ring-blue-500/20"
+                            : "hover:border-blue-200"
                         }
                       `}
                       >
-                        <div className="absolute top-2 left-2 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-md z-10">
+                        {/* Option ID Badge */}
+                        <div className="absolute top-2 left-2 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-md z-20 ring-1 ring-white/30">
                           {option.id.toUpperCase()}
                         </div>
-                        <div className="p-4 flex-grow flex items-center justify-center text-center bg-white min-h-[80px]">
+
+                        {/* Image Section (Top) */}
+                        {option.imageUrl && (
+                          <div className="relative aspect-video w-full bg-slate-100 overflow-hidden flex-shrink-0">
+                            <Image
+                              src={option.imageUrl}
+                              alt={option.text}
+                              fill
+                              className={`object-cover transition-transform duration-300 ${
+                                !isDisabled && "group-hover:scale-105"
+                              }`}
+                            />
+                            {isDisabled && (
+                              <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10 backdrop-blur-[2px]">
+                                <XCircle className="text-white w-8 h-8 opacity-90 drop-shadow-md" />
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {isDisabled && !option.imageUrl && (
+                          <div className="absolute inset-0 bg-black/10 flex items-center justify-center z-10 backdrop-blur-[1px]">
+                            <XCircle className="text-slate-400 w-8 h-8 opacity-40" />
+                          </div>
+                        )}
+
+                        {/* Text Section (Bottom) */}
+                        <div
+                          className={`p-3 flex-grow flex items-center justify-center text-center ${
+                            isDisabled ? "bg-slate-50" : "bg-white"
+                          }`}
+                        >
                           <span
-                            className={`text-sm font-semibold line-clamp-3 leading-tight ${
-                              isDisabled ? "text-slate-500" : "text-slate-900"
+                            className={`text-sm font-bold line-clamp-3 leading-tight ${
+                              isDisabled ? "text-slate-400" : "text-slate-800"
                             }`}
                           >
                             {option.text}
                           </span>
                         </div>
-                        {isDisabled && (
-                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
-                            <XCircle className="text-white w-8 h-8 opacity-80" />
-                          </div>
-                        )}
                       </button>
                     );
                   })}
@@ -365,7 +422,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
         <div className="absolute top-6 left-6 z-10">
           <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 shadow-lg">
             <span className="text-white font-bold text-xl tracking-wider">
-              Question {currentIndex + 1}
+              Question {currentQuestion.displayId || currentIndexInOrdered + 1}
             </span>
           </div>
         </div>
@@ -413,7 +470,8 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                 >
                   <div className="bg-black/60 backdrop-blur-md inline-block px-8 py-4 rounded-2xl shadow-lg border border-white/10">
                     <h2 className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-2">
-                      Question {currentIndex + 1}
+                      Question{" "}
+                      {currentQuestion.displayId || currentIndexInOrdered + 1}
                     </h2>
                     <h3 className="text-white text-2xl md:text-3xl font-bold leading-relaxed">
                       {currentQuestion.questionText}
@@ -438,41 +496,64 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                           onClick={() => handleOptionSelect(option.id)}
                           disabled={isDisabled || feedbackState !== "idle"}
                           className={`
-                            w-full rounded-xl overflow-hidden shadow-2xl
-                            transform transition-all duration-300
+                            group relative w-full rounded-2xl overflow-hidden shadow-2xl flex flex-col
+                            transform transition-all duration-300 border-4
+                            ${!option.imageUrl ? "aspect-video" : ""}
                             ${
                               isDisabled
-                                ? "bg-slate-300 opacity-50 cursor-not-allowed grayscale"
-                                : "bg-white/90 backdrop-blur-sm hover:scale-105 hover:bg-white cursor-pointer hover:shadow-blue-500/30"
+                                ? "bg-slate-200 border-slate-300 opacity-50 cursor-not-allowed grayscale"
+                                : "bg-white border-transparent hover:scale-105 cursor-pointer shadow-blue-500/10 hover:shadow-blue-500/30"
                             }
                             ${
                               selectedOptionId === option.id
-                                ? "ring-4 ring-blue-500 scale-105"
-                                : "border border-white/20"
+                                ? "border-blue-500 ring-4 ring-blue-500/20"
+                                : "hover:border-blue-200"
                             }
                           `}
                         >
-                          <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-base font-bold shadow-md z-10 ring-1 ring-white/50">
+                          {/* Option ID Badge */}
+                          <div className="absolute top-3 left-3 w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-black shadow-lg z-20 ring-2 ring-white/30">
                             {option.id.toUpperCase()}
                           </div>
-                          <div className="p-6 h-full min-h-[120px] flex items-center justify-center text-center bg-white relative">
+
+                          {/* Image Section (Top) */}
+                          {option.imageUrl && (
+                            <div className="relative aspect-video w-full bg-slate-50 overflow-hidden flex-shrink-0">
+                              <Image
+                                src={option.imageUrl}
+                                alt={option.text}
+                                fill
+                                className={`object-cover transition-transform duration-500 ${
+                                  !isDisabled && "group-hover:scale-110"
+                                }`}
+                                sizes="(max-width: 1280px) 25vw, 300px"
+                              />
+                              {isDisabled && (
+                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10 backdrop-blur-[2px]">
+                                  <XCircle
+                                    className="text-white w-16 h-16 opacity-90 drop-shadow-2xl"
+                                    strokeWidth={1.5}
+                                  />
+                                </div>
+                              )}
+                            </div>
+                          )}
+
+                          {isDisabled && !option.imageUrl && (
+                            <div className="absolute inset-0 bg-black/5 flex items-center justify-center z-10 backdrop-blur-[1px]">
+                              <XCircle className="text-slate-300 w-16 h-16 opacity-30" />
+                            </div>
+                          )}
+
+                          {/* Text Section (Bottom) */}
+                          <div
+                            className={`p-6 flex-grow flex items-center justify-center text-center ${
+                              isDisabled ? "bg-slate-100" : "bg-white"
+                            }`}
+                          >
                             <span
-                              className={`text-lg font-semibold leading-snug ${
-                                isDisabled ? "text-slate-500" : "text-slate-900"
-                              }`}
-                            >
-                              {option.text}
-                            </span>
-                            {isDisabled && (
-                              <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
-                                <XCircle className="text-white w-12 h-12 opacity-80" />
-                              </div>
-                            )}
-                          </div>
-                          <div className="p-4 h-24 flex items-center text-left bg-white">
-                            <span
-                              className={`text-sm font-semibold line-clamp-3 leading-tight ${
-                                isDisabled ? "text-slate-500" : "text-slate-900"
+                              className={`text-lg font-black leading-tight tracking-tight ${
+                                isDisabled ? "text-slate-400" : "text-slate-900"
                               }`}
                             >
                               {option.text}
