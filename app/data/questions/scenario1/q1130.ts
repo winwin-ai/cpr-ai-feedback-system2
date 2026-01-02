@@ -43,7 +43,7 @@ export const q1130: Question = {
   explanation:
     "전원 → 패드 → 리듬 확인 순서입니다. 충전은 리듬 확인 후 Shockable 리듬일 때 진행합니다.",
   videoPaths: {
-    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315418/S1_2_3_hkmklv.mp4`,
+    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767352168/q1130_a_xv1ycq.mp4`,
   },
   nextId: 1140,
 };
