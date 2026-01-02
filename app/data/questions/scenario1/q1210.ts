@@ -24,5 +24,8 @@ export const q1210: Question = {
     "정답입니다. 제세동 후 가슴압박 시간에 투여하며, 3~5분 간격으로 반복합니다.",
   feedbackIncorrect: "에피네프린 투여 시점을 다시 확인하세요.",
   explanation: "Shockable 리듬에서는 제세동 후 가슴압박 중에 투여합니다.",
+  videoPaths: {
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288661/VF_r1yv9r.mp4`,
+  },
   nextId: 1220,
 };
