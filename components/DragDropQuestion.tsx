@@ -14,7 +14,7 @@ interface DragDropQuestionProps {
   items: DragItem[];
   correctOrder: string[]; // Array of item ids in correct order (e.g., ["A", "C", "B"])
   onCorrect: () => void;
-  onIncorrect: () => void;
+  onIncorrect: (retryCount: number) => void; // Pass retry count to parent
 }
 
 export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
@@ -31,6 +31,7 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
   const [dragOverSlot, setDragOverSlot] = useState<number | null>(null);
   const [isChecked, setIsChecked] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [localRetryCount, setLocalRetryCount] = useState(0);
 
   // Get IDs of items already in drop zone
   const usedItemIds = droppedItems.filter((item) => item !== null).map((item) => item!.id);
@@ -127,7 +128,9 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
     if (correct) {
       onCorrect();
     } else {
-      onIncorrect();
+      const newRetryCount = localRetryCount + 1;
+      setLocalRetryCount(newRetryCount);
+      onIncorrect(newRetryCount);
     }
   };
 

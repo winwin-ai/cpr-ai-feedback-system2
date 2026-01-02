@@ -327,8 +327,11 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                       setScore((prev) => prev + 1);
                       setFeedbackState("correct");
                     }}
-                    onIncorrect={() => {
-                      setRetryCount((prev) => prev + 1);
+                    onIncorrect={(dragRetryCount) => {
+                      setRetryCount(dragRetryCount);
+                      if (dragRetryCount >= 2) {
+                        setFeedbackState("incorrect");
+                      }
                     }}
                   />
                 </div>
@@ -519,7 +522,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
               currentQuestion.dragItems &&
               currentQuestion.correctOrder ? (
               // Drag-Drop Desktop UI
-              <div className="absolute inset-0 flex flex-col z-10 p-6 pt-32 pb-12">
+              <div className="absolute inset-0 flex flex-col z-10 p-6 pt-32 pb-24">
                 {/* 드래그 드롭 영역 */}
                 <div className="flex-grow flex items-end justify-center overflow-auto px-4">
                   <div className="w-full max-w-6xl">
@@ -530,8 +533,11 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                         setScore((prev) => prev + 1);
                         setFeedbackState("correct");
                       }}
-                      onIncorrect={() => {
-                        setRetryCount((prev) => prev + 1);
+                      onIncorrect={(dragRetryCount) => {
+                        setRetryCount(dragRetryCount);
+                        if (dragRetryCount >= 2) {
+                          setFeedbackState("incorrect");
+                        }
                       }}
                     />
                   </div>
