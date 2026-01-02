@@ -12,22 +12,22 @@ export const q2010: Question = {
     {
       id: "1",
       text: "환자의 어깨를 두드리며 큰 소리로 '괜찮으세요?'라고 묻는다.",
-      imageUrl: "/images/questions/scenario2/Q02-A.jpg",
+      imageUrl: "/images/questions/scenario2/Q01-A.jpg",
     },
     {
       id: "2",
       text: "환자를 바로 눕히고 산소를 적용한다.",
-      imageUrl: "/images/questions/scenario2/Q02-B.jpg",
+      imageUrl: "/images/questions/scenario2/Q01-B.jpg",
     },
     {
       id: "3",
       text: "침대로 옮기기 위해 환자를 일으킨다.",
-      imageUrl: "/images/questions/scenario2/Q02-C.jpg",
+      imageUrl: "/images/questions/scenario2/Q01-C.jpg",
     },
     {
       id: "4",
       text: "맥박을 확인하여 심정지 여부를 판단한다.",
-      imageUrl: "/images/questions/scenario2/Q02-D.jpg",
+      imageUrl: "/images/questions/scenario2/Q01-D.jpg",
     },
   ],
   correctOptionId: "1",
