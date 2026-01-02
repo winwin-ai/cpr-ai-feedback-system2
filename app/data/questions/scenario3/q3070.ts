@@ -4,40 +4,37 @@ export const q3070: Question = {
   id: 3070,
   scenarioId: 3,
   sessionId: 1,
-  role: "Nurse 2",
-  title: "산소 공급 (간호사2)",
+  role: "Nurse 3",
+  title: "제세동기 준비 (간호사 다)",
   mediaType: "video",
-  mediaPrompt: "Scenario3_Video_4_3",
-  questionText: "CPR 상황에서 산소 공급 방법으로 옳은 짝은?",
+  mediaPrompt: "Scenario3_Video_5_3",
+  questionText:
+    "제세동기가 도착했습니다. 어떤 순서로 제세동기를 준비하고 사용해야 할까요?\nA. 전원을 켠다.\nB. 리듬을 확인한다.\nC. 전극(electrode)를 부착한다.\nD. 200J 충전을 한다.\nE. 처방이 있을 때까지 기다린다.",
   options: [
     {
       id: "1",
-      text: "Head tilt-chin lift - O2 mask 10L",
-      imageUrl: "/images/questions/scenario3/3-2/Q02-A.jpg",
+      text: "A-C-B",
     },
     {
       id: "2",
-      text: "Head tilt-chin lift - Ambubag O2 full",
-      imageUrl: "/images/questions/scenario3/3-2/Q02-B.jpg",
+      text: "A-C-B-D",
     },
     {
       id: "3",
-      text: "머리에 베개 - Ambubag O2 full",
-      imageUrl: "/images/questions/scenario3/3-2/Q02-C.jpg",
+      text: "A-D",
     },
     {
       id: "4",
-      text: "Head up 30도 - O2 cannula 3L",
-      imageUrl: "/images/questions/scenario3/3-2/Q02-D.jpg",
+      text: "A-E",
     },
   ],
-  correctOptionId: "2",
+  correctOptionId: "1",
   feedbackCorrect:
-    "정확합니다! head tilt-chin lift 자세는 기도가 직선으로 확보되어 산소 공급을 최적화됩니다. 심정지 상황에서는 sniffing자세를 취한 후 ambubagging을 통해 O2를 full로 공급하여 최대한의 산소를 공급해야 합니다.",
+    "정확합니다! 제세동기 준비 순서는 전원을 켜고(A), 전극을 부착한 후(C), 리듬을 확인(B)하는 순서입니다. 충전은 Shockable 리듬이 확인된 후에 진행합니다.",
   feedbackIncorrect:
-    "잘못된 선택입니다. Head up이나 베개를 적용할 시에 기도를 부분적으로 막아 산소 공급이 원활하지 않을 수 있습니다. 또한 cannula나 mask를 통한 산소 공급은 자발호흡이 없는 심정지 환자에게는 적합하지 않으며 ambubagging을 통한 최대한의 산소를 공급해야 합니다.",
+    "잘못된 선택입니다. 제세동기 준비는 전원을 켜고(A), 전극을 부착한 후(C), 리듬을 확인(B)하는 순서로 진행해야 합니다. 리듬 확인 전에 충전하거나 처방을 기다리지 않습니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316225/S4_3_w1wq5g.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315231/S5_3_ia9edt.mp4`,
   },
 };
