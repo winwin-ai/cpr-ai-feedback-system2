@@ -30,7 +30,6 @@ import { q1190 } from "./q1190";
 import { q1200 } from "./q1200";
 import { q1210 } from "./q1210";
 import { q1220 } from "./q1220";
-import { q1230 } from "./q1230";
 
 import { Scenario } from "../../../types";
 
@@ -66,7 +65,6 @@ export const scenario1Questions: Question[] = [
   q1200,
   q1210,
   q1220,
-  q1230,
 ];
 
 export const scenario1: Scenario = {

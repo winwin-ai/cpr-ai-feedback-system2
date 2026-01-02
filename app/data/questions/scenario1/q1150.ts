@@ -11,7 +11,7 @@ export const q1150: Question = {
   questionText:
     "제세동기 전극 부착 후 환자의 심장 리듬을 확인했습니다. 다음 심전도는 무슨 리듬인가요?",
   options: [
-    { id: "1", text: "VF (심실세동)" },
+    { id: "1", text: "VF" },
     { id: "2", text: "Pulseless VT (무맥성 심실빈맥)" },
     { id: "3", text: "Asystole (무수축)" },
     { id: "4", text: "PEA (무맥성 전기활동)" },

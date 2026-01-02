@@ -11,7 +11,7 @@ export const q1153: Question = {
   questionText: "다음 심전도는 무슨 리듬인가요?",
   options: [
     { id: "1", text: "PEA (무맥성 전기활동)" },
-    { id: "2", text: "VF (심실세동)" },
+    { id: "2", text: "VF" },
     { id: "3", text: "Asystole (무수축)" },
     { id: "4", text: "Pulseless VT (무맥성 심실빈맥)" },
   ],

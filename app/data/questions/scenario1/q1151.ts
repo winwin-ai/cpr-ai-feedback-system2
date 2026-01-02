@@ -12,7 +12,7 @@ export const q1151: Question = {
   options: [
     { id: "1", text: "Asystole (무수축)" },
     { id: "2", text: "PEA (무맥성 전기활동)" },
-    { id: "3", text: "VF (심실세동)" },
+    { id: "3", text: "VF" },
     { id: "4", text: "Pulseless VT (무맥성 심실빈맥)" },
   ],
   correctOptionId: "2",

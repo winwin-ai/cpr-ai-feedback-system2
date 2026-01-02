@@ -24,5 +24,4 @@ export const q1220: Question = {
     videoPaths: {
         answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314710/S1_2_9_iso4al.mp4`,
     },
-  nextId: 1230,
 };
