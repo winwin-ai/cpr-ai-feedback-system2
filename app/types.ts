@@ -18,7 +18,7 @@ export interface Option {
 export interface DragItem {
   id: string;
   label: string;
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 // Matching Question Types
