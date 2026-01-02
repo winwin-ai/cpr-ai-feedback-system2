@@ -33,7 +33,7 @@ export const q1130: Question = {
       imageUrl: "/images/questions/scenario1/Q13-D.jpg",
     },
   ],
-  correctOrder: ["A", "C", "B", "D"],
+  correctOrder: ["A", "C", "B"],
   options: [],
   correctOptionId: "1",
   feedbackCorrect:
