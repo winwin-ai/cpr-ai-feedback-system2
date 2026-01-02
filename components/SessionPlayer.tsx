@@ -39,6 +39,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   const [isDesktop, setIsDesktop] = useState(true); // Default to true or check on mount
   const [videoError, setVideoError] = useState(false);
   const [activeVideoSrc, setActiveVideoSrc] = useState<string | null>(null);
+  const [dragDropResetKey, setDragDropResetKey] = useState(0);
 
   const currentQuestion = questionsMap[currentQuestionId];
 
@@ -164,6 +165,8 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       } else {
         setFeedbackState("idle");
         setSelectedOptionId(null);
+        // Reset DragDropQuestion by changing key
+        setDragDropResetKey((prev) => prev + 1);
       }
     }
   };
@@ -321,6 +324,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
                 <div className="flex-grow overflow-auto px-2 pb-2">
                   <DragDropQuestion
+                    key={dragDropResetKey}
                     items={currentQuestion.dragItems}
                     correctOrder={currentQuestion.correctOrder}
                     onCorrect={() => {
@@ -525,6 +529,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                 <div className="flex-grow flex items-end justify-center overflow-auto px-4">
                   <div className="w-full max-w-6xl">
                     <DragDropQuestion
+                      key={dragDropResetKey}
                       items={currentQuestion.dragItems}
                       correctOrder={currentQuestion.correctOrder}
                       onCorrect={() => {
@@ -533,9 +538,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                       }}
                       onIncorrect={(dragRetryCount) => {
                         setRetryCount(dragRetryCount);
-                        if (dragRetryCount >= 2) {
-                          setFeedbackState("incorrect");
-                        }
+                        setFeedbackState("incorrect");
                       }}
                     />
                   </div>
