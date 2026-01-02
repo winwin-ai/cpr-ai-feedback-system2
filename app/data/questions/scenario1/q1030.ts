@@ -38,7 +38,7 @@ export const q1030: Question = {
     "잘못된 선택입니다. 혈당 측정이나 환자를 옮기는 행동보다 먼저 도움을 요청해야 합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314678/S1_2_rkfidu.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365699/cpr-videos/q1030_question.mp4`,
   },
   nextId: 1040,
 };

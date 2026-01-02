@@ -35,6 +35,7 @@ export const q3090: Question = {
     "잘못된 선택입니다. 환자의 머리를 과도하게 젖히거나 ambumask만을 밀착시키면 산소가 적절하게 제공되지 않을 수 있습니다. 또한 ambubag을 너무 빠른 간격으로 강한 압력을 주어 짜면 산소가 폐에 제대로 전달되지 않거나 폐에 손상을 줄 수 있습니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: ``,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365900/cpr-videos/q3090_question.mp4`,
+    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365895/cpr-videos/q3090_answer.mp4`,
   },
 };

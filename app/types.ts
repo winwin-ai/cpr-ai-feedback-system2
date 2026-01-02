@@ -21,6 +21,18 @@ export interface DragItem {
   imageUrl: string;
 }
 
+// Matching Question Types
+export interface MatchingItem {
+  id: string;
+  text: string;
+  imageUrl?: string;
+}
+
+export interface MatchingPair {
+  leftId: string;
+  rightId: string;
+}
+
 export interface Question {
   id: number | string;
   sessionId: number;
@@ -46,9 +58,15 @@ export interface Question {
   nextId?: number | string; // Direct link to next question
   isTransition?: boolean; // If true, displayed as a session transition screen
   // Drag-drop question support
-  questionType?: "default" | "dragdrop";
+  questionType?: "default" | "dragdrop" | "matching";
   dragItems?: DragItem[];
   correctOrder?: string[]; // Array of item ids in correct order
+  // Matching question support
+  matchingLeftItems?: MatchingItem[];
+  matchingRightItems?: MatchingItem[];
+  matchingCorrectPairs?: MatchingPair[];
+  matchingLeftTitle?: string;
+  matchingRightTitle?: string;
 }
 
 export interface Scenario {

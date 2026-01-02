@@ -26,8 +26,8 @@ export const q1170: Question = {
     "잘못된 선택입니다. Asystole은 Non-shockable 리듬으로 제세동이 필요없고 에피네프린은 가능한 한 빨리 투여해야 합니다.",
   explanation: "가급적 빠른 투여가 권장됩니다.",
     videoPaths: {
-      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314878/S1_2_5_dmebob.mp4`,
-        answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314811/S1_2_6_ep5fxi.mp4`,
-    },
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365763/cpr-videos/q1170_question.mp4`,
+    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365757/cpr-videos/q1170_answer.mp4`,
+  },
   nextId: 1180,
 };

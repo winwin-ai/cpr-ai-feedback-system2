@@ -41,8 +41,8 @@ export const q1200: Question = {
     "잘못된 순서입니다. A → B → C → D 순서가 올바릅니다.",
   explanation: "제세동 시 안전 확인 후 Shock, 즉시 가슴압박 재개가 중요합니다.",
     videoPaths: {
-        question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314753/S1_2_7_wb6ydm.mp4`,
-        answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316513/S1_2_8_jwrlmd.mp4`,
-    },
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365795/cpr-videos/q1200_question.mp4`,
+    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365781/cpr-videos/q1200_answer.mp4`,
+  },
   nextId: 1210,
 };

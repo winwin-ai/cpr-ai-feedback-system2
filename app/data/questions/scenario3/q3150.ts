@@ -35,6 +35,6 @@ export const q3150: Question = {
     "잘못된 선택입니다. 응급 상황에서는 미리 blade를 핸들과 결합하여 광원이 정상 작동하는지 확인해두어야 합니다. 필요 시 조립하거나 의사가 요청할 때 준비하면 시간 지연이 발생할 수 있습니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315786/S5_6_mrsqjy.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365957/cpr-videos/q3150_question.mp4`,
   },
 };

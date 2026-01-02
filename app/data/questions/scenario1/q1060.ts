@@ -38,7 +38,7 @@ export const q1060: Question = {
     "정확하지 않습니다. 손목 맥박은 신뢰도가 낮으며, 복부나 코에 손을 대는 방법은 표준이 아닙니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314580/S1_4_woqoql.mp4`,
+    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365708/cpr-videos/q1060_answer.mp4`,
   },
   nextId: 1071,
 };

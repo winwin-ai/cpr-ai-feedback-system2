@@ -35,6 +35,6 @@ export const q3170: Question = {
     "잘못된 선택입니다. E-tube 준비 시 cuff의 누출 여부를 미리 확인하는 것이 중요합니다. ballooning 상태로 두거나 확인을 하지 않으면 삽관 후 문제가 발생할 수 있습니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315852/S5_8_smzbkf.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365973/cpr-videos/q3170_question.mp4`,
   },
 };

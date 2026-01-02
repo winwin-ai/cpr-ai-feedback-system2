@@ -39,6 +39,6 @@ export const q3110: Question = {
     "잘못된 선택입니다. 기관삽관을 위해서는 침상을 뒤로 빼고 침상 헤드를 분리하여 충분한 공간을 확보해야 합니다. 베개를 받치거나 체위만 조정하는 것은 적절하지 않습니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315280/S5_2_xp2bth.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365909/cpr-videos/q3110_question.mp4`,
   },
 };

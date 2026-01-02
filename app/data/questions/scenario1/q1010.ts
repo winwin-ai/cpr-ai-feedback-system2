@@ -38,7 +38,7 @@ export const q1010: Question = {
     "잘못된 선택입니다. 환자를 옮기거나 약을 찾기보다 먼저 환자가 반응하는지 확인해야 합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765292860/S1_1_ltbciy.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365693/cpr-videos/q1010_question.mp4`,
   },
   nextId: 1020,
 };

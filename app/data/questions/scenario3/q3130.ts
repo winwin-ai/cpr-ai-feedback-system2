@@ -35,6 +35,6 @@ export const q3130: Question = {
     "잘못된 선택입니다. 흡인기를 기도에 미리 삽입해두거나 압력을 최대한 강하게 설정하는 것은 적절하지 않습니다. 적절한 압력을 확인하고 석션팁을 연결하여 준비해야 합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315530/S5_4_vpkths.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365933/cpr-videos/q3130_question.mp4`,
   },
 };

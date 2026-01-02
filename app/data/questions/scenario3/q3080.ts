@@ -35,6 +35,6 @@ export const q3080: Question = {
     "잘못된 선택입니다. 구강기도유지기 삽입 시 올바른 사이즈 선택(입술 끝에서 하악각까지)과 삽입 방법(곡면을 위로 하여 삽입 후 180도 회전)을 따라야 합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316225/S4_3_w1wq5g.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365887/cpr-videos/q3080_question.mp4`,
   },
 };

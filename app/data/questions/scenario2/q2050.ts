@@ -37,6 +37,6 @@ export const q2050: Question = {
     "잘못된 선택입니다. 정상 호흡이 있어 CPR은 필요하지 않으며, 단순히 지켜보거나 보호자에게 병력을 묻는 것은 시급성을 간과한 대응입니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316044/S2_5_allcbm.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365837/cpr-videos/q2050_question.mp4`,
   },
 };

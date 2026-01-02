@@ -22,6 +22,6 @@ export const q1220: Question = {
   feedbackIncorrect: "다른 징후들은 확실한 ROSC 증거가 아닙니다.",
   explanation: "교육이 종료됩니다. 수고하셨습니다.",
   videoPaths: {
-    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314710/S1_2_9_iso4al.mp4`,
+    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365799/cpr-videos/q1220_answer.mp4`,
   },
 };

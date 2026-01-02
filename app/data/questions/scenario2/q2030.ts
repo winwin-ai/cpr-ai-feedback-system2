@@ -37,6 +37,6 @@ export const q2030: Question = {
     "잘못된 선택입니다. 모니터 부착이나 IV 확보보다 먼저 환자가 심정지 상태인지 확인하는 것이 중요합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316458/S2_3_dvrtt1.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365816/cpr-videos/q2030_question.mp4`,
   },
 };

@@ -35,6 +35,6 @@ export const q3160: Question = {
     "잘못된 선택입니다. stylet을 끝까지 삽입하면 삽관시 기도 점막 손상이나 천공 위험이 있을 수 있습니다. 또한 과도하게 꺾어서 삽관하면 삽관이 불가능하고, 기도 손상 위험이 커집니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: ``,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365961/cpr-videos/q3160_question.mp4`,
   },
 };

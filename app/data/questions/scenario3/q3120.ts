@@ -35,6 +35,6 @@ export const q3120: Question = {
     "잘못된 선택입니다. 제세동기 준비는 전원을 켜고(A), 전극을 부착한 후(C), 리듬을 확인(B)하는 순서로 진행해야 합니다. 리듬 확인 전에 충전하거나 처방을 기다리지 않습니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315231/S5_3_ia9edt.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365916/cpr-videos/q3120_question.mp4`,
   },
 };

@@ -1,0 +1,272 @@
+[
+  {
+    "originalFile": "시나리오 1_1.mp4",
+    "newFile": "q1010_question.mp4",
+    "questionId": "q1010",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 1_2.mp4",
+    "newFile": "q1030_question.mp4",
+    "questionId": "q1030",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 1_3.mp4",
+    "newFile": "q1050_question.mp4",
+    "questionId": "q1050",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 1_4.mp4",
+    "newFile": "q1060_answer.mp4",
+    "questionId": "q1060",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 1_4_심정지 추가.mp4",
+    "newFile": "q1070_question.mp4",
+    "questionId": "q1070",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 1_5.mp4",
+    "newFile": "q1090_question.mp4",
+    "questionId": "q1090",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 1_2_1.mp4",
+    "newFile": "q1090_answer.mp4",
+    "questionId": "q1090",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 1_2_2.mp4",
+    "newFile": "q1120_answer.mp4",
+    "questionId": "q1120",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 1_2_3.mp4",
+    "newFile": "q1130_answer.mp4",
+    "questionId": "q1130",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 1_2_4.mp4",
+    "newFile": "q1140_answer.mp4",
+    "questionId": "q1140",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 1_2_5.mp4",
+    "newFile": "q1170_question.mp4",
+    "questionId": "q1170",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 1_2_6.mp4",
+    "newFile": "q1170_answer.mp4",
+    "questionId": "q1170",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 1_2_7.mp4",
+    "newFile": "q1200_question.mp4",
+    "questionId": "q1200",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 1_2_8.mp4",
+    "newFile": "q1200_answer.mp4",
+    "questionId": "q1200",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 1_2_8_자막X.mp4",
+    "newFile": "q1200_nosub_answer.mp4",
+    "questionId": "q1200_nosub",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 1_2_9.mp4",
+    "newFile": "q1220_answer.mp4",
+    "questionId": "q1220",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 2_1.mp4",
+    "newFile": "q2010_question.mp4",
+    "questionId": "q2010",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 2_2.mp4",
+    "newFile": "q2020_question.mp4",
+    "questionId": "q2020",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 2_3.mp4",
+    "newFile": "q2030_question.mp4",
+    "questionId": "q2030",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 2_4.mp4",
+    "newFile": "q2040_question.mp4",
+    "questionId": "q2040",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 2_4_정상호흡.mp4",
+    "newFile": "q2040_normal_question.mp4",
+    "questionId": "q2040_normal",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 2_5.mp4",
+    "newFile": "q2050_question.mp4",
+    "questionId": "q2050",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 3_1.mp4",
+    "newFile": "q3010_question.mp4",
+    "questionId": "q3010",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 3_2.mp4",
+    "newFile": "q3020_answer.mp4",
+    "questionId": "q3020",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 3_3.mp4",
+    "newFile": "q3030_question.mp4",
+    "questionId": "q3030",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 3_4.mp4",
+    "newFile": "q3040_question.mp4",
+    "questionId": "q3040",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 3_5.mp4",
+    "newFile": "q3050_answer.mp4",
+    "questionId": "q3050",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 4_1.mp4",
+    "newFile": "q3060_question.mp4",
+    "questionId": "q3060",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 4_2.mp4",
+    "newFile": "q3060_answer.mp4",
+    "questionId": "q3060",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 4_3.mp4",
+    "newFile": "q3070_question.mp4",
+    "questionId": "q3070",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 4_4.mp4",
+    "newFile": "q3080_question.mp4",
+    "questionId": "q3080",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 4_5.mp4",
+    "newFile": "q3090_question.mp4",
+    "questionId": "q3090",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 4_6.mp4",
+    "newFile": "q3090_answer.mp4",
+    "questionId": "q3090",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 5_1.mp4",
+    "newFile": "q3100_question.mp4",
+    "questionId": "q3100",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 5_2.mp4",
+    "newFile": "q3110_question.mp4",
+    "questionId": "q3110",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 5_3.mp4",
+    "newFile": "q3120_question.mp4",
+    "questionId": "q3120",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 5_4.mp4",
+    "newFile": "q3130_question.mp4",
+    "questionId": "q3130",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 5_4_자막X.mp4",
+    "newFile": "q3130_nosub_question.mp4",
+    "questionId": "q3130_nosub",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 5_5.mp4",
+    "newFile": "q3140_question.mp4",
+    "questionId": "q3140",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 5_6.mp4",
+    "newFile": "q3150_question.mp4",
+    "questionId": "q3150",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 5_7.mp4",
+    "newFile": "q3160_question.mp4",
+    "questionId": "q3160",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 5_8.mp4",
+    "newFile": "q3170_question.mp4",
+    "questionId": "q3170",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 5_9.mp4",
+    "newFile": "q3180_question.mp4",
+    "questionId": "q3180",
+    "type": "question"
+  },
+  {
+    "originalFile": "시나리오 5_10.mp4",
+    "newFile": "q3180_answer.mp4",
+    "questionId": "q3180",
+    "type": "answer"
+  },
+  {
+    "originalFile": "시나리오 5_11.mp4",
+    "newFile": "q3180_extra_answer.mp4",
+    "questionId": "q3180_extra",
+    "type": "answer"
+  }
+]

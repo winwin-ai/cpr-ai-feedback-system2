@@ -34,6 +34,6 @@ export const q3040: Question = {
     "잘못된 선택입니다. 영상에서 환자는 무호흡 상태를 보이고 있습니다. 호흡이 없는 상태는 심정지의 중요한 징후이므로 정확하게 파악해야 합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315341/S3_4_mwfs03.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365854/cpr-videos/q3040_question.mp4`,
   },
 };

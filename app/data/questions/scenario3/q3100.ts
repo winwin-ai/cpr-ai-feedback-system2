@@ -39,6 +39,6 @@ export const q3100: Question = {
     "잘못된 선택입니다. 가슴압박 중에 혈압 측정은 불필요하며 CPR시 제세동기는 요청받은 보유부서에서 가지고 옵니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315385/S5_1_jc9v9i.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365904/cpr-videos/q3100_question.mp4`,
   },
 };

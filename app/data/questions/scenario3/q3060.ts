@@ -38,7 +38,7 @@ export const q3060: Question = {
     "잘못된 선택입니다. CPR상황에서 도움 요청을 받은 간호사는 CPR팀과 주치의를 호출하는 것이 먼저입니다. 또 먼저 제세동기가 준비될 수 있게 조치를 한 후에 가슴 압박을 돕거나 정맥을 확보하는 등의 대응을 해야합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315915/S4_1_z43cvx.mp4`,
-    answer: 'https://res.cloudinary.com/dn3cicucf/video/upload/v1765315997/S4_2_ylfao2.mp4'
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365870/cpr-videos/q3060_question.mp4`,
+    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365867/cpr-videos/q3060_answer.mp4`,
   },
 };

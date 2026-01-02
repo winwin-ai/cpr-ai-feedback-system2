@@ -38,6 +38,6 @@ export const q3010: Question = {
     "잘못된 선택입니다. 환자를 옮기거나 라인을 확보하기보다 먼저 환자가 반응하는지 확인해야 합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315689/S3_1_zn1hxj.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365844/cpr-videos/q3010_question.mp4`,
   },
 };

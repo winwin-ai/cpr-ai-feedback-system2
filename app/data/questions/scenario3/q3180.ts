@@ -35,6 +35,7 @@ export const q3180: Question = {
     "잘못된 선택입니다. 심정지 상황에서 에피네프린은 1mg을 정맥주사 bolus로 3~5분 간격으로 반복 투여해야하며, 투여 후 생리식염수로 flush 해야합니다. Shockable과 Non-shockable 리듬에 따라 투여 시점이 다르며, 의사 처방에 따라 투여해야 합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316343/S5_9_opmgmy.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365998/cpr-videos/q3180_question.mp4`,
+    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365982/cpr-videos/q3180_answer.mp4`,
   },
 };
