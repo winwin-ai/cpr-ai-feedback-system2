@@ -38,5 +38,8 @@ export const q1140: Question = {
   feedbackIncorrect:
     "잘못된 위치입니다. 양 어깨나 목 부위, 갈비뼈 아래는 부착 위치가 아닙니다. 표준 위치를 기억하세요.",
   explanation: "Anterior-Lateral 위치에 부착합니다.",
+    videoPaths: {
+        answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314973/S1_2_4_h4y1jm.mp4`,
+    },
   nextId: 1150,
 };

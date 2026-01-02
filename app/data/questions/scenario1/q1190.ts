@@ -20,7 +20,8 @@ export const q1190: Question = {
   feedbackIncorrect: "제세동이 가장 시급한 처치입니다.",
   explanation: "심실세동은 제세동이 유일한 교정 방법입니다.",
     videoPaths: {
-        question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288661/VF_r1yv9r.mp4`,
+        question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765314753/S1_2_7_wb6ydm.mp4`,
+        answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316513/S1_2_8_jwrlmd.mp4`,
     },
   nextId: 1200,
 };
