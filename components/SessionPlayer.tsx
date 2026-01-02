@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MediaDisplay } from "./MediaDisplay";
 import { DragDropQuestion } from "./DragDropQuestion";
 import { MatchingQuestion } from "./MatchingQuestion";
+import { MultiSelectQuestion } from "./MultiSelectQuestion";
 import { AlertCircle, CheckCircle2, XCircle } from "lucide-react";
 import Image from "next/image";
 import { getCloudinaryUrl } from "@/utils/cloudinaryUrl";
@@ -374,6 +375,39 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                   />
                 </div>
               </div>
+            ) : currentQuestion.questionType === "multiselect" &&
+              currentQuestion.dragItems &&
+              currentQuestion.correctOrder ? (
+              // MultiSelect Question UI - Mobile
+              <div className="flex flex-col h-full -mx-3 -mb-3">
+                <div className="px-3">
+                  <div className="bg-slate-800/80 backdrop-blur-sm px-4 py-2 rounded-xl mb-3 border border-slate-700">
+                    <h2 className="text-blue-400 font-bold text-xs uppercase tracking-widest mb-0.5">
+                      Question{" "}
+                      {currentQuestion.displayId || currentIndexInOrdered + 1}
+                    </h2>
+                    <h3 className="text-white text-sm font-bold leading-snug whitespace-pre-line">
+                      {currentQuestion.questionText}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="flex-grow overflow-auto px-2 pb-2">
+                  <MultiSelectQuestion
+                    key={dragDropResetKey}
+                    items={currentQuestion.dragItems}
+                    correctItems={currentQuestion.correctOrder}
+                    onCorrect={() => {
+                      setScore((prev) => prev + 1);
+                      setFeedbackState("correct");
+                    }}
+                    onIncorrect={(selectRetryCount) => {
+                      setRetryCount(selectRetryCount);
+                      setFeedbackState("incorrect");
+                    }}
+                  />
+                </div>
+              </div>
             ) : (
               // Standard Question UI
               <>
@@ -599,6 +633,29 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                       }}
                       onIncorrect={(matchRetryCount) => {
                         setRetryCount(matchRetryCount);
+                        setFeedbackState("incorrect");
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : currentQuestion.questionType === "multiselect" &&
+              currentQuestion.dragItems &&
+              currentQuestion.correctOrder ? (
+              // MultiSelect Desktop UI
+              <div className="absolute inset-0 flex flex-col z-10 p-6 pt-32 pb-8">
+                <div className="flex-grow flex items-center justify-center overflow-auto px-4">
+                  <div className="w-full max-w-6xl bg-black/60 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                    <MultiSelectQuestion
+                      key={dragDropResetKey}
+                      items={currentQuestion.dragItems}
+                      correctItems={currentQuestion.correctOrder}
+                      onCorrect={() => {
+                        setScore((prev) => prev + 1);
+                        setFeedbackState("correct");
+                      }}
+                      onIncorrect={(selectRetryCount) => {
+                        setRetryCount(selectRetryCount);
                         setFeedbackState("incorrect");
                       }}
                     />

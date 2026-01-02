@@ -58,9 +58,9 @@ export interface Question {
   nextId?: number | string; // Direct link to next question
   isTransition?: boolean; // If true, displayed as a session transition screen
   // Drag-drop question support
-  questionType?: "default" | "dragdrop" | "matching";
+  questionType?: "default" | "dragdrop" | "matching" | "multiselect";
   dragItems?: DragItem[];
-  correctOrder?: string[]; // Array of item ids in correct order
+  correctOrder?: string[]; // Array of item ids in correct order (for dragdrop) or correct item ids (for multiselect)
   // Matching question support
   matchingLeftItems?: MatchingItem[];
   matchingRightItems?: MatchingItem[];

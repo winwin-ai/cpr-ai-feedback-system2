@@ -8,7 +8,7 @@ export const q3140: Question = {
   title: "기관삽관 물품 준비 (간호사3)",
   mediaType: "image",
   mediaPrompt: "Scenario3_Image_5_5",
-  questionType: "dragdrop",
+  questionType: "multiselect",
   questionText: "기관삽관을 해야 합니다. 필요한 물품을 선택해 주세요.",
   options: [],
   dragItems: [
