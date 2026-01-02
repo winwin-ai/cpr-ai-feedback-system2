@@ -319,12 +319,6 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
         </button>
       </div>
 
-      {/* Feedback */}
-      {isChecked && !isCorrect && (
-        <div className="text-center text-red-400 text-sm sm:text-xl font-bold mt-2 animate-in fade-in">
-          순서가 올바르지 않습니다. 다시 시도해주세요.
-        </div>
-      )}
     </div>
   );
 };

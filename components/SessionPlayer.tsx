@@ -329,9 +329,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                     }}
                     onIncorrect={(dragRetryCount) => {
                       setRetryCount(dragRetryCount);
-                      if (dragRetryCount >= 2) {
-                        setFeedbackState("incorrect");
-                      }
+                      setFeedbackState("incorrect");
                     }}
                   />
                 </div>
