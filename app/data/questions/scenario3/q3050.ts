@@ -39,6 +39,6 @@ export const q3050: Question = {
     "잘못된 선택입니다. 맥박이 없고 무호흡인 환자에게는 즉시 가슴압박을 시작해야 합니다. 주치의 처방을 기다리거나 다른 준비를 하는 것보다 바로 CPR을 시작하는 것이 중요합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315150/S3_5_sezwy8.mp4`,
+    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315150/S3_5_sezwy8.mp4`,
   },
 };

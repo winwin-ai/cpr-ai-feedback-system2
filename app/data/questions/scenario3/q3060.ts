@@ -39,5 +39,6 @@ export const q3060: Question = {
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
     question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315915/S4_1_z43cvx.mp4`,
+    answer: 'https://res.cloudinary.com/dn3cicucf/video/upload/v1765315997/S4_2_ylfao2.mp4'
   },
 };
