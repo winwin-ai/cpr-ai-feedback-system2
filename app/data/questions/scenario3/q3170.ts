@@ -23,9 +23,9 @@ export const q3170: Question = {
       imageUrl: "/images/questions/scenario3/3-3/laryngoscope.jpg",
     },
     {
-      id: "blade",
-      label: "Blade",
-      imageUrl: "/images/questions/scenario3/3-3/blade.jpg",
+      id: "stylet",
+      label: "Stylet",
+      imageUrl: "/images/questions/scenario3/3-3/stylet.jpg",
     },
     {
       id: "syringe10cc",
@@ -91,7 +91,7 @@ export const q3170: Question = {
   correctOrder: [
     "etube",
     "laryngoscope",
-    "blade",
+    "stylet",
     "syringe10cc",
     "airway",
     "stethoscope",
@@ -101,8 +101,8 @@ export const q3170: Question = {
   ],
   correctOptionId: "",
   feedbackCorrect:
-    "정확합니다! 기관삽관에 필요한 물품을 올바르게 선택하셨습니다. E-tube, laryngoscope, blade, 10cc syringe, airway, 청진기, 크린조, 고정밴드, 멸균장갑이 필요합니다.",
+    "정확합니다! 기관삽관에 필요한 물품을 올바르게 선택하셨습니다. E-tube, laryngoscope, stylet, 10cc syringe, airway, 청진기, 크린조, 고정밴드, 멸균장갑이 필요합니다.",
   feedbackIncorrect:
-    "잘못된 선택입니다. 기관삽관에는 E-tube, laryngoscope, blade, 10cc syringe, airway, 청진기, 크린조, 고정밴드(또는 반창고), 멸균장갑이 필요합니다. O2 cannula, O2 mask, medicut, 체온계, 혈압계, 수액 등은 기관삽관 물품이 아닙니다.",
+    "잘못된 선택입니다. 기관삽관에는 E-tube, laryngoscope, stylet, 10cc syringe, airway, 청진기, 크린조, 고정밴드(또는 반창고), 멸균장갑이 필요합니다. O2 cannula, O2 mask, medicut, 체온계, 혈압계, 수액 등은 기관삽관 물품이 아닙니다.",
   explanation: "추가 설명이 없습니다.",
 };

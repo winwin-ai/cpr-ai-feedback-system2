@@ -14,18 +14,22 @@ export const q3130: Question = {
     {
       id: "1",
       text: "E-cart를 가져온다.",
+      imageUrl: "/images/questions/scenario3/3-1/Q05-A.jpg",
     },
     {
       id: "2",
       text: "주치의에게 연락한 후 처방을 기다린다",
+      imageUrl: "/images/questions/scenario3/3-1/Q05-B.jpg",
     },
     {
       id: "3",
       text: "모니터를 가지고 와서 환자에게 부착한다.",
+      imageUrl: "/images/questions/scenario3/3-1/Q05-C.jpg",
     },
     {
       id: "4",
       text: "가슴압박을 시작한다.",
+      imageUrl: "/images/questions/scenario3/3-1/Q05-D.jpg",
     },
   ],
   correctOptionId: "4",

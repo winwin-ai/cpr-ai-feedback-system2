@@ -14,18 +14,22 @@ export const q3140: Question = {
     {
       id: "1",
       text: "ㄱ-A",
+      imageUrl: "/images/questions/scenario3/3-2/Q02-A.jpg",
     },
     {
       id: "2",
       text: "ㄱ-C",
+      imageUrl: "/images/questions/scenario3/3-2/Q02-B.jpg",
     },
     {
       id: "3",
       text: "ㄷ-C",
+      imageUrl: "/images/questions/scenario3/3-2/Q02-C.jpg",
     },
     {
       id: "4",
       text: "ㄴ-B",
+      imageUrl: "/images/questions/scenario3/3-2/Q02-D.jpg",
     },
   ],
   correctOptionId: "2",

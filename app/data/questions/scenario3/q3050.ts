@@ -14,18 +14,22 @@ export const q3050: Question = {
     {
       id: "1",
       text: "E-cart를 가져온다.",
+      imageUrl: "/images/questions/scenario3/3-3/Q01-A.jpg",
     },
     {
       id: "2",
       text: "가슴압박 교대를 위해 옆에서 기다린다.",
+      imageUrl: "/images/questions/scenario3/3-3/Q01-B.jpg",
     },
     {
       id: "3",
       text: "혈압을 측정한다.",
+      imageUrl: "/images/questions/scenario3/3-3/Q01-C.jpg",
     },
     {
       id: "4",
       text: "제세동기를 빌려온다.",
+      imageUrl: "/images/questions/scenario3/3-3/Q01-D.jpg",
     },
   ],
   correctOptionId: "1",

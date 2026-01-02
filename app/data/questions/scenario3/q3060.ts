@@ -14,18 +14,22 @@ export const q3060: Question = {
     {
       id: "1",
       text: "환자의 머리를 높여 베개를 받쳐준다.",
+      imageUrl: "/images/questions/scenario3/3-3/Q02-A.jpg",
     },
     {
       id: "2",
       text: "침대를 그대로 둔 채 환자 체위만 조정한다.",
+      imageUrl: "/images/questions/scenario3/3-3/Q02-B.jpg",
     },
     {
       id: "3",
       text: "침상을 뒤로 빼고, 침상 헤드를 분리하여 충분한 공간을 확보한다.",
+      imageUrl: "/images/questions/scenario3/3-3/Q02-C.jpg",
     },
     {
       id: "4",
       text: "침상난간을 내린다.",
+      imageUrl: "/images/questions/scenario3/3-3/Q02-D.jpg",
     },
   ],
   correctOptionId: "3",

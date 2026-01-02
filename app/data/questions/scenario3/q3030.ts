@@ -13,18 +13,22 @@ export const q3030: Question = {
     {
       id: "1",
       text: "환자의 맥박과 호흡을 10초 이내로 확인한다.",
+      imageUrl: "/images/questions/scenario3/3-1/Q03-A.jpg",
     },
     {
       id: "2",
       text: "모니터를 가지고 와서 환자에게 부착한다.",
+      imageUrl: "/images/questions/scenario3/3-1/Q03-B.jpg",
     },
     {
       id: "3",
       text: "정맥 주사라인을 확보한다.",
+      imageUrl: "/images/questions/scenario3/3-1/Q03-C.jpg",
     },
     {
       id: "4",
       text: "환자에게 산소를 적용한다.",
+      imageUrl: "/images/questions/scenario3/3-1/Q03-D.jpg",
     },
   ],
   correctOptionId: "1",

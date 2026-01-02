@@ -13,18 +13,22 @@ export const q3040: Question = {
     {
       id: "1",
       text: "가슴압박을 돕는다.",
+      imageUrl: "/images/questions/scenario3/3-2/Q01-A.jpg",
     },
     {
       id: "2",
       text: "정맥주사라인을 확보한다.",
+      imageUrl: "/images/questions/scenario3/3-2/Q01-B.jpg",
     },
     {
       id: "3",
       text: "CPR팀과 제세동기 보유부서, 주치의에게 요청한다.",
+      imageUrl: "/images/questions/scenario3/3-2/Q01-C.jpg",
     },
     {
       id: "4",
       text: "주치의에게 연락하고, 보호자에게 상황을 알린다.",
+      imageUrl: "/images/questions/scenario3/3-2/Q01-D.jpg",
     },
   ],
   correctOptionId: "3",
