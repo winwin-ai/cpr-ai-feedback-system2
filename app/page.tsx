@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, Suspense } from "react";
+import React, { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { Layout } from "../components/Layout";
 import { Dashboard } from "../components/Dashboard";
@@ -8,6 +8,7 @@ import { SessionPlayer } from "../components/SessionPlayer";
 import { ResultScreen } from "../components/ResultScreen";
 import { Scenario } from "../components/Scenario";
 import { ViewState } from "./types";
+import { Pause, Play, SkipForward } from "lucide-react";
 import {
   scenario1Questions,
   scenario1,
@@ -16,6 +17,13 @@ import {
   scenario3Questions,
   scenario3,
 } from "@/app/data";
+
+// 시나리오별 인트로 영상 URL
+const SCENARIO_INTRO_VIDEOS: Record<number, string> = {
+  1: "https://res.cloudinary.com/dn3cicucf/video/upload/v1767390718/cpr-videos/q1000_question.mp4",
+  2: "https://res.cloudinary.com/dn3cicucf/video/upload/v1767390721/cpr-videos/q2000_question.mp4",
+  3: "https://res.cloudinary.com/dn3cicucf/video/upload/v1767390727/cpr-videos/q3000_question.mp4",
+};
 
 // Scenario Intro Data
 const SCENARIO_DATA = {
@@ -800,6 +808,12 @@ function HomeContent() {
   const [initialQuestionIndex, setInitialQuestionIndex] = useState<number>(0);
   const [currentQuestionId, setCurrentQuestionId] = useState<string | number | null>(null);
 
+  // 인트로 영상 관련 state
+  const [introPlaying, setIntroPlaying] = useState(true);
+  const [introProgress, setIntroProgress] = useState(0);
+  const [introDuration, setIntroDuration] = useState(0);
+  const introVideoRef = useRef<HTMLVideoElement>(null);
+
   // Update URL when state changes
   const updateUrl = useCallback((view: ViewState, scenarioId?: number, questionId?: string | number) => {
     const params = new URLSearchParams();
@@ -903,8 +917,56 @@ function HomeContent() {
     setSelectedScenarioId(scenarioId);
     setInitialQuestionIndex(0);
     setCurrentQuestionId(null);
+    setViewState(ViewState.INTRO);
+    updateUrl(ViewState.INTRO, scenarioId);
+  };
+
+  // 인트로 영상 완료 후 사례요약 팝업으로 이동
+  const handleIntroComplete = () => {
     setViewState(ViewState.SCENARIO);
-    updateUrl(ViewState.SCENARIO, scenarioId);
+    updateUrl(ViewState.SCENARIO, selectedScenarioId);
+    // 다음 시나리오를 위해 인트로 상태 리셋
+    setIntroPlaying(true);
+    setIntroProgress(0);
+    setIntroDuration(0);
+  };
+
+  // 인트로 영상 핸들러들
+  const handleIntroTimeUpdate = () => {
+    if (introVideoRef.current) {
+      setIntroProgress(introVideoRef.current.currentTime);
+    }
+  };
+
+  const handleIntroLoadedMetadata = () => {
+    if (introVideoRef.current) {
+      setIntroDuration(introVideoRef.current.duration);
+    }
+  };
+
+  const handleIntroPlayPause = () => {
+    if (introVideoRef.current) {
+      if (introPlaying) {
+        introVideoRef.current.pause();
+      } else {
+        introVideoRef.current.play();
+      }
+      setIntroPlaying(!introPlaying);
+    }
+  };
+
+  const handleIntroSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const time = parseFloat(e.target.value);
+    if (introVideoRef.current) {
+      introVideoRef.current.currentTime = time;
+      setIntroProgress(time);
+    }
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
   const handleJumpToQuestion = (scenarioId: number, questionIndex: number) => {
@@ -966,6 +1028,105 @@ function HomeContent() {
         />
       )}
 
+      {/* 인트로 영상 화면 */}
+      {viewState === ViewState.INTRO && (
+        <div className="fixed inset-0 bg-black z-50">
+          {/* 인트로 영상 - 전체화면 */}
+          <video
+            ref={introVideoRef}
+            src={SCENARIO_INTRO_VIDEOS[selectedScenarioId]}
+            className="w-full h-full object-contain"
+            autoPlay
+            playsInline
+            onTimeUpdate={handleIntroTimeUpdate}
+            onLoadedMetadata={handleIntroLoadedMetadata}
+            onEnded={handleIntroComplete}
+            onClick={handleIntroPlayPause}
+          />
+
+          {/* 시나리오 제목 */}
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
+            <div className="bg-black/70 backdrop-blur-md px-3 py-2 sm:px-5 sm:py-3 rounded-lg border border-white/10">
+              <span className="text-blue-400 font-bold text-xs sm:text-base uppercase tracking-wider">
+                Scenario {selectedScenarioId}
+              </span>
+              <p className="text-white font-bold text-sm sm:text-xl mt-0.5">
+                시나리오 소개
+              </p>
+            </div>
+          </div>
+
+          {/* 컨트롤 바 - 영상 위 오버레이 */}
+          <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
+            <div className="bg-black/70 backdrop-blur-md rounded-xl sm:rounded-2xl px-3 py-2 sm:px-5 sm:py-3 border border-white/10">
+              {/* 프로그래스 바 */}
+              <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                <span className="text-white text-[10px] sm:text-xs font-mono w-8 sm:w-10">
+                  {formatTime(introProgress)}
+                </span>
+                <input
+                  type="range"
+                  min="0"
+                  max={introDuration || 100}
+                  value={introProgress}
+                  onChange={handleIntroSeek}
+                  className="flex-grow h-1.5 sm:h-2 bg-slate-600 rounded-full appearance-none cursor-pointer
+                    [&::-webkit-slider-thumb]:appearance-none
+                    [&::-webkit-slider-thumb]:w-3
+                    [&::-webkit-slider-thumb]:h-3
+                    [&::-webkit-slider-thumb]:sm:w-4
+                    [&::-webkit-slider-thumb]:sm:h-4
+                    [&::-webkit-slider-thumb]:rounded-full
+                    [&::-webkit-slider-thumb]:bg-blue-500
+                    [&::-webkit-slider-thumb]:cursor-pointer
+                    [&::-webkit-slider-thumb]:shadow-lg
+                    [&::-moz-range-thumb]:w-3
+                    [&::-moz-range-thumb]:h-3
+                    [&::-moz-range-thumb]:rounded-full
+                    [&::-moz-range-thumb]:bg-blue-500
+                    [&::-moz-range-thumb]:border-0
+                    [&::-moz-range-thumb]:cursor-pointer"
+                  style={{
+                    background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(introProgress / (introDuration || 1)) * 100}%, #475569 ${(introProgress / (introDuration || 1)) * 100}%, #475569 100%)`
+                  }}
+                />
+                <span className="text-slate-400 text-[10px] sm:text-xs font-mono w-8 sm:w-10 text-right">
+                  {formatTime(introDuration)}
+                </span>
+              </div>
+
+              {/* 컨트롤 버튼 */}
+              <div className="flex items-center justify-between gap-2">
+                <button
+                  onClick={handleIntroPlayPause}
+                  className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-slate-600 hover:bg-slate-500 text-white rounded-lg font-bold text-xs sm:text-sm transition-all"
+                >
+                  {introPlaying ? (
+                    <>
+                      <Pause className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="hidden sm:inline">일시정지</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="hidden sm:inline">재생</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={handleIntroComplete}
+                  className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold text-xs sm:text-sm transition-all shadow-lg"
+                >
+                  <SkipForward className="w-4 h-4 sm:w-5 sm:h-5" />
+                  건너뛰기
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {viewState === ViewState.SCENARIO && (
         <Scenario
           title={activeScenarioData.title}
@@ -989,6 +1150,7 @@ function HomeContent() {
           sessionId={
             selectedScenarioId === 1 ? (initialQuestionIndex >= 8 ? 2 : 1) : 1
           }
+          scenarioId={selectedScenarioId}
           onComplete={handleSessionComplete}
           onQuestionChange={handleQuestionChange}
         />

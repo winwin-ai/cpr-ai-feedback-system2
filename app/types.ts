@@ -1,5 +1,6 @@
 export enum ViewState {
   DASHBOARD = "DASHBOARD",
+  INTRO = "INTRO",
   SCENARIO = "SCENARIO",
   SESSION_1 = "SESSION_1",
   SESSION_2 = "SESSION_2",

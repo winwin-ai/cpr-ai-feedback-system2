@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MediaDisplay } from "./MediaDisplay";
 import { DragDropQuestion } from "./DragDropQuestion";
 import { MatchingQuestion } from "./MatchingQuestion";
@@ -12,17 +12,19 @@ interface SessionPlayerProps {
   orderedQuestionIds: (string | number)[];
   initialQuestionId: string | number;
   sessionId: number;
+  scenarioId: number;
   onComplete: (correctCount: number) => void;
   onQuestionChange?: (questionId: string | number) => void;
 }
 
-type PlaybackState = "intro" | "question" | "waiting" | "answer";
+type PlaybackState = "question" | "waiting" | "answer";
 
 export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   questionsMap,
   orderedQuestionIds,
   initialQuestionId,
   sessionId,
+  scenarioId,
   onComplete,
   onQuestionChange,
 }) => {
@@ -236,7 +238,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                   onVideoEnded={handleVideoEnded}
                   onError={handleVideoError}
                   autoLoop={false}
-                  autoPlay={playbackState !== "intro" && !!currentIntendedSrc}
+                  autoPlay={!!currentIntendedSrc}
                 />
               ) : (
                 <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center p-6 text-center">
@@ -498,8 +500,8 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
           </div>
         )}
 
-        {/* 인트로/영상 재생 중일 때 하단 빈 공간 */}
-        {playbackState !== "waiting" && playbackState !== "intro" && (
+        {/* 영상 재생 중일 때 하단 빈 공간 */}
+        {playbackState !== "waiting" && (
           <div className="flex-grow flex items-center justify-center">
             <p className="text-slate-500 text-sm">영상을 시청해주세요...</p>
           </div>
@@ -521,7 +523,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                   onVideoEnded={handleVideoEnded}
                   onError={handleVideoError}
                   autoLoop={false}
-                  autoPlay={playbackState !== "intro" && !!currentIntendedSrc}
+                  autoPlay={!!currentIntendedSrc}
                 />
               ) : (
                 <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center p-12 text-center z-50 relative">
