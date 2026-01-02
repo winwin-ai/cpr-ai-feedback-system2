@@ -19,7 +19,7 @@ export const q3140: Question = {
     },
     {
       id: "laryngoscope",
-      label: "Laryngoscope",
+      label: "Laryngoscope/Blade",
       imageUrl: "/images/questions/scenario3/3-3/laryngoscope.jpg",
     },
     {

@@ -20,12 +20,12 @@ export const q3120: Question = {
     {
       id: "B",
       label: "B. 리듬을 확인한다",
-        imageUrl: "/images/questions/scenario3/3-3/Q03-B.jpg",
+        imageUrl: "/images/questions/scenario3/3-3/Q03-C.jpg",
     },
     {
       id: "C",
       label: "C. 전극(electrode)를 부착한다",
-        imageUrl: "/images/questions/scenario3/3-3/Q03-C.jpg",
+        imageUrl: "/images/questions/scenario3/3-3/Q03-B.jpg",
     },
     {
       id: "D",
