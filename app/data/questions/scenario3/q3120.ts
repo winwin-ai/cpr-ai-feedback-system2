@@ -15,22 +15,27 @@ export const q3120: Question = {
     {
       id: "A",
       label: "A. 전원을 켠다",
-      imageUrl: "/images/questions/scenario1/Q13-A.jpg",
+      imageUrl: "/images/questions/scenario3/3-3/Q03-A.jpg",
     },
     {
       id: "B",
       label: "B. 리듬을 확인한다",
-      imageUrl: "/images/questions/scenario1/Q13-B.jpg",
+        imageUrl: "/images/questions/scenario3/3-3/Q03-B.jpg",
     },
     {
       id: "C",
       label: "C. 전극(electrode)를 부착한다",
-      imageUrl: "/images/questions/scenario1/Q13-C.jpg",
+        imageUrl: "/images/questions/scenario3/3-3/Q03-C.jpg",
     },
     {
       id: "D",
       label: "D. 200J 충전을 한다",
-      imageUrl: "/images/questions/scenario1/Q13-D.jpg",
+        imageUrl: "/images/questions/scenario3/3-3/Q03-D.jpg",
+    },
+    {
+      id: "E",
+      label: "E. 처방이 있을 때까지 기다린다",
+      imageUrl: "/images/questions/scenario3/3-3/Q03-E.jpg",
     },
   ],
   correctOrder: ["A", "C", "B"],

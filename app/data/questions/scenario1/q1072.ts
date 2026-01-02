@@ -27,7 +27,7 @@ export const q1072: Question = {
     "체인-스토크스 호흡(Cheyne-Stokes respiration)에 대한 설명입니다.",
   localVideoFilename: "Q07(2).mp4",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767099236/cpr-videos/Q07%282%29.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390971/cpr-videos/q1072_question.mp4`,
   },
   nextId: 1073,
 };

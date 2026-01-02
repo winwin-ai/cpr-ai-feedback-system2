@@ -22,7 +22,7 @@ export const q1071: Question = {
   explanation: "정상 호흡 양상입니다.",
   localVideoFilename: "Q07(1).mp4",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767099232/cpr-videos/Q07%281%29.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390969/cpr-videos/q1071_question.mp4`,
   },
   nextId: 1072,
 };

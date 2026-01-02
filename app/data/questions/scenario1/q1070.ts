@@ -26,7 +26,7 @@ export const q1070: Question = {
   explanation: "추가 설명이 없습니다.",
   localVideoFilename: "Q07.mp4",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365712/cpr-videos/q1070_question.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390962/cpr-videos/q1070_question.mp4`,
   },
   nextId: 1080,
 };

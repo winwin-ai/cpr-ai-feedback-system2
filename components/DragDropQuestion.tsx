@@ -305,8 +305,8 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
   // Original layout with images
   return (
     <div className="w-full flex flex-col gap-3 sm:gap-6">
-      {/* Source Items - 중단 (1x4 가로 배치, 데스크톱 스타일) */}
-      <div className="grid grid-cols-4 gap-1.5 sm:gap-4 w-[90%] mx-auto">
+      {/* Source Items - 중단 (가로 배치, 데스크톱 스타일) */}
+      <div className={`grid gap-1.5 sm:gap-4 w-[95%] mx-auto ${items.length === 5 ? "grid-cols-5" : "grid-cols-4"}`}>
         {items.map((item) => {
           const isUsed = usedItemIds.includes(item.id);
           const isBeingDragged = draggedItem?.id === item.id;
@@ -350,7 +350,7 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
               {/* Label */}
               <div className={`p-1.5 sm:p-3 text-center flex-grow flex items-center justify-center ${isUsed ? "bg-slate-800" : "bg-white"}`}>
                 <span className={`text-[10px] sm:text-sm font-semibold sm:font-bold leading-tight ${isUsed ? "text-slate-400" : "text-slate-700 sm:text-slate-900"}`}>
-                  {item.label.replace(/^[A-D]\.\s*/, "")}
+                  {item.label.replace(/^[A-E]\.\s*/, "")}
                 </span>
               </div>
             </div>
@@ -415,7 +415,7 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
                     </div>
                     <div className="p-1.5 sm:p-2 text-center bg-slate-800">
                       <span className="text-white text-[10px] sm:text-sm font-bold">
-                        {item.id}. {item.label.replace(/^[A-D]\.\s*/, "")}
+                        {item.id}. {item.label.replace(/^[A-E]\.\s*/, "")}
                       </span>
                     </div>
                   </div>

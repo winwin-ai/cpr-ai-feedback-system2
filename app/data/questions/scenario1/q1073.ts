@@ -24,7 +24,7 @@ export const q1073: Question = {
     "심정지호흡(Agonal breathing)은 즉각적인 심폐소생술이 필요한 상태입니다.",
   localVideoFilename: "Q07(3).mp4",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767099237/cpr-videos/Q07%283%29.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390973/cpr-videos/q1073_question.mp4`,
   },
   nextId: 1070,
 };
