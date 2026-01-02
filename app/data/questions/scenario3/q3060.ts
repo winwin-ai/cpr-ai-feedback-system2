@@ -4,41 +4,40 @@ export const q3060: Question = {
   id: 3060,
   scenarioId: 3,
   sessionId: 1,
-  role: "Nurse 3",
-  title: "공간 확보 (간호사 다)",
+  role: "Nurse 2",
+  title: "CPR팀 호출 (간호사2)",
   mediaType: "video",
-  mediaPrompt: "Scenario3_Video_5_2",
-  questionText:
-    "E-cart를 가져온 후, intubation을 위해 공간확보를 준비해야 합니다. 어떻게 해야 할까요?",
+  mediaPrompt: "Scenario3_Video_4_1",
+  questionText: "CPR상황에 도움 요청을 받았습니다. 어떻게 해야 할까요?",
   options: [
     {
       id: "1",
-      text: "환자의 머리를 높여 베개를 받쳐준다.",
-      imageUrl: "/images/questions/scenario3/3-3/Q02-A.jpg",
+      text: "가슴압박을 돕는다.",
+      imageUrl: "/images/questions/scenario3/3-2/Q01-A.jpg",
     },
     {
       id: "2",
-      text: "침대를 그대로 둔 채 환자 체위만 조정한다.",
-      imageUrl: "/images/questions/scenario3/3-3/Q02-B.jpg",
+      text: "정맥주사라인을 확보한다.",
+      imageUrl: "/images/questions/scenario3/3-2/Q01-B.jpg",
     },
     {
       id: "3",
-      text: "침상을 뒤로 빼고, 침상 헤드를 분리하여 충분한 공간을 확보한다.",
-      imageUrl: "/images/questions/scenario3/3-3/Q02-C.jpg",
+      text: "CPR팀과 제세동기 보유부서, 주치의에게 요청한다.",
+      imageUrl: "/images/questions/scenario3/3-2/Q01-C.jpg",
     },
     {
       id: "4",
-      text: "침상난간을 내린다.",
-      imageUrl: "/images/questions/scenario3/3-3/Q02-D.jpg",
+      text: "주치의에게 연락하고, 보호자에게 상황을 알린다.",
+      imageUrl: "/images/questions/scenario3/3-2/Q01-D.jpg",
     },
   ],
   correctOptionId: "3",
   feedbackCorrect:
-    "정확합니다! 기관삽관을 위해서는 충분한 공간 확보가 필요합니다. 침상을 뒤로 빼고 침상 헤드를 분리하여 의료진이 환자의 머리 쪽에서 삽관을 수행할 수 있도록 해야 합니다.",
+    "정확합니다! CPR상황이므로 도움 요청을 받았으면 즉시 CPR팀과 주치의를 호출하고 제세동을 위해 제세동기 보유부서에 제세동기를 요청해야 합니다.",
   feedbackIncorrect:
-    "잘못된 선택입니다. 기관삽관을 위해서는 침상을 뒤로 빼고 침상 헤드를 분리하여 충분한 공간을 확보해야 합니다. 베개를 받치거나 체위만 조정하는 것은 적절하지 않습니다.",
+    "잘못된 선택입니다. CPR상황에서 도움 요청을 받은 간호사는 CPR팀과 주치의를 호출하는 것이 먼저입니다. 또 먼저 제세동기가 준비될 수 있게 조치를 한 후에 가슴 압박을 돕거나 정맥을 확보하는 등의 대응을 해야합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315280/S5_2_xp2bth.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315915/S4_1_z43cvx.mp4`,
   },
 };

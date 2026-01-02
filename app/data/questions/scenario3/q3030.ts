@@ -5,7 +5,7 @@ export const q3030: Question = {
   scenarioId: 3,
   sessionId: 1,
   role: "Nurse 1",
-  title: "맥박 호흡 확인 (간호사 가)",
+  title: "맥박 호흡 확인 (간호사1)",
   mediaType: "video",
   mediaPrompt: "Scenario3_Video_3_3",
   questionText: "도움요청 후 무엇을 해야 하나요?",

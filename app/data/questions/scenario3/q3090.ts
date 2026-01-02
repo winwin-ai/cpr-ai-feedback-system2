@@ -4,37 +4,37 @@ export const q3090: Question = {
   id: 3090,
   scenarioId: 3,
   sessionId: 1,
-  role: "Nurse 3",
-  title: "Laryngoscope 준비 (간호사 다)",
+  role: "Nurse 2",
+  title: "백마스크 환기 (간호사2)",
   mediaType: "video",
-  mediaPrompt: "Scenario3_Video_5_6",
+  mediaPrompt: "Scenario3_Video_4_4",
   questionText:
-    "기관삽관을 위해 laryngoscope와 blade를 준비하는 가장 적절한 방법은 무엇인가요?",
+    "효과적인 백마스크 환기(bag-mask ventilation)의 방법은 무엇인가요?",
   options: [
     {
       id: "1",
-      text: "핸들과 blade를 결합하지 않고 필요 시 조립한다.",
+      text: "E-C기법으로 Ambumask를 환자에게 밀착시키고, 6초에 1번씩 Ambubag의 약1/4을 짠다",
     },
     {
       id: "2",
-      text: "blade를 선택한 후 핸들과 결합하여 광원이 정상적으로 작동하는지 확인한다.",
+      text: "Ambumask를 환자에게 밀착시키고, Ambubag을 2초에 1번씩 짠다.",
     },
     {
       id: "3",
-      text: "멸균 blade는 오염 방지를 위해 미리 개봉하지 않고 의사가 달라고 할 때 결합해서 준다.",
+      text: "E-C기법으로 Ambumask를 환자에게 밀착시키고, 6초에 1번씩 Ambubag을 최대한 세게 양손으로 짠다.",
     },
     {
       id: "4",
-      text: "blade 크기는 소아용도 우선 준비해 다양한 상황에 대비한다.",
+      text: "환자의 머리를 최대한 젖힌 후, 6초에 1번씩 Ambubag의 약 1/2을 짠다.",
     },
   ],
-  correctOptionId: "2",
+  correctOptionId: "1",
   feedbackCorrect:
-    "정확합니다! 기관삽관 전에 blade를 선택하여 핸들과 결합하고, 광원이 정상적으로 작동하는지 미리 확인해야 합니다.",
+    "정확합니다! E-C기법은 ambumask를 환자의 얼굴에 효과적으로 밀착시키고, ambubag을 압박하여 산소를 공급할 수 있게 합니다. ambubag은 6초에 1번씩 1/4의 양만 짜는 것이 심정지 환자에게 적절한 산소 공급 방법입니다.",
   feedbackIncorrect:
-    "잘못된 선택입니다. 응급 상황에서는 미리 blade를 핸들과 결합하여 광원이 정상 작동하는지 확인해두어야 합니다. 필요 시 조립하거나 의사가 요청할 때 준비하면 시간 지연이 발생할 수 있습니다.",
+    "잘못된 선택입니다. 환자의 머리를 과도하게 젖히거나 ambumask만을 밀착시키면 산소가 적절하게 제공되지 않을 수 있습니다. 또한 ambubag을 너무 빠른 간격으로 강한 압력을 주어 짜면 산소가 폐에 제대로 전달되지 않거나 폐에 손상을 줄 수 있습니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765315786/S5_6_mrsqjy.mp4`,
+    question: ``,
   },
 };

@@ -5,36 +5,36 @@ export const q3180: Question = {
   scenarioId: 3,
   sessionId: 1,
   role: "Nurse 3",
-  title: "E-tube/Stylet 준비 (간호사 다)",
+  title: "에피네프린 준비 (간호사3)",
   mediaType: "video",
-  mediaPrompt: "Scenario3_Video_5_7",
+  mediaPrompt: "Scenario3_Video_5_9",
   questionText:
-    "기관삽관을 위해 E-tube를 준비하는 적절한 방법은 무엇입니까?",
+    "에피네프린 주사 준비와 관련하여 간호사가 반드시 숙지해야 할 내용으로 옳은 것은?",
   options: [
     {
       id: "1",
-      text: "E-tube안에 stylet을 약 1cm 남기고 삽입한 후 하키채 모양으로 만들어 준다.",
+      text: "에피네프린은 1mg을 지속주입(infusion)으로 천천히 투여한다",
     },
     {
       id: "2",
-      text: "E-tube안에 stylet을 끝까지 삽입하여 단단히 고정한다.",
+      text: "심폐소생술이 진행되는 동안, 정맥주사로 1mg 에피네프린을 bolus 주사하고 생리식염수로 flush 해야한다",
     },
     {
       id: "3",
-      text: "E-tube안에 stylet을 절반 정도 삽입한 후 하키채 모양으로 만들어 둔다.",
+      text: "Shockable과 Non-shockable 리듬에 상관없이 CPR 시작 즉시 무조건 에피네프린을 준다",
     },
     {
       id: "4",
-      text: "E-tube안에 삽입한 후, 튜브 곡선을 최대한 꺾어 각도를 만들어 둔다.",
+      text: "에피네프린은 간호사가 독자적으로 판단하여 투여할 수 있다",
     },
   ],
-  correctOptionId: "1",
+  correctOptionId: "2",
   feedbackCorrect:
-    "정확합니다! stylet을 튜브 끝보다 약간 짧게 (약 1cm) 남기고 삽입해야 삽관시 튜브 끝이 기도 점막을 손상시키지 않으며, 튜브의 형태를 하키채 모양으로 만들어 주면 stylet이 움직이지 않으며 안정적으로 유지할 수 있습니다.",
+    "정확합니다! 에피네프린은 1mg IV를 3~5분 간격으로 반복 투여하며, 투여 후 생리식염수로 flush해야 합니다. Shockable 리듬은 제세동 후, Non-shockable 리듬은 즉시 투여합니다.",
   feedbackIncorrect:
-    "잘못된 선택입니다. stylet을 끝까지 삽입하면 삽관시 기도 점막 손상이나 천공 위험이 있을 수 있습니다. 또한 과도하게 꺾어서 삽관하면 삽관이 불가능하고, 기도 손상 위험이 커집니다.",
+    "잘못된 선택입니다. 심정지 상황에서 에피네프린은 1mg을 정맥주사 bolus로 3~5분 간격으로 반복 투여해야하며, 투여 후 생리식염수로 flush 해야합니다. Shockable과 Non-shockable 리듬에 따라 투여 시점이 다르며, 의사 처방에 따라 투여해야 합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: ``,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765316343/S5_9_opmgmy.mp4`,
   },
 };
