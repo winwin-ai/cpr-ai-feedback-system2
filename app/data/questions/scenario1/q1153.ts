@@ -10,10 +10,10 @@ export const q1153: Question = {
   mediaPrompt: "Scenario1_Video_2_7_3",
   questionText: "다음 심전도는 무슨 리듬인가요?",
   options: [
-    { id: "1", text: "PEA (무맥성 전기활동)" },
+    { id: "1", text: "PEA" },
     { id: "2", text: "VF" },
-    { id: "3", text: "Asystole (무수축)" },
-    { id: "4", text: "Pulseless VT (무맥성 심실빈맥)" },
+    { id: "3", text: "Asystole" },
+    { id: "4", text: "Pulseless VT" },
   ],
   correctOptionId: "1",
   feedbackCorrect:

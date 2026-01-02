@@ -37,5 +37,8 @@ export const q1160: Question = {
   feedbackIncorrect:
     "잘못된 선택입니다. Asystole은 Non-shockable 리듬으로 제세동 대상이 아닙니다.",
   explanation: "CPR을 2분간 지속합니다.",
+    videoPaths: {
+        question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767270173/cpr-videos/Asystole.mp4`,
+    },
   nextId: 1170,
 };
