@@ -4,7 +4,7 @@ import { getVideoFromDB } from "../utils/videoStorage";
 
 interface MediaDisplayProps {
   type: "video" | "image";
-  prompt: string;
+  prompt?: string;
   isCorrectAction?: boolean;
   localVideoFilename?: string;
   videoSrc?: string; // Direct URL/Path
