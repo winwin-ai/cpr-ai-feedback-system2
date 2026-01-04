@@ -61,21 +61,15 @@ export const Layout: React.FC<LayoutProps> = ({
           </div>
 
           <div className="flex items-center gap-4">
-            {questionInfo ? (
-              <div className="flex flex-col items-end">
-                {progressInfo && (
-                  <div className="text-[10px] text-slate-500 font-medium mb-0.5">
+            {progressInfo ? (
+              <div className="flex items-center">
+                <div className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-1.5">
+                  <span className="text-blue-600">
                     {progressInfo.scenarioTitle}
-                    <span className="mx-1">·</span>
-                    {progressInfo.current}/{progressInfo.total}
-                  </div>
-                )}
-                <div className="flex items-center justify-end gap-2 text-lg font-bold text-slate-900">
-                  <span className="text-blue-600 shrink-0">
-                    {questionInfo.displayId}.
                   </span>
-                  <span className="line-clamp-1 max-w-[200px] sm:max-w-md text-right">
-                    {questionInfo.title}
+                  <span className="text-slate-300">·</span>
+                  <span>
+                    {progressInfo.current}/{progressInfo.total}
                   </span>
                 </div>
               </div>

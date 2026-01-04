@@ -42,7 +42,7 @@ export interface Question {
   title: string;
   description?: string; // Additional context
   mediaType: "video" | "image";
-  mediaPrompt: string; // Description of the AI media for the placeholder
+  mediaPrompt?: string; // Description of the AI media for the placeholder
   questionText: string;
   options: Option[];
   correctOptionId: string;

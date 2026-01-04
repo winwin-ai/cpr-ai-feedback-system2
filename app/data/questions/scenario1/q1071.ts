@@ -20,7 +20,7 @@ export const q1071: Question = {
   feedbackIncorrect:
     "다시 확인해 보세요. 환자의 가슴 움직임과 깊이가 규칙적입니다.",
   explanation: "정상 호흡 양상입니다.",
-  localVideoFilename: "Q07(1).mp4",
+
   videoPaths: {
     question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390969/cpr-videos/q1071_question.mp4`,
   },

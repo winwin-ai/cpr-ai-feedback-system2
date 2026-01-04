@@ -24,7 +24,7 @@ export const q1070: Question = {
   feedbackIncorrect:
     "잘못된 선택입니다. 간헐적 헐떡임은 정상 호흡이 아니며 심정지 상태의 특징입니다.",
   explanation: "추가 설명이 없습니다.",
-  localVideoFilename: "Q07.mp4",
+
   videoPaths: {
     question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390962/cpr-videos/q1070_question.mp4`,
   },

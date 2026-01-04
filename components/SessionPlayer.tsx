@@ -205,6 +205,12 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       ? (Math.max(0, currentIndexInOrdered) / orderedQuestionIds.length) * 100
       : 0;
 
+  const isSpecialQuestion =
+    scenarioId === 1 &&
+    ["7", "7-1", "7-2", "7-3"].includes(String(currentQuestion.displayId));
+
+  const showQuestionOverlay = playbackState === "waiting" || isSpecialQuestion;
+
   return (
     <div className="flex flex-col h-[calc(100vh-64px)] overflow-hidden bg-black font-sans">
       {/* 모바일 세로모드 레이아웃 (sm 이하) */}
@@ -217,7 +223,6 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                 <MediaDisplay
                   key={activeVideoSrc || "empty"}
                   type={currentQuestion.mediaType}
-                  prompt={currentQuestion.mediaPrompt}
                   videoSrc={activeVideoSrc || undefined}
                   onVideoEnded={handleVideoEnded}
                   onError={handleVideoError}
@@ -245,16 +250,18 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
           )}
 
           {/* Question Overlay (Small) - Mobile */}
-          <div className="absolute top-4 left-4 right-4 z-10">
-            <div className="bg-black/60 backdrop-blur-md px-3 py-2 rounded-lg border border-white/10">
-              <span className="text-blue-400 font-bold text-xs tracking-wider">
-                Q{currentQuestion.displayId || currentIndexInOrdered + 1}
-              </span>
-              <p className="text-white font-bold text-sm mt-1 leading-snug">
-                {currentQuestion.questionText}
-              </p>
+          {showQuestionOverlay && (
+            <div className="absolute top-0 left-0 right-0 z-10 animate-in fade-in slide-in-from-top-4 duration-500">
+              <div className="bg-black/60 backdrop-blur-md px-3 py-2 border-b border-white/10 flex items-center gap-2 justify-center">
+                <span className="text-blue-400 font-bold text-sm tracking-wider shrink-0">
+                  Q{currentQuestion.displayId || currentIndexInOrdered + 1}.
+                </span>
+                <p className="text-white font-bold text-sm line-clamp-1">
+                  {currentQuestion.questionText}
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* 질문 및 선택지 영역 - 하단 60% */}
@@ -502,7 +509,6 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                 <MediaDisplay
                   key={activeVideoSrc || "empty"}
                   type={currentQuestion.mediaType}
-                  prompt={currentQuestion.mediaPrompt}
                   videoSrc={activeVideoSrc || undefined}
                   onVideoEnded={handleVideoEnded}
                   onError={handleVideoError}
@@ -531,6 +537,20 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                 </div>
               )}
             </>
+          )}
+
+          {/* Question Overlay - Desktop (Centered Top) */}
+          {showQuestionOverlay && (
+            <div className="absolute top-0 left-0 right-0 z-20 flex justify-center animate-in fade-in slide-in-from-top-2 duration-500">
+              <div className="bg-black/60 backdrop-blur-md px-8 py-3 rounded-b-2xl border-x border-b border-white/10 flex items-center gap-4 shadow-2xl">
+                <span className="text-blue-400 font-bold text-xl tracking-widest uppercase">
+                  Q{currentQuestion.displayId || currentIndexInOrdered + 1}.
+                </span>
+                <p className="text-white font-bold text-2xl leading-snug">
+                  {currentQuestion.questionText}
+                </p>
+              </div>
+            </div>
           )}
         </div>
 

@@ -16,7 +16,6 @@ interface MediaDisplayProps {
 }
 
 export const MediaDisplay: React.FC<MediaDisplayProps> = ({
-  prompt,
   cacheKey,
   localVideoFilename,
   videoSrc,
@@ -39,7 +38,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
         .play()
         .catch((e) => console.log("Playback failed/prevented", e));
     }
-  }, [autoPlay, videoSrc, localVideoUrl, generatedVideoUrl, prompt]);
+  }, [autoPlay, videoSrc, localVideoUrl, generatedVideoUrl]);
 
   // Check for local video file
   useEffect(() => {
@@ -66,13 +65,13 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
     checkLocalVideo();
   }, [localVideoFilename]);
 
-  // Use cacheKey if provided, otherwise fallback to prompt
-  const storageKey = cacheKey || prompt;
+  // Use cacheKey if provided, otherwise null (we removed prompt dependency)
+  const storageKey = cacheKey;
 
-  // Restore video from DB on prompt/key change
+  // Restore video from DB on key change
   useEffect(() => {
     // If we have a direct video source or local video file, we don't need to check DB
-    if (videoSrc || localVideoUrl) {
+    if (videoSrc || localVideoUrl || !storageKey) {
       return;
     }
 
@@ -103,16 +102,15 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
     };
   }, [storageKey, localVideoUrl, videoSrc]);
 
-  const placeholderUrl = `https://picsum.photos/seed/${encodeURIComponent(
-    prompt
-  )}/1280/720`;
+  // Fixed placeholder for fallback
+  const placeholderUrl = "https://picsum.photos/seed/cpr-fallback/1280/720";
 
   return (
     <div className="w-full h-full bg-black relative overflow-hidden group">
       {videoSrc ? (
         <video
           ref={videoRef}
-          key={`${videoSrc}-${prompt}`} // Force re-render on prompt change even if src is same
+          key={videoSrc} // Force re-render on src change
           src={videoSrc}
           autoPlay={autoPlay}
           loop={autoLoop}
@@ -121,6 +119,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           onError={onError}
           playsInline
           className="w-full h-full object-contain"
+          style={{ objectFit: "contain" }}
         />
       ) : localVideoUrl ? (
         <video
@@ -133,6 +132,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           onError={onError}
           playsInline
           className="w-full h-full object-contain"
+          style={{ objectFit: "contain" }}
         />
       ) : generatedVideoUrl ? (
         <video
@@ -145,11 +145,12 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           onError={onError}
           playsInline
           className="w-full h-full object-contain"
+          style={{ objectFit: "contain" }}
         />
       ) : (
         <Image
           src={placeholderUrl}
-          alt={prompt}
+          alt="Media placeholder"
           fill
           unoptimized
           className="object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-700"

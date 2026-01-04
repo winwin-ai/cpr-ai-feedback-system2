@@ -22,7 +22,7 @@ export const q1073: Question = {
     "다시 확인해 보세요. 정상 호흡이 아닌 비정상적인 헐떡임이 관찰됩니다.",
   explanation:
     "심정지호흡(Agonal breathing)은 즉각적인 심폐소생술이 필요한 상태입니다.",
-  localVideoFilename: "Q07(3).mp4",
+
   videoPaths: {
     question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390973/cpr-videos/q1073_question.mp4`,
   },

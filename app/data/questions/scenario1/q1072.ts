@@ -25,7 +25,7 @@ export const q1072: Question = {
     "다시 확인해 보세요. 호흡의 리듬과 깊이가 주기적으로 변하고 있습니다.",
   explanation:
     "체인-스토크스 호흡(Cheyne-Stokes respiration)에 대한 설명입니다.",
-  localVideoFilename: "Q07(2).mp4",
+
   videoPaths: {
     question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390971/cpr-videos/q1072_question.mp4`,
   },
