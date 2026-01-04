@@ -1,5 +1,6 @@
-import React from "react";
-import { ArrowRight, FileText, Activity, AlertTriangle } from "lucide-react";
+import React, { useState } from "react";
+import { ArrowRight, FileText, Activity, AlertTriangle, X } from "lucide-react";
+import Image from "next/image";
 
 interface ScenarioProps {
   title: string;
@@ -13,6 +14,7 @@ interface ScenarioProps {
     description: React.ReactNode;
   };
   onNext: () => void;
+  roleImage?: string;
 }
 
 export const Scenario: React.FC<ScenarioProps> = ({
@@ -21,7 +23,18 @@ export const Scenario: React.FC<ScenarioProps> = ({
   patientInfo,
   eventInfo,
   onNext,
+  roleImage,
 }) => {
+  const [showRolePopup, setShowRolePopup] = useState(false);
+
+  const handleInitialClick = () => {
+    if (roleImage) {
+      setShowRolePopup(true);
+    } else {
+      onNext();
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 w-full min-h-screen flex flex-col justify-top">
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
@@ -68,15 +81,66 @@ export const Scenario: React.FC<ScenarioProps> = ({
           {/* Action */}
           <div className="pt-8 flex justify-end">
             <button
-              onClick={onNext}
+              onClick={handleInitialClick}
               className="group flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover:shadow-lg hover:-translate-y-1"
             >
-              상황 인지 및 훈련 시작
+              {roleImage ? "간호사 역할" : "상황 인지 및 훈련 시작"}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
       </div>
+
+      {/* Role Popup Modal */}
+      {showRolePopup && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          <div
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={() => setShowRolePopup(false)}
+          />
+          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-300">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+              <h3 className="text-xl font-bold text-slate-800">
+                간호사 역할 가이드
+              </h3>
+              <button
+                onClick={() => setShowRolePopup(false)}
+                className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+              >
+                <X className="w-6 h-6 text-slate-500" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 overflow-auto max-h-[70vh] flex flex-col items-center">
+              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
+                <Image
+                  src={roleImage!}
+                  alt="Nurse Team Roles"
+                  fill
+                  className="object-contain"
+                  unoptimized
+                />
+              </div>
+              <div className="mt-6 text-slate-600 text-center">
+                <p>각 역할에 따른 임무를 숙지한 후 훈련을 시작해 주세요.</p>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 bg-slate-50 flex justify-center">
+              <button
+                onClick={onNext}
+                className="group flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 rounded-xl font-bold text-lg transition-all hover:shadow-lg active:scale-95"
+              >
+                상황 인지 및 훈련 시작
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

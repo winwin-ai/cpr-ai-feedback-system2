@@ -207,7 +207,21 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
   const isSpecialQuestion =
     scenarioId === 1 &&
-    ["7", "7-1", "7-2", "7-3"].includes(String(currentQuestion.displayId));
+    [
+      "7",
+      "7-1",
+      "7-2",
+      "7-3",
+      "15",
+      "15-1",
+      "15-2",
+      "15-3",
+      "16",
+      "18",
+      "18-1",
+      "18-2",
+      "18-3",
+    ].includes(String(currentQuestion.displayId));
 
   const showQuestionOverlay = playbackState === "waiting" || isSpecialQuestion;
 
@@ -588,7 +602,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
               currentQuestion.dragItems &&
               currentQuestion.correctOrder ? (
               // Drag-Drop Desktop UI
-              <div className="absolute inset-0 flex flex-col z-10 p-6 pt-32 pb-24">
+              <div className="absolute inset-0 flex flex-col z-10 p-6 pt-16 pb-12">
                 {/* 드래그 드롭 영역 */}
                 <div className="flex-grow flex items-end justify-center overflow-auto px-4">
                   <div className="w-full max-w-6xl">
@@ -613,7 +627,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
               currentQuestion.matchingRightItems &&
               currentQuestion.matchingCorrectPairs ? (
               // Matching Desktop UI
-              <div className="absolute inset-0 flex flex-col z-10 p-6 pt-32 pb-24">
+              <div className="absolute inset-0 flex flex-col z-10 p-6 pt-16 pb-12">
                 <div className="flex-grow flex items-center justify-center overflow-auto px-4">
                   <div className="w-full max-w-5xl bg-black/60 backdrop-blur-md rounded-2xl p-8 border border-white/10">
                     <MatchingQuestion
@@ -637,7 +651,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
               currentQuestion.dragItems &&
               currentQuestion.correctOrder ? (
               // MultiSelect Desktop UI
-              <div className="absolute inset-0 flex flex-col z-10 p-6 pt-32 pb-8">
+              <div className="absolute inset-0 flex flex-col z-10 p-6 pt-16 pb-12">
                 <div className="flex-grow flex items-center justify-center overflow-auto px-4">
                   <div className="w-full max-w-6xl bg-black/60 backdrop-blur-md rounded-2xl p-6 border border-white/10">
                     <MultiSelectQuestion

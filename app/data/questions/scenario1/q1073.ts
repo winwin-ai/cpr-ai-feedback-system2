@@ -26,5 +26,5 @@ export const q1073: Question = {
   videoPaths: {
     question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390973/cpr-videos/q1073_question.mp4`,
   },
-  nextId: 1070,
+  nextId: 1080,
 };

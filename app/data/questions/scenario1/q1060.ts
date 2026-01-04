@@ -40,5 +40,5 @@ export const q1060: Question = {
   videoPaths: {
     answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365708/cpr-videos/q1060_answer.mp4`,
   },
-  nextId: 1071,
+  nextId: 1070,
 };

@@ -15,6 +15,7 @@ import { ResultScreen } from "../components/ResultScreen";
 import { Scenario } from "../components/Scenario";
 import { ViewState } from "./types";
 import { Pause, Play, SkipForward } from "lucide-react";
+import Image from "next/image";
 import {
   scenario1Questions,
   scenario1,
@@ -803,6 +804,7 @@ const SCENARIO_DATA = {
         </>
       ),
     },
+    roleImage: "/images/questions/scenario3/team.png",
   },
 };
 
@@ -1087,102 +1089,95 @@ function HomeContent() {
 
       {/* 인트로 영상 화면 */}
       {viewState === ViewState.INTRO && (
-        <div className="fixed inset-0 bg-black z-50">
-          {/* 인트로 영상 - 전체화면 */}
-          <video
-            ref={introVideoRef}
-            src={SCENARIO_INTRO_VIDEOS[selectedScenarioId]}
-            className="w-full h-full object-contain"
-            autoPlay
-            playsInline
-            onTimeUpdate={handleIntroTimeUpdate}
-            onLoadedMetadata={handleIntroLoadedMetadata}
-            onEnded={handleIntroComplete}
-            onClick={handleIntroPlayPause}
-          />
+        <div className="fixed inset-0 bg-black z-50 flex flex-col">
+          {/* 영상 영역 */}
+          <div className="relative flex-grow min-h-0 bg-black flex items-center justify-center">
+            <video
+              ref={introVideoRef}
+              src={SCENARIO_INTRO_VIDEOS[selectedScenarioId]}
+              className="max-w-full max-h-full object-contain"
+              autoPlay
+              playsInline
+              onTimeUpdate={handleIntroTimeUpdate}
+              onLoadedMetadata={handleIntroLoadedMetadata}
+              onEnded={handleIntroComplete}
+              onClick={handleIntroPlayPause}
+            />
 
-          {/* 시나리오 제목 */}
-          <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
-            <div className="bg-black/70 backdrop-blur-md px-3 py-2 sm:px-5 sm:py-3 rounded-lg border border-white/10">
-              <span className="text-blue-400 font-bold text-xs sm:text-base uppercase tracking-wider">
-                Scenario {selectedScenarioId}
-              </span>
-              <p className="text-white font-bold text-sm sm:text-xl mt-0.5">
-                시나리오 소개
-              </p>
+            {/* 시나리오 제목 오버레이 (영상 위에 유지) */}
+            <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
+              <div className="bg-black/60 backdrop-blur-md px-3 py-2 sm:px-5 sm:py-3 rounded-lg border border-white/10">
+                <span className="text-blue-400 font-bold text-[10px] sm:text-xs uppercase tracking-widest block mb-0.5">
+                  Scenario {selectedScenarioId}
+                </span>
+                <p className="text-white font-black text-sm sm:text-lg">
+                  시나리오 소개
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* 컨트롤 바 - 영상 위 오버레이 */}
-          <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
-            <div className="bg-black/70 backdrop-blur-md rounded-xl sm:rounded-2xl px-3 py-2 sm:px-5 sm:py-3 border border-white/10">
-              {/* 프로그래스 바 */}
-              <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                <span className="text-white text-[10px] sm:text-xs font-mono w-8 sm:w-10">
+          {/* 하단 컨트롤 바 (영상과 겹치지 않음) */}
+          <div className="bg-slate-900 border-t border-white/10 px-4 py-3 sm:px-6 sm:py-4">
+            <div className="max-w-6xl mx-auto flex items-center gap-3 sm:gap-6">
+              {/* 재생/일시정지 버튼 */}
+              <button
+                onClick={handleIntroPlayPause}
+                className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white rounded-full transition-all group"
+              >
+                {introPlaying ? (
+                  <Pause className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
+                ) : (
+                  <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current ml-0.5" />
+                )}
+              </button>
+
+              {/* 프로그래스 영역 */}
+              <div className="flex-grow flex items-center gap-3">
+                <span className="text-slate-400 text-[10px] sm:text-xs font-mono w-8 sm:w-10">
                   {formatTime(introProgress)}
                 </span>
-                <input
-                  type="range"
-                  min="0"
-                  max={introDuration || 100}
-                  value={introProgress}
-                  onChange={handleIntroSeek}
-                  className="flex-grow h-1.5 sm:h-2 bg-slate-600 rounded-full appearance-none cursor-pointer
-                    [&::-webkit-slider-thumb]:appearance-none
-                    [&::-webkit-slider-thumb]:w-3
-                    [&::-webkit-slider-thumb]:h-3
-                    [&::-webkit-slider-thumb]:sm:w-4
-                    [&::-webkit-slider-thumb]:sm:h-4
-                    [&::-webkit-slider-thumb]:rounded-full
-                    [&::-webkit-slider-thumb]:bg-blue-500
-                    [&::-webkit-slider-thumb]:cursor-pointer
-                    [&::-webkit-slider-thumb]:shadow-lg
-                    [&::-moz-range-thumb]:w-3
-                    [&::-moz-range-thumb]:h-3
-                    [&::-moz-range-thumb]:rounded-full
-                    [&::-moz-range-thumb]:bg-blue-500
-                    [&::-moz-range-thumb]:border-0
-                    [&::-moz-range-thumb]:cursor-pointer"
-                  style={{
-                    background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
-                      (introProgress / (introDuration || 1)) * 100
-                    }%, #475569 ${
-                      (introProgress / (introDuration || 1)) * 100
-                    }%, #475569 100%)`,
-                  }}
-                />
-                <span className="text-slate-400 text-[10px] sm:text-xs font-mono w-8 sm:w-10 text-right">
+                <div className="flex-grow relative group py-2">
+                  <input
+                    type="range"
+                    min="0"
+                    max={introDuration || 100}
+                    value={introProgress}
+                    onChange={handleIntroSeek}
+                    className="w-full h-1.5 sm:h-2 bg-slate-700 rounded-full appearance-none cursor-pointer relative z-10
+                      [&::-webkit-slider-thumb]:appearance-none
+                      [&::-webkit-slider-thumb]:w-3
+                      [&::-webkit-slider-thumb]:h-3
+                      [&::-webkit-slider-thumb]:sm:w-4
+                      [&::-webkit-slider-thumb]:sm:h-4
+                      [&::-webkit-slider-thumb]:rounded-full
+                      [&::-webkit-slider-thumb]:bg-blue-500
+                      [&::-webkit-slider-thumb]:cursor-pointer
+                      [&::-webkit-slider-thumb]:shadow-lg
+                      [&::-webkit-slider-thumb]:hover:scale-125
+                      [&::-webkit-slider-thumb]:transition-transform"
+                    style={{
+                      background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
+                        (introProgress / (introDuration || 1)) * 100
+                      }%, #475569 ${
+                        (introProgress / (introDuration || 1)) * 100
+                      }%, #475569 100%)`,
+                    }}
+                  />
+                </div>
+                <span className="text-slate-500 text-[10px] sm:text-xs font-mono w-8 sm:w-10 text-right">
                   {formatTime(introDuration)}
                 </span>
               </div>
 
-              {/* 컨트롤 버튼 */}
-              <div className="flex items-center justify-between gap-2">
-                <button
-                  onClick={handleIntroPlayPause}
-                  className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-slate-600 hover:bg-slate-500 text-white rounded-lg font-bold text-xs sm:text-sm transition-all"
-                >
-                  {introPlaying ? (
-                    <>
-                      <Pause className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span className="hidden sm:inline">일시정지</span>
-                    </>
-                  ) : (
-                    <>
-                      <Play className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span className="hidden sm:inline">재생</span>
-                    </>
-                  )}
-                </button>
-
-                <button
-                  onClick={handleIntroComplete}
-                  className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold text-xs sm:text-sm transition-all shadow-lg"
-                >
-                  <SkipForward className="w-4 h-4 sm:w-5 sm:h-5" />
-                  건너뛰기
-                </button>
-              </div>
+              {/* 건너뛰기 버튼 */}
+              <button
+                onClick={handleIntroComplete}
+                className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-xs sm:text-sm transition-all shadow-lg active:scale-95 whitespace-nowrap"
+              >
+                <span className="hidden sm:inline">건너뛰기</span>
+                <SkipForward className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
             </div>
           </div>
         </div>
@@ -1195,6 +1190,7 @@ function HomeContent() {
           patientInfo={activeScenarioData.patientInfo}
           eventInfo={activeScenarioData.eventInfo}
           onNext={handleScenarioComplete}
+          roleImage={(activeScenarioData as any).roleImage}
         />
       )}
 

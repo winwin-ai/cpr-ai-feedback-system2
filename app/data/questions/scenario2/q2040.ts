@@ -21,7 +21,7 @@ export const q2040: Question = {
     "잘못된 판단입니다. 간헐적이거나 비정상적인 호흡과 달리, 이 영상은 규칙적이고 깊은 정상 호흡을 나타냅니다. 심정지가 아님을 인지해야 합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365827/cpr-videos/q2040_question.mp4`,
-    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767372471/cpr-videos/q2040_normal_question.mp4`,
+    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365827/cpr-videos/q2040_question.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767372471/cpr-videos/q2040_normal_question.mp4`,
   },
 };

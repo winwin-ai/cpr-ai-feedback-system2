@@ -87,18 +87,21 @@ export const Layout: React.FC<LayoutProps> = ({
       {/* Main Content */}
       <main className="flex-grow flex flex-col">{children}</main>
 
-      {/* Footer - 휴대폰 가로모드에서 숨김 */}
-      <footer className="mobile-landscape-hidden fixed bottom-0 left-0 right-0 z-[60] bg-slate-900 text-slate-400 py-2 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 text-center text-xs flex flex-wrap justify-center items-center gap-2 md:gap-4">
-          <span>
-            © 2025 전남대학교 간호대학 CPR 교육 플랫폼. All rights reserved.
-          </span>
-          <span className="hidden md:inline px-1">|</span>
-          <span className="flex items-center gap-1">
-            <HeartPulse size={12} className="text-red-500" /> 생명을 살리는 기술
-          </span>
-        </div>
-      </footer>
+      {/* Footer - 홈화면(DASHBOARD)에서만 표시 */}
+      {viewState === "DASHBOARD" && (
+        <footer className="mobile-landscape-hidden bg-slate-900 text-slate-400 py-2 border-t border-slate-800 shrink-0">
+          <div className="max-w-7xl mx-auto px-4 text-center text-xs flex flex-wrap justify-center items-center gap-2 md:gap-4">
+            <span>
+              © 2025 전남대학교 간호대학 CPR 교육 플랫폼. All rights reserved.
+            </span>
+            <span className="hidden md:inline px-1">|</span>
+            <span className="flex items-center gap-1">
+              <HeartPulse size={12} className="text-red-500" /> 생명을 살리는
+              기술
+            </span>
+          </div>
+        </footer>
+      )}
     </div>
   );
 };

@@ -8,7 +8,8 @@ export const q1153: Question = {
   title: "심장 리듬 확인 (PEA)",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_7_3",
-  questionText: "다음 심전도는 무슨 리듬인가요?",
+  questionText:
+    "모니터를 확인한 후 환자의 맥박을 확인해 보았으나 맥박이 느껴지지 않았습니다. 다음 심전도는 무슨 리듬인가요?",
   options: [
     { id: "1", text: "PEA" },
     { id: "2", text: "VF" },
@@ -21,7 +22,7 @@ export const q1153: Question = {
   feedbackIncorrect: "틀렸습니다. 이 파형은 PEA(무맥성 전기활동)입니다.",
   explanation: "심전도상 전기적 활동은 보이나 맥박이 없는 상태입니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767270178/cpr-videos/PEA-NSR.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767506168/PEA-NSR2_dhnwvi.mp4`,
   },
   nextId: 1160,
 };

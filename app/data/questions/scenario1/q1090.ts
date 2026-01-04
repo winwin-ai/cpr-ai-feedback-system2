@@ -37,10 +37,10 @@ export const q1090: Question = {
   feedbackIncorrect:
     "오답입니다. 가슴압박은 반드시 흉골 중앙의 하단부에 손바닥을 올려 심장에 효과적으로 압력을 전달해야 합니다.",
   explanation: "추가 설명이 없습니다.",
-    videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365726/cpr-videos/q1090_question.mp4`,
-    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365719/cpr-videos/q1090_answer.mp4`,
+  videoPaths: {
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365719/cpr-videos/q1090_answer.mp4`,
   },
 
   nextId: 1100,
 };
+// question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365726/cpr-videos/q1090_question.mp4`,

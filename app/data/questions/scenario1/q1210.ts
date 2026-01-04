@@ -25,7 +25,7 @@ export const q1210: Question = {
   feedbackIncorrect: "에피네프린 투여 시점을 다시 확인하세요.",
   explanation: "Shockable 리듬에서는 제세동 후 가슴압박 중에 투여합니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288661/VF_r1yv9r.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767506164/VF2_jx6212.mp4`,
   },
   nextId: 1220,
 };

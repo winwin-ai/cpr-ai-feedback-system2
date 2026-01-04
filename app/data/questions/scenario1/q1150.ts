@@ -22,7 +22,7 @@ export const q1150: Question = {
   feedbackIncorrect: "틀렸습니다. 이 파형은 무수축(Asystole)입니다.",
   explanation: "전기적 활동이 없는 상태입니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767270173/cpr-videos/Asystole.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767505359/Asystole2_idrlt0.mp4`,
   },
   nextId: 1151,
 };

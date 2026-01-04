@@ -11,7 +11,7 @@ export const q1180: Question = {
   questionText:
     "가슴압박 중 환자의 심장 리듬을 재확인했습니다. 다음 심전도는 무슨 리듬인가요?",
   options: [
-    { id: "1", text: "VF" },
+    { id: "1", text: "VF", nextId: 1182 },
     { id: "2", text: "Pulseless VT" },
     { id: "3", text: "Asystole" },
     { id: "4", text: "PEA" },
@@ -21,7 +21,7 @@ export const q1180: Question = {
   feedbackIncorrect: "틀렸습니다. 불규칙한 파형의 심실세동입니다.",
   explanation: "즉각적인 제세동이 필요합니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288661/VF_r1yv9r.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767506164/VF2_jx6212.mp4`,
   },
   nextId: 1181,
 };

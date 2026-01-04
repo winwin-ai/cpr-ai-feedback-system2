@@ -22,7 +22,7 @@ export const q1182: Question = {
     "틀렸습니다. 규칙적인 넓은 QRS 파형의 무맥성 심실빈맥(Pulseless VT)입니다.",
   explanation: "즉각적인 제세동이 필요합니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288668/Pulseless_VT_kbzktc.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767506162/Pulseless_VT2_y2dqoo.mp4`,
   },
   nextId: 1183,
 };

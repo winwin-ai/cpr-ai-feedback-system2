@@ -469,7 +469,7 @@ export const scenario1Questions: Question[] = [
     feedbackIncorrect: "틀렸습니다. 불규칙한 파형의 심실세동입니다.",
     explanation: "즉각적인 제세동이 필요합니다.",
     videoPaths: {
-      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288661/VF_r1yv9r.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767506164/VF2_jx6212.mp4`,
     },
   },
   {
@@ -558,7 +558,7 @@ export const scenario1Questions: Question[] = [
       "틀렸습니다. 이 리듬은 Pulseless VT로, 즉각적인 제세동이 필요한 상태입니다.",
     explanation: "VF와 마찬가지로 Shockable Rhythm입니다.",
     videoPaths: {
-      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288668/Pulseless_VT_kbzktc.mp4`,
+      question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767506162/Pulseless_VT2_y2dqoo.mp4`,
     },
   },
   {

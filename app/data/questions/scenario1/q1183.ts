@@ -20,7 +20,7 @@ export const q1183: Question = {
   feedbackIncorrect: "틀렸습니다. 불규칙한 파형의 심실세동(VF)입니다.",
   explanation: "즉각적인 제세동이 필요합니다.",
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1765288661/VF_r1yv9r.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767506164/VF2_jx6212.mp4`,
   },
   nextId: 1190,
 };

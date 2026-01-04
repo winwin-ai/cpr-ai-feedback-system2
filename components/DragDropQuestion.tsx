@@ -37,7 +37,9 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
   const hasImages = items.some((item) => item.imageUrl);
 
   // Get IDs of items already in drop zone
-  const usedItemIds = droppedItems.filter((item) => item !== null).map((item) => item!.id);
+  const usedItemIds = droppedItems
+    .filter((item) => item !== null)
+    .map((item) => item!.id);
 
   // Handle drag start from source
   const handleDragStart = (item: DragItem) => {
@@ -75,7 +77,9 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
     // If slot already has an item, swap or replace
     if (newDropped[slotIndex] !== null) {
       // Find if dragged item was from another slot
-      const fromSlot = droppedItems.findIndex((item) => item?.id === draggedItem.id);
+      const fromSlot = droppedItems.findIndex(
+        (item) => item?.id === draggedItem.id
+      );
       if (fromSlot !== -1) {
         // Swap items
         newDropped[fromSlot] = newDropped[slotIndex];
@@ -124,7 +128,9 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
     }
 
     const currentOrder = droppedItems.map((item) => item!.id);
-    const correct = correctOrder.every((id, index) => currentOrder[index] === id);
+    const correct = correctOrder.every(
+      (id, index) => currentOrder[index] === id
+    );
     setIsCorrect(correct);
     setIsChecked(true);
 
@@ -165,10 +171,22 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
                 onClick={() => handleSourceItemClick(item)}
                 className={`
                   relative flex items-center gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 sm:border-3 transition-all duration-300
-                  ${isUsed ? "opacity-40 cursor-not-allowed border-slate-700 bg-slate-900/50" : ""}
+                  ${
+                    isUsed
+                      ? "opacity-40 cursor-not-allowed border-slate-700 bg-slate-900/50"
+                      : ""
+                  }
                   ${isBeingDragged ? "opacity-50 scale-95 border-blue-500" : ""}
-                  ${!isUsed && !isBeingDragged && !isChecked ? "cursor-grab active:cursor-grabbing hover:border-blue-400 sm:hover:scale-[1.02] border-slate-600 bg-slate-800/50 hover:bg-slate-700/50" : ""}
-                  ${isChecked ? "cursor-default border-slate-700 bg-slate-800/30" : ""}
+                  ${
+                    !isUsed && !isBeingDragged && !isChecked
+                      ? "cursor-grab active:cursor-grabbing hover:border-blue-400 sm:hover:scale-[1.02] border-slate-600 bg-slate-800/50 hover:bg-slate-700/50"
+                      : ""
+                  }
+                  ${
+                    isChecked
+                      ? "cursor-default border-slate-700 bg-slate-800/30"
+                      : ""
+                  }
                 `}
               >
                 {/* Option ID Badge */}
@@ -177,7 +195,11 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
                 </div>
 
                 {/* Label */}
-                <span className={`text-sm sm:text-base font-medium leading-tight flex-grow ${isUsed ? "text-slate-500" : "text-white"}`}>
+                <span
+                  className={`text-sm sm:text-base font-medium leading-tight flex-grow ${
+                    isUsed ? "text-slate-500" : "text-white"
+                  }`}
+                >
                   {item.label.replace(/^[A-E]\.\s*/, "")}
                 </span>
 
@@ -191,8 +213,18 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
 
         {/* Arrow indicator */}
         <div className="flex justify-center text-slate-500">
-          <svg className="w-6 h-6 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          <svg
+            className="w-6 h-6 sm:w-10 sm:h-10"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
           </svg>
         </div>
 
@@ -210,10 +242,26 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
                 onDrop={() => handleDrop(index)}
                 className={`
                   relative flex items-center gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 sm:border-3 transition-all duration-300 min-h-[52px] sm:min-h-[64px]
-                  ${dragOverSlot === index ? "border-blue-500 bg-blue-500/20 scale-[1.02]" : "border-dashed border-slate-600"}
-                  ${item === null ? "bg-slate-800/30" : "bg-slate-700/50 border-solid border-slate-500"}
-                  ${isChecked && isCorrect ? "border-green-500 bg-green-500/10" : ""}
-                  ${isChecked && !isCorrect ? "border-red-500 bg-red-500/10" : ""}
+                  ${
+                    dragOverSlot === index
+                      ? "border-blue-500 bg-blue-500/20 scale-[1.02]"
+                      : "border-dashed border-slate-600"
+                  }
+                  ${
+                    item === null
+                      ? "bg-slate-800/30"
+                      : "bg-slate-700/50 border-solid border-slate-500"
+                  }
+                  ${
+                    isChecked && isCorrect
+                      ? "border-green-500 bg-green-500/10"
+                      : ""
+                  }
+                  ${
+                    isChecked && !isCorrect
+                      ? "border-red-500 bg-red-500/10"
+                      : ""
+                  }
                 `}
               >
                 {/* Slot Number */}
@@ -255,7 +303,9 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
                     )}
                   </>
                 ) : (
-                  <span className="text-slate-500 text-sm sm:text-base">빈 칸</span>
+                  <span className="text-slate-500 text-sm sm:text-base">
+                    빈 칸
+                  </span>
                 )}
               </div>
             ))}
@@ -304,9 +354,13 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
 
   // Original layout with images
   return (
-    <div className="w-full flex flex-col gap-3 sm:gap-6">
+    <div className="w-full flex flex-col gap-1.5 sm:gap-2">
       {/* Source Items - 중단 (가로 배치, 데스크톱 스타일) */}
-      <div className={`grid gap-1.5 sm:gap-4 w-[95%] mx-auto ${items.length === 5 ? "grid-cols-5" : "grid-cols-4"}`}>
+      <div
+        className={`grid gap-1 sm:gap-3 w-[95%] mx-auto ${
+          items.length === 5 ? "grid-cols-5" : "grid-cols-4"
+        }`}
+      >
         {items.map((item) => {
           const isUsed = usedItemIds.includes(item.id);
           const isBeingDragged = draggedItem?.id === item.id;
@@ -320,10 +374,22 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
               onClick={() => handleSourceItemClick(item)}
               className={`
                 group relative flex flex-col rounded-xl sm:rounded-2xl overflow-hidden border-2 sm:border-4 transition-all duration-300 shadow-lg sm:shadow-2xl
-                ${isUsed ? "opacity-40 cursor-not-allowed border-slate-700 bg-slate-900/50 grayscale" : ""}
+                ${
+                  isUsed
+                    ? "opacity-40 cursor-not-allowed border-slate-700 bg-slate-900/50 grayscale"
+                    : ""
+                }
                 ${isBeingDragged ? "opacity-50 scale-95 border-blue-500" : ""}
-                ${!isUsed && !isBeingDragged && !isChecked ? "cursor-grab active:cursor-grabbing hover:border-blue-400 sm:hover:scale-105 border-slate-600 sm:border-transparent bg-white shadow-blue-500/10 sm:hover:shadow-blue-500/30" : ""}
-                ${isChecked ? "cursor-default border-slate-700 bg-slate-800/30" : ""}
+                ${
+                  !isUsed && !isBeingDragged && !isChecked
+                    ? "cursor-grab active:cursor-grabbing hover:border-blue-400 sm:hover:scale-105 border-slate-600 sm:border-transparent bg-white shadow-blue-500/10 sm:hover:shadow-blue-500/30"
+                    : ""
+                }
+                ${
+                  isChecked
+                    ? "cursor-default border-slate-700 bg-slate-800/30"
+                    : ""
+                }
               `}
             >
               {/* Option ID Badge */}
@@ -337,7 +403,9 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
                   src={item.imageUrl!}
                   alt={item.label}
                   fill
-                  className={`object-cover transition-transform duration-500 ${!isUsed && !isChecked ? "sm:group-hover:scale-110" : ""}`}
+                  className={`object-cover transition-transform duration-500 ${
+                    !isUsed && !isChecked ? "sm:group-hover:scale-110" : ""
+                  }`}
                   sizes="25vw"
                   unoptimized
                 />
@@ -348,8 +416,18 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
                 )}
               </div>
               {/* Label */}
-              <div className={`p-1.5 sm:p-3 text-center flex-grow flex items-center justify-center ${isUsed ? "bg-slate-800" : "bg-white"}`}>
-                <span className={`text-[10px] sm:text-sm font-semibold sm:font-bold leading-tight ${isUsed ? "text-slate-400" : "text-slate-700 sm:text-slate-900"}`}>
+              <div
+                className={`p-1.5 sm:p-3 text-center flex-grow flex items-center justify-center ${
+                  isUsed ? "bg-slate-800" : "bg-white"
+                }`}
+              >
+                <span
+                  className={`text-[10px] sm:text-sm font-semibold sm:font-bold leading-tight ${
+                    isUsed
+                      ? "text-slate-400"
+                      : "text-slate-700 sm:text-slate-900"
+                  }`}
+                >
                   {item.label.replace(/^[A-E]\.\s*/, "")}
                 </span>
               </div>
@@ -357,18 +435,32 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
           );
         })}
       </div>
-
       {/* Arrow indicator */}
       <div className="flex justify-center text-slate-500">
-        <svg className="w-6 h-6 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        <svg
+          className="w-5 h-5 sm:w-8 sm:h-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
         </svg>
       </div>
-
       {/* Drop Zone - 하단 (중단과 같은 크기) */}
-      <div className="bg-slate-900/30 rounded-xl sm:rounded-2xl p-2 sm:p-3 w-[70%] mx-auto">
-        <div className="text-xs sm:text-sm text-slate-400 mb-1.5 sm:mb-2 text-center font-medium">순서대로 배치 ({correctOrder.length}개 선택)</div>
-        <div className={`grid gap-1 sm:gap-3 w-full ${correctOrder.length === 4 ? "grid-cols-4" : "grid-cols-3"}`}>
+      <div className="bg-slate-900/30 rounded-xl sm:rounded-2xl p-1.5 sm:p-2 w-[70%] mx-auto">
+        <div className="text-[10px] sm:text-xs text-slate-400 mb-1 text-center font-medium">
+          순서대로 배치 ({correctOrder.length}개 선택)
+        </div>
+        <div
+          className={`grid gap-1 sm:gap-2 w-full ${
+            correctOrder.length === 4 ? "grid-cols-4" : "grid-cols-3"
+          }`}
+        >
           {droppedItems.map((item, index) => (
             <div
               key={index}
@@ -377,9 +469,21 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
               onDrop={() => handleDrop(index)}
               className={`
                 relative flex flex-col rounded-xl sm:rounded-2xl border-2 sm:border-4 transition-all duration-300 overflow-hidden
-                ${dragOverSlot === index ? "border-blue-500 bg-blue-500/20 scale-105" : "border-dashed border-slate-600"}
-                ${item === null ? "bg-slate-800/30" : "bg-slate-700/50 border-solid border-slate-500"}
-                ${isChecked && isCorrect ? "border-green-500 bg-green-500/10" : ""}
+                ${
+                  dragOverSlot === index
+                    ? "border-blue-500 bg-blue-500/20 scale-105"
+                    : "border-dashed border-slate-600"
+                }
+                ${
+                  item === null
+                    ? "bg-slate-800/30"
+                    : "bg-slate-700/50 border-solid border-slate-500"
+                }
+                ${
+                  isChecked && isCorrect
+                    ? "border-green-500 bg-green-500/10"
+                    : ""
+                }
                 ${isChecked && !isCorrect ? "border-red-500 bg-red-500/10" : ""}
               `}
             >
@@ -402,7 +506,9 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
                     draggable={!isChecked}
                     onDragStart={() => handleDropZoneDragStart(item, index)}
                     onDragEnd={handleDragEnd}
-                    className={`flex flex-col ${!isChecked ? "cursor-grab" : ""}`}
+                    className={`flex flex-col ${
+                      !isChecked ? "cursor-grab" : ""
+                    }`}
                   >
                     <div className="relative aspect-[4/3] w-full bg-slate-700 overflow-hidden">
                       <Image
@@ -434,25 +540,25 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
                 </>
               ) : (
                 <div className="aspect-[4/3] flex items-center justify-center">
-                  <span className="text-slate-500 text-xs sm:text-base">빈 칸</span>
+                  <span className="text-slate-500 text-xs sm:text-base">
+                    빈 칸
+                  </span>
                 </div>
               )}
             </div>
           ))}
         </div>
       </div>
-
-      {/* Buttons */}
-      <div className="flex gap-3 sm:gap-6 mt-2 max-w-2xl mx-auto w-full">
+      <div className="flex gap-3 sm:gap-4 mt-0.5 max-w-2xl mx-auto w-full">
         <button
           onClick={handleReset}
           disabled={isChecked && isCorrect}
           className={`
-            flex-1 py-3 sm:py-5 px-4 sm:px-8 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-xl flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300
+            flex-1 py-2 sm:py-3.5 px-4 sm:px-6 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300
             ${
               isChecked && isCorrect
                 ? "bg-slate-700 text-slate-500 cursor-not-allowed"
-                : "bg-slate-700 text-white hover:bg-slate-600 hover:scale-105"
+                : "bg-slate-700 text-white hover:bg-slate-600 hover:scale-101"
             }
           `}
         >
@@ -464,13 +570,13 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
           onClick={handleConfirm}
           disabled={(isChecked && isCorrect) || !allSlotsFilled}
           className={`
-            flex-1 py-3 sm:py-5 px-4 sm:px-8 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-xl flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300
+            flex-1 py-2 sm:py-3.5 px-4 sm:px-6 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300
             ${
               isChecked && isCorrect
                 ? "bg-green-600 text-white cursor-not-allowed"
                 : !allSlotsFilled
                 ? "bg-slate-600 text-slate-400 cursor-not-allowed"
-                : "bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 shadow-lg hover:shadow-blue-500/30"
+                : "bg-blue-600 text-white hover:bg-blue-700 hover:scale-101 shadow-lg hover:shadow-blue-500/30"
             }
           `}
         >
@@ -478,7 +584,6 @@ export const DragDropQuestion: React.FC<DragDropQuestionProps> = ({
           {isChecked && isCorrect ? "정답입니다!" : "확인"}
         </button>
       </div>
-
     </div>
   );
 };
