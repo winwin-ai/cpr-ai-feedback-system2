@@ -52,7 +52,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
       {/* Hero Section */}
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
-          전남대학교 간호대학 CPR 교육 플랫폼
+          심폐소생술 교육 플랫폼
         </h2>
         <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
           실제 응급 상황 시나리오를 통해 심정지 인지부터 고품질 심폐소생술까지
@@ -74,13 +74,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <Activity className="w-6 h-6 text-blue-600" />
           </div>
           <h3 className="text-xl font-bold text-slate-900 mb-2">Scenario 1</h3>
-          <p className="text-lg font-bold text-blue-600 mb-4">
-            심소생 (심정지 환자)
-          </p>
-          <p className="text-slate-500 mb-6 text-sm flex-grow">
-            병동에서 발생한 심정지 상황. 초기 대응부터 심폐소생술, 제세동까지의
-            과정을 훈련합니다.
-          </p>
+          <p className="text-lg font-bold text-blue-600 mb-4">심소생</p>
           <div className="flex items-center text-blue-600 font-bold group-hover:translate-x-2 transition-transform mb-2">
             시작하기 <ChevronRight className="w-5 h-5 ml-1" />
           </div>
@@ -103,13 +97,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <User className="w-6 h-6 text-teal-600" />
           </div>
           <h3 className="text-xl font-bold text-slate-900 mb-2">Scenario 2</h3>
-          <p className="text-lg font-bold text-teal-600 mb-4">
-            김여린 (실신/정상호흡)
-          </p>
-          <p className="text-slate-500 mb-6 text-sm flex-grow">
-            실신 환자 발생. 의식 확인 및 호흡 양상 판단을 통해 비심정지 상황을
-            감별합니다.
-          </p>
+          <p className="text-lg font-bold text-teal-600 mb-4">김여린</p>
           <div className="flex items-center text-teal-600 font-bold group-hover:translate-x-2 transition-transform mb-2">
             시작하기 <ChevronRight className="w-5 h-5 ml-1" />
           </div>
@@ -132,13 +120,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <Users className="w-6 h-6 text-indigo-600" />
           </div>
           <h3 className="text-xl font-bold text-slate-900 mb-2">Scenario 3</h3>
-          <p className="text-lg font-bold text-indigo-600 mb-4">
-            장소중 (팀 기반 CPR)
-          </p>
-          <p className="text-slate-500 mb-6 text-sm flex-grow">
-            전문 심폐소생술 팀 활동. 간호사 1, 2, 3의 역할 분담과 협력을
-            훈련합니다.
-          </p>
+          <p className="text-lg font-bold text-indigo-600 mb-4">장소중</p>
           <div className="flex items-center text-indigo-600 font-bold group-hover:translate-x-2 transition-transform mb-2">
             시작하기 <ChevronRight className="w-5 h-5 ml-1" />
           </div>

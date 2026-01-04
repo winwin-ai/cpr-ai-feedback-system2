@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, Suspense, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  Suspense,
+  useRef,
+} from "react";
 import { useSearchParams } from "next/navigation";
 import { Layout } from "../components/Layout";
 import { Dashboard } from "../components/Dashboard";
@@ -277,7 +283,8 @@ const SCENARIO_DATA = {
           일어서다 쓰러졌습니다.
           <br />
           <br />
-          보호자가 <span className="font-bold">&quot;환자가 쓰러졌어요&quot;</span>
+          보호자가{" "}
+          <span className="font-bold">&quot;환자가 쓰러졌어요&quot;</span>
           라고 해서 화장실에 갔을 때 환자는 바닥에 쓰러져 있었습니다. 눈을 감은
           채로 사지에{" "}
           <span className="font-bold decoration-red-300 underline underline-offset-4">
@@ -289,7 +296,7 @@ const SCENARIO_DATA = {
     },
   },
   2: {
-    title: "Scenario 2: 김여린 (실신/정상호흡)",
+    title: "Scenario 2: 김여린",
     description: (
       <div className="space-y-6 text-sm md:text-base">
         {/* 사례 요약 */}
@@ -506,7 +513,7 @@ const SCENARIO_DATA = {
     },
   },
   3: {
-    title: "Scenario 3: 장소중 (팀 기반 CPR)",
+    title: "Scenario 3: 장소중",
     description: (
       <div className="space-y-6 text-sm md:text-base">
         {/* 사례 요약 */}
@@ -806,7 +813,9 @@ function HomeContent() {
   const [sessionScore, setSessionScore] = useState(0);
   const [selectedScenarioId, setSelectedScenarioId] = useState<number>(1);
   const [initialQuestionIndex, setInitialQuestionIndex] = useState<number>(0);
-  const [currentQuestionId, setCurrentQuestionId] = useState<string | number | null>(null);
+  const [currentQuestionId, setCurrentQuestionId] = useState<
+    string | number | null
+  >(null);
 
   // 인트로 영상 관련 state
   const [introPlaying, setIntroPlaying] = useState(true);
@@ -815,18 +824,21 @@ function HomeContent() {
   const introVideoRef = useRef<HTMLVideoElement>(null);
 
   // Update URL when state changes
-  const updateUrl = useCallback((view: ViewState, scenarioId?: number, questionId?: string | number) => {
-    const params = new URLSearchParams();
-    params.set("view", view);
-    if (scenarioId) {
-      params.set("scenario", String(scenarioId));
-    }
-    if (questionId) {
-      params.set("q", String(questionId));
-    }
-    const newUrl = `?${params.toString()}`;
-    window.history.pushState({ view, scenarioId, questionId }, "", newUrl);
-  }, []);
+  const updateUrl = useCallback(
+    (view: ViewState, scenarioId?: number, questionId?: string | number) => {
+      const params = new URLSearchParams();
+      params.set("view", view);
+      if (scenarioId) {
+        params.set("scenario", String(scenarioId));
+      }
+      if (questionId) {
+        params.set("q", String(questionId));
+      }
+      const newUrl = `?${params.toString()}`;
+      window.history.pushState({ view, scenarioId, questionId }, "", newUrl);
+    },
+    []
+  );
 
   // Parse URL and restore state on mount
   useEffect(() => {
@@ -848,7 +860,9 @@ function HomeContent() {
         }
       }
       if (questionId) {
-        setCurrentQuestionId(isNaN(Number(questionId)) ? questionId : Number(questionId));
+        setCurrentQuestionId(
+          isNaN(Number(questionId)) ? questionId : Number(questionId)
+        );
       }
     });
   }, [searchParams]);
@@ -878,10 +892,13 @@ function HomeContent() {
   }, []);
 
   // Handle question changes from SessionPlayer
-  const handleQuestionChange = useCallback((questionId: string | number) => {
-    setCurrentQuestionId(questionId);
-    updateUrl(ViewState.SESSION_1, selectedScenarioId, questionId);
-  }, [selectedScenarioId, updateUrl]);
+  const handleQuestionChange = useCallback(
+    (questionId: string | number) => {
+      setCurrentQuestionId(questionId);
+      updateUrl(ViewState.SESSION_1, selectedScenarioId, questionId);
+    },
+    [selectedScenarioId, updateUrl]
+  );
 
   // Helper to get questions based on scenario
   const getQuestions = () => {
@@ -972,7 +989,12 @@ function HomeContent() {
   const handleJumpToQuestion = (scenarioId: number, questionIndex: number) => {
     setSelectedScenarioId(scenarioId);
     setInitialQuestionIndex(questionIndex);
-    const questions = scenarioId === 1 ? scenario1Questions : scenarioId === 2 ? scenario2Questions : scenario3Questions;
+    const questions =
+      scenarioId === 1
+        ? scenario1Questions
+        : scenarioId === 2
+        ? scenario2Questions
+        : scenario3Questions;
     const questionId = questions[questionIndex]?.id;
     setCurrentQuestionId(questionId || null);
     setViewState(ViewState.SESSION_1);
@@ -991,7 +1013,8 @@ function HomeContent() {
   const handleSessionComplete = (correctCount: number) => {
     setSessionScore(correctCount);
     const percentage = correctCount / currentQuestions.length;
-    const resultView = percentage >= 0.8 ? ViewState.RESULT_PASS : ViewState.RESULT_FAIL;
+    const resultView =
+      percentage >= 0.8 ? ViewState.RESULT_PASS : ViewState.RESULT_FAIL;
     setViewState(resultView);
     updateUrl(resultView, selectedScenarioId);
   };
@@ -1019,8 +1042,42 @@ function HomeContent() {
   const activeScenarioData =
     SCENARIO_DATA[selectedScenarioId as keyof typeof SCENARIO_DATA];
 
+  // Calculate active question for header display
+  const activeQuestionId =
+    currentQuestionId ||
+    currentQuestions[initialQuestionIndex]?.id ||
+    currentScenario.startQuestionId;
+  const activeQuestion = currentQuestions.find(
+    (q) => q.id === activeQuestionId
+  );
+
+  const questionInfo =
+    viewState === ViewState.SESSION_1 && activeQuestion
+      ? {
+          displayId: `Q${
+            activeQuestion.displayId ||
+            currentQuestions.indexOf(activeQuestion) + 1
+          }`,
+          title: activeQuestion.questionText,
+        }
+      : undefined;
+
+  const progressInfo =
+    viewState === ViewState.SESSION_1 && activeQuestion
+      ? {
+          current: currentQuestions.indexOf(activeQuestion) + 1,
+          total: currentQuestions.length,
+          scenarioTitle: `시나리오 ${selectedScenarioId}`,
+        }
+      : undefined;
+
   return (
-    <Layout viewState={viewState} onGoHome={handleGoHome}>
+    <Layout
+      viewState={viewState}
+      onGoHome={handleGoHome}
+      questionInfo={questionInfo}
+      progressInfo={progressInfo}
+    >
       {viewState === ViewState.DASHBOARD && (
         <Dashboard
           onSelectScenario={handleScenarioSelect}
@@ -1087,7 +1144,11 @@ function HomeContent() {
                     [&::-moz-range-thumb]:border-0
                     [&::-moz-range-thumb]:cursor-pointer"
                   style={{
-                    background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(introProgress / (introDuration || 1)) * 100}%, #475569 ${(introProgress / (introDuration || 1)) * 100}%, #475569 100%)`
+                    background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
+                      (introProgress / (introDuration || 1)) * 100
+                    }%, #475569 ${
+                      (introProgress / (introDuration || 1)) * 100
+                    }%, #475569 100%)`,
                   }}
                 />
                 <span className="text-slate-400 text-[10px] sm:text-xs font-mono w-8 sm:w-10 text-right">
@@ -1174,7 +1235,13 @@ function HomeContent() {
 
 export default function Home() {
   return (
-    <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center h-screen">
+          Loading...
+        </div>
+      }
+    >
       <HomeContent />
     </Suspense>
   );

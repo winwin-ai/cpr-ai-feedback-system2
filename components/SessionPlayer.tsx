@@ -191,7 +191,9 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   // Also update when playbackState changes to "answer"
   useEffect(() => {
     if (playbackState === "answer" && currentQuestion.videoPaths?.answer) {
-      const answerVideoUrl = getCloudinaryUrl(currentQuestion.videoPaths.answer);
+      const answerVideoUrl = getCloudinaryUrl(
+        currentQuestion.videoPaths.answer
+      );
       queueMicrotask(() => setActiveVideoSrc(answerVideoUrl));
     }
   }, [playbackState, currentQuestion.videoPaths?.answer]);
@@ -205,24 +207,6 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
   return (
     <div className="flex flex-col h-[calc(100vh-64px)] overflow-hidden bg-black font-sans">
-      {/* Top Bar */}
-      <div className="bg-slate-900 text-white px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-between border-b border-slate-700 z-20">
-        <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-1/2">
-          <span className="text-xs sm:text-sm font-bold text-slate-400 whitespace-nowrap">
-            Scenario {currentQuestion.scenarioId || 1}
-          </span>
-          <div className="flex-grow h-1.5 sm:h-2 bg-slate-700 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-blue-500 transition-all duration-500 ease-out"
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
-          <span className="text-xs sm:text-sm font-mono whitespace-nowrap">
-            {currentIndexInOrdered + 1} / {orderedQuestionIds.length}
-          </span>
-        </div>
-      </div>
-
       {/* 모바일 세로모드 레이아웃 (sm 이하) */}
       <div className="flex-grow flex flex-col sm:hidden overflow-hidden">
         {/* 영상 영역 - 상단 40% */}
@@ -548,18 +532,6 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
               )}
             </>
           )}
-        </div>
-
-        {/* Question Title - Always Visible */}
-        <div className="absolute top-6 left-6 z-10">
-          <div className="bg-black/60 backdrop-blur-md px-8 py-5 rounded-xl border border-white/10 shadow-lg max-w-3xl">
-            <span className="text-blue-400 font-bold text-xl uppercase tracking-wider">
-              Question {currentQuestion.displayId || currentIndexInOrdered + 1}
-            </span>
-            <p className="text-white font-bold text-2xl mt-2 leading-snug">
-              {currentQuestion.questionText}
-            </p>
-          </div>
         </div>
 
         {/* Overlays - Only in Waiting State */}

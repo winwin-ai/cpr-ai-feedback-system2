@@ -69,7 +69,7 @@ export const scenario1Questions: Question[] = [
 
 export const scenario1: Scenario = {
   id: 1,
-  title: "심소생 (심정지 환자)",
+  title: "심소생",
   startQuestionId: 1010,
   questions: scenario1Questions.reduce((acc, q) => {
     acc[q.id] = q;
