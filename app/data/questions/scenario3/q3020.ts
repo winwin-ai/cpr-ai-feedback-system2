@@ -38,6 +38,6 @@ export const q3020: Question = {
     "잘못된 선택입니다. 다른 처치보다 먼저 도움을 요청해야 합니다.",
   explanation: "추가 설명이 없습니다.",
   videoPaths: {
-    answer: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365847/cpr-videos/q3020_answer.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767365847/cpr-videos/q3020_answer.mp4`,
   },
 };
