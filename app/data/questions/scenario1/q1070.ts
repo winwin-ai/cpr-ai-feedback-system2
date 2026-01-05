@@ -13,7 +13,7 @@ export const q1070: Question = {
     { id: "1", text: "규칙적이고 깊은 정상 호흡을 보임." },
     {
       id: "2",
-      text: "심정지호흡을 보임 또는 간헐적 헐떡임(agonal breathing) 양상을 보임.",
+      text: "심정지호흡을 보임 / 또는 간헐적 헐떡임(agonal breathing) 양상을 보임.",
     },
     { id: "3", text: "코골이 소리가 나는 수면성 호흡을 보임." },
     { id: "4", text: "빠르고 얕은 과호흡을 보임." },

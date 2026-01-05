@@ -13,9 +13,19 @@ export const q3140: Question = {
   options: [],
   dragItems: [
     {
+      id: "medicut",
+      label: "Medicut",
+      imageUrl: "/images/questions/scenario3/3-3/medicut.jpg",
+    },
+    {
       id: "etube",
       label: "E-tube",
       imageUrl: "/images/questions/scenario3/3-3/E-tube.jpg",
+    },
+    {
+      id: "o2mask",
+      label: "O2 Mask",
+      imageUrl: "/images/questions/scenario3/3-3/O2_mask.jpg",
     },
     {
       id: "laryngoscope",
@@ -23,9 +33,19 @@ export const q3140: Question = {
       imageUrl: "/images/questions/scenario3/3-3/laryngoscope.jpg",
     },
     {
+      id: "thermometer",
+      label: "체온계",
+      imageUrl: "/images/questions/scenario3/3-3/체온계.jpg",
+    },
+    {
       id: "stylet",
       label: "Stylet",
       imageUrl: "/images/questions/scenario3/3-3/stylet.jpg",
+    },
+    {
+      id: "bpmeter",
+      label: "혈압계",
+      imageUrl: "/images/questions/scenario3/3-3/혈압계.jpg",
     },
     {
       id: "syringe10cc",
@@ -33,9 +53,19 @@ export const q3140: Question = {
       imageUrl: "/images/questions/scenario3/3-3/10cc_syringe.jpg",
     },
     {
+      id: "ivfluid",
+      label: "수액",
+      imageUrl: "/images/questions/scenario3/3-3/수액.jpg",
+    },
+    {
       id: "airway",
       label: "Airway",
       imageUrl: "/images/questions/scenario3/3-3/airway.jpg",
+    },
+    {
+      id: "o2cannula",
+      label: "O2 Cannula",
+      imageUrl: "/images/questions/scenario3/3-3/O2_cannula.jpg",
     },
     {
       id: "stethoscope",
@@ -56,36 +86,6 @@ export const q3140: Question = {
       id: "sterilegloves",
       label: "멸균장갑",
       imageUrl: "/images/questions/scenario3/3-3/멸균장갑.jpg",
-    },
-    {
-      id: "o2cannula",
-      label: "O2 Cannula",
-      imageUrl: "/images/questions/scenario3/3-3/O2_cannula.jpg",
-    },
-    {
-      id: "o2mask",
-      label: "O2 Mask",
-      imageUrl: "/images/questions/scenario3/3-3/O2_mask.jpg",
-    },
-    {
-      id: "medicut",
-      label: "Medicut",
-      imageUrl: "/images/questions/scenario3/3-3/medicut.jpg",
-    },
-    {
-      id: "thermometer",
-      label: "체온계",
-      imageUrl: "/images/questions/scenario3/3-3/체온계.jpg",
-    },
-    {
-      id: "bpmeter",
-      label: "혈압계",
-      imageUrl: "/images/questions/scenario3/3-3/혈압계.jpg",
-    },
-    {
-      id: "ivfluid",
-      label: "수액",
-      imageUrl: "/images/questions/scenario3/3-3/수액.jpg",
     },
   ],
   correctOrder: [

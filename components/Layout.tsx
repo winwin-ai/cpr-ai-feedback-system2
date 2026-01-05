@@ -74,11 +74,7 @@ export const Layout: React.FC<LayoutProps> = ({
                 </div>
               </div>
             ) : (
-              viewState === "DASHBOARD" && (
-                <div className="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-500">
-                  대기 중
-                </div>
-              )
+              viewState === "DASHBOARD" && <div></div>
             )}
           </div>
         </div>

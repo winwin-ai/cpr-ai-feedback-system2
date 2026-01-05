@@ -18,7 +18,7 @@ export const q1072: Question = {
     { id: "3", text: "불규칙하고 간헐적인 헐떡임을 보임" },
     { id: "4", text: "호흡이 전혀 관찰되지 않음" },
   ],
-  correctOptionId: "2",
+  correctOptionId: "1",
   feedbackCorrect:
     "정답입니다! 호흡의 깊이와 속도가 변하며 무호흡이 반복되는 Cheyne–Stokes breathing 양상입니다.",
   feedbackIncorrect:
@@ -27,7 +27,7 @@ export const q1072: Question = {
     "체인-스토크스 호흡(Cheyne-Stokes respiration)에 대한 설명입니다.",
 
   videoPaths: {
-    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390971/cpr-videos/q1072_question.mp4`,
+    question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390969/cpr-videos/q1071_question.mp4`,
   },
   nextId: 1073,
 };

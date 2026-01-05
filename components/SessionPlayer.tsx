@@ -156,6 +156,54 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
   const handleFeedbackConfirm = () => {
     if (feedbackState === "correct") {
+      // ----------------------------------------------------------------
+      // [Scenario 1 / Q7] Branching Logic
+      // If Q7(1070) is correct, mark Q7-1, Q7-2, Q7-3 as correct (bonus +3 score)
+      // and skip directly to Q8(1080).
+      // ----------------------------------------------------------------
+      if (
+        scenarioId === 1 &&
+        String(currentQuestionId) === "1070" &&
+        retryCount === 0
+      ) {
+        setScore((prev) => prev + 3);
+        // Direct jump to Q8
+        setCurrentQuestionId(1080);
+        return;
+      }
+
+      // ----------------------------------------------------------------
+      // [Scenario 1 / Q15] Branching Logic
+      // If Q15(1150) is correct, mark Q15-1, Q15-2, Q15-3 as correct (bonus +3 score)
+      // and skip directly to Q16(1160).
+      // ----------------------------------------------------------------
+      if (
+        scenarioId === 1 &&
+        String(currentQuestionId) === "1150" &&
+        retryCount === 0
+      ) {
+        setScore((prev) => prev + 3);
+        // Direct jump to Q16
+        setCurrentQuestionId(1160);
+        return;
+      }
+
+      // ----------------------------------------------------------------
+      // [Scenario 1 / Q18] Branching Logic
+      // If Q18(1180) is correct, mark Q18-1, Q18-2, Q18-3 as correct (bonus +3 score)
+      // and skip directly to Q19(1190).
+      // ----------------------------------------------------------------
+      if (
+        scenarioId === 1 &&
+        String(currentQuestionId) === "1180" &&
+        retryCount === 0
+      ) {
+        setScore((prev) => prev + 3);
+        // Direct jump to Q19
+        setCurrentQuestionId(1190);
+        return;
+      }
+
       // If there is an answer video, play it now
       if (currentQuestion.videoPaths?.answer) {
         setPlaybackState("answer");
