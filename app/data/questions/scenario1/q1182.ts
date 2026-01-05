@@ -8,7 +8,8 @@ export const q1182: Question = {
   title: "리듬 확인 (Pulseless VT)",
   mediaType: "video",
   mediaPrompt: "Scenario1_Video_2_10_2",
-  questionText: "다음 심전도는 무슨 리듬인가요?",
+  questionText:
+    "모니터를 확인한 후 환자의 맥박을 확인해 보았으나 맥박이 느껴지지 않았습니다. 다음 심전도는 무슨 리듬인가요?",
   options: [
     { id: "1", text: "Pulseless VT" },
     { id: "2", text: "Asystole" },
