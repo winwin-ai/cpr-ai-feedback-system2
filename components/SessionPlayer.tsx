@@ -293,7 +293,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
             <>
               {!videoError ? (
                 <MediaDisplay
-                  key={activeVideoSrc || "empty"}
+                  key={`${currentQuestionId}-${activeVideoSrc || "empty"}`}
                   type={currentQuestion.mediaType}
                   videoSrc={activeVideoSrc || undefined}
                   onVideoEnded={handleVideoEnded}
@@ -579,7 +579,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
             <>
               {!videoError ? (
                 <MediaDisplay
-                  key={activeVideoSrc || "empty"}
+                  key={`${currentQuestionId}-${activeVideoSrc || "empty"}`}
                   type={currentQuestion.mediaType}
                   videoSrc={activeVideoSrc || undefined}
                   onVideoEnded={handleVideoEnded}
