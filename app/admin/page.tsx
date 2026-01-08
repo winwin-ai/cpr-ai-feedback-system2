@@ -14,6 +14,9 @@ import {
   Eye,
   EyeOff,
   ArrowLeft,
+  Search,
+  RotateCcw,
+  X,
 } from "lucide-react";
 
 interface Stats {
@@ -86,6 +89,14 @@ export default function AdminPage() {
   const [usersLoading, setUsersLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserDetail | null>(null);
   const [userDetailLoading, setUserDetailLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // 비밀번호 초기화 모달
+  const [resetPasswordModal, setResetPasswordModal] = useState<UserData | null>(null);
+  const [resetNewPassword, setResetNewPassword] = useState("");
+  const [resetLoading, setResetLoading] = useState(false);
+  const [resetError, setResetError] = useState("");
+  const [resetSuccess, setResetSuccess] = useState("");
 
   // 비밀번호 변경
   const [currentPw, setCurrentPw] = useState("");
@@ -227,6 +238,59 @@ export default function AdminPage() {
       setPwLoading(false);
     }
   };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!resetPasswordModal) return;
+
+    setResetError("");
+    setResetSuccess("");
+
+    if (resetNewPassword.length < 6) {
+      setResetError("비밀번호는 6자 이상이어야 합니다.");
+      return;
+    }
+
+    setResetLoading(true);
+    try {
+      const res = await fetch("/api/admin/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: resetPasswordModal.id,
+          newPassword: resetNewPassword,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setResetSuccess(`${resetPasswordModal.name}님의 비밀번호가 초기화되었습니다.`);
+        setResetNewPassword("");
+        setTimeout(() => {
+          setResetPasswordModal(null);
+          setResetSuccess("");
+        }, 2000);
+      } else {
+        setResetError(data.error || "비밀번호 초기화에 실패했습니다.");
+      }
+    } catch {
+      setResetError("비밀번호 초기화 중 오류가 발생했습니다.");
+    } finally {
+      setResetLoading(false);
+    }
+  };
+
+  // 사용자 검색/필터링
+  const filteredUsers = users.filter((u) => {
+    if (!searchQuery.trim()) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      u.name.toLowerCase().includes(query) ||
+      u.email.toLowerCase().includes(query) ||
+      (u.school && u.school.toLowerCase().includes(query)) ||
+      (u.studentId && u.studentId.toLowerCase().includes(query))
+    );
+  });
 
   useEffect(() => {
     if (isAdmin) {
@@ -517,12 +581,41 @@ export default function AdminPage() {
         {/* 사용자 탭 */}
         {activeTab === "users" && (
           <div>
+            {/* 검색창 */}
+            <div className="mb-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="이름, 이메일, 학교, 학번으로 검색..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-10 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                )}
+              </div>
+              {searchQuery && (
+                <p className="text-sm text-gray-400 mt-2">
+                  {filteredUsers.length}명의 사용자를 찾았습니다.
+                </p>
+              )}
+            </div>
+
             {usersLoading ? (
               <div className="flex justify-center py-8">
                 <Loader2 className="w-6 h-6 animate-spin text-blue-500" />
               </div>
             ) : users.length === 0 ? (
               <p className="text-gray-400 text-center py-8">등록된 사용자가 없습니다.</p>
+            ) : filteredUsers.length === 0 ? (
+              <p className="text-gray-400 text-center py-8">검색 결과가 없습니다.</p>
             ) : (
               <div className="bg-gray-800 rounded-xl overflow-hidden">
                 <table className="w-full">
@@ -533,11 +626,11 @@ export default function AdminPage() {
                       <th className="px-4 py-3 text-left text-sm font-medium text-gray-300 hidden md:table-cell">학교</th>
                       <th className="px-4 py-3 text-center text-sm font-medium text-gray-300">시험</th>
                       <th className="px-4 py-3 text-center text-sm font-medium text-gray-300">통과</th>
-                      <th className="px-4 py-3"></th>
+                      <th className="px-4 py-3 text-center text-sm font-medium text-gray-300">관리</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-700">
-                    {users.map((u) => (
+                    {filteredUsers.map((u) => (
                       <tr key={u.id} className="hover:bg-gray-700/50">
                         <td className="px-4 py-3">
                           <div>
@@ -550,12 +643,27 @@ export default function AdminPage() {
                         <td className="px-4 py-3 text-center">{u.totalAttempts}</td>
                         <td className="px-4 py-3 text-center text-green-400">{u.passedCount}</td>
                         <td className="px-4 py-3">
-                          <button
-                            onClick={() => fetchUserDetail(u.id)}
-                            className="p-2 hover:bg-gray-600 rounded-lg"
-                          >
-                            <ChevronRight className="w-4 h-4" />
-                          </button>
+                          <div className="flex items-center justify-center gap-1">
+                            <button
+                              onClick={() => {
+                                setResetPasswordModal(u);
+                                setResetNewPassword("");
+                                setResetError("");
+                                setResetSuccess("");
+                              }}
+                              className="p-2 hover:bg-gray-600 rounded-lg text-yellow-400"
+                              title="비밀번호 초기화"
+                            >
+                              <RotateCcw className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => fetchUserDetail(u.id)}
+                              className="p-2 hover:bg-gray-600 rounded-lg"
+                              title="상세 보기"
+                            >
+                              <ChevronRight className="w-4 h-4" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -637,6 +745,76 @@ export default function AdminPage() {
           </div>
         )}
       </main>
+
+      {/* 비밀번호 초기화 모달 */}
+      {resetPasswordModal && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-800 rounded-xl w-full max-w-md p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold">비밀번호 초기화</h3>
+              <button
+                onClick={() => setResetPasswordModal(null)}
+                className="p-1 hover:bg-gray-700 rounded"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="bg-gray-700 rounded-lg p-3 mb-4">
+              <p className="text-sm text-gray-400">대상 사용자</p>
+              <p className="font-medium">{resetPasswordModal.name}</p>
+              <p className="text-sm text-gray-400">{resetPasswordModal.email}</p>
+            </div>
+
+            <form onSubmit={handleResetPassword} className="space-y-4">
+              {resetError && (
+                <div className="bg-red-500/20 border border-red-500/50 text-red-400 px-4 py-2 rounded text-sm">
+                  {resetError}
+                </div>
+              )}
+              {resetSuccess && (
+                <div className="bg-green-500/20 border border-green-500/50 text-green-400 px-4 py-2 rounded text-sm">
+                  {resetSuccess}
+                </div>
+              )}
+
+              <div>
+                <label className="block text-sm text-gray-400 mb-1">새 비밀번호</label>
+                <input
+                  type="text"
+                  value={resetNewPassword}
+                  onChange={(e) => setResetNewPassword(e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                  placeholder="6자 이상 입력"
+                  required
+                  minLength={6}
+                  autoFocus
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  초기화된 비밀번호를 사용자에게 안내해주세요.
+                </p>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={() => setResetPasswordModal(null)}
+                  className="flex-1 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium"
+                >
+                  취소
+                </button>
+                <button
+                  type="submit"
+                  disabled={resetLoading}
+                  className="flex-1 py-3 bg-yellow-600 hover:bg-yellow-700 disabled:bg-yellow-800 text-white rounded-lg font-medium flex items-center justify-center gap-2"
+                >
+                  {resetLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "초기화"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
