@@ -1,5 +1,10 @@
+"use client";
+
 import React from "react";
-import { Activity, HeartPulse } from "lucide-react";
+import { Activity, HeartPulse, LogIn } from "lucide-react";
+import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import { UserMenu } from "./auth/UserMenu";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -24,6 +29,7 @@ export const Layout: React.FC<LayoutProps> = ({
   questionInfo,
   progressInfo,
 }) => {
+  const { user, isLoading } = useAuth();
   const handleLogoClick = () => {
     if (viewState === "DASHBOARD") {
       return; // 이미 홈이면 아무것도 하지 않음
@@ -61,7 +67,7 @@ export const Layout: React.FC<LayoutProps> = ({
           </div>
 
           <div className="flex items-center gap-4">
-            {progressInfo ? (
+            {progressInfo && (
               <div className="flex items-center">
                 <div className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-1.5">
                   <span className="text-blue-600">
@@ -73,8 +79,21 @@ export const Layout: React.FC<LayoutProps> = ({
                   </span>
                 </div>
               </div>
-            ) : (
-              viewState === "DASHBOARD" && <div></div>
+            )}
+
+            {/* 사용자 메뉴 */}
+            {!isLoading && (
+              user ? (
+                <UserMenu user={user} />
+              ) : (
+                <Link
+                  href="/login"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span className="hidden sm:inline">로그인</span>
+                </Link>
+              )
             )}
           </div>
         </div>

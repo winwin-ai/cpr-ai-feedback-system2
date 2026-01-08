@@ -24,6 +24,7 @@ import {
   scenario3Questions,
   scenario3,
 } from "@/app/data";
+import { useExam } from "@/contexts/ExamContext";
 
 // 시나리오별 인트로 영상 URL
 const SCENARIO_INTRO_VIDEOS: Record<number, string> = {
@@ -810,6 +811,7 @@ const SCENARIO_DATA = {
 
 function HomeContent() {
   const searchParams = useSearchParams();
+  const { startExam, completeExam, resetExam } = useExam();
 
   const [viewState, setViewState] = useState<ViewState>(ViewState.DASHBOARD);
   const [sessionScore, setSessionScore] = useState(0);
@@ -1003,7 +1005,10 @@ function HomeContent() {
     updateUrl(ViewState.SESSION_1, scenarioId, questionId);
   };
 
-  const handleScenarioComplete = () => {
+  const handleScenarioComplete = async () => {
+    // 시험 시작 API 호출 (로그인 된 경우에만 기록)
+    await startExam(selectedScenarioId, currentQuestions.length);
+
     // Scenario 1 starts with Session 1 (which encompasses the whole flow in this simplified logic, or we can split it if needed)
     // For now, mapping all questions to "SESSION_1" view state which uses SessionPlayer
     setViewState(ViewState.SESSION_1);
@@ -1012,11 +1017,15 @@ function HomeContent() {
     updateUrl(ViewState.SESSION_1, selectedScenarioId, startQuestionId);
   };
 
-  const handleSessionComplete = (correctCount: number) => {
+  const handleSessionComplete = async (correctCount: number) => {
     setSessionScore(correctCount);
     const percentage = correctCount / currentQuestions.length;
-    const resultView =
-      percentage >= 0.8 ? ViewState.RESULT_PASS : ViewState.RESULT_FAIL;
+    const passed = percentage >= 0.8;
+    const resultView = passed ? ViewState.RESULT_PASS : ViewState.RESULT_FAIL;
+
+    // 시험 완료 API 호출 (로그인 된 경우에만 기록)
+    await completeExam(correctCount, passed);
+
     setViewState(resultView);
     updateUrl(resultView, selectedScenarioId);
   };
@@ -1038,6 +1047,7 @@ function HomeContent() {
     setViewState(ViewState.DASHBOARD);
     setCurrentQuestionId(null);
     setInitialQuestionIndex(0);
+    resetExam();
     updateUrl(ViewState.DASHBOARD);
   };
 

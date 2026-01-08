@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { MediaDisplay } from "./MediaDisplay";
 import { DragDropQuestion } from "./DragDropQuestion";
 import { MatchingQuestion } from "./MatchingQuestion";
@@ -6,6 +6,7 @@ import { MultiSelectQuestion } from "./MultiSelectQuestion";
 import { AlertCircle, CheckCircle2, XCircle } from "lucide-react";
 import Image from "next/image";
 import { getCloudinaryUrl } from "@/utils/cloudinaryUrl";
+import { useExam } from "@/contexts/ExamContext";
 
 interface SessionPlayerProps {
   questionsMap: Record<string | number, import("@/app/types").Question>;
@@ -28,6 +29,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   onComplete,
   onQuestionChange,
 }) => {
+  const { recordAnswer } = useExam();
   const [currentQuestionId, setCurrentQuestionId] = useState(initialQuestionId);
   const [playbackState, setPlaybackState] = useState<PlaybackState>("question");
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
@@ -137,6 +139,16 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
     setSelectedOptionId(optionId);
     const isCorrect = optionId === currentQuestion.correctOptionId;
+
+    // 답변 기록 (로그인 된 경우에만)
+    recordAnswer({
+      questionId: currentQuestionId,
+      questionDisplayId: currentQuestion.displayId,
+      selectedOptionId: optionId,
+      correctOptionId: currentQuestion.correctOptionId,
+      isCorrect,
+      retryCount,
+    });
 
     if (isCorrect) {
       if (retryCount === 0) {
