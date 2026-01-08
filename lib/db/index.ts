@@ -2,11 +2,18 @@ import Database from "better-sqlite3";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import * as schema from "./schema";
 import path from "path";
+import fs from "fs";
 
 // 데이터베이스 경로 설정
 const dbPath =
   process.env.DATABASE_PATH ||
   path.join(process.cwd(), "data", "cpr-education.db");
+
+// 데이터베이스 디렉토리가 없으면 생성
+const dbDir = path.dirname(dbPath);
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
+}
 
 // SQLite 연결
 const sqlite = new Database(dbPath);
