@@ -25,6 +25,7 @@ import {
   scenario3,
 } from "@/app/data";
 import { useExam } from "@/contexts/ExamContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 // 시나리오별 인트로 영상 URL
 const SCENARIO_INTRO_VIDEOS: Record<number, string> = {
@@ -812,6 +813,7 @@ const SCENARIO_DATA = {
 function HomeContent() {
   const searchParams = useSearchParams();
   const { startExam, completeExam, resetExam } = useExam();
+  const { user } = useAuth();
 
   const [viewState, setViewState] = useState<ViewState>(ViewState.DASHBOARD);
   const [sessionScore, setSessionScore] = useState(0);
@@ -1094,6 +1096,7 @@ function HomeContent() {
         <Dashboard
           onSelectScenario={handleScenarioSelect}
           onJumpToQuestion={handleJumpToQuestion}
+          isAdmin={user?.isAdmin}
         />
       )}
 

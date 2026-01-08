@@ -15,6 +15,7 @@ export interface User {
   name: string;
   school?: string | null;
   studentId?: string | null;
+  isAdmin?: boolean;
 }
 
 interface RegisterData {

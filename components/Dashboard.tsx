@@ -10,11 +10,13 @@ import { Question } from "@/app/types";
 interface DashboardProps {
   onSelectScenario: (scenarioId: number) => void;
   onJumpToQuestion: (scenarioId: number, questionIndex: number) => void;
+  isAdmin?: boolean;
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({
   onSelectScenario,
   onJumpToQuestion,
+  isAdmin = false,
 }) => {
   const renderShortcuts = (
     scenarioId: number,
@@ -78,7 +80,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <div className="flex items-center text-blue-600 font-bold group-hover:translate-x-2 transition-transform mb-2">
             시작하기 <ChevronRight className="w-5 h-5 ml-1" />
           </div>
-          {renderShortcuts(
+          {isAdmin && renderShortcuts(
             1,
             scenario1Questions,
             "bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white"
@@ -101,7 +103,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <div className="flex items-center text-teal-600 font-bold group-hover:translate-x-2 transition-transform mb-2">
             시작하기 <ChevronRight className="w-5 h-5 ml-1" />
           </div>
-          {renderShortcuts(
+          {isAdmin && renderShortcuts(
             2,
             scenario2Questions,
             "bg-teal-50 text-teal-600 hover:bg-teal-600 hover:text-white"
@@ -124,7 +126,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <div className="flex items-center text-indigo-600 font-bold group-hover:translate-x-2 transition-transform mb-2">
             시작하기 <ChevronRight className="w-5 h-5 ml-1" />
           </div>
-          {renderShortcuts(
+          {isAdmin && renderShortcuts(
             3,
             scenario3Questions,
             "bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white"

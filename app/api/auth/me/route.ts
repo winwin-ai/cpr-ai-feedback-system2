@@ -25,6 +25,7 @@ export async function GET() {
         name: users.name,
         school: users.school,
         studentId: users.studentId,
+        isAdmin: users.isAdmin,
       })
       .from(users)
       .where(eq(users.id, session.userId))
