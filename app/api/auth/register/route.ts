@@ -51,7 +51,7 @@ export async function POST(request: Request) {
     const passwordHash = await bcrypt.hash(password, 10);
 
     // 사용자 생성
-    const result = await db
+    await db
       .insert(users)
       .values({
         email,
@@ -59,10 +59,21 @@ export async function POST(request: Request) {
         name,
         school: school || null,
         studentId: studentId || null,
-      })
-      .returning({ id: users.id, email: users.email, name: users.name });
+      });
 
-    const newUser = result[0];
+    // 생성된 사용자 조회
+    const newUser = await db
+      .select({ id: users.id, email: users.email, name: users.name })
+      .from(users)
+      .where(eq(users.email, email))
+      .get();
+
+    if (!newUser) {
+      return NextResponse.json(
+        { error: "사용자 생성에 실패했습니다." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
@@ -74,8 +85,9 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Registration error:", error);
+    const errorMessage = error instanceof Error ? error.message : "알 수 없는 오류";
     return NextResponse.json(
-      { error: "회원가입 중 오류가 발생했습니다." },
+      { error: `회원가입 중 오류가 발생했습니다: ${errorMessage}` },
       { status: 500 }
     );
   }
