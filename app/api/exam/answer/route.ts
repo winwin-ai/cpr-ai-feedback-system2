@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     }
 
     // 시험 시도가 현재 사용자의 것인지 확인
-    const attempt = await db
+    const [attempt] = await db
       .select()
       .from(examAttempts)
       .where(
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
           eq(examAttempts.userId, session.userId)
         )
       )
-      .get();
+      .limit(1);
 
     if (!attempt) {
       return NextResponse.json(
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
     }
 
     // 답변 기록 (기존 답변이 있으면 업데이트)
-    const existingAnswer = await db
+    const [existingAnswer] = await db
       .select()
       .from(questionAnswers)
       .where(
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
           eq(questionAnswers.questionId, String(questionId))
         )
       )
-      .get();
+      .limit(1);
 
     if (existingAnswer) {
       // 기존 답변 업데이트
@@ -84,7 +84,7 @@ export async function POST(request: Request) {
           selectedOptionId,
           isCorrect,
           retryCount: retryCount || 0,
-          answeredAt: new Date().toISOString(),
+          answeredAt: new Date(),
         })
         .where(eq(questionAnswers.id, existingAnswer.id));
     } else {

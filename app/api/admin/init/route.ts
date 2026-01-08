@@ -1,18 +1,21 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { db } from "@/lib/db";
+import { db, initializeDatabase } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 // 관리자 계정 초기화 (최초 1회만)
 export async function POST() {
   try {
+    // 데이터베이스 테이블 초기화
+    await initializeDatabase();
+
     // 관리자 계정이 이미 있는지 확인
-    const existingAdmin = await db
+    const [existingAdmin] = await db
       .select()
       .from(users)
       .where(eq(users.email, "admin"))
-      .get();
+      .limit(1);
 
     if (existingAdmin) {
       return NextResponse.json(

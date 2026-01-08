@@ -18,7 +18,7 @@ export async function GET() {
     }
 
     // 사용자 정보 조회
-    const user = await db
+    const [user] = await db
       .select({
         id: users.id,
         email: users.email,
@@ -29,7 +29,7 @@ export async function GET() {
       })
       .from(users)
       .where(eq(users.id, session.userId))
-      .get();
+      .limit(1);
 
     if (!user) {
       // 세션은 있지만 사용자가 없는 경우 (삭제된 사용자)

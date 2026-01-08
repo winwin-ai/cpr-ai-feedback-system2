@@ -18,54 +18,49 @@ export async function GET() {
     }
 
     // 관리자 확인
-    const user = await db
+    const [user] = await db
       .select()
       .from(users)
       .where(eq(users.id, session.userId))
-      .get();
+      .limit(1);
 
     if (!user?.isAdmin) {
       return NextResponse.json({ error: "관리자 권한이 필요합니다." }, { status: 403 });
     }
 
     // 전체 사용자 수 (관리자 제외)
-    const totalUsersResult = await db
+    const [totalUsersResult] = await db
       .select({ count: count() })
       .from(users)
-      .where(eq(users.isAdmin, false))
-      .get();
+      .where(eq(users.isAdmin, false));
     const totalUsers = totalUsersResult?.count || 0;
 
     // 전체 시험 시도 수
-    const totalAttemptsResult = await db
+    const [totalAttemptsResult] = await db
       .select({ count: count() })
-      .from(examAttempts)
-      .get();
+      .from(examAttempts);
     const totalAttempts = totalAttemptsResult?.count || 0;
 
     // 완료된 시험 수
-    const completedAttemptsResult = await db
+    const [completedAttemptsResult] = await db
       .select({ count: count() })
       .from(examAttempts)
-      .where(sql`${examAttempts.completedAt} IS NOT NULL`)
-      .get();
+      .where(sql`${examAttempts.completedAt} IS NOT NULL`);
     const completedAttempts = completedAttemptsResult?.count || 0;
 
     // 통과율
-    const passedAttemptsResult = await db
+    const [passedAttemptsResult] = await db
       .select({ count: count() })
       .from(examAttempts)
-      .where(eq(examAttempts.passed, true))
-      .get();
+      .where(eq(examAttempts.passed, true));
     const passedAttempts = passedAttemptsResult?.count || 0;
     const passRate = completedAttempts > 0 ? (passedAttempts / completedAttempts) * 100 : 0;
 
     // 평균 점수
-    const avgScoreResult = await db
+    const [avgScoreResult] = await db
       .select({ avg: avg(examAttempts.percentage) })
       .from(examAttempts)
-      .where(sql`${examAttempts.completedAt} IS NOT NULL`)
-      .get();
+      .where(sql`${examAttempts.completedAt} IS NOT NULL`);
     const avgScore = avgScoreResult?.avg || 0;
 
     // 시나리오별 통계

@@ -20,11 +20,11 @@ export async function POST(request: Request) {
     }
 
     // 관리자 확인
-    const adminUser = await db
+    const [adminUser] = await db
       .select()
       .from(users)
       .where(eq(users.id, session.userId))
-      .get();
+      .limit(1);
 
     if (!adminUser?.isAdmin) {
       return NextResponse.json({ error: "관리자 권한이 필요합니다." }, { status: 403 });
@@ -47,11 +47,11 @@ export async function POST(request: Request) {
     }
 
     // 대상 사용자 확인
-    const targetUser = await db
+    const [targetUser] = await db
       .select()
       .from(users)
       .where(eq(users.id, userId))
-      .get();
+      .limit(1);
 
     if (!targetUser) {
       return NextResponse.json({ error: "사용자를 찾을 수 없습니다." }, { status: 404 });
@@ -69,7 +69,7 @@ export async function POST(request: Request) {
     const newPasswordHash = await bcrypt.hash(newPassword, 10);
     await db
       .update(users)
-      .set({ passwordHash: newPasswordHash, updatedAt: new Date().toISOString() })
+      .set({ passwordHash: newPasswordHash, updatedAt: new Date() })
       .where(eq(users.id, userId));
 
     return NextResponse.json({

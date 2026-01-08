@@ -20,11 +20,11 @@ export async function POST(request: Request) {
     }
 
     // 사용자 조회
-    const user = await db
+    const [user] = await db
       .select()
       .from(users)
       .where(eq(users.email, email))
-      .get();
+      .limit(1);
 
     if (!user) {
       return NextResponse.json(

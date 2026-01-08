@@ -18,11 +18,11 @@ export async function GET(request: Request) {
     }
 
     // 관리자 확인
-    const adminUser = await db
+    const [adminUser] = await db
       .select()
       .from(users)
       .where(eq(users.id, session.userId))
-      .get();
+      .limit(1);
 
     if (!adminUser?.isAdmin) {
       return NextResponse.json({ error: "관리자 권한이 필요합니다." }, { status: 403 });
@@ -35,7 +35,7 @@ export async function GET(request: Request) {
     if (userId) {
       const userIdNum = parseInt(userId, 10);
 
-      const user = await db
+      const [user] = await db
         .select({
           id: users.id,
           email: users.email,
@@ -46,7 +46,7 @@ export async function GET(request: Request) {
         })
         .from(users)
         .where(eq(users.id, userIdNum))
-        .get();
+        .limit(1);
 
       if (!user) {
         return NextResponse.json({ error: "사용자를 찾을 수 없습니다." }, { status: 404 });
@@ -88,14 +88,13 @@ export async function GET(request: Request) {
     // 각 사용자별 시험 통계
     const usersWithStats = await Promise.all(
       userList.map(async (user) => {
-        const statsResult = await db
+        const [statsResult] = await db
           .select({
             totalAttempts: count(),
-            passedCount: sql<number>`SUM(CASE WHEN ${examAttempts.passed} = 1 THEN 1 ELSE 0 END)`,
+            passedCount: sql<number>`SUM(CASE WHEN ${examAttempts.passed} = true THEN 1 ELSE 0 END)`,
           })
           .from(examAttempts)
-          .where(eq(examAttempts.userId, user.id))
-          .get();
+          .where(eq(examAttempts.userId, user.id));
 
         return {
           ...user,

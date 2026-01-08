@@ -34,11 +34,11 @@ export async function POST(request: Request) {
     }
 
     // 이메일 중복 검사
-    const existingUser = await db
+    const [existingUser] = await db
       .select()
       .from(users)
       .where(eq(users.email, email))
-      .get();
+      .limit(1);
 
     if (existingUser) {
       return NextResponse.json(
@@ -62,11 +62,11 @@ export async function POST(request: Request) {
       });
 
     // 생성된 사용자 조회
-    const newUser = await db
+    const [newUser] = await db
       .select({ id: users.id, email: users.email, name: users.name })
       .from(users)
       .where(eq(users.email, email))
-      .get();
+      .limit(1);
 
     if (!newUser) {
       return NextResponse.json(

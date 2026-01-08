@@ -19,11 +19,11 @@ export async function POST(request: Request) {
     }
 
     // 관리자 확인
-    const user = await db
+    const [user] = await db
       .select()
       .from(users)
       .where(eq(users.id, session.userId))
-      .get();
+      .limit(1);
 
     if (!user?.isAdmin) {
       return NextResponse.json({ error: "관리자 권한이 필요합니다." }, { status: 403 });
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     const newPasswordHash = await bcrypt.hash(newPassword, 10);
     await db
       .update(users)
-      .set({ passwordHash: newPasswordHash, updatedAt: new Date().toISOString() })
+      .set({ passwordHash: newPasswordHash, updatedAt: new Date() })
       .where(eq(users.id, session.userId));
 
     return NextResponse.json({ success: true, message: "비밀번호가 변경되었습니다." });

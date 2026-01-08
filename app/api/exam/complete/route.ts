@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     }
 
     // 시험 시도가 현재 사용자의 것인지 확인
-    const attempt = await db
+    const [attempt] = await db
       .select()
       .from(examAttempts)
       .where(
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
           eq(examAttempts.userId, session.userId)
         )
       )
-      .get();
+      .limit(1);
 
     if (!attempt) {
       return NextResponse.json(
@@ -60,18 +60,22 @@ export async function POST(request: Request) {
     const percentage = (score / attempt.totalQuestions) * 100;
 
     // 시험 완료 처리
-    const result = await db
+    await db
       .update(examAttempts)
       .set({
         score,
         percentage,
         passed,
-        completedAt: new Date().toISOString(),
+        completedAt: new Date(),
       })
-      .where(eq(examAttempts.id, attemptId))
-      .returning();
+      .where(eq(examAttempts.id, attemptId));
 
-    const updatedAttempt = result[0];
+    // 업데이트된 시험 조회
+    const [updatedAttempt] = await db
+      .select()
+      .from(examAttempts)
+      .where(eq(examAttempts.id, attemptId))
+      .limit(1);
 
     return NextResponse.json({
       success: true,
