@@ -58,7 +58,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   // Sync with external initialQuestionId changes (e.g., from URL navigation)
   useEffect(() => {
     if (initialQuestionId && initialQuestionId !== currentQuestionId) {
-      queueMicrotask(() => setCurrentQuestionId(initialQuestionId));
+      setCurrentQuestionId(initialQuestionId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialQuestionId]);
@@ -72,14 +72,12 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
 
     // If no video, skip straight to waiting (question)
     const hasQuestionVideo = !!currentQuestion.videoPaths?.question;
-    queueMicrotask(() => {
-      setPlaybackState(hasQuestionVideo ? "question" : "waiting");
-      setFeedbackState("idle");
-      setSelectedOptionId(null);
-      setDisabledOptionIds(new Set());
-      setRetryCount(0);
-      setVideoError(false);
-    });
+    setPlaybackState(hasQuestionVideo ? "question" : "waiting");
+    setFeedbackState("idle");
+    setSelectedOptionId(null);
+    setDisabledOptionIds(new Set());
+    setRetryCount(0);
+    setVideoError(false);
   }, [currentQuestionId, currentQuestion, onQuestionChange]);
 
   const proceedToNextQuestion = () => {
@@ -232,7 +230,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
   useEffect(() => {
     // Update activeVideoSrc when intended source changes
     if (currentIntendedSrc) {
-      queueMicrotask(() => setActiveVideoSrc(currentIntendedSrc));
+      setActiveVideoSrc(currentIntendedSrc);
     }
   }, [currentIntendedSrc]);
 
@@ -242,7 +240,7 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       const answerVideoUrl = getCloudinaryUrl(
         currentQuestion.videoPaths.answer
       );
-      queueMicrotask(() => setActiveVideoSrc(answerVideoUrl));
+      setActiveVideoSrc(answerVideoUrl);
     }
   }, [playbackState, currentQuestion.videoPaths?.answer]);
 
