@@ -20,12 +20,11 @@ export const q1072: Question = {
   ],
   correctOptionId: "1",
   feedbackCorrect:
-    "정답입니다! 호흡의 깊이와 속도가 변하며 무호흡이 반복되는 Cheyne–Stokes breathing 양상입니다.",
+    "정확합니다! 영상에서 보이는 간헐적 헐떡임은 정상 호흡이 아닌 심정지 호흡(agonal breathing)입니다.",
   feedbackIncorrect:
-    "다시 확인해 보세요. 호흡의 리듬과 깊이가 주기적으로 변하고 있습니다.",
+    "잘못된 선택입니다. 간헐적 헐떡임은 정상 호흡이 아니며 심정지 상태의 특징입니다.",
   explanation:
-    "체인-스토크스 호흡(Cheyne-Stokes respiration)에 대한 설명입니다.",
-
+    "",
   videoPaths: {
     question: `https://res.cloudinary.com/dn3cicucf/video/upload/v1767390969/cpr-videos/q1071_question.mp4`,
   },

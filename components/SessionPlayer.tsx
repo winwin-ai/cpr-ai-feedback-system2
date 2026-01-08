@@ -223,7 +223,13 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
       }
     } else if (feedbackState === "incorrect") {
       if (retryCount >= 2) {
-        proceedToNextQuestion();
+        // 2번 틀려도 answer 비디오가 있으면 재생 후 다음 문제로
+        if (currentQuestion.videoPaths?.answer) {
+          setPlaybackState("answer");
+          setFeedbackState("idle");
+        } else {
+          proceedToNextQuestion();
+        }
       } else {
         setFeedbackState("idle");
         setSelectedOptionId(null);
@@ -398,8 +404,8 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                       setScore((prev) => prev + 1);
                       setFeedbackState("correct");
                     }}
-                    onIncorrect={(dragRetryCount) => {
-                      setRetryCount(dragRetryCount);
+                    onIncorrect={() => {
+                      setRetryCount((prev) => prev + 1);
                       setFeedbackState("incorrect");
                     }}
                   />
@@ -672,8 +678,8 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                         setScore((prev) => prev + 1);
                         setFeedbackState("correct");
                       }}
-                      onIncorrect={(dragRetryCount) => {
-                        setRetryCount(dragRetryCount);
+                      onIncorrect={() => {
+                        setRetryCount((prev) => prev + 1);
                         setFeedbackState("incorrect");
                       }}
                     />
@@ -697,8 +703,8 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                         setScore((prev) => prev + 1);
                         setFeedbackState("correct");
                       }}
-                      onIncorrect={(matchRetryCount) => {
-                        setRetryCount(matchRetryCount);
+                      onIncorrect={() => {
+                        setRetryCount((prev) => prev + 1);
                         setFeedbackState("incorrect");
                       }}
                     />
@@ -720,8 +726,8 @@ export const SessionPlayer: React.FC<SessionPlayerProps> = ({
                         setScore((prev) => prev + 1);
                         setFeedbackState("correct");
                       }}
-                      onIncorrect={(selectRetryCount) => {
-                        setRetryCount(selectRetryCount);
+                      onIncorrect={() => {
+                        setRetryCount((prev) => prev + 1);
                         setFeedbackState("incorrect");
                       }}
                     />
