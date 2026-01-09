@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { getVideoFromDB } from "../utils/videoStorage";
-import { Play, Pause } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX } from "lucide-react";
 
 interface MediaDisplayProps {
   type: "video" | "image";
@@ -30,6 +30,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
   );
   const [localVideoUrl, setLocalVideoUrl] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
+  const [isMuted, setIsMuted] = useState(true); // Start muted for autoplay compatibility
 
   const videoRef = React.useRef<HTMLVideoElement>(null);
 
@@ -43,6 +44,14 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
         videoRef.current.pause();
         setIsPlaying(false);
       }
+    }
+  };
+
+  // Toggle mute/unmute
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
     }
   };
 
@@ -146,7 +155,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           src={videoSrc}
           autoPlay={autoPlay}
           loop={autoLoop}
-          muted={false}
+          muted={true}
           onEnded={onVideoEnded}
           onError={onError}
           playsInline
@@ -159,7 +168,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           src={localVideoUrl}
           autoPlay={autoPlay}
           loop={autoLoop}
-          muted={false}
+          muted={true}
           onEnded={onVideoEnded}
           onError={onError}
           playsInline
@@ -172,7 +181,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           src={generatedVideoUrl}
           autoPlay={autoPlay}
           loop={autoLoop}
-          muted={false}
+          muted={true}
           onEnded={onVideoEnded}
           onError={onError}
           playsInline
@@ -199,27 +208,49 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
         }}
       ></div>
 
-      {/* Play/Pause Button - Right Side Center */}
+      {/* Video Control Buttons - Right Side Center */}
       {(videoSrc || localVideoUrl || generatedVideoUrl) && (
-        <button
-          onClick={togglePlayPause}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30
-                     w-10 h-16 sm:w-12 sm:h-20
-                     bg-black/50 hover:bg-black/70
-                     backdrop-blur-sm rounded-lg
-                     flex items-center justify-center
-                     transition-all duration-200
-                     border border-white/20 hover:border-white/40
-                     shadow-lg hover:shadow-xl
-                     group"
-          aria-label={isPlaying ? "일시 중지" : "재생"}
-        >
-          {isPlaying ? (
-            <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:scale-110 transition-transform" />
-          ) : (
-            <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:scale-110 transition-transform ml-0.5" />
-          )}
-        </button>
+        <div className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2">
+          {/* Play/Pause Button */}
+          <button
+            onClick={togglePlayPause}
+            className="w-10 h-12 sm:w-12 sm:h-14
+                       bg-black/50 hover:bg-black/70
+                       backdrop-blur-sm rounded-lg
+                       flex items-center justify-center
+                       transition-all duration-200
+                       border border-white/20 hover:border-white/40
+                       shadow-lg hover:shadow-xl
+                       group"
+            aria-label={isPlaying ? "일시 중지" : "재생"}
+          >
+            {isPlaying ? (
+              <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:scale-110 transition-transform" />
+            ) : (
+              <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:scale-110 transition-transform ml-0.5" />
+            )}
+          </button>
+
+          {/* Mute/Unmute Button */}
+          <button
+            onClick={toggleMute}
+            className="w-10 h-12 sm:w-12 sm:h-14
+                       bg-black/50 hover:bg-black/70
+                       backdrop-blur-sm rounded-lg
+                       flex items-center justify-center
+                       transition-all duration-200
+                       border border-white/20 hover:border-white/40
+                       shadow-lg hover:shadow-xl
+                       group"
+            aria-label={isMuted ? "소리 켜기" : "소리 끄기"}
+          >
+            {isMuted ? (
+              <VolumeX className="w-5 h-5 sm:w-6 sm:h-6 text-red-400 group-hover:scale-110 transition-transform" />
+            ) : (
+              <Volume2 className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:scale-110 transition-transform" />
+            )}
+          </button>
+        </div>
       )}
     </div>
   );
