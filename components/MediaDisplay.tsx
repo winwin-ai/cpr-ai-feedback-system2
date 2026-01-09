@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { getVideoFromDB } from "../utils/videoStorage";
-import { Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, RefreshCw, Loader2 } from "lucide-react";
 
 interface MediaDisplayProps {
   type: "video" | "image";
@@ -31,8 +31,12 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
   const [localVideoUrl, setLocalVideoUrl] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [isMuted, setIsMuted] = useState(true); // Start muted for autoplay compatibility
+  const [isLoading, setIsLoading] = useState(true);
+  const [isStalled, setIsStalled] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
 
   const videoRef = React.useRef<HTMLVideoElement>(null);
+  const stallTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   // Toggle play/pause
   const togglePlayPause = () => {
@@ -55,22 +59,89 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
     }
   };
 
-  // Sync isPlaying state with video events
+  // Reload video
+  const reloadVideo = () => {
+    setIsStalled(false);
+    setIsLoading(true);
+    setReloadKey((prev) => prev + 1);
+
+    // Also try to reload via video element
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play().catch((e) => console.log("Reload play failed", e));
+    }
+  };
+
+  // Clear stall timeout helper
+  const clearStallTimeout = () => {
+    if (stallTimeoutRef.current) {
+      clearTimeout(stallTimeoutRef.current);
+      stallTimeoutRef.current = null;
+    }
+  };
+
+  // Start stall timeout (10 seconds)
+  const startStallTimeout = () => {
+    clearStallTimeout();
+    stallTimeoutRef.current = setTimeout(() => {
+      setIsStalled(true);
+    }, 10000);
+  };
+
+  // Sync isPlaying state with video events and handle loading/stall detection
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    const handlePlay = () => setIsPlaying(true);
+    const handlePlay = () => {
+      setIsPlaying(true);
+      setIsLoading(false);
+      setIsStalled(false);
+      clearStallTimeout();
+    };
     const handlePause = () => setIsPlaying(false);
+    const handleCanPlay = () => {
+      setIsLoading(false);
+      setIsStalled(false);
+      clearStallTimeout();
+    };
+    const handleWaiting = () => {
+      setIsLoading(true);
+      startStallTimeout();
+    };
+    const handlePlaying = () => {
+      setIsLoading(false);
+      setIsStalled(false);
+      clearStallTimeout();
+    };
+    const handleStalled = () => {
+      startStallTimeout();
+    };
+    const handleLoadStart = () => {
+      setIsLoading(true);
+      setIsStalled(false);
+      startStallTimeout();
+    };
 
     video.addEventListener("play", handlePlay);
     video.addEventListener("pause", handlePause);
+    video.addEventListener("canplay", handleCanPlay);
+    video.addEventListener("waiting", handleWaiting);
+    video.addEventListener("playing", handlePlaying);
+    video.addEventListener("stalled", handleStalled);
+    video.addEventListener("loadstart", handleLoadStart);
 
     return () => {
       video.removeEventListener("play", handlePlay);
       video.removeEventListener("pause", handlePause);
+      video.removeEventListener("canplay", handleCanPlay);
+      video.removeEventListener("waiting", handleWaiting);
+      video.removeEventListener("playing", handlePlaying);
+      video.removeEventListener("stalled", handleStalled);
+      video.removeEventListener("loadstart", handleLoadStart);
+      clearStallTimeout();
     };
-  }, [videoSrc, localVideoUrl, generatedVideoUrl]);
+  }, [videoSrc, localVideoUrl, generatedVideoUrl, reloadKey]);
 
   // Handle autoPlay changes
   useEffect(() => {
@@ -151,7 +222,7 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
       {videoSrc ? (
         <video
           ref={videoRef}
-          key={videoSrc} // Force re-render on src change
+          key={`${videoSrc}-${reloadKey}`} // Force re-render on src change or reload
           src={videoSrc}
           autoPlay={autoPlay}
           loop={autoLoop}
@@ -248,6 +319,28 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
               <VolumeX className="w-5 h-5 sm:w-6 sm:h-6 text-red-400 group-hover:scale-110 transition-transform" />
             ) : (
               <Volume2 className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:scale-110 transition-transform" />
+            )}
+          </button>
+
+          {/* Reload Button - Shows when stalled or always available */}
+          <button
+            onClick={reloadVideo}
+            className={`w-10 h-12 sm:w-12 sm:h-14
+                       backdrop-blur-sm rounded-lg
+                       flex items-center justify-center
+                       transition-all duration-200
+                       border shadow-lg hover:shadow-xl
+                       group
+                       ${isStalled
+                         ? "bg-red-500/70 hover:bg-red-500/90 border-red-400 animate-pulse"
+                         : "bg-black/50 hover:bg-black/70 border-white/20 hover:border-white/40"
+                       }`}
+            aria-label="영상 다시 로드"
+          >
+            {isLoading && !isStalled ? (
+              <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 text-white animate-spin" />
+            ) : (
+              <RefreshCw className={`w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform ${isStalled ? "text-white" : "text-white"}`} />
             )}
           </button>
         </div>
