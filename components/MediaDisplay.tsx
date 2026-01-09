@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { getVideoFromDB } from "../utils/videoStorage";
+import { Play, Pause } from "lucide-react";
 
 interface MediaDisplayProps {
   type: "video" | "image";
@@ -28,8 +29,39 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
     null
   );
   const [localVideoUrl, setLocalVideoUrl] = useState<string | null>(null);
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
 
   const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  // Toggle play/pause
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play().catch((e) => console.log("Playback failed", e));
+        setIsPlaying(true);
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  // Sync isPlaying state with video events
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
+    video.addEventListener("play", handlePlay);
+    video.addEventListener("pause", handlePause);
+
+    return () => {
+      video.removeEventListener("play", handlePlay);
+      video.removeEventListener("pause", handlePause);
+    };
+  }, [videoSrc, localVideoUrl, generatedVideoUrl]);
 
   // Handle autoPlay changes
   useEffect(() => {
@@ -166,6 +198,29 @@ export const MediaDisplay: React.FC<MediaDisplayProps> = ({
           backgroundSize: "50px 50px",
         }}
       ></div>
+
+      {/* Play/Pause Button - Right Side Center */}
+      {(videoSrc || localVideoUrl || generatedVideoUrl) && (
+        <button
+          onClick={togglePlayPause}
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30
+                     w-10 h-16 sm:w-12 sm:h-20
+                     bg-black/50 hover:bg-black/70
+                     backdrop-blur-sm rounded-lg
+                     flex items-center justify-center
+                     transition-all duration-200
+                     border border-white/20 hover:border-white/40
+                     shadow-lg hover:shadow-xl
+                     group"
+          aria-label={isPlaying ? "일시 중지" : "재생"}
+        >
+          {isPlaying ? (
+            <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:scale-110 transition-transform" />
+          ) : (
+            <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:scale-110 transition-transform ml-0.5" />
+          )}
+        </button>
+      )}
     </div>
   );
 };
